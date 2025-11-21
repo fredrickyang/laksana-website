@@ -1,9 +1,18 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
+import Script from "next/script";
 import Image from "next/image";
 
 export default function Home() {
+  const images: { [key: string]: string } = {
+    "1": "/images/img1.jpg",
+    "2": "/images/img2.jpg",
+    "3": "/images/img1.jpg",
+  };
+
+  const [currentImage, setCurrentImage] = useState(images["1"]);
+
   useEffect(() => {
     const initInViewAnimations = function (
       selector = ".animate-on-scroll"
@@ -29,21 +38,16 @@ export default function Home() {
 
     const stats = document.querySelectorAll(".stat-item");
     const mainImage = document.getElementById("main-image") as HTMLImageElement;
-    const images = {
-      1: "/images/hero-img1.webp",
-      2: "/images/hero-img2.webp",
-      3: "/images/hero-img3.webp",
-    };
 
     stats.forEach((stat) => {
       stat.addEventListener("click", () => {
         stats.forEach((s) => s.classList.remove("active"));
         stat.classList.add("active");
         const imgId = (stat as HTMLElement).dataset.imgId;
-        if (mainImage && imgId && images[imgId as keyof typeof images]) {
+        if (mainImage && imgId && images[imgId]) {
           mainImage.classList.add("fade-out");
           setTimeout(() => {
-            mainImage.src = images[imgId as keyof typeof images];
+            setCurrentImage(images[imgId]);
             mainImage.onload = () => {
               mainImage.classList.remove("fade-out");
             };
@@ -57,11 +61,11 @@ export default function Home() {
     <>
       <Head>
         <title>Novus Arc Studio</title>
-        <script
-          src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
-          async
-        ></script>
       </Head>
+      <Script
+        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
+        strategy="lazyOnload"
+      />
       <div className="text-neutral-800 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#FACC15] selection:text-black">
         <style jsx global>{`
           body {
@@ -627,13 +631,11 @@ export default function Home() {
             </div>
 
             <div className="relative z-10 w-full aspect-[3/4] overflow-hidden shadow-2xl border border-black/10 group">
-              <Image
-                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a5f2766e-81d8-4036-baed-e613aa1fcca4_1600w.webp"
-                alt="Architectural Detail"
-                width={1600}
-                height={2133}
-                className="group-hover:grayscale-0 opacity-90 w-full h-full object-cover grayscale scale-110"
+              <img
                 id="main-image"
+                src={currentImage}
+                alt="Architectural Detail"
+                className="group-hover:grayscale-0 opacity-90 w-full h-full object-cover grayscale scale-110"
               />
             </div>
           </div>
@@ -754,19 +756,6 @@ export default function Home() {
         </section>
         <footer className="w-full bg-[#FAFAFA] relative pt-32 pb-0 overflow-hidden">
           <div className="absolute top-12 left-0 right-0 flex justify-center z-30 px-6">
-            <div className="bg-[#F5F5F5]/80 backdrop-blur-md border border-black/10 rounded-full py-3 pl-6 pr-3 flex items-center gap-4 shadow-2xl max-w-lg w-full group transition-all hover:border-black/20 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll">
-              <span className="text-neutral-500 text-sm font-light font-mono hidden sm:block">
-                Redefining spaces, one voxel at a time.
-              </span>
-              <input
-                type="text"
-                placeholder="Enter email for access..."
-                className="bg-transparent border-none outline-none text-black text-sm w-full sm:w-auto placeholder:text-neutral-400 font-mono"
-              />
-              <button className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FACC15] transition-colors shrink-0">
-                <iconify-icon icon="solar:arrow-right-bold-duotone"></iconify-icon>
-              </button>
-            </div>
           </div>
 
           <div className="max-w-[90%] mx-auto flex items-end gap-4 relative z-10 translate-y-2 opacity-50 hover:opacity-100 transition-opacity duration-500">
@@ -802,10 +791,10 @@ export default function Home() {
           <div className="w-full bg-[#F5F5F5] border-t border-black/10 rounded-t-[3rem] relative z-20 overflow-hidden">
             <div className="w-full px-6 lg:px-12 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 relative z-20">
               <div className="lg:col-span-7 flex flex-col justify-center">
-                <h2 className="text-6xl lg:text-[7rem] leading-[0.85] font-normal text-black tracking-tighter mb-12">
+                <h2 className="flex flex-col text-6xl lg:text-[7rem] leading-[0.85] font-normal text-black tracking-tighter mb-24">
                   Systematic.
-                  <span className="text-neutral-400">Parametric.</span>
-                  Adaptive.
+                  <span className="text-neutral-400 pt-10">Parametric.</span>
+                  <span className="pt-10">Adaptive.</span>
                 </h2>
 
                 <div className="flex flex-wrap gap-8 items-center mt-auto opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
