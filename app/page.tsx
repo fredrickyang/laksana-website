@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import Script from "next/script";
 import Image from "next/image";
@@ -12,6 +12,7 @@ export default function Home() {
   };
 
   const [currentImage, setCurrentImage] = useState(images["1"]);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const initInViewAnimations = function (
@@ -55,6 +56,32 @@ export default function Home() {
         }
       });
     });
+
+    // Carousel navigation
+    const carouselContainer = carouselRef.current;
+    const leftBtn = document.querySelector('.carousel-btn-left') as HTMLButtonElement;
+    const rightBtn = document.querySelector('.carousel-btn-right') as HTMLButtonElement;
+
+    const scrollCarousel = (direction: 'left' | 'right') => {
+      if (!carouselContainer) return;
+      const scrollAmount = 400; // Adjust scroll distance
+      const targetScroll = direction === 'left' 
+        ? carouselContainer.scrollLeft - scrollAmount 
+        : carouselContainer.scrollLeft + scrollAmount;
+      
+      carouselContainer.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth',
+      });
+    };
+
+    leftBtn?.addEventListener('click', () => scrollCarousel('left'));
+    rightBtn?.addEventListener('click', () => scrollCarousel('right'));
+
+    return () => {
+      leftBtn?.removeEventListener('click', () => scrollCarousel('left'));
+      rightBtn?.removeEventListener('click', () => scrollCarousel('right'));
+    };
   }, []);
 
   return (
@@ -92,6 +119,147 @@ export default function Home() {
         <nav className="w-full px-6 py-6 lg:px-12 flex justify-between items-center relative z-50 [animation:fadeSlideIn_0.8s_ease-out_0s_both] animate-on-scroll animate">
           <div className="beam-border-h"></div>
         </nav>
+
+        {/* Header (Light Theme) */}
+        <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-20 mt-20 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
+          <h2 className="text-5xl lg:text-7xl font-normal text-neutral-900 tracking-tighter leading-[0.9] uppercase">
+            OUR PROJECT
+          </h2>
+          <a
+            href="#"
+            className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#FACC15] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#FACC15]"
+          >
+            See All Project
+            <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
+          </a>
+        </div>
+        {/* Carousel Scroll Container (Light Theme) */}
+        <div
+          ref={carouselRef}
+          className="w-full overflow-x-auto pb-12 px-6 lg:px-12 flex gap-6 snap-x snap-mandatory scrollbar-hide [animation:fadeSlideIn_1s_ease-out_0.3s_both] animate-on-scroll animate"
+          style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+        >
+          {/* Card 1: Liquid Interface */}
+          <div className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-default">
+            <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
+              {/* Background Abstract */}
+              <div className="absolute top-0 right-0 bottom-0 left-0">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92f79571-c9ab-4ba6-827b-8845c8060486_800w.webp"
+                  className="w-full h-full object-cover"
+                  alt="Abstract"
+                />
+              </div>
+              {/* Overlay Grid */}
+              <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
+            </div>
+            <div className="mt-6 border-l border-black/5 pl-4">
+              <h3 className="text-sm text-neutral-900 font-medium uppercase tracking-widest mb-2">
+                Liquid Interface
+              </h3>
+              <p className="text-neutral-600 font-light text-xs leading-relaxed max-w-[90%]">
+                Refracts project data in real time. Dynamically adapting workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 2: Liquid Interface */}
+          <div className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-default">
+            <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
+              {/* Background Abstract */}
+              <div className="absolute top-0 right-0 bottom-0 left-0">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92f79571-c9ab-4ba6-827b-8845c8060486_800w.webp"
+                  className="w-full h-full object-cover"
+                  alt="Abstract"
+                />
+              </div>
+              {/* Overlay Grid */}
+              <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
+            </div>
+            <div className="mt-6 border-l border-black/5 pl-4">
+              <h3 className="text-sm text-neutral-900 font-medium uppercase tracking-widest mb-2">
+                Liquid Interface
+              </h3>
+              <p className="text-neutral-600 font-light text-xs leading-relaxed max-w-[90%]">
+                Refracts project data in real time. Dynamically adapting workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Liquid Interface */}
+          <div className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-default">
+            <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
+              {/* Background Abstract */}
+              <div className="absolute top-0 right-0 bottom-0 left-0">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92f79571-c9ab-4ba6-827b-8845c8060486_800w.webp"
+                  className="w-full h-full object-cover"
+                  alt="Abstract"
+                />
+              </div>
+              {/* Overlay Grid */}
+              <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
+            </div>
+            <div className="mt-6 border-l border-black/5 pl-4">
+              <h3 className="text-sm text-neutral-900 font-medium uppercase tracking-widest mb-2">
+                Liquid Interface
+              </h3>
+              <p className="text-neutral-600 font-light text-xs leading-relaxed max-w-[90%]">
+                Refracts project data in real time. Dynamically adapting workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 1: Liquid Interface */}
+          <div className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-default">
+            <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
+              {/* Background Abstract */}
+              <div className="absolute top-0 right-0 bottom-0 left-0">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92f79571-c9ab-4ba6-827b-8845c8060486_800w.webp"
+                  className="w-full h-full object-cover"
+                  alt="Abstract"
+                />
+              </div>
+              {/* Overlay Grid */}
+              <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
+            </div>
+            <div className="mt-6 border-l border-black/5 pl-4">
+              <h3 className="text-sm text-neutral-900 font-medium uppercase tracking-widest mb-2">
+                Liquid Interface
+              </h3>
+              <p className="text-neutral-600 font-light text-xs leading-relaxed max-w-[90%]">
+                Refracts project data in real time. Dynamically adapting workflow.
+              </p>
+            </div>
+          </div>
+            <div className="mt-6 border-l border-black/5 pl-4">
+              <h3 className="text-sm text-neutral-900 font-medium uppercase tracking-widest mb-2">
+                Site Assist
+              </h3>
+              <p className="text-neutral-600 font-light text-xs leading-relaxed max-w-[90%]">
+                Operational continuity. Automatic robotics deployment.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <footer className="w-full relative pt-32 pb-0 overflow-hidden">
+        {/* Navigation Controls (Light Theme) */}
+        <div className="absolute bottom-12 right-6 lg:right-12 flex gap-px border border-black/5 bg-white">
+            <button className="carousel-btn-left w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all border-r border-black/5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+          </button>
+          <button className="carousel-btn-right w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            </svg>
+          </button>
+        </div>
+        </footer>
 
         <main className="flex-grow grid grid-cols-1 lg:px-12 lg:grid-cols-12 my-32 pb-12 relative gap-x-8 gap-y-8">
           <div className="lg:col-span-5 flex flex-col lg:pt-10 z-20 relative justify-center">
@@ -312,28 +480,19 @@ export default function Home() {
 
           <div className="max-w-[90%] mx-auto flex items-end gap-4 relative z-10 translate-y-2 opacity-50 hover:opacity-100 transition-opacity duration-500">
             <div className="h-16 w-48 bg-[#F5F5F5] border-t border-x border-black/10 rounded-t-2xl flex items-center justify-center gap-2 relative z-20">
-              <iconify-icon
-                icon="solar:code-square-bold-duotone"
-                className="text-black"
-              ></iconify-icon>
+                    <span className="iconify text-black" data-icon="solar:code-square-bold-duotone"></span>
               <span className="text-xs font-semibold text-black uppercase tracking-widest">
                 System
               </span>
             </div>
             <div className="h-12 w-40 bg-[#FAFAFA] border-t border-x border-black/5 rounded-t-xl flex items-center justify-center gap-2 relative z-10 hover:bg-[#F5F5F5] hover:h-14 transition-all cursor-pointer group">
-              <iconify-icon
-                icon="solar:users-group-rounded-bold-duotone"
-                className="text-neutral-400 group-hover:text-black transition-colors"
-              ></iconify-icon>
+              <span className="iconify text-neutral-400 group-hover:text-black transition-colors" data-icon="solar:users-group-rounded-bold-duotone"></span>
               <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest group-hover:text-black transition-colors">
                 Studio
               </span>
             </div>
             <div className="h-12 w-40 bg-[#FAFAFA] border-t border-x border-black/5 rounded-t-xl flex items-center justify-center gap-2 relative z-10 hover:bg-[#F5F5F5] hover:h-14 transition-all cursor-pointer group">
-              <iconify-icon
-                icon="solar:document-text-bold-duotone"
-                className="text-neutral-400 group-hover:text-black transition-colors"
-              ></iconify-icon>
+              <span className="iconify text-neutral-400 group-hover:text-black transition-colors" data-icon="solar:document-text-bold-duotone"></span>
               <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest group-hover:text-black transition-colors">
                 Legal
               </span>
@@ -350,36 +509,17 @@ export default function Home() {
                 </h2>
 
                 <div className="flex flex-wrap gap-8 items-center mt-auto opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                  <iconify-icon
-                    icon="simple-icons:framer"
-                    width="24"
-                    className="hover:text-black transition-colors"
-                  ></iconify-icon>
-                  <iconify-icon
-                    icon="simple-icons:github"
-                    width="24"
-                    className="hover:text-black transition-colors"
-                  ></iconify-icon>
+                  <span className="iconify hover:text-black transition-colors" data-icon="simple-icons:framer"></span>
+                  <span className="iconify hover:text-black transition-colors" data-icon="simple-icons:github"></span>
                   <div className="h-6 w-px bg-black/10"></div>
-                  <iconify-icon
-                    icon="simple-icons:x"
-                    width="22"
-                    className="hover:text-black transition-colors"
-                  ></iconify-icon>
-                  <iconify-icon
-                    icon="simple-icons:discord"
-                    width="24"
-                    className="hover:text-black transition-colors"
-                  ></iconify-icon>
+                  <span className="iconify hover:text-black transition-colors" data-icon="simple-icons:x"></span>
+                  <span className="iconify hover:text-black transition-colors" data-icon="simple-icons:discord"></span>
                 </div>
               </div>
 
               <div className="lg:col-span-5 flex lg:justify-end items-center">
                 <div className="w-full max-w-md bg-[#FACC15] p-8 lg:p-12 rounded-xl relative overflow-hidden group rotate-1 hover:rotate-0 transition-transform duration-500 shadow-2xl">
-                  <iconify-icon
-                    icon="solar:settings-bold-duotone"
-                    className="absolute -right-8 -top-8 text-black/10 text-[12rem] rotate-12 group-hover:rotate-45 transition-transform duration-700"
-                  ></iconify-icon>
+                  <span className="iconify absolute -right-8 -top-8 text-black/10 text-[12rem] rotate-12 group-hover:rotate-45 transition-transform duration-700" data-icon="solar:settings-bold-duotone"></span>
 
                   <div className="relative z-10">
                     <h3 className="text-3xl font-medium text-black tracking-tight leading-tight mb-6">
@@ -400,10 +540,7 @@ export default function Home() {
                         </span>
                       </div>
                       <button className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform group/btn">
-                        <iconify-icon
-                          icon="solar:arrow-right-up-bold-duotone"
-                          className="group-hover/btn:rotate-45 transition-transform"
-                        ></iconify-icon>
+                        <span className="iconify group-hover/btn:rotate-45 transition-transform" data-icon="solar:arrow-right-up-bold-duotone"></span>
                       </button>
                     </div>
                   </div>
@@ -425,7 +562,6 @@ export default function Home() {
             </div>
           </div>
         </footer>
-      </div>
     </>
   );
 }
