@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
-import Script from "next/script";
 import Image from "next/image";
 
 export default function Home() {
@@ -108,10 +107,7 @@ export default function Home() {
       <Head>
         <title>Novus Arc Studio</title>
       </Head>
-      <Script
-        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
-        strategy="lazyOnload"
-      />
+
       <div className="text-neutral-800 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#FACC15] selection:text-black">
 
         <div
@@ -324,7 +320,7 @@ export default function Home() {
           </div>
         </div>
         
-        <footer className="w-full relative pt-32 pb-0 overflow-hidden">
+        <section className="w-full relative pt-32 pb-0 overflow-hidden">
         {/* Navigation Controls (Light Theme) */}
         <div className="absolute bottom-12 right-6 lg:right-12 flex gap-px border border-black/5 bg-white">
             <button className="carousel-btn-left w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all border-r border-black/5">
@@ -338,7 +334,7 @@ export default function Home() {
             </svg>
           </button>
         </div>
-        </footer>
+        </section>
 
         <main className="flex-grow grid grid-cols-1 lg:px-12 lg:grid-cols-12 my-10 pb-12 relative gap-x-8 gap-y-8 px-6 py-6">
           <div className="lg:col-span-5 flex flex-col lg:pt-10 z-20 relative justify-center">
@@ -478,14 +474,15 @@ export default function Home() {
                 </div>
 
                 <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                  Redefining urban landscapes since 2024
+                  Akses Mudah ke Bandara
+                  Tersertifikasi UIKI
                 </p>
               </div>
             </div>
           </div>
         </main>
         
-      <footer className="w-full bg-[#FAFAFA] relative overflow-hidden">
+      <section className="w-full bg-[#FAFAFA] relative overflow-hidden">
         <div className="absolute top-12 left-0 right-0 flex justify-center z-30 px-6">
           </div>
 
@@ -566,81 +563,101 @@ export default function Home() {
             </section>
           </div>
 
-          <div className="branding">
+          <div className="cta-section">
             <section className="overflow-hidden bg-white border-neutral-200 border-t pt-24 pb-24 relative">
               <div className="bg-gradient-to-b from-neutral-50 via-white to-neutral-100 absolute top-0 right-0 bottom-0 left-0" />
-              <div className="container mx-auto px-6 lg:px-12 relative z-10">
-                {/* Label */}
-                <div className="flex flex-col items-center mb-14">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-1 shadow-sm">
-                    <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500">
-                      Klien Kami
-                    </span>
-                  </div>
-                  <h2 className="mt-6 text-4xl lg:text-5xl font-medium tracking-tight text-neutral-900 text-center max-w-3xl leading-[1.05]">
-                    Dipercaya oleh perusahaan besar
-                  </h2>
-                  <p className="mt-4 text-base text-neutral-500 text-center max-w-2xl">
-                    Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.
-                  </p>
-                </div>
-                {/* Logos Row */}
-                <div className="mt-14 flex flex-col items-center gap-5">
-                  <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/coca-cola.svg"
-                        alt="Lead Architect"
-                        className="w-28 h-28 object-cover relative transition-all"
-                      />
-                      {/* <span className="hidden sm:inline">GitHub Labs</span> */}
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/google.svg"
-                        alt="Lead Architect"
-                        className="w-28 h-28 object-cover relative transition-all"
-                      />
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/heineken.svg"
-                        alt="Lead Architect"
-                        className="w-28 h-28 object-cover relative transition-all"
-                      />
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/microsoft.svg"
-                        alt="Lead Architect"
-                        className="w-28 h-28 object-cover relative transition-all"
-                      />
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/underarmour.svg"
-                        alt="Lead Architect"
-                        className="w-20 h-20 object-cover relative transition-all"
-                      />
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/yamaha.svg"
-                        alt="Lead Architect"
-                        className="w-28 h-28 object-cover relative transition-all"
-                      />
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img
-                        src="/brand/mastercard.svg"
-                        alt="Lead Architect"
-                        className="w-20 h-20 object-cover relative transition-all"
-                      />
-                    </span>
-                  </div>
-                </div>
-              </div>
             </section>
+          </div>
+
+                    {/* Floating Dark Feature Card */}
+                    {/* Negative margin pulls it up into the white section above */}
+                    <div className="relative z-30 mx-4 lg:mx-auto max-w-6xl -mt-16 transform lg:-translate-y-12">
+                      <div className="bg-gradient-to-r from-[#1A1A1A] to-[#0A0A0A] p-8 lg:p-16 overflow-hidden relative shadow-2xl border border-white/10">
+                        {/* Grid/Globe Background Effect */}
+                        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-40">
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-transparent to-transparent"></div>
+                          {/* Simulate Dotted Map/Globe with CSS pattern */}
+                          <div
+                            className="w-full h-full"
+                            style={{
+                              backgroundImage: "radial-gradient(white 1px, transparent 1px)",
+                              backgroundSize: "20px 20px",
+                              maskImage:
+                                "radial-gradient(circle at 50% 50%, black, transparent 70%)"
+                            }}
+                          ></div>
+                        </div>
+                        <div className="relative z-10 max-w-xl">
+                          <h3
+                            className="text-3xl lg:text-5xl text-white mb-4 leading-tight font-playfair font-medium tracking-tight"
+                            style={{}}
+                          >
+                            Experience superior architecture design
+                          </h3>
+                          <p
+                            className="text-[#A1A1AA] text-sm lg:text-base mb-8 font-geist"
+                            style={{ transition: "outline 0.1s ease-in-out" }}
+                          >
+                            150+ international awards won for sustainable innovation.
+                          </p>
+            <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
+              <a
+                href="#"
+                className="btn-wrapper"
+                style={
+                  {
+                    "--dot-size": "6px",
+                    "--line-weight": "1px",
+                    "--line-distance": "0.8rem 1rem",
+                    "--animation-speed": "0.35s",
+                    "--dot-color": "#FACC15",
+                    "--line-color": "#FACC15",
+                    "--grid-color": "rgba(255, 255, 255, 0.29)",
+                    position: "relative",
+                    display: "inline-flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "auto",
+                    height: "auto",
+                    padding: "var(--line-distance)",
+                    userSelect: "none",
+                  } as React.CSSProperties
+                }
+              >
+                <div className="line horizontal top"></div>
+                <div className="line vertical right"></div>
+                <div className="line horizontal bottom"></div>
+                <div className="line vertical left"></div>
+
+                <div className="dot top left"></div>
+                <div className="dot top right"></div>
+                <div className="dot bottom right"></div>
+                <div className="dot bottom left"></div>
+
+                <button className="btn bg-neutral-900 text-white border-transparent hover:bg-neutral-800 transition-colors rounded-md">
+                  <span className="btn-text tracking-tight text-white">
+                    Bergabung dengan kami
+                  </span>
+                  <svg
+                    className="btn-svg text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
           </div>
 
             <div className="relative w-full overflow-hidden pointer-events-none select-none pt-20">
@@ -655,7 +672,7 @@ export default function Home() {
                 © 2024 Novus Arc Systems. All rights reserved.
               </p>
             </div>
-        </footer>
+        </section>
     </>
   );
 }
