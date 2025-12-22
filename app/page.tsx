@@ -103,7 +103,7 @@ export default function Home() {
     return (<>
 
   {/* Hero Section with Background Image */}
-  <header className="relative min-h-screen flex flex-col justify-center px-6 border-b overflow-hidden">
+  <header className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
     <title>Laksana Business Park - Solusi Gudang & Properti Strategis</title>
     {/* Background Video (fixed) */}
     <div className="absolute inset-0 z-0">
@@ -112,6 +112,7 @@ export default function Home() {
         muted
         loop
         playsInline
+        preload="metadata"
         className="w-full h-full object-cover"
       >
         <source src="/videos/hero-video.mp4" type="video/mp4" />
@@ -126,13 +127,13 @@ export default function Home() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
         {/* Left side - Title and description */}
         <div className="lg:flex-1 fade-in-up">
-          <h1 className="text-2xl md:text-5xl font-medium tracking-tight text-white mb-8 leading-[0.95] brand-font">
+          <h1 className="text-2xl md:text-5xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
             
             <span className="text-white bg-clip-text">
               Laksana Business Park
             </span>
           </h1>
-          <p className="text-lg text-white max-w-2xl font-light leading-relaxed border-l border-white/20 pl-6">
+          <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
             Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh PT. Agung Intiland dengan fasilitas modern dan lokasi strategis.
           </p>
         </div>
@@ -144,7 +145,7 @@ export default function Home() {
           
             <a
               href="#contact"
-              className="px-8 py-4 bg-white text-black font-medium rounded-sm hover:bg-slate-200 transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
+              className="px-8 py-4 bg-white text-black font-medium hover:bg-slate-200 transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
@@ -153,7 +154,7 @@ export default function Home() {
             </a>
             <a
               href="#virtual"
-              className="justify-start flex px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium rounded-sm transition-colors text-sm tracking-wide whitespace-nowrap"
+              className="justify-start flex px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-play-circle-fill mr-3 mt-0.5" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
@@ -899,7 +900,7 @@ export default function Home() {
               <div className="flex items-center gap-3">
                 <img
                   src="/images/logo/logo.svg"
-                  className="w-[40%] object-contain"
+                  className="h-10 sm:h-12 md:h-14 w-auto object-contain"
                   alt="Abstract"
                 />
               </div>
