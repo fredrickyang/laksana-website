@@ -75,7 +75,7 @@ export default function Menu() {
         id="main-nav"
       >
         {/* Brand / Logo */}
-        <a href="#" className="flex items-center gap-3 group z-50 relative">
+        <a href="/" className="flex items-center gap-3 group z-50 relative">
           <img
             src="/images/logo/logo.svg"
             alt="Laksana Logo"
@@ -148,7 +148,7 @@ export default function Menu() {
             <nav className="flex flex-col gap-2 menu-hover-dim" id="mobile-nav-list">
               {[
                 { href: '/', label: 'Home'},
-                { href: '#', label: 'Produk'},
+                { href: '/product', label: 'Produk'},
                 { href: '#', label: 'Tentang Kami'},
                 { href: '#', label: 'Fasilitas'},
                 { href: '#', label: 'Tenan'},
