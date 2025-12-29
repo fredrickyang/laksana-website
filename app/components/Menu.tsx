@@ -95,7 +95,7 @@ export default function Menu() {
           {/* Burger Trigger */}
           <button
             id="menu-toggle"
-            className="group flex flex-col items-center justify-center gap-[5px] w-12 h-12 border border-white/20 hover:bg-brand hover:border-brand backdrop-blur-sm transition-all duration-300 focus:outline-none text-white"
+            className="group cursor-pointer flex flex-col items-center justify-center gap-[5px] w-12 h-12 border border-white/20 hover:bg-brand hover:border-brand backdrop-blur-sm transition-all duration-300 focus:outline-none text-white"
           >
             <span className="h-[2px] w-5 transition-all duration-300 group-hover:bg-white bg-current"></span>
             <span className="h-[2px] w-5 transition-all duration-300 group-hover:bg-white bg-current"></span>
@@ -115,7 +115,7 @@ export default function Menu() {
         <div className="w-full flex justify-end p-6 md:p-12 z-10">
           <button
             id="menu-close"
-            className="group flex items-center gap-3 transition-colors text-white/60 hover:text-sand"
+            className="group cursor-pointer flex items-center gap-3 transition-colors text-white/60 hover:text-sand"
           >
             <span className="text-xs uppercase tracking-[0.2em] font-sans font-normal">
               Close

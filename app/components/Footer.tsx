@@ -9,7 +9,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <img
                   src="/images/logo/logo.svg"
-                  className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                  className="h-8 sm:h-10 md:h-10 w-auto object-contain"
                   alt="Abstract"
                 />
               </div>
