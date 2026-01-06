@@ -545,8 +545,7 @@ export default function Home() {
           </div>
 
           <div className="branding">
-            <section className="overflow-hidden bg-white border-neutral-200 border-t pt-24 pb-24 relative">
-              <div className="bg-gradient-to-b from-neutral-50 via-white to-neutral-100 absolute top-0 right-0 bottom-0 left-0" />
+            <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-24 relative">
               <div className="container mx-auto px-6 lg:px-12 relative z-10">
                 {/* Label */}
                 <div className="flex flex-col items-center mb-14">
@@ -622,8 +621,7 @@ export default function Home() {
           </div>
 
           <div className="cta-section">
-            <section className="overflow-hidden bg-white border-neutral-200 border-t pt-24 pb-24 relative">
-              <div className="bg-gradient-to-b from-neutral-50 via-white to-neutral-100 absolute top-0 right-0 bottom-0 left-0" />
+            <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-24 relative">
             </section>
           </div>
 
@@ -729,7 +727,7 @@ export default function Home() {
             <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
           </a>
       </div>
-      <div className="w-full px-6 lg:px-12">
+      <div className="w-full px-6 lg:px-12 bg-grey-50">
         <article className="cursor-pointer pt-16 pb-16 flex flex-col lg:flex-row justify-start gap-8 flex-wrap">
         <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
           <div className="relative">

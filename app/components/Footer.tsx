@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full justify-between mt-10 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
+    <footer className="w-full justify-between border-t border-neutral-100 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
       <div className="container mx-auto">
         <div className="px-6 py-10 lg:px-10 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
