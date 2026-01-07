@@ -168,14 +168,14 @@ export default function Product() {
 
             {/* Konten Produk 3 */}
             <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-                <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9] uppercase">
+                <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9] uppercase" id="luxima-product">
                     Luxima Bizhub 4 in 1
                 </h2>
             </div>
             {/* Card Produk */}
             <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
                 <a
-                    href="#"
+                    href="/unit-detail"
                     className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
                 >
                     <img

@@ -606,7 +606,7 @@ export default function Unit() {
                         ) : (
                             <>
                                 <img
-                                    src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&auto=format&fit=crop&w=2600&q=80"
+                                    src="https://agungintiland.com/assets/source/assets/thumbs/images/cover_1280_700_laksana-business-park---view-semi-bev-05.png.webp"
                                     alt="Video cover"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
                                 />

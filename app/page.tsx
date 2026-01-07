@@ -213,7 +213,7 @@ export default function Home() {
           style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
           {/* Card 1: Luxima */}
-          <a href="#" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
+          <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
             <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
               {/* Background Abstract */}
               <div className="absolute top-0 right-0 bottom-0 left-0">
