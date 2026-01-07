@@ -105,6 +105,97 @@ export default function Article() {
 </div>
 </section>
 
+<section id="profile" className="py-24 px-6 relative">
+  <div className="max-w-7xl mx-auto">
+    <div className="mb-16 text-center">
+      <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-tight">Pimpinan Perusahaan</h2>
+      <p className="text-md text-slate-600 max-w-xl mx-auto">
+        Tim manajemen yang terdiri dari para profesional dengan pengalaman luas di berbagai bidang.
+      </p>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Coach 1 */}
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+        <div className="aspect-[4/5] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+            alt="Coach"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-white mb-1">James Sterling</h3>
+          <p className="text-[#F7D300] text-sm font-medium mb-3">
+            Executive Performance
+          </p>
+          <p className="text-slate-400 text-sm leading-relaxed">
+            "Master your mind, master your industry."
+          </p>
+        </div>
+      </div>
+      {/* Coach 2 */}
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+        <div className="aspect-[4/5] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+            alt="Coach"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-white mb-1">Elena Vance</h3>
+          <p className="text-[#F7D300] text-sm font-medium mb-3">
+            Holistic Leadership
+          </p>
+          <p className="text-slate-400 text-sm leading-relaxed">
+            "Leadership starts with self-awareness."
+          </p>
+        </div>
+      </div>
+      {/* Coach 3 */}
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+        <div className="aspect-[4/5] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+            alt="Coach"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-white mb-1">Marcus Chen</h3>
+          <p className="text-[#F7D300] text-sm font-medium mb-3">
+            Strategic Vision
+          </p>
+          <p className="text-slate-400 text-sm leading-relaxed">
+            "Clarity is the ultimate competitive advantage."
+          </p>
+        </div>
+      </div>
+      {/* Coach 4 */}
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+        <div className="aspect-[4/5] overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+            alt="Coach"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-white mb-1">Sarah O'Neil</h3>
+          <p className="text-[#F7D300] text-sm font-medium mb-3">
+            Emotional Intelligence
+          </p>
+          <p className="text-slate-400 text-sm leading-relaxed">
+            "Connect with yourself to connect with others."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
   <Form />
   <Footer />
   </>
