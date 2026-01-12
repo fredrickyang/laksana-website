@@ -80,7 +80,7 @@ export default function Unit() {
                 </div>
             </div>
             {/* Gallery Carousel Section - Centered */}
-            <div className="w-full flex items-center justify-center px-6">
+            <div className="w-full flex items-center justify-center px-6 mt-5 mb-10">
                 <div className="w-full max-w-300">
                     <div className="lg:col-span-5 flex flex-col lg:pt-5 flex items-start relative justify-center">
                         <p className="text-neutral-900 justify-center max-w-md mb-5">
@@ -482,6 +482,43 @@ export default function Unit() {
                     </div>
                 </div>
             </div>
+<section className="border-white/5 border-t">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="relative border border-slate-800 bg-zinc-900 overflow-hidden p-12 md:p-24 text-center">
+      {/* BG Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-800/50 to-black pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-white/5 blur-3xl pointer-events-none" />
+      <div className="relative z-10">
+        <h2
+          className="text-3xl md:text-5xl text-white tracking-tighter mb-6 font-montserrat font-medium"
+          style={{ transition: "outline 0.1s ease-in-out" }}
+        >
+          Punya kebutuhan spesifik mengenai Gudang ?
+        </h2>
+        <p
+          className="text-zinc-400 text-base md:text-lg mb-10 max-w-2xl mx-auto font-manrope"
+          style={{ transition: "outline 0.1s ease-in-out" }}
+        >
+          Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#contact"
+            className="button-cta1  w-full sm:w-auto px-8 py-3 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors tracking-tight cursor-pointer"
+            style={{ transition: "outline 0.1s ease-in-out" }}
+          >
+            Konsultasi Gratis
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer"
+            style={{ transition: "outline 0.1s ease-in-out" }}
+          >
+            Download E-Brochure
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
             <section id="video" className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6">
                     {/* Video Placeholder */}
@@ -636,44 +673,6 @@ export default function Unit() {
                     </div>
                 </div>
             </section>
-
-            <section className="border-white/5 border-t pt-24 pb-24">
-  <div className="max-w-7xl mx-auto px-6">
-    <div className="relative border border-slate-800 bg-zinc-900 overflow-hidden p-12 md:p-24 text-center">
-      {/* BG Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-800/50 to-black pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-white/5 blur-3xl pointer-events-none" />
-      <div className="relative z-10">
-        <h2
-          className="text-3xl md:text-5xl text-white tracking-tighter mb-6 font-montserrat font-medium"
-          style={{ transition: "outline 0.1s ease-in-out" }}
-        >
-          Punya kebutuhan spesifik mengenai Gudang ?
-        </h2>
-        <p
-          className="text-zinc-400 text-base md:text-lg mb-10 max-w-2xl mx-auto font-manrope"
-          style={{ transition: "outline 0.1s ease-in-out" }}
-        >
-          Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#" target="_blank" rel="noopener noreferrer"
-            className="button-cta1  w-full sm:w-auto px-8 py-3 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors tracking-tight cursor-pointer"
-            style={{ transition: "outline 0.1s ease-in-out" }}
-          >
-            Konsultasi Gratis
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer"
-            style={{ transition: "outline 0.1s ease-in-out" }}
-          >
-            Download E-Brochure
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
             <Form />
             <Footer />
