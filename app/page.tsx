@@ -146,7 +146,7 @@ export default function Home() {
           
             <a
               href="#contact"
-              className="px-8 py-4 bg-white text-black font-medium hover:bg-slate-200 transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
+              className="px-8 py-4 bg-white text-black font-medium hover:bg-[#1d2088] hover:text-white transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
@@ -199,8 +199,8 @@ export default function Home() {
             Proyek Kami
           </h2>
           <a
-            href="#"
-            className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#FACC15] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#FACC15]"
+            href="/product"
+            className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]"
           >
             Lihat Semua Proyek
             <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
@@ -227,7 +227,7 @@ export default function Home() {
           <div className="opacity-10 absolute top-0 right-0 bottom-0 left-0"></div>
             </div>
             <div className="justify-start mt-6 border-l border-black/5 pl-4">
-              <h3 className="text-xl text-neutral-900 font-medium mb-2">
+              <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
                 Luxima Bizhub 4 in 1
               </h3>
 
@@ -268,7 +268,7 @@ export default function Home() {
           <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
             </div>
             <div className="justify-start mt-6 border-l border-black/5 pl-4">
-              <h3 className="text-xl text-neutral-900 font-medium mb-2">
+              <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
                 Laksana Tahap 1
               </h3>
 
@@ -309,7 +309,7 @@ export default function Home() {
           <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
             </div>
             <div className="justify-start mt-6 border-l border-black/5 pl-4">
-              <h3 className="text-xl text-neutral-900 font-medium mb-2">
+              <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
                 Laksana Tahap 2
               </h3>
 
@@ -350,7 +350,7 @@ export default function Home() {
           <div className="pointer-events-none opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] absolute top-0 right-0 bottom-0 left-0"></div>
             </div>
             <div className="justify-start mt-6 border-l border-black/5 pl-4">
-              <h3 className="text-xl text-neutral-900 font-medium mb-2">
+              <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
                 Kavling Industri
               </h3>
 
@@ -416,8 +416,8 @@ export default function Home() {
                     "--line-weight": "1px",
                     "--line-distance": "0.8rem 1rem",
                     "--animation-speed": "0.35s",
-                    "--dot-color": "#FACC15",
-                    "--line-color": "#FACC15",
+                    "--dot-color": "#1d2088",
+                    "--line-color": "#1d2088",
                     "--grid-color": "#0003",
                     position: "relative",
                     display: "inline-flex",
@@ -476,7 +476,7 @@ export default function Home() {
                 id="main-image"
                 src={currentImage}
                 alt="Architectural Detail"
-                className="group-hover:grayscale-0 opacity-90 w-full h-full object-cover grayscale scale-110"
+                className="opacity-90 w-full h-full object-cover scale-110"
               />
             </div>
           </div>
@@ -666,8 +666,8 @@ export default function Home() {
                     "--line-weight": "1px",
                     "--line-distance": "0.8rem 1rem",
                     "--animation-speed": "0.35s",
-                    "--dot-color": "#FACC15",
-                    "--line-color": "#FACC15",
+                    "--dot-color": "#1d2088",
+                    "--line-color": "#1d2088",
                     "--grid-color": "rgba(255, 255, 255, 0.29)",
                     position: "relative",
                     display: "inline-flex",
@@ -721,7 +721,7 @@ export default function Home() {
           </h2>
           <a
             href="#"
-            className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#FACC15] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#FACC15]"
+            className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]"
           >
             Lihat Semua Artikel
             <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
@@ -751,7 +751,7 @@ export default function Home() {
               <div className="flex items-center gap-2">
               </div>
             </div>
-            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
               Pengembangan Laksana Tahap 3
             </h2>
             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -760,7 +760,7 @@ export default function Home() {
             <div className="flex items-center justify-start">
               <div className="flex items-center gap-4">
               </div>
-              <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+              <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                 <span>Baca Berita</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -804,8 +804,8 @@ export default function Home() {
               <div className="flex items-center gap-2">
               </div>
             </div>
-            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
-              Kawasan Industri dengan Izin Lengkap (UIKI)
+            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
+              Kawasan Industri dengan Izin Lengkap (IUKI)
             </h2>
             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
               Memiliki izin lengkap (UIKI) memberikan kemudahan bagi perusahaan dalam menjalankan operasional bisnisnya di kawasan industri.
@@ -813,7 +813,7 @@ export default function Home() {
             <div className="flex items-center justify-start">
               <div className="flex items-center gap-4">
               </div>
-              <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+              <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                 <span>Baca Berita</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -857,7 +857,7 @@ export default function Home() {
               <div className="flex items-center gap-2">
               </div>
             </div>
-            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
               Dikelola dengan manajemen estate profesional
             </h2>
             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -866,7 +866,7 @@ export default function Home() {
             <div className="flex items-center justify-start">
               <div className="flex items-center gap-4">
               </div>
-              <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+              <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                 <span>Baca Berita</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

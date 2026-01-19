@@ -17,8 +17,8 @@ body {
 :root {
     --color-navy: #000000;
     --color-navy-dark: #ffffff;
-    --color-brand: #facc15; /* accent yellow */
-    --color-sand: #facc15;
+    --color-brand: #ffffff; /* accent yellow */
+    --color-sand: #1d2088;
 }
 
 .bg-navy { background-color: var(--color-navy); }

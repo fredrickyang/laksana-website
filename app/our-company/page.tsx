@@ -116,7 +116,7 @@ export default function Article() {
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {/* Profile 1 */}
-      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#1d2088] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
         <div className="aspect-[2/3] overflow-hidden">
           <Image
             src="/images/pimpinan/pimpinan1.png"
@@ -128,13 +128,13 @@ export default function Article() {
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-white mb-1">Francis Cahyadi</h3>
-          <p className="text-[#F7D300] text-sm font-medium mb-3">
+          <p className="text-white text-sm font-medium mb-3">
             Komisaris Utama
           </p>
         </div>
       </div>
       {/* Profile 2 */}
-      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#1d2088] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
         <div className="aspect-[2/3] overflow-hidden">
           <Image
             src="/images/pimpinan/pimpinan2.png"
@@ -146,13 +146,13 @@ export default function Article() {
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-white mb-1">Jimmy Widjaja</h3>
-          <p className="text-[#F7D300] text-sm font-medium mb-3">
+          <p className="text-white text-sm font-medium mb-3">
             Komisaris
           </p>
         </div>
       </div>
       {/* Profile 3 */}
-      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#1d2088] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
         <div className="aspect-[2/3] overflow-hidden">
           <Image
             src="/images/pimpinan/pimpinan3.png"
@@ -164,16 +164,16 @@ export default function Article() {
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-white mb-1">Paberd Leonard Hutagaol</h3>
-          <p className="text-[#F7D300] text-sm font-medium mb-3">
+          <p className="text-white text-sm font-medium mb-3">
             Direktur Utama
           </p>
         </div>
       </div>
       {/* Profile 4 */}
-      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#F7D300] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+      <div className="group relative bg-[#0A0A0A] border border-white/50 hover:border-[#1d2088] transition-all duration-500 hover:-translate-y-2 overflow-hidden">
         <div className="aspect-[2/3] overflow-hidden">
           <Image
-            src="/images/pimpinan/pimpinan3.png"
+            src="/images/pimpinan/pimpinan4.png"
             className="w-full h-full object-cover group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
             alt="Pimpinan"
             width={400}
@@ -182,7 +182,7 @@ export default function Article() {
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-white mb-1">Netty Rusli</h3>
-          <p className="text-[#F7D300] text-sm font-medium mb-3">
+          <p className="text-white text-sm font-medium mb-3">
             Direktur Keuangan
           </p>
         </div>

@@ -87,7 +87,7 @@ export default function Menu() {
         <div className="flex items-center gap-6 z-50">
           <a
             href="#"
-            className="hidden md:flex items-center gap-2 bg-brand px-6 py-3 text-xs tracking-[0.15em] font-medium uppercase transition-all duration-300 shadow-lg hover:shadow-brand/20 text-black btn-magnetic z-10 border border-transparent"
+            className="hidden md:flex items-center gap-2 bg-brand px-6 py-3 text-xs tracking-[0.15em] font-medium uppercase transition-all duration-300 shadow-lg text-black z-10 border border-transparent"
           >
             <span className="font-sans relative z-10">Konsultasi Gratis</span>
           </a>
@@ -95,7 +95,7 @@ export default function Menu() {
           {/* Burger Trigger */}
           <button
             id="menu-toggle"
-            className="group cursor-pointer flex flex-col items-center justify-center gap-[5px] w-12 h-12 border border-white/20 hover:bg-brand hover:border-brand backdrop-blur-sm transition-all duration-300 focus:outline-none text-white"
+            className="group cursor-pointer flex flex-col items-center justify-center gap-[5px] w-12 h-12 border border-white/20 hover:bg-[#1d2088] hover:border-brand backdrop-blur-sm transition-all duration-300 focus:outline-none text-white"
           >
             <span className="h-[2px] w-5 transition-all duration-300 group-hover:bg-white bg-current"></span>
             <span className="h-[2px] w-5 transition-all duration-300 group-hover:bg-white bg-current"></span>
@@ -115,12 +115,12 @@ export default function Menu() {
         <div className="w-full flex justify-end p-6 md:p-12 z-10">
           <button
             id="menu-close"
-            className="group cursor-pointer flex items-center gap-3 transition-colors text-white/60 hover:text-sand"
+            className="group cursor-pointer flex items-center gap-3 transition-colors text-white/60"
           >
             <span className="text-xs uppercase tracking-[0.2em] font-sans font-normal">
               Close
             </span>
-            <div className="relative w-10 h-10 flex items-center justify-center border group-hover:border-sand transition-all duration-300 group-hover:rotate-90 border-white/20">
+            <div className="relative w-10 h-10 flex items-center justify-center border group-hover:border-sand transition-all duration-300 group-hover:rotate-90 group-hover:bg-[#1d2088] border-white/20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -212,7 +212,7 @@ export default function Menu() {
             <div className="menu-item delay-500">
               <a
                 href="#"
-                className="block w-full py-4 border text-center uppercase text-sm tracking-[0.2em] hover:bg-sand hover:border-sand hover:text-navy transition-all duration-300 font-sans font-normal bg-white border-white/10 text-black"
+                className="block w-full py-4 border text-center uppercase text-sm tracking-[0.2em] hover:bg-sand hover:border-sand hover:text-white transition-all duration-300 font-sans font-normal bg-white border-white/10 text-black"
               >
                 Download e-Brochure
               </a>

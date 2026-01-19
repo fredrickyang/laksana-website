@@ -111,10 +111,10 @@ export default function Timeline() {
                                 <button
                                     key={item.year}
                                     onClick={() => updateSlide(index)}
-                                    className={`relative px-1 py-4 text-sm font-medium transition-colors duration-300 snap-start flex-shrink-0 whitespace-nowrap ${index === currentIndex ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'}`}
+                                    className={`relative px-1 py-4 text-sm font-medium transition-colors duration-300 snap-start flex-shrink-0 whitespace-nowrap ${index === currentIndex ? 'text-[#1d2088]' : 'text-zinc-400 hover:text-zinc-600'}`}
                                 >
                                     {item.year}
-                                    {index === currentIndex && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-zinc-900 rounded-t-full"></span>}
+                                    {index === currentIndex && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#1d2088] rounded-t-full"></span>}
                                 </button>
                             ))}
                         </div>
@@ -128,7 +128,7 @@ export default function Timeline() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                     <div className="lg:col-span-5 flex flex-col justify-center h-full order-2 lg:order-1 pt-4 lg:pt-12">
                         <div ref={textContentRef} className="fade-in">
-                            <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-zinc-900 mb-6">
+                            <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-[#1d2088] mb-6">
                                 {currentData.title}
                             </h3>
                             <p className="text-base text-zinc-500 leading-relaxed mb-8">
