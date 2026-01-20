@@ -83,7 +83,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Pengembangan Laksana Tahap 3
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -93,7 +93,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Kawasan Industri dengan Izin Lengkap (UIKI)
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -144,7 +144,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +185,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Dikelola dengan manajemen estate profesional
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -195,7 +195,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +235,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Inovasi Terbaru di Laksana Business Park
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -245,7 +245,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -285,7 +285,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Tips Memilih Lokasi Gudang Strategis
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -295,7 +295,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -335,7 +335,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Keunggulan Berinvestasi di Kawasan Industri
                                 Modern
                             </h2>
@@ -346,7 +346,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -386,7 +386,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Pembangunan Infrastruktur Penunjang Terbaru
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -396,7 +396,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -436,7 +436,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Strategi Optimalisasi Logistik Bisnis Anda
                             </h2>
                             <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
@@ -446,7 +446,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -486,7 +486,7 @@ export default function Article() {
                             <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
                                 <div className="flex items-center gap-2"></div>
                             </div>
-                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#facc15] transition-colors duration-300 text-white">
+                            <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                                 Dampak Positif Kawasan Industri Terhadap Ekonomi
                                 Lokal
                             </h2>
@@ -497,7 +497,7 @@ export default function Article() {
                             </p>
                             <div className="flex items-center justify-start">
                                 <div className="flex items-center gap-4"></div>
-                                <button className="flex items-center gap-2 text-[#facc15] hover:text-[#facc15] transition-colors font-medium text-xs">
+                                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                                     <span>Baca Berita</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -542,19 +542,19 @@ export default function Article() {
                             </svg>
                             Previous
                         </button>
-                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] shadow-sm hover:shadow-md bg-stone-800 border-stone-800 text-stone-50 hover:bg-stone-700 hover:border-stone-700">
+                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] shadow-sm hover:shadow-md bg-neutral-900 border-stone-800 text-stone-50 hover:border-stone-700 cursor-pointer">
                             1
                         </button>
-                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none">
+                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
                             2
                         </button>
-                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none">
+                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
                             3
                         </button>
-                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none">
+                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
                             4
                         </button>
-                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none">
+                        <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
                             5
                         </button>
                         <button className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
