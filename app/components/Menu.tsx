@@ -150,7 +150,7 @@ export default function Menu() {
                 { href: '/', label: 'Home'},
                 { href: '/product', label: 'Produk'},
                 { href: '/our-company', label: 'Tentang Kami'},
-                { href: '#', label: 'Fasilitas'},
+                { href: '/facilities', label: 'Fasilitas'},
                 { href: '/article', label: 'Artikel'},
               ].map((item, idx) => (
                 <div key={idx} className="menu-link-wrapper overflow-hidden cursor-pointer group">
