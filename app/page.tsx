@@ -1,107 +1,107 @@
 "use client";
 import {
-    useEffect,
-    useState,
-    useRef
+  useEffect,
+  useState,
+  useRef
 } from "react";
 import Image from "next/image";
 import Footer from "./components/Footer";
 export default function Home() {
-    const images: {
-        [key: string]: string
-    } = {
-        "1": "/images/hero1.png",
-        "2": "/images/img2.jpg",
-        "3": "/images/hero2.png",
-    };
-    const [currentImage, setCurrentImage] = useState(images["1"]);
-    const carouselRef = useRef < HTMLDivElement > (null);
-    useEffect(() => {
-        const initInViewAnimations = function(selector = ".animate-on-scroll") {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("animate");
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: "0px 0px -5% 0px"
-                });
-            document.querySelectorAll(selector).forEach((el) => {
-                observer.observe(el);
-            });
-        };
-        initInViewAnimations();
-        const stats = Array.from(document.querySelectorAll(".stat-item")) as HTMLElement[];
-        const mainImage = document.getElementById("main-image") as HTMLImageElement | null;
-        // Ensure first stat is active on initial load
-        if (stats.length > 0) {
-            stats.forEach((s) => s.classList.remove("active"));
-            stats[0].classList.add("active");
-        }
-        // Attach click handlers with proper cleanup and preloading
-        const statListeners: {
-            el: HTMLElement;handler: EventListener
-        } [] = [];
-        stats.forEach((stat) => {
-            const handler = () => {
-                stats.forEach((s) => s.classList.remove("active"));
-                stat.classList.add("active");
-                const imgId = stat.dataset.imgId;
-                if (imgId && images[imgId]) {
-                    const newSrc = images[imgId];
-                    if (mainImage) mainImage.classList.add("fade-out");
-                    // Preload image before swapping to avoid flicker / missing image
-                    const loader = document.createElement('img') as HTMLImageElement;
-                    loader.src = newSrc;
-                    loader.onload = () => {
-                        // Once loaded, update state so React swaps src synchronously
-                        setCurrentImage(newSrc);
-                        // small delay to let render commit, then remove fade
-                        setTimeout(() => {
-                            if (mainImage) mainImage.classList.remove("fade-out");
-                        }, 50);
-                    };
-                }
-            };
-            stat.addEventListener("click", handler);
-            statListeners.push({
-                el: stat,
-                handler
-            });
+  const images: {
+    [key: string]: string
+  } = {
+    "1": "/images/hero1.png",
+    "2": "/images/img2.png",
+    "3": "/images/hero2.png",
+  };
+  const [currentImage, setCurrentImage] = useState(images["1"]);
+  const carouselRef = useRef < HTMLDivElement > (null);
+  useEffect(() => {
+    const initInViewAnimations = function(selector = ".animate-on-scroll") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: "0px 0px -5% 0px"
         });
-        // Carousel navigation
-        const carouselContainer = carouselRef.current;
-        const leftBtn = document.querySelector('.carousel-btn-left') as HTMLButtonElement | null;
-        const rightBtn = document.querySelector('.carousel-btn-right') as HTMLButtonElement | null;
-        const scrollCarousel = (direction: 'left' | 'right') => {
-            if (!carouselContainer) return;
-            const scrollAmount = 400; // Adjust scroll distance
-            const targetScroll = direction === 'left' ? carouselContainer.scrollLeft - scrollAmount : carouselContainer.scrollLeft + scrollAmount;
-            carouselContainer.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
-        };
-        const onLeft = () => scrollCarousel('left');
-        const onRight = () => scrollCarousel('right');
-        leftBtn?.addEventListener('click', onLeft);
-        rightBtn?.addEventListener('click', onRight);
-        return () => {
-            // cleanup stat listeners
-            statListeners.forEach(({
-                el,
-                handler
-            }) => el.removeEventListener('click', handler));
-            // cleanup carousel listeners
-            leftBtn?.removeEventListener('click', onLeft);
-            rightBtn?.removeEventListener('click', onRight);
-        };
-    }, []);
-    return (<>
+      document.querySelectorAll(selector).forEach((el) => {
+        observer.observe(el);
+      });
+    };
+    initInViewAnimations();
+    const stats = Array.from(document.querySelectorAll(".stat-item")) as HTMLElement[];
+    const mainImage = document.getElementById("main-image") as HTMLImageElement | null;
+    // Ensure first stat is active on initial load
+    if (stats.length > 0) {
+      stats.forEach((s) => s.classList.remove("active"));
+      stats[0].classList.add("active");
+    }
+    // Attach click handlers with proper cleanup and preloading
+    const statListeners: {
+      el: HTMLElement;handler: EventListener
+    } [] = [];
+    stats.forEach((stat) => {
+      const handler = () => {
+        stats.forEach((s) => s.classList.remove("active"));
+        stat.classList.add("active");
+        const imgId = stat.dataset.imgId;
+        if (imgId && images[imgId]) {
+          const newSrc = images[imgId];
+          if (mainImage) mainImage.classList.add("fade-out");
+          // Preload image before swapping to avoid flicker / missing image
+          const loader = document.createElement('img') as HTMLImageElement;
+          loader.src = newSrc;
+          loader.onload = () => {
+            // Once loaded, update state so React swaps src synchronously
+            setCurrentImage(newSrc);
+            // small delay to let render commit, then remove fade
+            setTimeout(() => {
+              if (mainImage) mainImage.classList.remove("fade-out");
+            }, 50);
+          };
+        }
+      };
+      stat.addEventListener("click", handler);
+      statListeners.push({
+        el: stat,
+        handler
+      });
+    });
+    // Carousel navigation
+    const carouselContainer = carouselRef.current;
+    const leftBtn = document.querySelector('.carousel-btn-left') as HTMLButtonElement | null;
+    const rightBtn = document.querySelector('.carousel-btn-right') as HTMLButtonElement | null;
+    const scrollCarousel = (direction: 'left' | 'right') => {
+      if (!carouselContainer) return;
+      const scrollAmount = 400; // Adjust scroll distance
+      const targetScroll = direction === 'left' ? carouselContainer.scrollLeft - scrollAmount : carouselContainer.scrollLeft + scrollAmount;
+      carouselContainer.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    };
+    const onLeft = () => scrollCarousel('left');
+    const onRight = () => scrollCarousel('right');
+    leftBtn?.addEventListener('click', onLeft);
+    rightBtn?.addEventListener('click', onRight);
+    return () => {
+      // cleanup stat listeners
+      statListeners.forEach(({
+        el,
+        handler
+      }) => el.removeEventListener('click', handler));
+      // cleanup carousel listeners
+      leftBtn?.removeEventListener('click', onLeft);
+      rightBtn?.removeEventListener('click', onRight);
+    };
+  }, []);
+  return (<>
 
   {/* Hero Section with Background Image */}
   <header className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
@@ -135,7 +135,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
-            Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh PT. Agung Intiland dengan fasilitas modern dan lokasi strategis.
+            Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.
           </p>
         </div>
         {/* Right side - Buttons aligned horizontally */}
@@ -145,7 +145,7 @@ export default function Home() {
         >
           
             <a
-              href="#contact"
+              href="https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park"
               className="px-8 py-4 bg-white text-black font-medium hover:bg-[#1d2088] hover:text-white transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
@@ -254,7 +254,7 @@ export default function Home() {
           </a>
 
           {/* Card 2: Laksana Tahap 1 */}
-          <a href="#" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
+          <a href="/product#tahap-satu" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
             <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
               {/* Background Abstract */}
               <div className="absolute top-0 right-0 bottom-0 left-0">
@@ -295,7 +295,7 @@ export default function Home() {
           </a>
 
           {/* Card 3: Laksana Tahap 2 */}
-          <a href="#" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
+          <a href="/product#tahap-dua" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
             <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
               {/* Background Abstract */}
               <div className="absolute top-0 right-0 bottom-0 left-0">
@@ -336,7 +336,7 @@ export default function Home() {
           </a>
 
           {/* Card 4: Kavling Industri */}
-          <a href="#" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
+          <a href="/product#tahap-dua" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
             <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
               {/* Background Abstract */}
               <div className="absolute top-0 right-0 bottom-0 left-0">
@@ -381,12 +381,12 @@ export default function Home() {
         <section className="w-full relative pt-32 pb-0 overflow-hidden">
         {/* Navigation Controls (Light Theme) */}
         <div className="absolute bottom-12 right-6 lg:right-12 flex gap-px border border-black/5 bg-white">
-            <button className="carousel-btn-left w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all border-r border-black/5">
+            <button className="carousel-btn-left w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all border-r border-black/5 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
             </svg>
           </button>
-          <button className="carousel-btn-right w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all">
+          <button className="carousel-btn-right w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
             </svg>
@@ -402,13 +402,13 @@ export default function Home() {
             </h1>
 
             <p className="text-md text-neutral-600 text-justify max-w-md leading-relaxed mb-12 font-light [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-              Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh PT. Agung Intiland dengan fasilitas modern dan lokasi strategis.
+              Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.
               Kami memiliki lebih dari 1200 Hektar total kawasan dengan pilihan unit mulai dari Kavling, Gudang Serbaguna dan Ruko untuk menunjang bisnis anda.
             </p>
 
             <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate">
               <a
-                href="#"
+                href="/our-company"
                 className="btn-wrapper"
                 style={
                   {
@@ -658,7 +658,7 @@ export default function Home() {
                           </p>
             <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
               <a
-                href="#"
+                href="/our-company#contact"
                 className="btn-wrapper"
                 style={
                   {
@@ -720,7 +720,7 @@ export default function Home() {
             Artikel
           </h2>
           <a
-            href="#"
+            href="/article"
             className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]"
           >
             Lihat Semua Artikel

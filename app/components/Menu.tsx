@@ -1,14 +1,13 @@
 'use client';
-
-import { useEffect } from 'react';
-
+import {
+  useEffect
+} from 'react';
 export default function Menu() {
   useEffect(() => {
     // Initialize Lucide icons if available
     if (typeof window !== 'undefined' && (window as any).lucide) {
       (window as any).lucide.createIcons();
     }
-
     const menuToggle = document.getElementById('menu-toggle');
     const menuClose = document.getElementById('menu-close');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -26,21 +25,16 @@ export default function Menu() {
       menuOverlay?.classList.remove('menu-open');
       body.style.overflow = '';
     }
-
     menuToggle?.addEventListener('click', openMenu);
     menuClose?.addEventListener('click', closeMenu);
-
     menuLinks.forEach(link => {
       link.addEventListener('click', closeMenu);
     });
-
     // Navigation Scroll Effect (Smart Nav)
     const nav = document.getElementById('main-nav');
     let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY <= 0) {
         nav?.classList.remove('nav-hidden', 'nav-visible');
         nav?.classList.add('nav-top');
@@ -51,12 +45,9 @@ export default function Menu() {
         nav?.classList.remove('nav-hidden', 'nav-top');
         nav?.classList.add('nav-visible');
       }
-
       lastScrollY = currentScrollY;
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
       menuToggle?.removeEventListener('click', openMenu);
@@ -66,9 +57,7 @@ export default function Menu() {
       });
     };
   }, []);
-
-  return (
-    <>
+  return (<>
       {/* GLOBAL NAVIGATION (Smart Nav) */}
       <nav
         className="fixed z-50 md:px-12 flex w-full pt-6 pr-6 pb-6 pl-6 top-0 left-0 items-center justify-between nav-top"
@@ -86,7 +75,7 @@ export default function Menu() {
         {/* Right Side: CTA & Mobile Trigger */}
         <div className="flex items-center gap-6 z-50">
           <a
-            href="#"
+            href="/our-company#contact"
             className="hidden md:flex items-center gap-2 bg-brand hover:bg-sand hover:text-white px-6 py-3 text-xs tracking-[0.15em] font-medium uppercase transition-all duration-300 shadow-lg text-black z-10 border border-transparent"
           >
             <span className="font-sans relative z-10">Konsultasi Gratis</span>
@@ -219,6 +208,5 @@ export default function Menu() {
           </div>
         </div>
       </div>
-    </>
-  );
+    </>);
 }
