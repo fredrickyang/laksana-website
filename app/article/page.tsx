@@ -1,7 +1,78 @@
 "use client";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import { useState } from "react";
+
 export default function Article() {
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+
+  const articles = [
+    {
+      id: 1,
+      image: "images/card-blog/tahap3.png",
+      category: "News",
+      title: "Pengembangan Laksana Tahap 3",
+      description: "Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3 dengan berbagai keunggulan.",
+    },
+    {
+      id: 2,
+      image: "images/card-blog/iuki.png",
+      category: "Tips & Trick",
+      title: "Kawasan Industri dengan Izin Lengkap (UIKI)",
+      description: "Memiliki izin lengkap (UIKI) memberikan kemudahan bagi perusahaan dalam menjalankan operasional bisnisnya di kawasan industri.",
+    },
+    {
+      id: 3,
+      image: "images/card-blog/estate-terbaik.png",
+      category: "Article",
+      title: "Dikelola dengan manajemen estate profesional",
+      description: "Kami menjalankan dengan manajemen estate profesional untuk memastikan operasional kawasan berjalan lancar dan efisien.",
+    },
+    {
+      id: 4,
+      image: "images/card-blog/iuki.png",
+      category: "News",
+      title: "Inovasi Terbaru di Laksana Business Park",
+      description: "Laksana Business Park terus berinovasi menghadirkan fasilitas dan layanan terbaik untuk mendukung pertumbuhan bisnis Anda.",
+    },
+    {
+      id: 5,
+      image: "images/card-blog/estate-terbaik.png",
+      category: "Tips & Trick",
+      title: "Tips Memilih Lokasi Gudang Strategis",
+      description: "Pemilihan lokasi gudang yang tepat sangat penting untuk efisiensi operasional dan distribusi produk Anda.",
+    },
+    {
+      id: 6,
+      image: "images/card-blog/tahap3.png",
+      category: "Article",
+      title: "Keunggulan Berinvestasi di Kawasan Industri Modern",
+      description: "Investasi di kawasan industri modern menawarkan berbagai keuntungan jangka panjang bagi para pelaku bisnis.",
+    },
+    {
+      id: 7,
+      image: "images/card-blog/iuki.png",
+      category: "News",
+      title: "Pembangunan Infrastruktur Penunjang Terbaru",
+      description: "Laksana Business Park berkomitmen memperluas dan meningkatkan infrastruktur untuk kenyamanan semua tenant.",
+    },
+    {
+      id: 8,
+      image: "images/card-blog/estate-terbaik.png",
+      category: "Tips & Trick",
+      title: "Strategi Optimalisasi Logistik Bisnis Anda",
+      description: "Pelajari cara mengoptimalkan rantai pasok dan logistik untuk meningkatkan efisiensi dan mengurangi biaya operasional.",
+    },
+    {
+      id: 9,
+      image: "images/card-blog/tahap3.png",
+      category: "Article",
+      title: "Dampak Positif Kawasan Industri Terhadap Ekonomi Lokal",
+      description: "Kehadiran Laksana Business Park memberikan kontribusi signifikan terhadap perekonomian lokal melalui penciptaan lapangan kerja.",
+    },
+  ];
+
+  const filteredArticles = selectedCategory === "Semua" ? articles : articles.filter(article => article.category.toLowerCase() === selectedCategory.toLowerCase());
   return (
     <>
       {/* Hero Section with Background Image */}
@@ -52,7 +123,11 @@ export default function Article() {
               fillRule="nonzero"
             />
           </svg>
-          <select className="border border-gray-300 text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+          <select
+            className="border border-gray-300 text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none cursor-pointer"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
             <option>Semua</option>
             <option>News</option>
             <option>Tips & Trick</option>
@@ -62,451 +137,56 @@ export default function Article() {
       </div>
       <div className="w-full px-6 lg:px-12 bg-grey-50">
         <article className="cursor-pointer pt-16 pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/tahap3.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  NEWS
-                </span>
+          {filteredArticles.map((article) => (
+            <div key={article.id} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
+              <div className="relative">
+                <img
+                  src={article.image}
+                  alt="Article Image"
+                  className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
+                />
+                <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
+                  <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
+                    {article.category.toUpperCase()}
+                  </span>
+                </div>
+                <div className="absolute top-3 right-3"></div>
+                <div className="absolute bottom-3 left-3 right-3"></div>
               </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Pengembangan Laksana Tahap 3
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Demi pesatnya kebutuhan industri di Indonesia, Laksana Business
-                Park kembali menghadirkan pengembangan tahap 3 dengan berbagai
-                keunggulan.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/iuki.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  TIPS & TRICK
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Kawasan Industri dengan Izin Lengkap (UIKI)
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Memiliki izin lengkap (UIKI) memberikan kemudahan bagi
-                perusahaan dalam menjalankan operasional bisnisnya di kawasan
-                industri.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
+              <div className="p-3 sm:p-4 bg-neutral-900">
+                <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
+                  <div className="flex items-center gap-2"></div>
+                </div>
+                <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
+                  {article.title}
+                </h2>
+                <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
+                  {article.description}
+                </p>
+                <div className="flex items-center justify-start">
+                  <div className="flex items-center gap-4"></div>
+                  <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
+                    <span>Baca Berita</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/estate-terbaik.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  Article
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Dikelola dengan manajemen estate profesional
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Kami menjalankan dengan manajemen estate profesional untuk
-                memastikan operasional kawasan berjalan lancar dan efisien.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/iuki.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  NEWS
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Inovasi Terbaru di Laksana Business Park
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Laksana Business Park terus berinovasi menghadirkan fasilitas
-                dan layanan terbaik untuk mendukung pertumbuhan bisnis Anda.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/estate-terbaik.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  TIPS & TRICK
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Tips Memilih Lokasi Gudang Strategis
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Pemilihan lokasi gudang yang tepat sangat penting untuk
-                efisiensi operasional dan distribusi produk Anda.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/tahap3.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  ARTICLE
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Keunggulan Berinvestasi di Kawasan Industri Modern
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Investasi di kawasan industri modern menawarkan berbagai
-                keuntungan jangka panjang bagi para pelaku bisnis.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/iuki.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  NEWS
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Pembangunan Infrastruktur Penunjang Terbaru
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Laksana Business Park berkomitmen memperluas dan meningkatkan
-                infrastruktur untuk kenyamanan semua tenant.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/estate-terbaik.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  TIPS & TRICK
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Strategi Optimalisasi Logistik Bisnis Anda
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Pelajari cara mengoptimalkan rantai pasok dan logistik untuk
-                meningkatkan efisiensi dan mengurangi biaya operasional.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:transform hover:scale-[1.02] w-full lg:flex-1">
-            <div className="relative">
-              <img
-                src="images/card-blog/tahap3.png"
-                alt="Neural Network Visualization"
-                className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
-              />
-              <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-                  ARTICLE
-                </span>
-              </div>
-              <div className="absolute top-3 right-3"></div>
-              <div className="absolute bottom-3 left-3 right-3"></div>
-            </div>
-            <div className="p-3 sm:p-4 bg-neutral-900">
-              <div className="hidden sm:flex items-center gap-2 mb-2 text-xs text-neutral-400">
-                <div className="flex items-center gap-2"></div>
-              </div>
-              <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
-                Dampak Positif Kawasan Industri Terhadap Ekonomi Lokal
-              </h2>
-              <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
-                Kehadiran Laksana Business Park memberikan kontribusi signifikan
-                terhadap perekonomian lokal melalui penciptaan lapangan kerja.
-              </p>
-              <div className="flex items-center justify-start">
-                <div className="flex items-center gap-4"></div>
-                <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                  <span>Baca Berita</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
+          ))}
         </article>
         <div className="flex flex-col items-center mb-10">
           {/* Pagination Component */}
