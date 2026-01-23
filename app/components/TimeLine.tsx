@@ -8,37 +8,37 @@ const journeyData = [
         year: "2010",
         title: "Agung Intiland didirikan",
         desc: "Dimulai perusahaan kami dengan visi untuk menjadi pelopor dalam industri properti pergudangan, mengutamakan inovasi dan keberlanjutan dalam setiap proyek yang kami jalankan.",
-        image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/timeline/tl-1.jpg"
     },
     {
         year: "2015",
         title: "Pembangunan Proyek Perdana",
         desc: "Laksana Business Park Tahap 1 dibangun, menandai tonggak penting dalam perjalanan kami. Proyek ini menampilkan desain modern dan fasilitas ramah lingkungan yang menetapkan standar baru untuk pergudangan di kawasan ini.",
-        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/timeline/tl-2.jpg"
     },
     {
         year: "2017",
         title: "Pembangunan Infrastruktur & Fasilitas Komersial",
         desc: "Pembangunan infrastruktur pendukung seperti jalan akses utama, sistem drainase tertutup, dan fasilitas komersial untuk mendukung kebutuhan operasional tenant kami.",
-        image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=2074&auto=format&fit=crop"
+        image: "/images/timeline/tl-3.jpg"
     },
     {
         year: "2019",
         title: "Pembangunan Laksana Business Park Tahap 2",
         desc: "Pengembangan Laksana Business Park Tahap 2 dengan penambahan area kawasan, seiring bertambahnya permintaan pasar terhadap fasilitas pergudangan modern dan terintegrasi.",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/images/timeline/tl-4.jpg"
     },
     {
         year: "2022",
         title: "Peluncuran Pasar Laksana Business Park Tahap 2",
         desc: "Peresmian peluncuran Laksana Business Park Tahap 2, menandai ekspansi besar-besaran dengan fasilitas yang lebih canggih, area kawasan yang luas, dan row jalan lebar untuk mendukung operasional tenant kami.",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/timeline/tl-5.jpg"
     },
     {
         year: "2025",
         title: "Peluncuran Luxima Bizhub, Gudang dengan konsep 4 in 1",
         desc: "Peluncuran Luxima Bizhub, gudang dengan konsep 4 in 1 yang mengintegrasikan fungsi pergudangan, kantor, ruko, dan fasilitas pendukung lainnya dalam satu kawasan terpadu untuk memenuhi kebutuhan bisnis modern.",
-        image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop"
+        image: "/images/timeline/tl-6.jpg"
     }
 ];
 

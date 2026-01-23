@@ -66,19 +66,19 @@ export default function Facilities() {
             <FacilityCard
               title="Enterprise Security"
               description="Row jalan Lebar untuk Kenyamanan Akses Operasional"
-              imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+              imageSrc="/images/facilities/image1.jpg"
               imageAlt="security dashboard"
             />
             <FacilityCard
               title="Enterprise Security"
               description="Keamanan yang Terjamin dengan Sistem Pengawasan Security 24 Jam"
-              imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+              imageSrc="/images/facilities/image3.jpg"
               imageAlt="security dashboard"
             />
             <FacilityCard
               title="Enterprise Security"
-              description="Underground Utility System yang menciptakan kawasan Rapih, Bersih, dan Elegan"
-              imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+              description="Underground Utility System yang menciptakan kawasan Rapih, Bersih dan Elegan"
+              imageSrc="/images/facilities/image2.jpg"
               imageAlt="security dashboard"
             />
           </div>
