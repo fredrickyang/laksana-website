@@ -152,7 +152,7 @@ export default function Footer() {
                       href="mailto:info@laksanabusinesspark.id"
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      info@laksanabusinesspark.id
+                      contact@agungintiland.com
                     </a>
                     </div>
                   </li>
