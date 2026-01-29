@@ -1,8 +1,18 @@
 'use client';
 import {
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 export default function Menu() {
+  const [language, setLanguage] = useState('ID');
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  const languages = [
+    { code: 'ID', label: 'Bahasa Indonesia' },
+    { code: 'EN', label: 'English' },
+    { code: 'CN', label: '中文' }
+  ];
+
   useEffect(() => {
     // Initialize Lucide icons if available
     if (typeof window !== 'undefined' && (window as any).lucide) {
@@ -57,6 +67,11 @@ export default function Menu() {
       });
     };
   }, []);
+
+  const handleLanguageSelect = (lang: string) => {
+    setLanguage(lang);
+    setIsLanguageOpen(false);
+  };
   return (<>
       {/* GLOBAL NAVIGATION (Smart Nav) */}
       <nav
@@ -80,6 +95,35 @@ export default function Menu() {
           >
             <span className="font-sans relative z-10">Konsultasi Gratis</span>
           </a>
+
+          {/* Language Selector */}
+          <div className="relative">
+            <button
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+              className="group cursor-pointer flex items-center justify-center w-12 h-12 border border-white/20 hover:bg-[#1d2088] hover:border-brand backdrop-blur-sm transition-all duration-300 focus:outline-none text-white"
+            >
+              <span className="text-sm font-semibold">{language}</span>
+            </button>
+
+            {/* Language Dropdown */}
+            {isLanguageOpen && (
+              <div className="absolute top-full mt-2 right-0 bg-navy border border-white/20 backdrop-blur-sm z-50 min-w-max overflow-hidden">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleLanguageSelect(lang.code)}
+                    className={`w-full px-4 py-3 text-left text-sm transition-all duration-300 font-sans ${
+                      language === lang.code
+                        ? 'bg-black` text-white text-bold cursor-pointer'
+                        : 'text-white/70 hover:bg-[#1d2088] hover:text-white cursor-pointer'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Burger Trigger */}
           <button
