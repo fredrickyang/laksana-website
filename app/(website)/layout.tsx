@@ -1,0 +1,33 @@
+import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
+import Script from 'next/script'
+import "../globals.css";
+import "../style-component.css";
+import "../style-menu.css";
+import Menu from "./components/Menu";
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Laksana Business Park - Solusi Gudang & Properti Strategis",
+  description: "Kawasan industri dan komersial terintegrasi di Tangerang Utara",
+};
+
+export default function WebsiteLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${manrope.variable} antialiased font-sans mb-0`}>
+        <Script src="https://unpkg.com/lucide@latest" />
+        <Menu />
+        {children}
+      </body>
+    </html>
+  );
+}
