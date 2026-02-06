@@ -9,6 +9,7 @@ import { Users } from './payload/collections/Users'
 import { Media } from './payload/collections/Media'
 import { Products } from './payload/collections/Products'
 import { Articles } from './payload/collections/Articles'
+import { Categories } from './payload/collections/Categories'
 
 import { Settings } from './payload/globals/Settings'
 import { HomePage } from './payload/globals/HomePage'
@@ -40,7 +41,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Products, Articles],
+  collections: [Users, Media, Products, Articles, Categories],
   globals: [Settings, HomePage, AboutPage, FacilitiesPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

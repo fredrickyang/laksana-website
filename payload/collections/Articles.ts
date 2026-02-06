@@ -26,8 +26,12 @@ export const Articles: CollectionConfig = {
         },
         {
             name: 'category',
-            type: 'select',
-            options: ['News', 'Tips & Trick', 'Article'],
+            type: 'relationship',
+            relationTo: 'categories',
+            hasMany: false,
+            admin: {
+                description: 'Select article category',
+            },
         },
         {
             name: 'thumbnail',

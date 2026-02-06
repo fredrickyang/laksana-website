@@ -28,7 +28,14 @@ export const HomePage: GlobalConfig = {
                     type: 'row',
                     fields: [
                         { name: 'primaryCta', type: 'text', localized: true },
+                        { name: 'primaryCtaLink', type: 'text', admin: { description: 'URL for primary CTA button' } },
+                    ],
+                },
+                {
+                    type: 'row',
+                    fields: [
                         { name: 'secondaryCta', type: 'text', localized: true },
+                        { name: 'secondaryCtaLink', type: 'text', admin: { description: 'URL or anchor for secondary CTA button' } },
                     ],
                 },
                 { name: 'secondaryCtaHelperText', type: 'richText', localized: true }, // e.g. "Klik untuk lihat"
@@ -116,6 +123,7 @@ export const HomePage: GlobalConfig = {
                     options: ['Dark Gradient', 'Blue Gradient', 'Simple Black'],
                 },
                 { name: 'button', type: 'text', localized: true },
+                { name: 'buttonLink', type: 'text', admin: { description: 'URL for CTA button' } },
             ],
         },
     ],

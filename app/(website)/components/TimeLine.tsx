@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
-const journeyData = [
+const defaultJourneyData = [
     {
         year: "2010",
         title: "Agung Intiland didirikan",
@@ -42,7 +42,24 @@ const journeyData = [
     }
 ];
 
-export default function Timeline() {
+interface TimelineProps {
+    timelineData?: Array<{
+        year: string;
+        title: string;
+        description: string;
+    }>;
+}
+
+export default function Timeline({ timelineData }: TimelineProps) {
+    // Transform CMS data or use defaults
+    const journeyData = timelineData && timelineData.length > 0
+        ? timelineData.map((item, index) => ({
+            year: item.year,
+            title: item.title,
+            desc: item.description,
+            image: `/images/timeline/tl-${index + 1}.jpg`
+        }))
+        : defaultJourneyData;
     const [currentIndex, setCurrentIndex] = useState(0);
     const yearsContainerRef = useRef<HTMLDivElement>(null);
     const textContentRef = useRef<HTMLDivElement>(null);

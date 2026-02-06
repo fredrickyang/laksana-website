@@ -32,6 +32,14 @@ export const Products: CollectionConfig = {
             }
         },
         {
+            name: 'label',
+            type: 'text',
+            localized: true,
+            admin: {
+                description: 'Product label shown on cards (e.g., "Gudang Siap Pakai", "Kavling Siap Bangun")',
+            },
+        },
+        {
             name: 'phase',
             type: 'select',
             options: [
@@ -65,17 +73,75 @@ export const Products: CollectionConfig = {
         {
             name: 'keySpecs',
             type: 'array',
+            admin: {
+                description: 'Key specs shown on product cards (icon + label)',
+            },
             fields: [
                 {
                     name: 'icon',
                     type: 'upload',
                     relationTo: 'media',
-                    // Note: Schema said Select/Upload. Upload is safer for custom icons.
                 },
                 {
                     name: 'label',
                     type: 'text',
                     localized: true,
+                },
+            ],
+        },
+        {
+            name: 'highlightSpecs',
+            type: 'group',
+            admin: {
+                description: 'Highlight specifications displayed at the top of product detail page',
+            },
+            fields: [
+                {
+                    name: 'dimension',
+                    type: 'text',
+                    admin: {
+                        description: 'e.g., "6 x 24 Meter"',
+                    },
+                },
+                {
+                    name: 'landArea',
+                    type: 'text',
+                    admin: {
+                        description: 'e.g., "144 m²"',
+                    },
+                },
+                {
+                    name: 'buildingArea',
+                    type: 'text',
+                    admin: {
+                        description: 'e.g., "126 m²"',
+                    },
+                },
+            ],
+        },
+        {
+            name: 'detailedSpecs',
+            type: 'array',
+            admin: {
+                description: 'Full specification list (Key-Value pairs)',
+            },
+            fields: [
+                {
+                    name: 'key',
+                    type: 'text',
+                    required: true,
+                    admin: {
+                        description: 'Spec name (e.g., "Pondasi", "Atap", "Lantai 1")',
+                    },
+                },
+                {
+                    name: 'value',
+                    type: 'text',
+                    required: true,
+                    localized: true,
+                    admin: {
+                        description: 'Spec value (e.g., "Tiang Pancang", "UPVC 2 Layer")',
+                    },
                 },
             ],
         },
@@ -90,10 +156,35 @@ export const Products: CollectionConfig = {
             localized: true,
         },
         {
+            name: 'virtualTourUrl',
+            type: 'text',
+            admin: {
+                description: 'URL to the 3D virtual tour',
+            },
+        },
+        {
+            name: 'facilities',
+            type: 'array',
+            admin: {
+                description: 'Unit-specific facilities (icon + label)',
+            },
+            fields: [
+                {
+                    name: 'icon',
+                    type: 'upload',
+                    relationTo: 'media',
+                },
+                {
+                    name: 'label',
+                    type: 'text',
+                    localized: true,
+                },
+            ],
+        },
+        {
             name: 'callToAction',
             type: 'text',
             localized: true,
-            // Link field could be complex, keeping simple text/url for now
         },
     ],
 }

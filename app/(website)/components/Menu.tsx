@@ -3,7 +3,12 @@ import {
   useEffect,
   useState
 } from 'react';
-export default function Menu() {
+
+interface MenuProps {
+  settings?: any;
+}
+
+export default function Menu({ settings }: MenuProps) {
   const [language, setLanguage] = useState('ID');
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
@@ -12,6 +17,48 @@ export default function Menu() {
     { code: 'EN', label: 'English' },
     { code: 'CN', label: '中文' }
   ];
+
+  // Extract navigation from settings or use defaults
+  const navigation = settings?.navigation?.length > 0
+    ? settings.navigation.map((item: any) => ({
+        href: item.link || '/',
+        label: item.label || 'Link',
+      }))
+    : [
+        { href: '/', label: 'Home' },
+        { href: '/product', label: 'Produk' },
+        { href: '/our-company', label: 'Tentang Kami' },
+        { href: '/facilities', label: 'Fasilitas' },
+        { href: '/article', label: 'Artikel' },
+      ];
+
+  // Extract contact info from settings or use defaults
+  const contactInfo = settings?.contactInformation || {};
+  const phoneNumbers = contactInfo.phoneNumbers || [
+    { label: 'Kantor', number: '(021) 588 6000' },
+    { label: 'WhatsApp', number: '0818 588 6000' },
+  ];
+  const email = contactInfo.email || 'info@laksanabusinesspark.id';
+
+  // Extract addresses from richText or use defaults
+  const getAddressText = (richText: any, fallback: string[]) => {
+    if (!richText?.root?.children) return fallback;
+    return richText.root.children.map((p: any) =>
+      p.children?.map((c: any) => c.text).join('') || ''
+    ).filter(Boolean);
+  };
+
+  const headOfficeAddress = getAddressText(contactInfo.headOfficeAddress, [
+    'Jl. Pantai Indah Selatan No.9',
+    'Blok DC, RT.9/RW.6, Kapuk',
+    'Muara, Penjaringan, North Jakarta 14460',
+  ]);
+
+  const marketingOfficeAddress = getAddressText(contactInfo.marketingOfficeAddress, [
+    'Jl. Raya Kali Baru, Laksana,',
+    'Kecamatan Paku Haji,',
+    'Kabupaten Tangerang, Banten 15570',
+  ]);
 
   useEffect(() => {
     // Initialize Lucide icons if available
@@ -114,7 +161,7 @@ export default function Menu() {
                     onClick={() => handleLanguageSelect(lang.code)}
                     className={`w-full px-4 py-3 text-left text-sm transition-all duration-300 font-sans ${
                       language === lang.code
-                        ? 'bg-black` text-white text-bold cursor-pointer'
+                        ? 'bg-black text-white text-bold cursor-pointer'
                         : 'text-white/70 hover:bg-[#1d2088] hover:text-white cursor-pointer'
                     }`}
                   >
@@ -179,13 +226,7 @@ export default function Menu() {
           {/* Left: Links List */}
           <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col justify-center">
             <nav className="flex flex-col gap-2 menu-hover-dim" id="mobile-nav-list">
-              {[
-                { href: '/', label: 'Home'},
-                { href: '/product', label: 'Produk'},
-                { href: '/our-company', label: 'Tentang Kami'},
-                { href: '/facilities', label: 'Fasilitas'},
-                { href: '/article', label: 'Artikel'},
-              ].map((item, idx) => (
+              {navigation.map((item: any, idx: number) => (
                 <div key={idx} className="menu-link-wrapper overflow-hidden cursor-pointer group">
                   <a
                     href={item.href}
@@ -210,11 +251,14 @@ export default function Menu() {
                 Kontak
               </h3>
               <p className="text-base leading-relaxed font-sans font-normal text-white/70">
-                (021) 588 6000
+                {phoneNumbers.map((phone: any, idx: number) => (
+                  <span key={idx}>
+                    {phone.number}
+                    {idx < phoneNumbers.length - 1 && <br />}
+                  </span>
+                ))}
                 <br />
-                0818 588 6000
-                <br />
-                info@laksanabusinesspark.id
+                {email}
               </p>
             </div>
             <div className="menu-item delay-500">
@@ -222,11 +266,12 @@ export default function Menu() {
                 Kantor Pusat
               </h3>
               <p className="text-base leading-relaxed font-sans font-normal text-white/70">
-                Jl. Pantai Indah Selatan No.9
-                <br />
-                Blok DC, RT.9/RW.6, Kapuk
-                <br />
-                Muara, Penjaringan, North Jakarta 14460
+                {headOfficeAddress.map((line: string, idx: number) => (
+                  <span key={idx}>
+                    {line}
+                    {idx < headOfficeAddress.length - 1 && <br />}
+                  </span>
+                ))}
               </p>
             </div>
             <div className="menu-item delay-500">
@@ -234,11 +279,12 @@ export default function Menu() {
                 Kantor Pemasaran
               </h3>
               <p className="text-base leading-relaxed font-sans font-normal text-white/70">
-                Jl. Raya Kali Baru, Laksana,
-                <br />
-                Kecamatan Paku Haji
-                <br />
-                Kabupaten Tangerang, Banten 15570
+                {marketingOfficeAddress.map((line: string, idx: number) => (
+                  <span key={idx}>
+                    {line}
+                    {idx < marketingOfficeAddress.length - 1 && <br />}
+                  </span>
+                ))}
               </p>
             </div>
             <div className="menu-item delay-500">

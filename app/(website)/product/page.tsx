@@ -1,9 +1,31 @@
-"use client";
+import { getProducts, getSettings, getMediaUrl } from '@/lib/payload'
+import Image from "next/image"
+import Footer from "../components/Footer"
 
-import Footer from "../components/Footer";
-import Image from "next/image";
+export default async function Product() {
+  const [products, settings] = await Promise.all([
+    getProducts('id'),
+    getSettings('id'),
+  ])
 
-export default function Product() {
+  // Group products by phase
+  const productsByPhase = products.reduce((acc: Record<string, any[]>, product: any) => {
+    const phase = product.phase || 'Other'
+    if (!acc[phase]) acc[phase] = []
+    acc[phase].push(product)
+    return acc
+  }, {})
+
+  // Define phase display order and titles
+  const phaseConfig: Record<string, { title: string; id: string }> = {
+    'Tahap 1': { title: 'Tahap Satu', id: 'tahap-satu' },
+    'Tahap 2': { title: 'Tahap Dua', id: 'tahap-dua' },
+    'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
+    'Kavling Industri': { title: 'Kavling Industri', id: 'kavling-industri' },
+  }
+
+  const phaseOrder = ['Tahap 1', 'Tahap 2', 'Luxima', 'Kavling Industri']
+
   return (
     <>
       {/* Hero Section with Background Image */}
@@ -36,225 +58,161 @@ export default function Product() {
           </div>
         </div>
       </div>
-      {/* Konten Produk */}
-      <div
-        className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate"
-        id="tahap-satu"
-      >
-        <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">
-          Tahap Satu
-        </h2>
-      </div>
-      {/* Card Produk */}
-      <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/blok-b.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang Siap Pakai
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Blok B
-            </h3>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/blok-c.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 object-auto bg-center w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="w-full pt-4 sm:pt-6 pr-4 sm:pr-6 pb-4 sm:pb-6 pl-4 sm:pl-6 absolute bottom-0 left-0">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang Siap Pakai
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Blok C
-            </h3>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/blok-l.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang Siap Pakai
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Blok L
-            </h3>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/kavling-card.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="w-full pt-4 sm:pt-6 pr-4 sm:pr-6 pb-4 sm:pb-6 pl-4 sm:pl-6 absolute bottom-0 left-0">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Kavling Siap Bangun
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Kavling
-            </h3>
-          </div>
-        </a>
-      </div>
 
-      {/* Konten Produk 2 */}
-      <div
-        className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate"
-        id="tahap-dua"
-      >
-        <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">
-          Tahap Dua
-        </h2>
-      </div>
-      {/* Card Produk */}
-      <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/kavling-card.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Kavling Siap Bangun
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Kavling
-            </h3>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/cluster-card.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 object-auto bg-center w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="w-full pt-4 sm:pt-6 pr-4 sm:pr-6 pb-4 sm:pb-6 pl-4 sm:pl-6 absolute bottom-0 left-0">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Cluster Siap Bangun
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Cluster
-            </h3>
-          </div>
-        </a>
-      </div>
+      {/* Render products by phase */}
+      {phaseOrder.map((phase) => {
+        const phaseProducts = productsByPhase[phase]
+        if (!phaseProducts || phaseProducts.length === 0) return null
 
-      {/* Konten Produk 3 */}
-      <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-        <h2
-          className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]"
-          id="luxima-product"
-        >
-          Luxima Bizhub 4 in 1
-        </h2>
-      </div>
-      {/* Card Produk */}
-      <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-        <a
-          href="/unit-detail"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/unit-opxima.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang 4 in 1
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Opxima
-            </h3>
+        const config = phaseConfig[phase]
+        return (
+          <div key={phase}>
+            {/* Phase Header */}
+            <div
+              className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate"
+              id={config.id}
+            >
+              <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">
+                {config.title}
+              </h2>
+            </div>
+
+            {/* Product Cards Grid */}
+            <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
+              {phaseProducts.map((product: any) => (
+                <a
+                  key={product.id}
+                  href={`/product/${product.slug}`}
+                  className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
+                >
+                  <img
+                    src={getMediaUrl(product.thumbnail) || "/images/card-unit/kavling-card.png"}
+                    className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
+                    alt={product.name}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                    <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
+                      {product.label || product.type || "Produk"}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-medium text-white">
+                      {product.name}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/unit-nexima.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 object-auto bg-center w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="w-full pt-4 sm:pt-6 pr-4 sm:pr-6 pb-4 sm:pb-6 pl-4 sm:pl-6 absolute bottom-0 left-0">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang 4 in 1
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Nexima
-            </h3>
+        )
+      })}
+
+      {/* Fallback for when there are no products in CMS */}
+      {Object.keys(productsByPhase).length === 0 && (
+        <>
+          {/* Tahap Satu */}
+          <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8" id="tahap-satu">
+            <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">Tahap Satu</h2>
           </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/unit-nexima-plus.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang 4 in 1
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Nexima +
-            </h3>
+          <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/blok-b.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok B</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/blok-c.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok C</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/blok-l.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok L</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/kavling-card.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Kavling</h3>
+              </div>
+            </a>
           </div>
-        </a>
-        <a
-          href="#"
-          className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
-        >
-          <img
-            src="/images/card-unit/unit-maxima.png"
-            className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="w-full pt-4 sm:pt-6 pr-4 sm:pr-6 pb-4 sm:pb-6 pl-4 sm:pl-6 absolute bottom-0 left-0">
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
-              Gudang 4 in 1
-            </span>
-            <h3 className="text-xl sm:text-2xl font-medium text-white">
-              Maxima
-            </h3>
+
+          {/* Tahap Dua */}
+          <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8" id="tahap-dua">
+            <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">Tahap Dua</h2>
           </div>
-        </a>
-      </div>
-      <Footer />
+          <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/kavling-card.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Kavling</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/cluster-card.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Cluster Siap Bangun</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Cluster</h3>
+              </div>
+            </a>
+          </div>
+
+          {/* Luxima */}
+          <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8">
+            <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]" id="luxima-product">Luxima Bizhub 4 in 1</h2>
+          </div>
+          <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
+            <a href="/product/opxima" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/unit-opxima.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Opxima</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/unit-nexima.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Nexima</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/unit-nexima-plus.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Nexima +</h3>
+              </div>
+            </a>
+            <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
+              <img src="/images/card-unit/unit-maxima.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
+                <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
+                <h3 className="text-xl sm:text-2xl font-medium text-white">Maxima</h3>
+              </div>
+            </a>
+          </div>
+        </>
+      )}
+
+      <Footer settings={settings} />
     </>
-  );
+  )
 }
