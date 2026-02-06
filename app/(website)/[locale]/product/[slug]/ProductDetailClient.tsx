@@ -1,7 +1,7 @@
 "use client";
 
-import Footer from "../../components/Footer";
-import Form from "../../components/Form";
+import Footer from "../../../components/Footer";
+import Form from "../../../components/Form";
 import Image from "next/image";
 import { useState } from "react";
 import { getMediaUrl } from "@/lib/utils";

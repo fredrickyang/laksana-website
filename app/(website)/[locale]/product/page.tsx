@@ -1,11 +1,18 @@
 import { getProducts, getSettings, getMediaUrl } from '@/lib/payload'
 import Image from "next/image"
-import Footer from "../components/Footer"
+import Footer from "../../components/Footer"
+import { locales, type Locale } from '@/i18n.config'
 
-export default async function Product() {
+interface ProductPageProps {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Product({ params }: ProductPageProps) {
+  const { locale } = await params
+
   const [products, settings] = await Promise.all([
-    getProducts('id'),
-    getSettings('id'),
+    getProducts(locale as Locale),
+    getSettings(locale as Locale),
   ])
 
   // Group products by phase
@@ -215,4 +222,9 @@ export default async function Product() {
       <Footer settings={settings} />
     </>
   )
+}
+
+// Generate static paths for all locales
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
 }

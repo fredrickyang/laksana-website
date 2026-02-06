@@ -1,17 +1,18 @@
 import { getArticleBySlug, getArticles, getSettings, getMediaUrl } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import Footer from '../../components/Footer'
+import Footer from '../../../components/Footer'
+import { locales, type Locale } from '@/i18n.config'
 
 interface ArticleDetailPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
-  const { slug } = await params
+  const { locale, slug } = await params
   const [article, settings] = await Promise.all([
-    getArticleBySlug(slug, 'id'),
-    getSettings('id'),
+    getArticleBySlug(slug, locale as Locale),
+    getSettings(locale as Locale),
   ])
 
   if (!article) {
@@ -204,10 +205,13 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   )
 }
 
-// Generate static paths for all articles
+// Generate static paths for all articles and locales
 export async function generateStaticParams() {
   const articles = await getArticles('id')
-  return articles.map((article: any) => ({
-    slug: article.slug,
-  }))
+  return locales.flatMap((locale) =>
+    articles.map((article: any) => ({
+      locale,
+      slug: article.slug,
+    }))
+  )
 }

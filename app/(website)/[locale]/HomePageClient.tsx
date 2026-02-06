@@ -5,7 +5,7 @@ import {
   useRef
 } from "react";
 import Image from "next/image";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 import { getMediaUrl } from "@/lib/utils";
 
 // Helper to extract plain text from Payload richText field
@@ -22,25 +22,22 @@ interface HomePageClientProps {
   products: any[];
   articles: any[];
   settings?: any;
+  locale?: string;
 }
 
-export default function HomePageClient({ homePage, products, articles, settings }: HomePageClientProps) {
+export default function HomePageClient({ homePage, products, articles, settings, locale }: HomePageClientProps) {
   // Build images map from CMS stats data
   const statsImages = homePage?.mainFeature?.stats?.reduce((acc: Record<string, string>, stat: any, index: number) => {
     const imageUrl = getMediaUrl(stat.image) || `/images/hero${index + 1}.png`;
     acc[String(index + 1)] = imageUrl;
     return acc;
-  }, {}) || {
-    "1": "/images/hero1.png",
-    "2": "/images/img2.png",
-    "3": "/images/hero2.png",
-  };
+  }, {}) || {};
 
-  const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string);
+  const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string || '/images/placeholder.png');
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const initInViewAnimations = function(selector = ".animate-on-scroll") {
+    const initInViewAnimations = function (selector = ".animate-on-scroll") {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -50,9 +47,9 @@ export default function HomePageClient({ homePage, products, articles, settings 
             }
           });
         }, {
-          threshold: 0.1,
-          rootMargin: "0px 0px -5% 0px"
-        });
+        threshold: 0.1,
+        rootMargin: "0px 0px -5% 0px"
+      });
       document.querySelectorAll(selector).forEach((el) => {
         observer.observe(el);
       });
@@ -113,15 +110,15 @@ export default function HomePageClient({ homePage, products, articles, settings 
   }, [statsImages]);
 
   // Get CTA URLs from CMS or use defaults
-  const primaryCtaLink = homePage?.hero?.primaryCtaLink || "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park";
-  const secondaryCtaLink = homePage?.hero?.secondaryCtaLink || "#virtual";
+  const primaryCtaLink = homePage?.hero?.primaryCtaLink || "#";
+  const secondaryCtaLink = homePage?.hero?.secondaryCtaLink || "#";
   const heroVideoUrl = getMediaUrl(homePage?.hero?.backgroundVideo) || "/videos/hero-video.mp4";
 
   return (
     <>
       {/* Hero Section with Background Image */}
       <header className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
-        <title>{settings?.siteTitle || 'Laksana Business Park - Solusi Gudang & Properti Strategis'}</title>
+        <title>{settings?.siteTitle || '[No Data: siteTitle]'}</title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
           <video
@@ -143,11 +140,11 @@ export default function HomePageClient({ homePage, products, articles, settings 
             <div className="lg:flex-1 fade-in-up">
               <h1 className="text-2xl md:text-5xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
                 <span className="text-white bg-clip-text">
-                  {getRichText(homePage?.hero?.headline, 'Laksana Business Park')}
+                  {getRichText(homePage?.hero?.headline, '[No Data: hero.headline]')}
                 </span>
               </h1>
               <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
-                {getRichText(homePage?.hero?.subheadline, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.')}
+                {getRichText(homePage?.hero?.subheadline, '[No Data: hero.subheadline]')}
               </p>
             </div>
             <div className="flex gap-4 fade-in-up justify-center lg:justify-start px-4 md:px-0 w-full lg:w-auto items-end" style={{ animationDelay: "0.2s" }}>
@@ -156,9 +153,9 @@ export default function HomePageClient({ homePage, products, articles, settings 
                 className="px-8 py-4 bg-white text-black font-medium hover:bg-[#1d2088] hover:text-white transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
-                  <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                  <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
                 </svg>
-                {homePage?.hero?.primaryCta || "Hubungi Kami"}
+                {homePage?.hero?.primaryCta || "[No Data: hero.primaryCta]"}
               </a>
               <div className="flex flex-col items-center gap-2">
                 <span className="text-white text-sm text-shadow tracking-wide animate-bounce">
@@ -169,9 +166,9 @@ export default function HomePageClient({ homePage, products, articles, settings 
                   className="justify-start flex px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-play-circle-fill mr-3 mt-0.5" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
                   </svg>
-                  {homePage?.hero?.secondaryCta || "Virtual 3D"}
+                  {homePage?.hero?.secondaryCta || "[No Data: hero.secondaryCta]"}
                 </a>
               </div>
             </div>
@@ -245,14 +242,14 @@ export default function HomePageClient({ homePage, products, articles, settings 
                 </h3>
                 <div className="flex justify-start items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-building" viewBox="0 0 16 16">
-                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"/>
+                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
+                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z" />
                   </svg>
                   <p className="ml-[2%] mr-5 text-sm leading-relaxed max-w-[90%]">
                     {product.type || "Industrial"}
                   </p>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-map" viewBox="0 0 16 16">
-                    <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z"/>
+                    <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
                   </svg>
                   <p className="ml-[2%] text-sm leading-relaxed max-w-[90%]">
                     {product.highlightSpecs?.landArea || "Luas 550 ha"}
@@ -288,12 +285,12 @@ export default function HomePageClient({ homePage, products, articles, settings 
         <div className="absolute bottom-12 right-6 lg:right-12 flex gap-px border border-black/5 bg-white">
           <button className="carousel-btn-left w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all border-r border-black/5 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
             </svg>
           </button>
           <button className="carousel-btn-right w-12 h-12 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+              <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
             </svg>
           </button>
         </div>
@@ -302,10 +299,10 @@ export default function HomePageClient({ homePage, products, articles, settings 
       <main className="flex-grow grid grid-cols-1 lg:px-12 lg:grid-cols-12 my-10 pb-12 relative gap-x-8 gap-y-8 px-6 py-6">
         <div className="lg:col-span-5 flex flex-col lg:pt-10 z-20 relative justify-center">
           <h1 className="text-3xl lg:text-[2.3rem] font-normal max-w-md tracking-tighter text-black mb-12 [animation:fadeSlideIn_0.8s_ease-out_0.1s_both] animate-on-scroll animate">
-            {getRichText(homePage?.mainFeature?.headline, 'Membangun berkerlanjutan untuk kawasan terpadu')}
+            {getRichText(homePage?.mainFeature?.headline, '[No Data: mainFeature.headline]')}
           </h1>
           <p className="text-md text-neutral-600 text-justify max-w-md leading-relaxed mb-12 font-light [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-            {getRichText(homePage?.mainFeature?.description, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis. Kami memiliki lebih dari 1200 Hektar total kawasan dengan pilihan unit mulai dari Kavling, Gudang Serbaguna dan Ruko untuk menunjang bisnis anda.')}
+            {getRichText(homePage?.mainFeature?.description, '[No Data: mainFeature.description]')}
           </p>
           <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate">
             <a
@@ -339,7 +336,7 @@ export default function HomePageClient({ homePage, products, articles, settings 
               <div className="dot bottom left"></div>
               <button className="btn">
                 <span className="btn-text tracking-tight">
-                  {homePage?.mainFeature?.ctaButtonLabel || "Tentang Perusahaan"}
+                  {homePage?.mainFeature?.ctaButtonLabel || "[No Data: mainFeature.ctaButtonLabel]"}
                 </span>
                 <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"></path>
@@ -416,14 +413,14 @@ export default function HomePageClient({ homePage, products, articles, settings 
               <div className="flex flex-col items-center mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-1 shadow-sm">
                   <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500">
-                    {getRichText(homePage?.branding?.tag, 'Klien Kami')}
+                    {getRichText(homePage?.branding?.tag, '[No Data: branding.tag]')}
                   </span>
                 </div>
                 <h2 className="mt-6 text-3xl lg:text-4xl font-medium tracking-tight text-neutral-900 text-center max-w-3xl leading-[1.05]">
-                  {getRichText(homePage?.branding?.sectionTitle, 'Dipercaya oleh perusahaan besar')}
+                  {getRichText(homePage?.branding?.sectionTitle, '[No Data: branding.sectionTitle]')}
                 </h2>
                 <p className="mt-4 text-base text-neutral-500 text-center max-w-2xl">
-                  {getRichText(homePage?.branding?.description, 'Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.')}
+                  {getRichText(homePage?.branding?.description, '[No Data: branding.description]')}
                 </p>
               </div>
               <div className="mt-14 flex flex-col items-center gap-5">
@@ -475,10 +472,10 @@ export default function HomePageClient({ homePage, products, articles, settings 
             </div>
             <div className="relative z-10 max-w-xl">
               <h3 className="text-2xl lg:text-4xl text-white mb-4 leading-tight font-playfair font-medium tracking-tight">
-                {getRichText(homePage?.ctaSection?.cardTitle, 'Sekarang giliran anda untuk bergabung dengan komunitas Laksana Business Park')}
+                {getRichText(homePage?.ctaSection?.cardTitle, '[No Data: ctaSection.cardTitle]')}
               </h3>
               <p className="text-[#A1A1AA] text-sm lg:text-base mb-8 font-geist">
-                {getRichText(homePage?.ctaSection?.cardDescription, 'Lebih dari 1000 perusahaan telah mempercayakan kebutuhan industri dan komersialnya bersama kami.')}
+                {getRichText(homePage?.ctaSection?.cardDescription, '[No Data: ctaSection.cardDescription]')}
               </p>
               <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
                 <a
@@ -512,7 +509,7 @@ export default function HomePageClient({ homePage, products, articles, settings 
                   <div className="dot bottom left"></div>
                   <button className="btn bg-neutral-900 text-white border-transparent hover:bg-neutral-800 transition-colors rounded-md">
                     <span className="btn-text tracking-tight text-white">
-                      {homePage?.ctaSection?.button || "Bergabung Sekarang"}
+                      {homePage?.ctaSection?.button || "[No Data: ctaSection.button]"}
                     </span>
                     <svg className="btn-svg text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>

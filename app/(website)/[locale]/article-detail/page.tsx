@@ -1,5 +1,5 @@
 "use client";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 import Image from "next/image";
 export default function ArticleDetail() {
   return (

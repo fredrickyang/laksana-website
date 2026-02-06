@@ -36,7 +36,7 @@ export default buildConfig({
       },
     ],
     defaultLocale: 'id',
-    fallback: true,
+    fallback: false,
   },
   admin: {
     user: Users.slug,

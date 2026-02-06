@@ -1,9 +1,9 @@
 "use client";
-import Footer from "../components/Footer";
-import Form from "../components/Form";
+import Footer from "../../components/Footer";
+import Form from "../../components/Form";
 import Image from "next/image";
 import { useState } from "react";
-import Timeline from "../components/TimeLine";
+import Timeline from "../../components/TimeLine";
 import { getMediaUrl } from "@/lib/utils";
 
 interface OurCompanyClientProps {
@@ -15,12 +15,12 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
   const [showVideo, setShowVideo] = useState(false);
 
   // Get YouTube embed URL
-  const youtubeUrl = aboutPage?.videoSection?.youtubeUrl || "https://www.youtube.com/embed/aIA9kDBlJDc?start=1";
+  const youtubeUrl = aboutPage?.videoSection?.youtubeUrl || "#";
   const youtubeEmbedUrl = youtubeUrl.includes('embed') ? youtubeUrl : youtubeUrl.replace('watch?v=', 'embed/');
-  const videoThumbnail = getMediaUrl(aboutPage?.videoSection?.thumbnail) || "https://agungintiland.com/assets/source/assets/thumbs/images/cover_1280_700_laksana-business-park---view-semi-bev-05.png.webp";
+  const videoThumbnail = getMediaUrl(aboutPage?.videoSection?.thumbnail) || "/images/placeholder.png";
 
   // Get hero background
-  const heroBackground = getMediaUrl(aboutPage?.hero?.backgroundImage) || "/images/bg-produk.png";
+  const heroBackground = getMediaUrl(aboutPage?.hero?.backgroundImage) || "/images/placeholder.png";
 
   // Get leaders data
   const leaders = aboutPage?.leadership?.leaders || [];
@@ -57,7 +57,7 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl md:text-5xl sm:text-4xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
                 <span className="text-white bg-clip-text uppercase">
-                  {aboutPage?.hero?.title || "Tentang Perusahaan"}
+                  {aboutPage?.hero?.title || "[No Data: hero.title]"}
                 </span>
               </h1>
             </div>
@@ -68,7 +68,7 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
       <section className="w-full mt-[8%] mb-[5%] border-y border-white/5">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl tracking-tight mb-6">
-            {aboutPage?.history?.headline || "Perjalanan Agung Intiland Dimulai 2010"}
+            {aboutPage?.history?.headline || "[No Data: history.headline]"}
           </h2>
           <div className="text-md text-slate-600 text-justify">
             {historyContent.length > 0 ? historyContent.map((paragraph: string, index: number) => (
@@ -159,10 +159,10 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-medium mb-4 tracking-tight">
-              {aboutPage?.leadership?.headline || "Pimpinan Perusahaan"}
+              {aboutPage?.leadership?.headline || "[No Data: leadership.headline]"}
             </h2>
             <p className="text-md text-slate-600 max-w-xl mx-auto">
-              {aboutPage?.leadership?.description || "Tim manajemen yang terdiri dari para profesional dengan pengalaman luas di berbagai bidang."}
+              {aboutPage?.leadership?.description || "[No Data: leadership.description]"}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

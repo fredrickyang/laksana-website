@@ -4,8 +4,6 @@ import Script from 'next/script'
 import "../globals.css";
 import "../style-component.css";
 import "../style-menu.css";
-import Menu from "./components/Menu";
-import { getSettings } from "@/lib/payload";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -22,13 +20,10 @@ export default async function WebsiteLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getSettings('id');
-
   return (
     <html lang="en">
       <body className={`${manrope.variable} antialiased font-sans mb-0`}>
         <Script src="https://unpkg.com/lucide@latest" />
-        <Menu settings={settings} />
         {children}
       </body>
     </html>
