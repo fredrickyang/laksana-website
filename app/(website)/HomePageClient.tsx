@@ -8,6 +8,15 @@ import Image from "next/image";
 import Footer from "./components/Footer";
 import { getMediaUrl } from "@/lib/utils";
 
+// Helper to extract plain text from Payload richText field
+function getRichText(richText: any, fallback: string = ''): string {
+  if (!richText?.root?.children) return fallback;
+  return richText.root.children
+    .map((p: any) => p.children?.map((c: any) => c.text).join('') || '')
+    .filter(Boolean)
+    .join(' ') || fallback;
+}
+
 interface HomePageClientProps {
   homePage: any;
   products: any[];
@@ -112,7 +121,7 @@ export default function HomePageClient({ homePage, products, articles, settings 
     <>
       {/* Hero Section with Background Image */}
       <header className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
-        <title>Laksana Business Park - Solusi Gudang & Properti Strategis</title>
+        <title>{settings?.siteTitle || 'Laksana Business Park - Solusi Gudang & Properti Strategis'}</title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
           <video
@@ -134,11 +143,11 @@ export default function HomePageClient({ homePage, products, articles, settings 
             <div className="lg:flex-1 fade-in-up">
               <h1 className="text-2xl md:text-5xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
                 <span className="text-white bg-clip-text">
-                  Laksana Business Park
+                  {getRichText(homePage?.hero?.headline, 'Laksana Business Park')}
                 </span>
               </h1>
               <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
-                Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.
+                {getRichText(homePage?.hero?.subheadline, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.')}
               </p>
             </div>
             <div className="flex gap-4 fade-in-up justify-center lg:justify-start px-4 md:px-0 w-full lg:w-auto items-end" style={{ animationDelay: "0.2s" }}>
@@ -293,11 +302,10 @@ export default function HomePageClient({ homePage, products, articles, settings 
       <main className="flex-grow grid grid-cols-1 lg:px-12 lg:grid-cols-12 my-10 pb-12 relative gap-x-8 gap-y-8 px-6 py-6">
         <div className="lg:col-span-5 flex flex-col lg:pt-10 z-20 relative justify-center">
           <h1 className="text-3xl lg:text-[2.3rem] font-normal max-w-md tracking-tighter text-black mb-12 [animation:fadeSlideIn_0.8s_ease-out_0.1s_both] animate-on-scroll animate">
-            Membangun berkerlanjutan untuk kawasan terpadu
+            {getRichText(homePage?.mainFeature?.headline, 'Membangun berkerlanjutan untuk kawasan terpadu')}
           </h1>
           <p className="text-md text-neutral-600 text-justify max-w-md leading-relaxed mb-12 font-light [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-            Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.
-            Kami memiliki lebih dari 1200 Hektar total kawasan dengan pilihan unit mulai dari Kavling, Gudang Serbaguna dan Ruko untuk menunjang bisnis anda.
+            {getRichText(homePage?.mainFeature?.description, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis. Kami memiliki lebih dari 1200 Hektar total kawasan dengan pilihan unit mulai dari Kavling, Gudang Serbaguna dan Ruko untuk menunjang bisnis anda.')}
           </p>
           <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate">
             <a
@@ -408,14 +416,14 @@ export default function HomePageClient({ homePage, products, articles, settings 
               <div className="flex flex-col items-center mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-1 shadow-sm">
                   <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500">
-                    Klien Kami
+                    {getRichText(homePage?.branding?.tag, 'Klien Kami')}
                   </span>
                 </div>
                 <h2 className="mt-6 text-3xl lg:text-4xl font-medium tracking-tight text-neutral-900 text-center max-w-3xl leading-[1.05]">
-                  Dipercaya oleh perusahaan besar
+                  {getRichText(homePage?.branding?.sectionTitle, 'Dipercaya oleh perusahaan besar')}
                 </h2>
                 <p className="mt-4 text-base text-neutral-500 text-center max-w-2xl">
-                  Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.
+                  {getRichText(homePage?.branding?.description, 'Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.')}
                 </p>
               </div>
               <div className="mt-14 flex flex-col items-center gap-5">
@@ -467,10 +475,10 @@ export default function HomePageClient({ homePage, products, articles, settings 
             </div>
             <div className="relative z-10 max-w-xl">
               <h3 className="text-2xl lg:text-4xl text-white mb-4 leading-tight font-playfair font-medium tracking-tight">
-                Sekarang giliran anda untuk bergabung dengan komunitas Laksana Business Park
+                {getRichText(homePage?.ctaSection?.cardTitle, 'Sekarang giliran anda untuk bergabung dengan komunitas Laksana Business Park')}
               </h3>
               <p className="text-[#A1A1AA] text-sm lg:text-base mb-8 font-geist">
-                Lebih dari 1000 perusahaan telah mempercayakan kebutuhan industri dan komersialnya bersama kami.
+                {getRichText(homePage?.ctaSection?.cardDescription, 'Lebih dari 1000 perusahaan telah mempercayakan kebutuhan industri dan komersialnya bersama kami.')}
               </p>
               <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
                 <a
