@@ -14,6 +14,7 @@ export async function getHomePage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'home-page',
         locale,
+        depth: 2,
     })
 }
 
@@ -23,6 +24,7 @@ export async function getAboutPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'about-page',
         locale,
+        depth: 2,
     })
 }
 
@@ -32,6 +34,7 @@ export async function getFacilitiesPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'facilities-page',
         locale,
+        depth: 2,
     })
 }
 
@@ -41,6 +44,7 @@ export async function getSettings(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'settings',
         locale,
+        depth: 2,
     })
 }
 

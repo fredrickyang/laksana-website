@@ -72,6 +72,7 @@ export interface Config {
     products: Product;
     articles: Article;
     categories: Category;
+    'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -106,9 +108,7 @@ export interface Config {
     'facilities-page': FacilitiesPageSelect<false> | FacilitiesPageSelect<true>;
   };
   locale: 'id' | 'en' | 'zh';
-  user: User & {
-    collection: 'users';
-  };
+  user: User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -155,6 +155,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -322,6 +323,22 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  domicile?: string | null;
+  buildingSize?: ('small' | 'medium' | 'large') | null;
+  serviceType?: ('full' | 'legal' | 'consult') | null;
+  message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -363,6 +380,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -528,6 +549,21 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  domicile?: T;
+  buildingSize?: T;
+  serviceType?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -583,6 +619,10 @@ export interface Setting {
         }[]
       | null;
     email?: string | null;
+    /**
+     * Email address to receive form submissions from the website contact form
+     */
+    formNotificationEmail?: string | null;
     headOfficeAddress?: {
       root: {
         type: string;
@@ -1026,6 +1066,7 @@ export interface SettingsSelect<T extends boolean = true> {
               id?: T;
             };
         email?: T;
+        formNotificationEmail?: T;
         headOfficeAddress?: T;
         marketingOfficeAddress?: T;
         socialMediaLinks?:

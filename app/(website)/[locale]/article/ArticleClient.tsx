@@ -1,8 +1,10 @@
 "use client";
 import Footer from "../../components/Footer";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getMediaUrl } from "@/lib/utils";
+
+const ITEMS_PER_PAGE = 6;
 
 interface ArticleClientProps {
   articles: any[];
@@ -39,6 +41,7 @@ const defaultArticles = [
 
 export default function ArticleClient({ articles: cmsArticles, settings }: ArticleClientProps) {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Use CMS articles or fallback to default
   const articles = cmsArticles.length > 0 ? cmsArticles : defaultArticles;
@@ -53,8 +56,27 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
   const filteredArticles = selectedCategory === "Semua"
     ? articles
     : articles.filter((article: any) =>
-        getCategoryName(article.category)?.toLowerCase() === selectedCategory.toLowerCase()
-      );
+      getCategoryName(article.category)?.toLowerCase() === selectedCategory.toLowerCase()
+    );
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const paginatedArticles = filteredArticles.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  // Reset page when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -122,7 +144,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
 
       <div className="w-full px-6 lg:px-12 bg-grey-50">
         <article className="cursor-pointer pt-16 pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredArticles.map((article: any) => (
+          {paginatedArticles.map((article: any) => (
             <a
               key={article.id}
               href={`/article/${article.slug}`}
@@ -178,60 +200,73 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
           ))}
         </article>
 
-        <div className="flex flex-col items-center mb-10">
-          {/* Pagination Component */}
-          <div className="flex items-center gap-1">
-            <button className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none cursor-pointer focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none">
-              <svg
-                width="1.5em"
-                height="1.5em"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                color="currentColor"
-                className="mr-1.5 h-4 w-4 stroke-2"
+        {totalPages > 1 && (
+          <div className="flex flex-col items-center mb-10">
+            {/* Pagination Component */}
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed cursor-pointer focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none"
               >
-                <path
-                  d="M15 6L9 12L15 18"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Previous
-            </button>
-            <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] shadow-sm hover:shadow-md bg-neutral-900 border-stone-800 text-stone-50 hover:border-stone-700 cursor-pointer">
-              1
-            </button>
-            <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
-              2
-            </button>
-            <button className="inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
-              3
-            </button>
-            <button className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer">
-              Next
-              <svg
-                width="1.5em"
-                height="1.5em"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                color="currentColor"
-                className="ml-1.5 h-4 w-4 stroke-2"
+                <svg
+                  width="1.5em"
+                  height="1.5em"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="currentColor"
+                  className="mr-1.5 h-4 w-4 stroke-2"
+                >
+                  <path
+                    d="M15 6L9 12L15 18"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Previous
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`inline-grid place-items-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm min-w-[38px] min-h-[38px] cursor-pointer ${currentPage === page
+                      ? 'shadow-sm hover:shadow-md bg-neutral-900 border-stone-800 text-stone-50 hover:border-stone-700'
+                      : 'bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none'
+                    }`}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer"
               >
-                <path
-                  d="M9 6L15 12L9 18"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+                Next
+                <svg
+                  width="1.5em"
+                  height="1.5em"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="currentColor"
+                  className="ml-1.5 h-4 w-4 stroke-2"
+                >
+                  <path
+                    d="M9 6L15 12L9 18"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <Footer settings={settings} />
     </>
