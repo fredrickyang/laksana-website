@@ -40,11 +40,13 @@ export default function Footer() {
                 <span className="text-[11px] font-medium text-neutral-400">
                   Developed by
                 </span>
+                <a href="https://www.agungintiland.com">
                 <img
                   src="/images/logo/agung-logo.svg"
                   className="h-7 object-contain"
                   alt="Agung Intiland"
                 />
+                </a>
               </div>
             </div>
             <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
@@ -94,18 +96,10 @@ export default function Footer() {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/our-company#progress"
                       className="hover:text-neutral-900 transition-colors"
                     >
                       Progress Pembangunan
-                    </a>
-                  </li>
-                  <li className="">
-                    <a
-                      href="#"
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      Unique Selling Point
                     </a>
                   </li>
                 </ul>
@@ -166,13 +160,13 @@ export default function Footer() {
               <p>© 2025 PT Bangun Laksana Persada. All rights reserved.</p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="#"
+                  href="/privacy-policy"
                   className="hover:text-neutral-700 transition-colors"
                 >
                   Privacy Policy
                 </a>
                 <a
-                  href="#"
+                  href="/tnc"
                   className="hover:text-neutral-700 transition-colors"
                 >
                   Terms of Service
