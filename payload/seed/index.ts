@@ -244,6 +244,120 @@ export async function seed() {
         console.error('Failed to seed Home Page:', error)
     }
 
+    // Home Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'home-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    headline: createRichText('Laksana Business Park'),
+                    subheadline: createRichText('An integrated industrial and commercial estate in North Tangerang, developed by Agung Intiland with modern facilities and a strategic location.'),
+                    primaryCta: 'Contact Us',
+                    secondaryCta: 'Virtual 3D',
+                    secondaryCtaHelperText: createRichText('Click to View'),
+                },
+                mainFeature: {
+                    headline: createRichText('Building sustainability for an integrated estate'),
+                    description: createRichText('An integrated industrial and commercial estate in North Tangerang, developed by Agung Intiland with modern facilities and a strategic location. We have over 1,200 hectares of total estate area with unit options ranging from Land Plots, Multipurpose Warehouses, and Shophouses to support your business.'),
+                    ctaButtonLabel: 'About the Company',
+                    stats: [
+                        {
+                            number: '01',
+                            title: createRichText('Maintaining Product Quality'),
+                            image: hero1Id,
+                        },
+                        {
+                            number: '02',
+                            title: createRichText('Developed by the Best Estate Management'),
+                            image: img2Id,
+                        },
+                        {
+                            number: '03',
+                            title: createRichText('Easy Access to IUKI-Certified Airport'),
+                            image: hero2Id,
+                        },
+                    ],
+                    badges: [
+                        { icon: usp1Id, label: 'IUKI' },
+                        { icon: usp2Id, label: 'Certified' },
+                    ],
+                    badgesCaption: createRichText('Easy Access to IUKI-Certified Airport'),
+                },
+                branding: {
+                    tag: createRichText('Our Clients'),
+                    sectionTitle: createRichText('Trusted by leading companies'),
+                    description: createRichText('Now they can focus on growing their business & operating their warehouses more efficiently with us.'),
+                },
+                ctaSection: {
+                    cardTitle: createRichText('Now it\'s your turn to join the Laksana Business Park community'),
+                    cardDescription: createRichText('More than 1,000 companies have entrusted their industrial and commercial needs with us.'),
+                    button: 'Join Now',
+                },
+            },
+        })
+        console.log('Home Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Home Page (EN):', error)
+    }
+
+    // Home Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'home-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    headline: createRichText('Laksana Business Park'),
+                    subheadline: createRichText('位于北丹格朗的综合工业与商业园区，由Agung Intiland开发，拥有现代化设施和战略位置。'),
+                    primaryCta: '联系我们',
+                    secondaryCta: '虚拟3D',
+                    secondaryCtaHelperText: createRichText('点击查看'),
+                },
+                mainFeature: {
+                    headline: createRichText('为综合园区打造可持续发展'),
+                    description: createRichText('位于北丹格朗的综合工业与商业园区，由Agung Intiland开发，拥有现代化设施和战略位置。我们拥有超过1200公顷的总园区面积，提供从工业用地、多功能仓库到商铺等多种单元选择，全方位支持您的业务。'),
+                    ctaButtonLabel: '关于公司',
+                    stats: [
+                        {
+                            number: '01',
+                            title: createRichText('保持产品质量'),
+                            image: hero1Id,
+                        },
+                        {
+                            number: '02',
+                            title: createRichText('由最佳园区管理团队开发'),
+                            image: img2Id,
+                        },
+                        {
+                            number: '03',
+                            title: createRichText('便捷通往IUKI认证机场'),
+                            image: hero2Id,
+                        },
+                    ],
+                    badges: [
+                        { icon: usp1Id, label: 'IUKI' },
+                        { icon: usp2Id, label: '认证' },
+                    ],
+                    badgesCaption: createRichText('便捷通往IUKI认证机场'),
+                },
+                branding: {
+                    tag: createRichText('我们的客户'),
+                    sectionTitle: createRichText('受到大型企业的信赖'),
+                    description: createRichText('现在他们可以专注于发展业务，与我们一起更高效地运营仓库。'),
+                },
+                ctaSection: {
+                    cardTitle: createRichText('现在轮到您加入Laksana Business Park大家庭了'),
+                    cardDescription: createRichText('超过1000家企业已将其工业和商业需求托付给我们。'),
+                    button: '立即加入',
+                },
+            },
+        })
+        console.log('Home Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Home Page (ZH):', error)
+    }
+
     // ========================================
     // SEED FACILITIES PAGE GLOBAL
     // ========================================
@@ -354,6 +468,218 @@ export async function seed() {
         console.error('Failed to seed Facilities Page:', error)
     }
 
+    // Facilities Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'facilities-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    title: 'Our Facilities',
+                },
+                values: {
+                    headline: 'Our Company Values',
+                    description: createRichTextMulti([
+                        'As a property company committed to providing the best estates for business partners and residents, we uphold values that form the foundation of every development across all our estates. We apply these values consistently to ensure the comfort, safety, and sustainability of the estates we build.',
+                        'Every project we deliver is built on thorough planning, reliable infrastructure, and comprehensive facilities that support modern business needs. Laksana Business Park, as our first milestone, has grown into a dynamic industrial and commercial hub, supported by a community designed to enhance efficiency and growth.',
+                    ]),
+                    valueCards: [
+                        {
+                            title: 'Enterprise Security',
+                            description: 'Wide Roads for Comfortable Operational Access',
+                            image: facility1Id,
+                        },
+                        {
+                            title: 'Enterprise Security',
+                            description: 'Guaranteed Security with 24-Hour Surveillance System',
+                            image: facility3Id,
+                        },
+                        {
+                            title: 'Enterprise Security',
+                            description: 'Underground Utility System Creating a Neat, Clean, and Elegant Estate',
+                            image: facility2Id,
+                        },
+                    ],
+                },
+                mainServices: {
+                    headline: 'Our Main Facilities',
+                    description: 'All our solutions are designed to provide the best experience for business owners and our residents',
+                    services: [
+                        {
+                            title: 'Fiber Optic Internet',
+                            subtitle: 'Fast & Stable Internet Connection',
+                            featuresList: [
+                                { feature: 'Fiber Optic Connection' },
+                                { feature: 'High-Speed Internet' },
+                                { feature: 'Backup Connection' },
+                                { feature: 'Latest Technology' },
+                            ],
+                        },
+                        {
+                            title: 'Multipurpose Warehouse',
+                            subtitle: 'Warehouse with 4-in-1 Concept',
+                            featuresList: [
+                                { feature: 'Office' },
+                                { feature: 'Warehouse' },
+                                { feature: 'Shophouse' },
+                                { feature: 'Residence' },
+                            ],
+                        },
+                        {
+                            title: 'Spacious Parking',
+                            subtitle: 'Spacious and Secure Parking Area',
+                            featuresList: [
+                                { feature: 'Spacious Parking Area' },
+                                { feature: 'Gate Security System' },
+                                { feature: 'Easy Access' },
+                                { feature: 'Loading Area' },
+                            ],
+                        },
+                        {
+                            title: 'Stable Electricity',
+                            subtitle: 'Various Electricity Capacity Options',
+                            featuresList: [
+                                { feature: 'Backup Generator' },
+                                { feature: 'Distribution Panel' },
+                                { feature: 'Stable Electricity' },
+                                { feature: 'Routine Maintenance' },
+                            ],
+                        },
+                        {
+                            title: '24-Hour Security',
+                            subtitle: 'Integrated CCTV Security System',
+                            featuresList: [
+                                { feature: '24-Hour CCTV Surveillance' },
+                                { feature: 'Security Guards' },
+                                { feature: 'Access Control' },
+                                { feature: 'Real-time Monitoring' },
+                            ],
+                        },
+                        {
+                            title: 'Strategic Location',
+                            subtitle: 'Located in a Strategic & Growing Area',
+                            featuresList: [
+                                { feature: 'Close to Soekarno-Hatta Airport' },
+                                { feature: 'Access to Kataraja Toll Road' },
+                                { feature: 'Main Road' },
+                                { feature: 'Rapidly Growing Area' },
+                            ],
+                        },
+                    ],
+                },
+            },
+        })
+        console.log('Facilities Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Facilities Page (EN):', error)
+    }
+
+    // Facilities Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'facilities-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    title: '我们的设施',
+                },
+                values: {
+                    headline: '我们的企业价值观',
+                    description: createRichTextMulti([
+                        '作为一家致力于为商业伙伴和居民打造最佳园区的房地产公司，我们秉持着贯穿每一个园区开发项目的核心价值观。我们始终如一地践行这些价值观，确保我们所建园区的舒适性、安全性和可持续性。',
+                        '我们交付的每一个项目都建立在周密的规划、可靠的基础设施和支持现代商业需求的完善设施之上。Laksana Business Park作为我们的第一个里程碑，已经发展成为一个充满活力的工业和商业中心，得益于一个旨在提高效率和促进增长的社区。',
+                    ]),
+                    valueCards: [
+                        {
+                            title: '企业安保',
+                            description: '宽阔道路，便于运营通行',
+                            image: facility1Id,
+                        },
+                        {
+                            title: '企业安保',
+                            description: '24小时监控系统，保障安全',
+                            image: facility3Id,
+                        },
+                        {
+                            title: '企业安保',
+                            description: '地下管线系统，打造整洁、清爽、优雅的园区',
+                            image: facility2Id,
+                        },
+                    ],
+                },
+                mainServices: {
+                    headline: '我们的主要设施',
+                    description: '我们的所有解决方案都旨在为业主和居民提供最佳体验',
+                    services: [
+                        {
+                            title: '光纤网络',
+                            subtitle: '快速稳定的网络连接',
+                            featuresList: [
+                                { feature: '光纤连接' },
+                                { feature: '高速网络' },
+                                { feature: '备用连接' },
+                                { feature: '最新技术' },
+                            ],
+                        },
+                        {
+                            title: '多功能仓库',
+                            subtitle: '4合1概念仓库',
+                            featuresList: [
+                                { feature: '办公室' },
+                                { feature: '仓库' },
+                                { feature: '商铺' },
+                                { feature: '住宅' },
+                            ],
+                        },
+                        {
+                            title: '宽敞停车场',
+                            subtitle: '宽敞安全的停车区',
+                            featuresList: [
+                                { feature: '宽敞停车区' },
+                                { feature: '门禁安全系统' },
+                                { feature: '便捷通行' },
+                                { feature: '货物装卸区' },
+                            ],
+                        },
+                        {
+                            title: '稳定电力',
+                            subtitle: '多种电力容量选择',
+                            featuresList: [
+                                { feature: '备用发电机' },
+                                { feature: '配电盘' },
+                                { feature: '稳定电力' },
+                                { feature: '定期维护' },
+                            ],
+                        },
+                        {
+                            title: '24小时安保',
+                            subtitle: 'CCTV综合安保系统',
+                            featuresList: [
+                                { feature: '24小时CCTV监控' },
+                                { feature: '安保巡逻' },
+                                { feature: '门禁控制' },
+                                { feature: '实时监控' },
+                            ],
+                        },
+                        {
+                            title: '战略位置',
+                            subtitle: '位于战略性发展区域',
+                            featuresList: [
+                                { feature: '靠近苏加诺-哈达机场' },
+                                { feature: '连接Kataraja收费公路' },
+                                { feature: '主干道' },
+                                { feature: '快速发展区域' },
+                            ],
+                        },
+                    ],
+                },
+            },
+        })
+        console.log('Facilities Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Facilities Page (ZH):', error)
+    }
+
     // ========================================
     // SEED ABOUT PAGE GLOBAL
     // ========================================
@@ -401,6 +727,90 @@ export async function seed() {
         console.log('About Page seeded successfully')
     } catch (error) {
         console.error('Failed to seed About Page:', error)
+    }
+
+    // About Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'about-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    title: 'About the Company',
+                },
+                history: {
+                    headline: 'The Journey of Agung Intiland Began in 2010',
+                    content: createRichTextMulti([
+                        'Since then, Agung Intiland has grown into the largest industrial estate developer in North Tangerang, with a commitment to creating a productive ecosystem that drives sustainable business growth. Starting from the development of Laksana Business Park, we have now become the benchmark for integrated industrial and commercial estates in the region.',
+                        'Every project we deliver is built on thorough planning, reliable infrastructure, and comprehensive facilities that support modern business needs. Laksana Business Park, as our first milestone, has grown into a dynamic industrial and commercial hub, supported by a community designed to enhance efficiency and growth.',
+                        'With the dedication of more than 300 professionals, Agung Intiland continues to strengthen its reputation through consistency, innovation, and sustainable practices. Looking ahead, we are preparing to develop residential projects, completing our vision of creating an integrated estate that harmoniously unites business and living.',
+                    ]),
+                },
+                leadership: {
+                    headline: 'Company Leadership',
+                    description: 'A management team consisting of professionals with extensive experience in various fields.',
+                    leaders: [
+                        { name: 'Francis Cahyadi', position: 'President Commissioner', photo: pimpinan1Id },
+                        { name: 'Jimmy Widjaja', position: 'Commissioner', photo: pimpinan2Id },
+                        { name: 'Paberd Leonard Hutagaol', position: 'President Director', photo: pimpinan3Id },
+                        { name: 'Netty Rusli', position: 'Finance Director', photo: pimpinan4Id },
+                    ],
+                },
+                timeline: [
+                    { year: '2010', title: 'Company Establishment', description: 'Agung Intiland was established with the vision of becoming a leading industrial estate developer.' },
+                    { year: '2012', title: 'Laksana Phase 1', description: 'Launch of Laksana Business Park Phase 1 with the first warehouse units.' },
+                    { year: '2015', title: 'Laksana Phase 2', description: 'Estate expansion with Laksana Business Park Phase 2.' },
+                    { year: '2018', title: 'Luxima Bizhub', description: 'Launch of the 4-in-1 concept with Luxima Bizhub.' },
+                    { year: '2022', title: 'Laksana Phase 3', description: 'Development of Laksana Business Park Phase 3 with modern facilities.' },
+                    { year: '2024', title: 'Township Development', description: 'Plans for integrated township development.' },
+                ],
+            },
+        })
+        console.log('About Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed About Page (EN):', error)
+    }
+
+    // About Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'about-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    title: '关于公司',
+                },
+                history: {
+                    headline: 'Agung Intiland的发展始于2010年',
+                    content: createRichTextMulti([
+                        '自那时起，Agung Intiland已发展成为北丹格朗最大的工业园区开发商，致力于创建推动可持续商业增长的生产性生态系统。从Laksana Business Park的开发开始，我们现已成为该地区综合工业和商业园区的标杆。',
+                        '我们交付的每一个项目都建立在周密的规划、可靠的基础设施和支持现代商业需求的完善设施之上。Laksana Business Park作为我们的第一个里程碑，已发展成为一个充满活力的工业和商业中心，得益于一个旨在提高效率和促进增长的社区。',
+                        '凭借300多名专业人士的奉献，Agung Intiland通过一致性、创新和可持续实践不断加强其声誉。展望未来，我们正在准备开发住宅项目，完善我们创建将商业与生活和谐统一的综合园区的愿景。',
+                    ]),
+                },
+                leadership: {
+                    headline: '公司领导层',
+                    description: '由在各领域拥有丰富经验的专业人士组成的管理团队。',
+                    leaders: [
+                        { name: 'Francis Cahyadi', position: '总监事', photo: pimpinan1Id },
+                        { name: 'Jimmy Widjaja', position: '监事', photo: pimpinan2Id },
+                        { name: 'Paberd Leonard Hutagaol', position: '总经理', photo: pimpinan3Id },
+                        { name: 'Netty Rusli', position: '财务总监', photo: pimpinan4Id },
+                    ],
+                },
+                timeline: [
+                    { year: '2010', title: '公司成立', description: 'Agung Intiland以成为领先工业园区开发商的愿景而成立。' },
+                    { year: '2012', title: 'Laksana第一期', description: 'Laksana Business Park第一期启动，推出首批仓库单元。' },
+                    { year: '2015', title: 'Laksana第二期', description: 'Laksana Business Park第二期园区扩展。' },
+                    { year: '2018', title: 'Luxima Bizhub', description: '推出4合1概念的Luxima Bizhub。' },
+                    { year: '2022', title: 'Laksana第三期', description: 'Laksana Business Park第三期开发，配备现代化设施。' },
+                    { year: '2024', title: '城镇开发', description: '综合城镇开发规划。' },
+                ],
+            },
+        })
+        console.log('About Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed About Page (ZH):', error)
     }
 
     // ========================================
@@ -564,6 +974,206 @@ export async function seed() {
     }
 
     // ========================================
+    // SEED PRODUCT TRANSLATIONS (EN & ZH)
+    // ========================================
+    console.log('\n--- Seeding Product Translations ---')
+
+    const productTranslations = [
+        {
+            slug: 'luxima-bizhub',
+            en: {
+                name: 'Luxima Bizhub 4 in 1',
+                slug: 'luxima-bizhub',
+                label: 'Ready-to-Use Warehouse',
+                type: 'Commercial',
+                shortDescription: 'Designed to meet the needs of business space and residence under one roof as a real solution especially for start-up businesses.',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: 'Pile Foundation' },
+                    { key: 'Struktur', value: 'Reinforced Concrete' },
+                    { key: 'Atap', value: 'Spandek' },
+                    { key: 'Lantai', value: 'Floor Hardener' },
+                ],
+            },
+            zh: {
+                name: 'Luxima Bizhub 4合1',
+                slug: 'luxima-bizhub',
+                label: '即用型仓库',
+                type: '商业',
+                shortDescription: '专为满足在同一屋檐下的商业空间和住所需求而设计，是初创企业的理想解决方案。',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: '桩基础' },
+                    { key: 'Struktur', value: '钢筋混凝土' },
+                    { key: 'Atap', value: 'Spandek屋顶' },
+                    { key: 'Lantai', value: '地坪硬化剂' },
+                ],
+            },
+        },
+        {
+            slug: 'unit-opxima',
+            en: {
+                name: 'Unit Opxima',
+                slug: 'unit-opxima',
+                label: 'Ready-to-Use Warehouse',
+                type: 'Industrial',
+                shortDescription: 'Warehouse unit with premium specifications for modern industrial needs.',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: 'Pile Foundation' },
+                    { key: 'Struktur', value: 'Light Steel' },
+                    { key: 'Atap', value: 'UPVC 2 Layer' },
+                    { key: 'Lantai', value: 'Floor Hardener' },
+                ],
+            },
+            zh: {
+                name: 'Opxima单元',
+                slug: 'unit-opxima',
+                label: '即用型仓库',
+                type: '工业',
+                shortDescription: '具有高端规格的仓库单元，满足现代工业需求。',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: '桩基础' },
+                    { key: 'Struktur', value: '轻钢结构' },
+                    { key: 'Atap', value: 'UPVC双层' },
+                    { key: 'Lantai', value: '地坪硬化剂' },
+                ],
+            },
+        },
+        {
+            slug: 'unit-nexima',
+            en: {
+                name: 'Unit Nexima',
+                slug: 'unit-nexima',
+                label: 'Ready-to-Use Warehouse',
+                type: 'Industrial',
+                shortDescription: 'Warehouse with efficient design for optimal business operations.',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: 'Pile Foundation' },
+                    { key: 'Struktur', value: 'Light Steel' },
+                    { key: 'Atap', value: 'UPVC 2 Layer' },
+                    { key: 'Lantai', value: 'Floor Hardener' },
+                ],
+            },
+            zh: {
+                name: 'Nexima单元',
+                slug: 'unit-nexima',
+                label: '即用型仓库',
+                type: '工业',
+                shortDescription: '设计高效的仓库，优化业务运营。',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: '桩基础' },
+                    { key: 'Struktur', value: '轻钢结构' },
+                    { key: 'Atap', value: 'UPVC双层' },
+                    { key: 'Lantai', value: '地坪硬化剂' },
+                ],
+            },
+        },
+        {
+            slug: 'unit-nexima-plus',
+            en: {
+                name: 'Unit Nexima Plus',
+                slug: 'unit-nexima-plus',
+                label: 'Ready-to-Use Warehouse',
+                type: 'Industrial',
+                shortDescription: 'The plus version of Unit Nexima with a larger area.',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: 'Pile Foundation' },
+                    { key: 'Struktur', value: 'Light Steel' },
+                    { key: 'Atap', value: 'UPVC 2 Layer' },
+                    { key: 'Lantai', value: 'Floor Hardener' },
+                ],
+            },
+            zh: {
+                name: 'Nexima Plus单元',
+                slug: 'unit-nexima-plus',
+                label: '即用型仓库',
+                type: '工业',
+                shortDescription: 'Nexima单元的加大版，面积更宽敞。',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: '桩基础' },
+                    { key: 'Struktur', value: '轻钢结构' },
+                    { key: 'Atap', value: 'UPVC双层' },
+                    { key: 'Lantai', value: '地坪硬化剂' },
+                ],
+            },
+        },
+        {
+            slug: 'unit-maxima',
+            en: {
+                name: 'Unit Maxima',
+                slug: 'unit-maxima',
+                label: 'Ready-to-Use Warehouse',
+                type: 'Industrial',
+                shortDescription: 'The largest warehouse unit with maximum storage capacity.',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: 'Pile Foundation' },
+                    { key: 'Struktur', value: 'WF Steel' },
+                    { key: 'Atap', value: 'UPVC 2 Layer' },
+                    { key: 'Lantai', value: 'Floor Hardener' },
+                ],
+            },
+            zh: {
+                name: 'Maxima单元',
+                slug: 'unit-maxima',
+                label: '即用型仓库',
+                type: '工业',
+                shortDescription: '最大的仓库单元，存储容量最大化。',
+                detailedSpecs: [
+                    { key: 'Pondasi', value: '桩基础' },
+                    { key: 'Struktur', value: 'WF钢结构' },
+                    { key: 'Atap', value: 'UPVC双层' },
+                    { key: 'Lantai', value: '地坪硬化剂' },
+                ],
+            },
+        },
+        {
+            slug: 'kavling-industri',
+            en: {
+                name: 'Industrial Land Plot',
+                slug: 'kavling-industri',
+                label: 'Ready-to-Build Land Plot',
+                type: 'Industrial Land',
+                shortDescription: 'Ready-to-build industrial land plot with complete infrastructure and IUKI permit.',
+                detailedSpecs: [
+                    { key: 'Infrastruktur', value: 'Complete' },
+                    { key: 'Listrik', value: 'Industrial PLN' },
+                    { key: 'Air', value: 'PDAM & Well' },
+                    { key: 'Izin', value: 'IUKI Ready' },
+                ],
+            },
+            zh: {
+                name: '工业用地',
+                slug: 'kavling-industri',
+                label: '即建型工业用地',
+                type: '工业用地',
+                shortDescription: '基础设施完善、拥有IUKI许可证的即建型工业用地。',
+                detailedSpecs: [
+                    { key: 'Infrastruktur', value: '完善' },
+                    { key: 'Listrik', value: '工业用电' },
+                    { key: 'Air', value: '自来水和井水' },
+                    { key: 'Izin', value: 'IUKI就绪' },
+                ],
+            },
+        },
+    ]
+
+    for (const pt of productTranslations) {
+        try {
+            const found = await payload.find({
+                collection: 'products',
+                where: { slug: { equals: pt.slug } },
+                limit: 1,
+            })
+            if (found.docs.length > 0) {
+                const id = found.docs[0].id
+                await payload.update({ collection: 'products', id, locale: 'en', data: pt.en as any })
+                await payload.update({ collection: 'products', id, locale: 'zh', data: pt.zh as any })
+                console.log(`Translated product: ${pt.slug}`)
+            }
+        } catch (error) {
+            console.error(`Failed to translate product ${pt.slug}:`, error)
+        }
+    }
+
+    // ========================================
     // SEED SETTINGS GLOBAL
     // ========================================
     console.log('\n--- Seeding Settings ---')
@@ -611,6 +1221,90 @@ export async function seed() {
         console.log('Settings seeded successfully')
     } catch (error) {
         console.error('Failed to seed Settings:', error)
+    }
+
+    // Settings - English
+    try {
+        await payload.updateGlobal({
+            slug: 'settings',
+            locale: 'en',
+            data: {
+                siteTitle: 'Laksana Business Park - Strategic Warehouse & Property Solutions',
+                topNotification: 'Special Promo! Get up to 10% discount on warehouse unit purchases this month.',
+                contactInformation: {
+                    phoneNumbers: [
+                        { label: 'Office', number: '(021) 588 6000' },
+                        { label: 'WhatsApp', number: '0818 588 6000' },
+                    ],
+                    headOfficeAddress: createRichTextMulti([
+                        'Jl. Pantai Indah Selatan No.9',
+                        'Blok DC, RT.9/RW.6, Kapuk Muara,',
+                        'Penjaringan, North Jakarta 14460',
+                    ]),
+                    marketingOfficeAddress: createRichTextMulti([
+                        'Jl. Raya Kali Baru, Laksana,',
+                        'Kecamatan Paku Haji,',
+                        'Kabupaten Tangerang, Banten 15570',
+                    ]),
+                },
+                navigation: [
+                    { label: 'Home', link: '/' },
+                    { label: 'Products', link: '/product' },
+                    { label: 'About Us', link: '/our-company' },
+                    { label: 'Facilities', link: '/facilities' },
+                    { label: 'Articles', link: '/article' },
+                ],
+                footer: {
+                    companyDescription: 'An integrated industrial and commercial estate in North Tangerang, developed by PT. Agung Intiland with modern facilities and a strategic location.',
+                    copyrightText: '© 2025 PT Bangun Laksana Persada. All rights reserved.',
+                },
+            },
+        })
+        console.log('Settings (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Settings (EN):', error)
+    }
+
+    // Settings - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'settings',
+            locale: 'zh',
+            data: {
+                siteTitle: 'Laksana Business Park - 战略性仓储与物业解决方案',
+                topNotification: '特别促销！本月购买仓库单元可享高达10%的折扣。',
+                contactInformation: {
+                    phoneNumbers: [
+                        { label: '办公室', number: '(021) 588 6000' },
+                        { label: 'WhatsApp', number: '0818 588 6000' },
+                    ],
+                    headOfficeAddress: createRichTextMulti([
+                        'Jl. Pantai Indah Selatan No.9',
+                        'Blok DC, RT.9/RW.6, Kapuk Muara,',
+                        'Penjaringan, 北雅加达 14460',
+                    ]),
+                    marketingOfficeAddress: createRichTextMulti([
+                        'Jl. Raya Kali Baru, Laksana,',
+                        'Paku Haji镇,',
+                        '丹格朗县, 万丹省 15570',
+                    ]),
+                },
+                navigation: [
+                    { label: '首页', link: '/' },
+                    { label: '产品', link: '/product' },
+                    { label: '关于我们', link: '/our-company' },
+                    { label: '设施', link: '/facilities' },
+                    { label: '文章', link: '/article' },
+                ],
+                footer: {
+                    companyDescription: '位于北丹格朗的综合工业与商业园区，由PT. Agung Intiland开发，拥有现代化设施和战略位置。',
+                    copyrightText: '© 2025 PT Bangun Laksana Persada. 版权所有。',
+                },
+            },
+        })
+        console.log('Settings (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Settings (ZH):', error)
     }
 
     // ========================================
@@ -730,6 +1424,101 @@ export async function seed() {
             console.log(`Created article: ${article.title}`)
         } catch (error) {
             console.error(`Failed to create article ${article.title}:`, error)
+        }
+    }
+
+    // ========================================
+    // SEED ARTICLE TRANSLATIONS (EN & ZH)
+    // ========================================
+    console.log('\n--- Seeding Article Translations ---')
+
+    const articleTranslations = [
+        {
+            slug: 'pengembangan-laksana-tahap-3',
+            en: {
+                title: 'Laksana Phase 3 Development',
+                slug: 'laksana-phase-3-development',
+                excerpt: 'To meet Indonesia\'s rapidly growing industrial needs, Laksana Business Park presents Phase 3 development with various advantages.',
+                content: createRichTextMulti([
+                    'Laksana Business Park proudly announces the launch of Phase 3 of our integrated industrial estate development. This project is a response to the increasing demand for quality industrial space in the North Tangerang area.',
+                    'Phase 3 will offer various types of warehouse units with premium specifications, equipped with modern infrastructure and better access to major transportation networks.',
+                    'With significant investment in infrastructure and supporting facilities, we are confident that Phase 3 will be the top choice for companies seeking a strategic location for their business operations.',
+                ]),
+            },
+            zh: {
+                title: 'Laksana第三期开发',
+                slug: 'laksana-phase-3-development',
+                excerpt: '为满足印尼日益增长的工业需求，Laksana Business Park推出第三期开发，具有多项优势。',
+                content: createRichTextMulti([
+                    'Laksana Business Park自豪地宣布推出综合工业园区第三期开发项目。该项目是对北丹格朗地区日益增长的优质工业空间需求的回应。',
+                    '第三期将提供多种类型的仓库单元，配备高端规格、现代化基础设施以及更便捷的主要交通网络连接。',
+                    '通过对基础设施和配套设施的大量投资，我们相信第三期将成为寻求战略位置开展业务运营的企业的首选。',
+                ]),
+            },
+        },
+        {
+            slug: 'kawasan-industri-izin-lengkap',
+            en: {
+                title: 'Industrial Estate with Complete Permits (IUKI)',
+                slug: 'industrial-estate-complete-permits',
+                excerpt: 'Having complete permits (IUKI) makes it easier for companies to run their business operations in the industrial estate.',
+                content: createRichTextMulti([
+                    'The Industrial Estate Business Permit (IUKI) is one of the essential requirements for industrial estates in Indonesia. Laksana Business Park has obtained complete IUKI, providing legal assurance and convenience for all tenants.',
+                    'With IUKI, companies operating in Laksana Business Park can carry out industrial activities with peace of mind without worrying about permit issues. This covers production permits, environmental permits, and various other operational permits.',
+                    'The advantages of choosing an estate with complete IUKI include faster permit processing, legal certainty, and support from estate management in administrative matters.',
+                ]),
+            },
+            zh: {
+                title: '拥有完整许可证的工业园区（IUKI）',
+                slug: 'industrial-estate-complete-permits',
+                excerpt: '拥有完整许可证（IUKI）使企业在工业园区内更容易开展业务运营。',
+                content: createRichTextMulti([
+                    '工业园区经营许可证（IUKI）是印尼工业园区的重要要求之一。Laksana Business Park已获得完整的IUKI，为所有租户提供法律保障和便利。',
+                    '凭借IUKI，在Laksana Business Park运营的企业可以安心开展工业活动，无需担心许可证问题。这涵盖了生产许可证、环境许可证和各种其他运营许可证。',
+                    '选择拥有完整IUKI的园区的优势包括更快的许可证审批流程、法律确定性以及园区管理层在行政事务方面的支持。',
+                ]),
+            },
+        },
+        {
+            slug: 'manajemen-estate-profesional',
+            en: {
+                title: 'Managed by Professional Estate Management',
+                slug: 'professional-estate-management',
+                excerpt: 'We operate with professional estate management to ensure smooth and efficient estate operations.',
+                content: createRichTextMulti([
+                    'Professional industrial estate management is the key to creating a conducive business environment. At Laksana Business Park, we apply the highest estate management standards to ensure the satisfaction of all residents.',
+                    'Our estate management team is responsible for various operational aspects, from infrastructure maintenance, 24-hour security, estate cleanliness, to handling tenant complaints and requests.',
+                    'With a proactive and responsive approach, we ensure that every issue is handled quickly and efficiently, allowing tenants to focus on growing their businesses.',
+                ]),
+            },
+            zh: {
+                title: '由专业园区管理团队管理',
+                slug: 'professional-estate-management',
+                excerpt: '我们以专业的园区管理运营，确保园区高效顺畅运行。',
+                content: createRichTextMulti([
+                    '专业的工业园区管理是创造良好商业环境的关键。在Laksana Business Park，我们采用最高的园区管理标准，确保所有住户的满意度。',
+                    '我们的园区管理团队负责各种运营方面，从基础设施维护、24小时安保、园区清洁，到处理租户投诉和请求。',
+                    '通过积极主动和快速响应的方式，我们确保每个问题都能得到迅速高效的处理，使租户能够专注于发展业务。',
+                ]),
+            },
+        },
+    ]
+
+    for (const at of articleTranslations) {
+        try {
+            const found = await payload.find({
+                collection: 'articles',
+                where: { slug: { equals: at.slug } },
+                limit: 1,
+            })
+            if (found.docs.length > 0) {
+                const id = found.docs[0].id
+                await payload.update({ collection: 'articles', id, locale: 'en', data: at.en as any })
+                await payload.update({ collection: 'articles', id, locale: 'zh', data: at.zh as any })
+                console.log(`Translated article: ${at.slug}`)
+            }
+        } catch (error) {
+            console.error(`Failed to translate article ${at.slug}:`, error)
         }
     }
 

@@ -144,6 +144,67 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               )
             }
 
+            if (element.type === 'upload') {
+              const media = element.value
+              const url = typeof media === 'object' ? media?.url : null
+              if (!url) return null
+
+              const alt = media?.alt || media?.filename || 'Article image'
+              const caption = element.fields?.caption
+              const alignment = element.fields?.alignment || 'center'
+              const size = element.fields?.size || 'full'
+
+              const sizeClass =
+                size === 'small' ? 'max-w-[25%]' :
+                size === 'medium' ? 'max-w-[50%]' :
+                size === 'large' ? 'max-w-[75%]' : 'max-w-full'
+
+              const alignmentClass =
+                alignment === 'center' ? 'mx-auto' :
+                alignment === 'right' ? 'ml-auto' :
+                alignment === 'left' ? 'mr-auto' : 'mx-auto'
+
+              return (
+                <figure key={index} className={`my-8 ${sizeClass} ${alignmentClass}`}>
+                  <Image
+                    src={url}
+                    alt={alt}
+                    width={media?.width || 800}
+                    height={media?.height || 600}
+                    className="w-full h-auto rounded-lg"
+                  />
+                  {caption && (
+                    <figcaption className="text-sm text-neutral-500 mt-2 text-center italic">
+                      {caption}
+                    </figcaption>
+                  )}
+                </figure>
+              )
+            }
+
+            if (element.type === 'block') {
+              const block = element.fields
+              if (block?.blockType === 'button' && block.label && block.url) {
+                const styleClasses =
+                  block.style === 'secondary'
+                    ? 'bg-neutral-700 text-white hover:bg-neutral-800'
+                    : block.style === 'outline'
+                      ? 'border-2 border-[#1d2088] text-[#1d2088] hover:bg-[#1d2088] hover:text-white'
+                      : 'bg-[#1d2088] text-white hover:bg-[#171a6e]'
+
+                return (
+                  <div key={index} className="my-6">
+                    <a
+                      href={block.url}
+                      className={`inline-block px-6 py-3 rounded font-medium transition-colors ${styleClasses}`}
+                    >
+                      {block.label}
+                    </a>
+                  </div>
+                )
+              }
+            }
+
             return null
           })}
 
