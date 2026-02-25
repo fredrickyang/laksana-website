@@ -16,6 +16,8 @@ import { Settings } from './payload/globals/Settings'
 import { HomePage } from './payload/globals/HomePage'
 import { AboutPage } from './payload/globals/AboutPage'
 import { FacilitiesPage } from './payload/globals/FacilitiesPage'
+import { PrivacyPolicyPage } from './payload/globals/PrivacyPolicyPage'
+import { TermsConditionsPage } from './payload/globals/TermsConditionsPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,7 +45,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Media, Products, Articles, Categories, FormSubmissions],
-  globals: [Settings, HomePage, AboutPage, FacilitiesPage],
+  globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

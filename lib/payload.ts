@@ -48,6 +48,26 @@ export async function getSettings(locale: Locale = 'id') {
     })
 }
 
+// Fetch PrivacyPolicyPage global
+export async function getPrivacyPolicyPage(locale: Locale = 'id') {
+    const payload = await getPayloadClient()
+    return await payload.findGlobal({
+        slug: 'privacy-policy-page',
+        locale,
+        depth: 2,
+    })
+}
+
+// Fetch TermsConditionsPage global
+export async function getTermsConditionsPage(locale: Locale = 'id') {
+    const payload = await getPayloadClient()
+    return await payload.findGlobal({
+        slug: 'terms-conditions-page',
+        locale,
+        depth: 2,
+    })
+}
+
 // Fetch all Products
 export async function getProducts(locale: Locale = 'id', limit: number = 100) {
     const payload = await getPayloadClient()

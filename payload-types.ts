@@ -100,12 +100,16 @@ export interface Config {
     'home-page': HomePage;
     'about-page': AboutPage;
     'facilities-page': FacilitiesPage;
+    'privacy-policy-page': PrivacyPolicyPage;
+    'terms-conditions-page': TermsConditionsPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'facilities-page': FacilitiesPageSelect<false> | FacilitiesPageSelect<true>;
+    'privacy-policy-page': PrivacyPolicyPageSelect<false> | PrivacyPolicyPageSelect<true>;
+    'terms-conditions-page': TermsConditionsPageSelect<false> | TermsConditionsPageSelect<true>;
   };
   locale: 'id' | 'en' | 'zh';
   user: User;
@@ -1050,6 +1054,140 @@ export interface FacilitiesPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy-page".
+ */
+export interface PrivacyPolicyPage {
+  id: number;
+  hero?: {
+    backgroundImage?: (number | null) | Media;
+    title?: string | null;
+  };
+  lastUpdated?: string | null;
+  introText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  highlightText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  sections?:
+    | {
+        title?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        variant?: ('default' | 'highlight-blue' | 'highlight-red' | 'cta') | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactEmail?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-conditions-page".
+ */
+export interface TermsConditionsPage {
+  id: number;
+  hero?: {
+    backgroundImage?: (number | null) | Media;
+    title?: string | null;
+  };
+  lastUpdated?: string | null;
+  introText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  highlightText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  sections?:
+    | {
+        title?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        variant?: ('default' | 'highlight-blue' | 'highlight-red' | 'cta') | null;
+        id?: string | null;
+      }[]
+    | null;
+  contactEmail?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -1266,6 +1404,60 @@ export interface FacilitiesPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy-page_select".
+ */
+export interface PrivacyPolicyPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        title?: T;
+      };
+  lastUpdated?: T;
+  introText?: T;
+  highlightText?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        variant?: T;
+        id?: T;
+      };
+  contactEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-conditions-page_select".
+ */
+export interface TermsConditionsPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        title?: T;
+      };
+  lastUpdated?: T;
+  introText?: T;
+  highlightText?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        variant?: T;
+        id?: T;
+      };
+  contactEmail?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

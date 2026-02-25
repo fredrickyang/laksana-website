@@ -1,9 +1,9 @@
 "use client";
-import Footer from "../components/Footer";
-import Form from "../components/Form";
+import Footer from "../(website)/components/Footer";
+import Form from "../(website)/components/Form";
 import Image from "next/image";
 import { useState } from "react";
-import Timeline from "../components/TimeLine";
+import Timeline from "../(website)/components/TimeLine";
 export default function Article() {
   const [showVideo, setShowVideo] = useState(false);
   return (

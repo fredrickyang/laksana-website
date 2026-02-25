@@ -48,6 +48,74 @@ function createRichTextMulti(paragraphs: string[]) {
     }
 }
 
+// Inline text node helper
+type InlineNode = { type: 'text'; text: string; format?: number }
+function t(text: string): InlineNode { return { type: 'text', text } }
+function bold(text: string): InlineNode { return { type: 'text', text, format: 1 } }
+
+// Helper to create richText with mixed block nodes (paragraphs, headings, lists)
+type BlockDef =
+    | { kind: 'paragraph'; children: InlineNode[] }
+    | { kind: 'heading'; tag: string; children: InlineNode[] }
+    | { kind: 'list'; listType: 'bullet' | 'number'; items: InlineNode[][] }
+
+function p(...children: InlineNode[]): BlockDef { return { kind: 'paragraph', children } }
+function h4(...children: InlineNode[]): BlockDef { return { kind: 'heading', tag: 'h4', children } }
+function h5(...children: InlineNode[]): BlockDef { return { kind: 'heading', tag: 'h5', children } }
+function ul(items: InlineNode[][]): BlockDef { return { kind: 'list', listType: 'bullet', items } }
+
+function createRichTextBlocks(blocks: BlockDef[]) {
+    return {
+        root: {
+            type: 'root',
+            children: blocks.map(block => {
+                if (block.kind === 'paragraph') {
+                    return {
+                        type: 'paragraph',
+                        children: block.children,
+                        direction: 'ltr' as const,
+                        format: '' as const,
+                        indent: 0,
+                        version: 1,
+                    }
+                }
+                if (block.kind === 'heading') {
+                    return {
+                        type: 'heading',
+                        tag: block.tag,
+                        children: block.children,
+                        direction: 'ltr' as const,
+                        format: '' as const,
+                        indent: 0,
+                        version: 1,
+                    }
+                }
+                // list
+                return {
+                    type: 'list',
+                    listType: block.listType,
+                    children: block.items.map(item => ({
+                        type: 'listitem',
+                        children: item,
+                        direction: 'ltr' as const,
+                        format: '' as const,
+                        indent: 0,
+                        version: 1,
+                    })),
+                    direction: 'ltr' as const,
+                    format: '' as const,
+                    indent: 0,
+                    version: 1,
+                }
+            }),
+            direction: 'ltr' as const,
+            format: '' as const,
+            indent: 0,
+            version: 1,
+        },
+    }
+}
+
 export async function seed() {
     const payload = await getPayload({ config })
 
@@ -1520,6 +1588,915 @@ export async function seed() {
         } catch (error) {
             console.error(`Failed to translate article ${at.slug}:`, error)
         }
+    }
+
+    // ========================================
+    // SEED PRIVACY POLICY PAGE GLOBAL
+    // ========================================
+    console.log('\n--- Seeding Privacy Policy Page ---')
+
+    try {
+        await payload.updateGlobal({
+            slug: 'privacy-policy-page',
+            data: {
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'Kebijakan Privasi',
+                },
+                lastUpdated: '2026-02-09',
+                introText: createRichText('Kebijakan Privasi ini menjelaskan kebijakan dan prosedur Kami mengenai pengumpulan, penggunaan, dan pengungkapan informasi Anda ketika Anda menggunakan Layanan dan memberi tahu Anda tentang hak privasi Anda serta bagaimana hukum melindungi Anda.'),
+                highlightText: createRichText('Kami menggunakan Data Pribadi Anda untuk menyediakan dan meningkatkan Layanan. Dengan menggunakan Layanan, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan Kebijakan Privasi ini.'),
+                sections: [
+                    {
+                        title: 'Interpretasi dan Definisi',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Interpretasi')),
+                            p(t('Kata-kata yang huruf awalnya dikapitalisasi memiliki arti yang didefinisikan di bawah kondisi berikut. Definisi berikut memiliki arti yang sama terlepas dari apakah kata tersebut muncul dalam bentuk tunggal atau jamak.')),
+                            h4(t('Definisi')),
+                            p(t('Untuk tujuan Kebijakan Privasi ini:')),
+                            ul([
+                                [bold('Akun'), t(' berarti akun unik yang dibuat untuk Anda untuk mengakses Layanan kami atau bagian dari Layanan kami.')],
+                                [bold('Afiliasi'), t(' berarti entitas yang mengendalikan, dikendalikan oleh, atau berada di bawah kendali bersama dengan suatu pihak, di mana "kendali" berarti kepemilikan 50% atau lebih dari saham.')],
+                                [bold('Perusahaan'), t(' (disebut sebagai "Perusahaan", "Kami", atau "Milik Kami" dalam Kebijakan Privasi ini) merujuk pada PT Bangun Laksana Persada, Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, Jakarta Utara 14460.')],
+                                [bold('Cookie'), t(' adalah file kecil yang ditempatkan di komputer, perangkat seluler, atau perangkat lainnya oleh situs web.')],
+                                [bold('Negara'), t(' merujuk pada: Indonesia')],
+                                [bold('Perangkat'), t(' berarti perangkat apa pun yang dapat mengakses Layanan seperti komputer, ponsel, atau tablet digital.')],
+                                [bold('Data Pribadi'), t(' adalah informasi apa pun yang berkaitan dengan individu yang teridentifikasi atau dapat diidentifikasi.')],
+                                [bold('Layanan'), t(' merujuk pada Situs Web.')],
+                                [bold('Penyedia Layanan'), t(' berarti setiap orang atau badan hukum yang memproses data atas nama Perusahaan.')],
+                                [bold('Data Penggunaan'), t(' merujuk pada data yang dikumpulkan secara otomatis dari penggunaan Layanan.')],
+                                [bold('Situs Web'), t(' merujuk pada Laksana Business Park | Solusi Gudang Strategis, dapat diakses dari https://www.laksanabusinesspark.id')],
+                                [bold('Anda'), t(' berarti individu yang mengakses atau menggunakan Layanan.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Mengumpulkan dan Menggunakan Data Pribadi Anda',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Jenis Data yang Dikumpulkan')),
+                            h5(t('Data Pribadi')),
+                            p(t('Saat menggunakan Layanan Kami, Kami mungkin meminta Anda untuk memberikan informasi pengenal pribadi tertentu yang dapat digunakan untuk menghubungi atau mengidentifikasi Anda. Informasi pengenal pribadi dapat mencakup, tetapi tidak terbatas pada:')),
+                            ul([
+                                [t('Alamat email')],
+                                [t('Nama depan dan nama belakang')],
+                                [t('Nomor telepon')],
+                                [t('Alamat, Provinsi, Kode Pos, Kota')],
+                            ]),
+                            h5(t('Data Penggunaan')),
+                            p(t('Data Penggunaan dikumpulkan secara otomatis saat menggunakan Layanan. Data ini dapat mencakup informasi seperti alamat Protokol Internet perangkat Anda, jenis browser, versi browser, halaman Layanan yang Anda kunjungi, waktu dan tanggal kunjungan Anda.')),
+                            h5(t('Teknologi Pelacakan dan Cookie')),
+                            p(t('Kami menggunakan Cookie dan teknologi pelacakan serupa untuk melacak aktivitas di Layanan Kami dan menyimpan informasi tertentu.')),
+                        ]),
+                    },
+                    {
+                        title: 'Penggunaan Data Pribadi Anda',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(bold('Perusahaan dapat menggunakan Data Pribadi untuk tujuan berikut:')),
+                            ul([
+                                [bold('Untuk menyediakan dan memelihara Layanan kami'), t(', termasuk untuk memantau penggunaan Layanan kami.')],
+                                [bold('Untuk mengelola Akun Anda:'), t(' untuk mengelola pendaftaran Anda sebagai pengguna Layanan.')],
+                                [bold('Untuk pelaksanaan kontrak:'), t(' pengembangan, kepatuhan, dan pelaksanaan kontrak pembelian produk, barang, atau layanan yang telah Anda beli.')],
+                                [bold('Untuk menghubungi Anda:'), t(' melalui email, panggilan telepon, SMS, atau bentuk komunikasi elektronik lainnya.')],
+                                [bold('Untuk menyediakan informasi'), t(' tentang berita, penawaran khusus, dan informasi umum tentang barang, layanan, dan acara lainnya.')],
+                                [bold('Untuk mengelola permintaan Anda:'), t(' untuk menangani dan mengelola permintaan Anda kepada Kami.')],
+                                [bold('Untuk transfer bisnis:'), t(' Kami dapat menggunakan Data Pribadi Anda untuk mengevaluasi atau melakukan merger, divestasi, atau restrukturisasi.')],
+                                [bold('Untuk tujuan lain'), t(': Kami dapat menggunakan informasi Anda untuk analisis data, mengidentifikasi tren penggunaan, dan untuk mengevaluasi serta meningkatkan Layanan kami.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Penyimpanan Data Pribadi Anda',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('Perusahaan akan menyimpan Data Pribadi Anda hanya selama diperlukan untuk tujuan yang ditetapkan dalam Kebijakan Privasi ini. Kami akan menyimpan dan menggunakan Data Pribadi Anda sejauh diperlukan untuk mematuhi kewajiban hukum kami.')),
+                            p(bold('Kami menerapkan periode penyimpanan yang berbeda untuk kategori Data Pribadi yang berbeda:')),
+                            ul([
+                                [bold('Akun Pengguna:'), t(' disimpan selama durasi hubungan akun Anda ditambah hingga 24 bulan setelah penutupan akun')],
+                                [bold('Tiket Dukungan:'), t(' hingga 24 bulan sejak tanggal penutupan tiket')],
+                                [bold('Analitik Situs Web:'), t(' hingga 24 bulan sejak tanggal pengumpulan')],
+                                [bold('Log Server:'), t(' hingga 24 bulan untuk pemantauan keamanan')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Transfer Data Pribadi Anda',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Informasi Anda, termasuk Data Pribadi, diproses di kantor operasional Perusahaan dan di tempat lain di mana pihak-pihak yang terlibat dalam pemrosesan berada. Ini berarti informasi ini dapat ditransfer ke komputer yang berlokasi di luar yurisdiksi pemerintah Anda di mana undang-undang perlindungan data mungkin berbeda.')),
+                            p(t('Jika diwajibkan oleh hukum yang berlaku, Kami akan memastikan bahwa transfer internasional Data Pribadi Anda tunduk pada perlindungan yang tepat. Perusahaan akan mengambil semua langkah yang wajar untuk memastikan bahwa data Anda diperlakukan dengan aman dan sesuai dengan Kebijakan Privasi ini.')),
+                        ]),
+                    },
+                    {
+                        title: 'Menghapus Data Pribadi Anda',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Anda memiliki hak untuk menghapus atau meminta Kami membantu menghapus Data Pribadi yang telah Kami kumpulkan tentang Anda.')),
+                            p(t('Layanan Kami mungkin memberi Anda kemampuan untuk menghapus informasi tertentu tentang Anda dari dalam Layanan. Anda dapat memperbarui, mengubah, atau menghapus informasi Anda kapan saja dengan masuk ke Akun Anda.')),
+                            p(t('Kami mungkin perlu menyimpan informasi tertentu ketika kami memiliki kewajiban hukum atau dasar hukum untuk melakukannya.')),
+                        ]),
+                    },
+                    {
+                        title: 'Pengungkapan Data Pribadi Anda',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Transaksi Bisnis')),
+                            p(t('Jika Perusahaan terlibat dalam merger, akuisisi, atau penjualan aset, Data Pribadi Anda dapat ditransfer. Kami akan memberikan pemberitahuan sebelum Data Pribadi Anda ditransfer dan menjadi tunduk pada Kebijakan Privasi yang berbeda.')),
+                            h4(t('Penegakan Hukum')),
+                            p(t('Dalam keadaan tertentu, Perusahaan mungkin diwajibkan untuk mengungkapkan Data Pribadi Anda jika diwajibkan oleh hukum atau sebagai tanggapan atas permintaan yang sah oleh otoritas publik.')),
+                            h4(t('Persyaratan Hukum Lainnya')),
+                            p(t('Perusahaan dapat mengungkapkan Data Pribadi Anda dengan keyakinan bahwa tindakan tersebut diperlukan untuk:')),
+                            ul([
+                                [t('Mematuhi kewajiban hukum')],
+                                [t('Melindungi dan membela hak atau properti Perusahaan')],
+                                [t('Mencegah atau menyelidiki kemungkinan kesalahan sehubungan dengan Layanan')],
+                                [t('Melindungi keselamatan pribadi Pengguna Layanan atau publik')],
+                                [t('Melindungi dari tanggung jawab hukum')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Keamanan Data Pribadi Anda',
+                        variant: 'highlight-red',
+                        content: createRichText('Keamanan Data Pribadi Anda penting bagi Kami, tetapi ingat bahwa tidak ada metode transmisi melalui Internet, atau metode penyimpanan elektronik yang 100% aman. Meskipun Kami berusaha menggunakan cara yang wajar secara komersial untuk melindungi Data Pribadi Anda, Kami tidak dapat menjamin keamanan mutlaknya.'),
+                    },
+                    {
+                        title: 'Privasi Anak',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Layanan Kami tidak ditujukan untuk siapa pun yang berusia di bawah 16 tahun. Kami tidak secara sengaja mengumpulkan informasi pengenal pribadi dari siapa pun yang berusia di bawah 16 tahun. Jika Anda adalah orang tua atau wali dan Anda mengetahui bahwa anak Anda telah memberikan Data Pribadi kepada Kami, harap hubungi Kami.')),
+                            p(t('Jika Kami mengetahui bahwa Kami telah mengumpulkan Data Pribadi dari siapa pun yang berusia di bawah 16 tahun tanpa verifikasi persetujuan orang tua, Kami mengambil langkah-langkah untuk menghapus informasi tersebut dari server Kami.')),
+                        ]),
+                    },
+                    {
+                        title: 'Tautan ke Situs Web Lain',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Layanan Kami mungkin berisi tautan ke situs web lain yang tidak dioperasikan oleh Kami. Jika Anda mengklik tautan pihak ketiga, Anda akan diarahkan ke situs pihak ketiga tersebut. Kami sangat menyarankan Anda untuk meninjau Kebijakan Privasi setiap situs yang Anda kunjungi.')),
+                            p(t('Kami tidak memiliki kendali atas dan tidak bertanggung jawab atas konten, kebijakan privasi, atau praktik situs atau layanan pihak ketiga mana pun.')),
+                        ]),
+                    },
+                    {
+                        title: 'Perubahan pada Kebijakan Privasi Ini',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Kami dapat memperbarui Kebijakan Privasi Kami dari waktu ke waktu. Kami akan memberi tahu Anda tentang perubahan apa pun dengan memposting Kebijakan Privasi baru di halaman ini.')),
+                            p(t('Kami akan memberi tahu Anda melalui email dan/atau pemberitahuan yang mencolok di Layanan Kami, sebelum perubahan berlaku dan memperbarui tanggal "Terakhir diperbarui" di bagian atas Kebijakan Privasi ini.')),
+                            p(t('Anda disarankan untuk meninjau Kebijakan Privasi ini secara berkala untuk setiap perubahan. Perubahan pada Kebijakan Privasi ini berlaku saat diposting di halaman ini.')),
+                        ]),
+                    },
+                    {
+                        title: 'Hubungi Kami',
+                        variant: 'cta',
+                        content: createRichText('Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, Anda dapat menghubungi kami:'),
+                    },
+                ],
+                contactEmail: 'contact@agungintiland.com',
+            },
+        })
+        console.log('Privacy Policy Page seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Privacy Policy Page:', error)
+    }
+
+    // Privacy Policy Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'privacy-policy-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    title: 'Privacy Policy',
+                },
+                introText: createRichText('This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.'),
+                highlightText: createRichText('We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.'),
+                sections: [
+                    {
+                        title: 'Interpretation and Definitions',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Interpretation')),
+                            p(t('The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.')),
+                            h4(t('Definitions')),
+                            p(t('For the purposes of this Privacy Policy:')),
+                            ul([
+                                [bold('Account'), t(' means a unique account created for You to access our Service or parts of our Service.')],
+                                [bold('Affiliate'), t(' means an entity that controls, is controlled by, or is under common control with a party, where "control" means ownership of 50% or more of the shares.')],
+                                [bold('Company'), t(' (referred to as either "the Company", "We", "Us" or "Our" in this Privacy Policy) refers to PT Bangun Laksana Persada, Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, North Jakarta 14460.')],
+                                [bold('Cookies'), t(' are small files that are placed on Your computer, mobile device or any other device by a website.')],
+                                [bold('Country'), t(' refers to: Indonesia')],
+                                [bold('Device'), t(' means any device that can access the Service such as a computer, a cell phone or a digital tablet.')],
+                                [bold('Personal Data'), t(' is any information that relates to an identified or identifiable individual.')],
+                                [bold('Service'), t(' refers to the Website.')],
+                                [bold('Service Provider'), t(' means any natural or legal person who processes the data on behalf of the Company.')],
+                                [bold('Usage Data'), t(' refers to data collected automatically from the use of the Service.')],
+                                [bold('Website'), t(' refers to Laksana Business Park | Solusi Gudang Strategis, accessible from https://www.laksanabusinesspark.id')],
+                                [bold('You'), t(' means the individual accessing or using the Service.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Collecting and Using Your Personal Data',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Types of Data Collected')),
+                            h5(t('Personal Data')),
+                            p(t('While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:')),
+                            ul([
+                                [t('Email address')],
+                                [t('First name and last name')],
+                                [t('Phone number')],
+                                [t('Address, State, Province, ZIP/Postal code, City')],
+                            ]),
+                            h5(t('Usage Data')),
+                            p(t('Usage Data is collected automatically when using the Service. Usage Data may include information such as Your Device\'s Internet Protocol address, browser type, browser version, the pages of our Service that You visit, the time and date of Your visit.')),
+                            h5(t('Tracking Technologies and Cookies')),
+                            p(t('We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information.')),
+                        ]),
+                    },
+                    {
+                        title: 'Use of Your Personal Data',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(bold('The Company may use Personal Data for the following purposes:')),
+                            ul([
+                                [bold('To provide and maintain our Service'), t(', including to monitor the usage of our Service.')],
+                                [bold('To manage Your Account:'), t(' to manage Your registration as a user of the Service.')],
+                                [bold('For the performance of a contract:'), t(' the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased.')],
+                                [bold('To contact You:'), t(' To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication.')],
+                                [bold('To provide You'), t(' with news, special offers, and general information about other goods, services and events.')],
+                                [bold('To manage Your requests:'), t(' To attend and manage Your requests to Us.')],
+                                [bold('For business transfers:'), t(' We may use Your Personal Data to evaluate or conduct a merger, divestiture, or restructuring.')],
+                                [bold('For other purposes'), t(': We may use Your information for data analysis, identifying usage trends, and to evaluate and improve our Service.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Retention of Your Personal Data',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations.')),
+                            p(bold('We apply different retention periods to different categories of Personal Data:')),
+                            ul([
+                                [bold('User Accounts:'), t(' retained for the duration of your account relationship plus up to 24 months after account closure')],
+                                [bold('Support Tickets:'), t(' up to 24 months from the date of ticket closure')],
+                                [bold('Website Analytics:'), t(' up to 24 months from the date of collection')],
+                                [bold('Server Logs:'), t(' up to 24 months for security monitoring')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Transfer of Your Personal Data',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Your information, including Personal Data, is processed at the Company\'s operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.')),
+                            p(t('Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy.')),
+                        ]),
+                    },
+                    {
+                        title: 'Delete Your Personal Data',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.')),
+                            p(t('Our Service may give You the ability to delete certain information about You from within the Service. You may update, amend, or delete Your information at any time by signing in to Your Account.')),
+                            p(t('We may need to retain certain information when we have a legal obligation or lawful basis to do so.')),
+                        ]),
+                    },
+                    {
+                        title: 'Disclosure of Your Personal Data',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Business Transactions')),
+                            p(t('If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.')),
+                            h4(t('Law Enforcement')),
+                            p(t('Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities.')),
+                            h4(t('Other Legal Requirements')),
+                            p(t('The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:')),
+                            ul([
+                                [t('Comply with a legal obligation')],
+                                [t('Protect and defend the rights or property of the Company')],
+                                [t('Prevent or investigate possible wrongdoing in connection with the Service')],
+                                [t('Protect the personal safety of Users of the Service or the public')],
+                                [t('Protect against legal liability')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Security of Your Personal Data',
+                        variant: 'highlight-red',
+                        content: createRichText('The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.'),
+                    },
+                    {
+                        title: 'Children\'s Privacy',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under the age of 16. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us.')),
+                            p(t('If We become aware that We have collected Personal Data from anyone under the age of 16 without verification of parental consent, We take steps to remove that information from Our servers.')),
+                        ]),
+                    },
+                    {
+                        title: 'Links to Other Websites',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party\'s site. We strongly advise You to review the Privacy Policy of every site You visit.')),
+                            p(t('We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.')),
+                        ]),
+                    },
+                    {
+                        title: 'Changes to this Privacy Policy',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.')),
+                            p(t('We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.')),
+                            p(t('You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.')),
+                        ]),
+                    },
+                    {
+                        title: 'Contact Us',
+                        variant: 'cta',
+                        content: createRichText('If you have any questions about this Privacy Policy, You can contact us:'),
+                    },
+                ],
+            },
+        })
+        console.log('Privacy Policy Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Privacy Policy Page (EN):', error)
+    }
+
+    // Privacy Policy Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'privacy-policy-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    title: '隐私政策',
+                },
+                introText: createRichText('本隐私政策描述了我们在您使用服务时收集、使用和披露您的信息的政策和程序，并告知您的隐私权利以及法律如何保护您。'),
+                highlightText: createRichText('我们使用您的个人数据来提供和改善服务。使用服务即表示您同意按照本隐私政策收集和使用信息。'),
+                sections: [
+                    {
+                        title: '解释和定义',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('解释')),
+                            p(t('首字母大写的词语具有以下条件下定义的含义。无论以单数还是复数形式出现，以下定义都具有相同的含义。')),
+                            h4(t('定义')),
+                            p(t('就本隐私政策而言：')),
+                            ul([
+                                [bold('账户'), t(' 指为您创建的用于访问我们服务或部分服务的唯一账户。')],
+                                [bold('关联公司'), t(' 指控制一方、被一方控制或与一方处于共同控制之下的实体，其中"控制"指拥有50%或以上的股份。')],
+                                [bold('公司'), t(' （在本隐私政策中称为"公司"、"我们"）指PT Bangun Laksana Persada，地址：Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, 北雅加达 14460。')],
+                                [bold('Cookie'), t(' 是网站放置在您的计算机、移动设备或任何其他设备上的小文件。')],
+                                [bold('国家'), t(' 指：印度尼西亚')],
+                                [bold('设备'), t(' 指可以访问服务的任何设备，如计算机、手机或数字平板电脑。')],
+                                [bold('个人数据'), t(' 是与已识别或可识别的个人相关的任何信息。')],
+                                [bold('服务'), t(' 指网站。')],
+                                [bold('服务提供商'), t(' 指代表公司处理数据的任何自然人或法人。')],
+                                [bold('使用数据'), t(' 指从使用服务中自动收集的数据。')],
+                                [bold('网站'), t(' 指Laksana Business Park | 战略仓储解决方案，可从 https://www.laksanabusinesspark.id 访问')],
+                                [bold('您'), t(' 指访问或使用服务的个人。')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: '收集和使用您的个人数据',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('收集的数据类型')),
+                            h5(t('个人数据')),
+                            p(t('在使用我们的服务时，我们可能会要求您提供某些可用于联系或识别您的个人身份信息。个人身份信息可能包括但不限于：')),
+                            ul([
+                                [t('电子邮件地址')],
+                                [t('姓名')],
+                                [t('电话号码')],
+                                [t('地址、省份、邮政编码、城市')],
+                            ]),
+                            h5(t('使用数据')),
+                            p(t('使用数据在使用服务时自动收集。使用数据可能包括您设备的互联网协议地址、浏览器类型、浏览器版本、您访问的服务页面、访问时间和日期等信息。')),
+                            h5(t('跟踪技术和Cookie')),
+                            p(t('我们使用Cookie和类似的跟踪技术来跟踪我们服务上的活动并存储某些信息。')),
+                        ]),
+                    },
+                    {
+                        title: '您的个人数据的使用',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(bold('公司可能将个人数据用于以下目的：')),
+                            ul([
+                                [bold('提供和维护我们的服务'), t('，包括监控我们服务的使用情况。')],
+                                [bold('管理您的账户：'), t('管理您作为服务用户的注册。')],
+                                [bold('履行合同：'), t('您购买的产品、物品或服务的购买合同的开发、合规和执行。')],
+                                [bold('联系您：'), t('通过电子邮件、电话、短信或其他等效的电子通信方式联系您。')],
+                                [bold('向您提供'), t('有关其他商品、服务和活动的新闻、特别优惠和一般信息。')],
+                                [bold('管理您的请求：'), t('处理和管理您向我们提出的请求。')],
+                                [bold('业务转让：'), t('我们可能使用您的个人数据来评估或进行合并、剥离或重组。')],
+                                [bold('其他目的'), t('：我们可能使用您的信息进行数据分析、识别使用趋势以及评估和改进我们的服务。')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: '您的个人数据的保留',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('公司仅在本隐私政策规定的目的所需的时间内保留您的个人数据。我们将在遵守法律义务所需的范围内保留和使用您的个人数据。')),
+                            p(bold('我们对不同类别的个人数据应用不同的保留期限：')),
+                            ul([
+                                [bold('用户账户：'), t('在您的账户关系持续期间保留，加上账户关闭后最多24个月')],
+                                [bold('支持工单：'), t('自工单关闭之日起最多24个月')],
+                                [bold('网站分析：'), t('自收集之日起最多24个月')],
+                                [bold('服务器日志：'), t('用于安全监控最多24个月')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: '您的个人数据的转移',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('您的信息（包括个人数据）在公司的运营办公室和参与处理的各方所在的任何其他地方进行处理。这意味着此信息可能被传输到位于您所在州、省、国家或其他政府管辖区之外的计算机，这些地方的数据保护法律可能与您所在管辖区的法律不同。')),
+                            p(t('在适用法律要求的情况下，我们将确保您的个人数据的国际传输受到适当的保障措施的约束。公司将采取所有合理必要的措施，确保您的数据得到安全处理并符合本隐私政策。')),
+                        ]),
+                    },
+                    {
+                        title: '删除您的个人数据',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('您有权删除或要求我们协助删除我们收集的关于您的个人数据。')),
+                            p(t('我们的服务可能使您能够从服务中删除有关您的某些信息。您可以随时通过登录您的账户来更新、修改或删除您的信息。')),
+                            p(t('当我们有法律义务或合法依据时，我们可能需要保留某些信息。')),
+                        ]),
+                    },
+                    {
+                        title: '您的个人数据的披露',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('商业交易')),
+                            p(t('如果公司参与合并、收购或资产出售，您的个人数据可能会被转移。我们将在您的个人数据被转移并受不同隐私政策约束之前发出通知。')),
+                            h4(t('执法')),
+                            p(t('在某些情况下，如果法律要求或应公共当局的有效请求，公司可能需要披露您的个人数据。')),
+                            h4(t('其他法律要求')),
+                            p(t('公司可能在善意相信此类行动是必要的情况下披露您的个人数据：')),
+                            ul([
+                                [t('遵守法律义务')],
+                                [t('保护和捍卫公司的权利或财产')],
+                                [t('防止或调查与服务相关的可能违规行为')],
+                                [t('保护服务用户或公众的人身安全')],
+                                [t('防止法律责任')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: '您的个人数据的安全',
+                        variant: 'highlight-red',
+                        content: createRichText('您的个人数据的安全对我们很重要，但请记住，没有任何通过互联网传输的方法或电子存储方法是100%安全的。虽然我们努力使用商业上合理的手段来保护您的个人数据，但我们不能保证其绝对安全。'),
+                    },
+                    {
+                        title: '儿童隐私',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们的服务不面向16岁以下的任何人。我们不会故意收集16岁以下任何人的个人身份信息。如果您是父母或监护人，并且您知道您的孩子已向我们提供了个人数据，请联系我们。')),
+                            p(t('如果我们意识到我们在未经父母同意验证的情况下收集了16岁以下任何人的个人数据，我们将采取措施从我们的服务器中删除该信息。')),
+                        ]),
+                    },
+                    {
+                        title: '其他网站的链接',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们的服务可能包含指向非我们运营的其他网站的链接。如果您点击第三方链接，您将被定向到该第三方的网站。我们强烈建议您查看您访问的每个网站的隐私政策。')),
+                            p(t('我们无法控制任何第三方网站或服务的内容、隐私政策或做法，也不对此承担任何责任。')),
+                        ]),
+                    },
+                    {
+                        title: '本隐私政策的变更',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们可能会不时更新我们的隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。')),
+                            p(t('我们将在更改生效之前通过电子邮件和/或在我们的服务上发布显著通知来通知您，并更新本隐私政策顶部的"最后更新"日期。')),
+                            p(t('建议您定期查看本隐私政策以了解任何更改。本隐私政策的更改在发布到此页面时生效。')),
+                        ]),
+                    },
+                    {
+                        title: '联系我们',
+                        variant: 'cta',
+                        content: createRichText('如果您对本隐私政策有任何疑问，您可以联系我们：'),
+                    },
+                ],
+            },
+        })
+        console.log('Privacy Policy Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Privacy Policy Page (ZH):', error)
+    }
+
+    // ========================================
+    // SEED TERMS & CONDITIONS PAGE GLOBAL
+    // ========================================
+    console.log('\n--- Seeding Terms & Conditions Page ---')
+
+    try {
+        await payload.updateGlobal({
+            slug: 'terms-conditions-page',
+            data: {
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'Syarat dan Ketentuan',
+                },
+                lastUpdated: '2026-02-09',
+                introText: createRichText('Harap baca syarat dan ketentuan ini dengan cermat sebelum menggunakan Layanan Kami.'),
+                sections: [
+                    {
+                        title: 'Interpretasi dan Definisi',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Interpretasi')),
+                            p(t('Kata-kata yang huruf awalnya dikapitalisasi memiliki arti yang didefinisikan di bawah kondisi berikut. Definisi berikut memiliki arti yang sama terlepas dari apakah kata tersebut muncul dalam bentuk tunggal atau jamak.')),
+                            h4(t('Definisi')),
+                            p(t('Untuk tujuan Syarat dan Ketentuan ini:')),
+                            ul([
+                                [bold('Afiliasi'), t(' berarti entitas yang mengendalikan, dikendalikan oleh, atau berada di bawah kendali bersama dengan suatu pihak, di mana "kendali" berarti kepemilikan 50% atau lebih dari saham.')],
+                                [bold('Negara'), t(' merujuk pada: Indonesia')],
+                                [bold('Perusahaan'), t(' (disebut sebagai "Perusahaan", "Kami", atau "Milik Kami") merujuk pada PT Bangun Laksana Persada, Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, Jakarta Utara 14460.')],
+                                [bold('Perangkat'), t(' berarti perangkat apa pun yang dapat mengakses Layanan seperti komputer, ponsel, atau tablet digital.')],
+                                [bold('Layanan'), t(' merujuk pada Situs Web.')],
+                                [bold('Syarat dan Ketentuan'), t(' (juga disebut sebagai "Syarat") berarti Syarat dan Ketentuan ini yang mengatur akses dan penggunaan Layanan oleh Anda.')],
+                                [bold('Layanan Media Sosial Pihak Ketiga'), t(' berarti layanan atau konten apa pun yang disediakan oleh pihak ketiga yang ditampilkan atau ditautkan melalui Layanan.')],
+                                [bold('Situs Web'), t(' merujuk pada Laksana Business Park | Solusi Gudang Strategis, dapat diakses dari https://www.laksanabusinesspark.id')],
+                                [bold('Anda'), t(' berarti individu yang mengakses atau menggunakan Layanan.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Pengakuan',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('Ini adalah Syarat dan Ketentuan yang mengatur penggunaan Layanan ini dan perjanjian antara Anda dan Perusahaan. Syarat dan Ketentuan ini menetapkan hak dan kewajiban semua pengguna terkait penggunaan Layanan.')),
+                            p(t('Akses dan penggunaan Layanan oleh Anda dikondisikan pada penerimaan dan kepatuhan Anda terhadap Syarat dan Ketentuan ini. Syarat dan Ketentuan ini berlaku untuk semua pengunjung, pengguna, dan pihak lain yang mengakses atau menggunakan Layanan.')),
+                            p(t('Dengan mengakses atau menggunakan Layanan, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini. Jika Anda tidak setuju dengan bagian mana pun dari Syarat dan Ketentuan ini, Anda tidak boleh mengakses Layanan.')),
+                            p(t('Anda menyatakan bahwa Anda berusia di atas 18 tahun. Perusahaan tidak mengizinkan mereka yang berusia di bawah 18 tahun untuk menggunakan Layanan.')),
+                            p(t('Akses dan penggunaan Layanan oleh Anda juga tunduk pada Kebijakan Privasi kami. Harap baca Kebijakan Privasi kami dengan cermat sebelum menggunakan Layanan Kami.')),
+                        ]),
+                    },
+                    {
+                        title: 'Tautan ke Situs Web Lain',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Layanan Kami mungkin berisi tautan ke situs web atau layanan pihak ketiga yang tidak dimiliki atau dikendalikan oleh Perusahaan.')),
+                            p(t('Perusahaan tidak memiliki kendali atas, dan tidak bertanggung jawab atas, konten, kebijakan privasi, atau praktik situs web atau layanan pihak ketiga mana pun. Anda selanjutnya mengakui dan menyetujui bahwa Perusahaan tidak bertanggung jawab, secara langsung atau tidak langsung, atas kerusakan atau kerugian apa pun.')),
+                            p(t('Kami sangat menyarankan Anda untuk membaca syarat dan ketentuan serta kebijakan privasi dari situs web atau layanan pihak ketiga mana pun yang Anda kunjungi.')),
+                        ]),
+                    },
+                    {
+                        title: 'Pemutusan',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Kami dapat menghentikan atau menangguhkan akses Anda segera, tanpa pemberitahuan atau tanggung jawab sebelumnya, karena alasan apa pun, termasuk tanpa batasan jika Anda melanggar Syarat dan Ketentuan ini.')),
+                            p(t('Setelah pemutusan, hak Anda untuk menggunakan Layanan akan segera berakhir.')),
+                        ]),
+                    },
+                    {
+                        title: 'Batasan Tanggung Jawab',
+                        variant: 'highlight-red',
+                        content: createRichTextBlocks([
+                            p(t('Terlepas dari kerugian apa pun yang mungkin Anda alami, seluruh tanggung jawab Perusahaan dan pemasoknya berdasarkan ketentuan apa pun dari Syarat ini dan pemulihan eksklusif Anda terbatas pada jumlah yang benar-benar Anda bayarkan melalui Layanan atau 100 USD jika Anda belum membeli apa pun melalui Layanan.')),
+                            p(t('Sejauh diizinkan oleh hukum yang berlaku, dalam keadaan apa pun Perusahaan atau pemasoknya tidak bertanggung jawab atas kerusakan khusus, insidental, tidak langsung, atau konsekuensial apa pun.')),
+                            p(t('Beberapa yurisdiksi tidak mengizinkan pengecualian jaminan tersirat atau pembatasan tanggung jawab untuk kerusakan insidental atau konsekuensial, yang berarti beberapa batasan di atas mungkin tidak berlaku.')),
+                        ]),
+                    },
+                    {
+                        title: 'Penafian "SEBAGAIMANA ADANYA" dan "SEBAGAIMANA TERSEDIA"',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Layanan ini disediakan kepada Anda "SEBAGAIMANA ADANYA" dan "SEBAGAIMANA TERSEDIA" dengan semua kesalahan dan cacat tanpa jaminan apa pun.')),
+                            p(t('Tanpa membatasi hal di atas, baik Perusahaan maupun penyedia Perusahaan tidak membuat pernyataan atau jaminan apa pun, tersurat maupun tersirat.')),
+                            p(t('Beberapa yurisdiksi tidak mengizinkan pengecualian jenis jaminan tertentu atau pembatasan hak konsumen, sehingga beberapa atau semua pengecualian dan batasan di atas mungkin tidak berlaku untuk Anda.')),
+                        ]),
+                    },
+                    {
+                        title: 'Hukum yang Berlaku',
+                        variant: 'default',
+                        content: createRichText('Hukum Negara ini, tidak termasuk aturan konflik hukumnya, mengatur Syarat ini dan penggunaan Layanan oleh Anda. Penggunaan Aplikasi oleh Anda juga dapat tunduk pada hukum lokal, negara bagian, nasional, atau internasional lainnya.'),
+                    },
+                    {
+                        title: 'Penyelesaian Sengketa',
+                        variant: 'default',
+                        content: createRichText('Jika Anda memiliki kekhawatiran atau sengketa tentang Layanan, Anda setuju untuk terlebih dahulu mencoba menyelesaikan sengketa secara informal dengan menghubungi Perusahaan.'),
+                    },
+                    {
+                        title: 'Untuk Pengguna Uni Eropa (UE)',
+                        variant: 'default',
+                        content: createRichText('Jika Anda adalah konsumen Uni Eropa, Anda akan mendapat manfaat dari ketentuan wajib hukum negara tempat Anda tinggal.'),
+                    },
+                    {
+                        title: 'Kepatuhan Hukum Amerika Serikat',
+                        variant: 'default',
+                        content: createRichText('Anda menyatakan dan menjamin bahwa (i) Anda tidak berada di negara yang dikenakan embargo oleh pemerintah Amerika Serikat, atau yang telah ditetapkan oleh pemerintah Amerika Serikat sebagai negara "pendukung teroris", dan (ii) Anda tidak terdaftar dalam daftar pihak yang dilarang atau dibatasi oleh pemerintah Amerika Serikat.'),
+                    },
+                    {
+                        title: 'Keterpisahan dan Pengabaian',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Keterpisahan')),
+                            p(t('Jika ada ketentuan dari Syarat ini yang dianggap tidak dapat dilaksanakan atau tidak valid, ketentuan tersebut akan diubah dan ditafsirkan untuk mencapai tujuan ketentuan tersebut sejauh mungkin berdasarkan hukum yang berlaku.')),
+                            h4(t('Pengabaian')),
+                            p(t('Kecuali sebagaimana ditentukan di sini, kegagalan untuk melaksanakan hak atau untuk meminta pelaksanaan kewajiban berdasarkan Syarat ini tidak akan memengaruhi kemampuan suatu pihak untuk melaksanakan hak tersebut kapan saja setelahnya.')),
+                        ]),
+                    },
+                    {
+                        title: 'Interpretasi Terjemahan',
+                        variant: 'default',
+                        content: createRichText('Syarat dan Ketentuan ini mungkin telah diterjemahkan jika Kami telah menyediakannya untuk Anda di Layanan kami. Anda setuju bahwa teks asli bahasa Inggris akan berlaku dalam hal terjadi sengketa.'),
+                    },
+                    {
+                        title: 'Perubahan pada Syarat dan Ketentuan Ini',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Kami berhak, atas kebijakan Kami sendiri, untuk memodifikasi atau mengganti Syarat ini kapan saja. Jika revisi bersifat material, Kami akan berusaha memberikan pemberitahuan setidaknya 30 hari sebelum syarat baru berlaku.')),
+                            p(t('Dengan terus mengakses atau menggunakan Layanan Kami setelah revisi tersebut berlaku, Anda setuju untuk terikat oleh syarat yang direvisi. Jika Anda tidak setuju dengan syarat baru, secara keseluruhan atau sebagian, harap berhenti menggunakan Layanan.')),
+                        ]),
+                    },
+                    {
+                        title: 'Hubungi Kami',
+                        variant: 'cta',
+                        content: createRichText('Jika Anda memiliki pertanyaan tentang Syarat dan Ketentuan ini, Anda dapat menghubungi kami:'),
+                    },
+                ],
+                contactEmail: 'contact@agungintiland.com',
+            },
+        })
+        console.log('Terms & Conditions Page seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Terms & Conditions Page:', error)
+    }
+
+    // Terms & Conditions Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'terms-conditions-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    title: 'Terms and Conditions',
+                },
+                introText: createRichText('Please read these terms and conditions carefully before using Our Service.'),
+                sections: [
+                    {
+                        title: 'Interpretation and Definitions',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Interpretation')),
+                            p(t('The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.')),
+                            h4(t('Definitions')),
+                            p(t('For the purposes of these Terms and Conditions:')),
+                            ul([
+                                [bold('Affiliate'), t(' means an entity that controls, is controlled by, or is under common control with a party, where "control" means ownership of 50% or more of the shares.')],
+                                [bold('Country'), t(' refers to: Indonesia')],
+                                [bold('Company'), t(' (referred to as either "the Company", "We", "Us" or "Our") refers to PT Bangun Laksana Persada, Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, North Jakarta 14460.')],
+                                [bold('Device'), t(' means any device that can access the Service such as a computer, a cell phone or a digital tablet.')],
+                                [bold('Service'), t(' refers to the Website.')],
+                                [bold('Terms and Conditions'), t(' (also referred to as "Terms") means these Terms and Conditions that govern Your access to and use of the Service.')],
+                                [bold('Third-Party Social Media Service'), t(' means any services or content provided by a third party that is displayed or linked through the Service.')],
+                                [bold('Website'), t(' refers to Laksana Business Park | Solusi Gudang Strategis, accessible from https://www.laksanabusinesspark.id')],
+                                [bold('You'), t(' means the individual accessing or using the Service.')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: 'Acknowledgment',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('These are the Terms and Conditions governing the use of this Service and the agreement between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.')),
+                            p(t('Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.')),
+                            p(t('By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.')),
+                            p(t('You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.')),
+                            p(t('Your access to and use of the Service is also subject to Our Privacy Policy, which describes how We collect, use, and disclose personal information. Please read Our Privacy Policy carefully before using Our Service.')),
+                        ]),
+                    },
+                    {
+                        title: 'Links to Other Websites',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('Our Service may contain links to third-party websites or services that are not owned or controlled by the Company.')),
+                            p(t('The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused.')),
+                            p(t('We strongly advise You to read the terms and conditions and privacy policies of any third-party websites or services that You visit.')),
+                        ]),
+                    },
+                    {
+                        title: 'Termination',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.')),
+                            p(t('Upon termination, Your right to use the Service will cease immediately.')),
+                        ]),
+                    },
+                    {
+                        title: 'Limitation of Liability',
+                        variant: 'highlight-red',
+                        content: createRichTextBlocks([
+                            p(t('Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of these Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven\'t purchased anything through the Service.')),
+                            p(t('To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever.')),
+                            p(t('Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply.')),
+                        ]),
+                    },
+                    {
+                        title: '"AS IS" and "AS AVAILABLE" Disclaimer',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind.')),
+                            p(t('Without limiting the foregoing, neither the Company nor any of the company\'s provider makes any representation or warranty of any kind, express or implied.')),
+                            p(t('Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You.')),
+                        ]),
+                    },
+                    {
+                        title: 'Governing Law',
+                        variant: 'default',
+                        content: createRichText('The laws of the Country, excluding its conflicts of law rules, shall govern these Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.'),
+                    },
+                    {
+                        title: 'Disputes Resolution',
+                        variant: 'default',
+                        content: createRichText('If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.'),
+                    },
+                    {
+                        title: 'For European Union (EU) Users',
+                        variant: 'default',
+                        content: createRichText('If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which You are resident.'),
+                    },
+                    {
+                        title: 'United States Legal Compliance',
+                        variant: 'default',
+                        content: createRichText('You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a "terrorist supporting" country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.'),
+                    },
+                    {
+                        title: 'Severability and Waiver',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('Severability')),
+                            p(t('If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.')),
+                            h4(t('Waiver')),
+                            p(t('Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not affect a party\'s ability to exercise such right or require such performance at any time thereafter.')),
+                        ]),
+                    },
+                    {
+                        title: 'Translation Interpretation',
+                        variant: 'default',
+                        content: createRichText('These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute.'),
+                    },
+                    {
+                        title: 'Changes to These Terms and Conditions',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days\' notice prior to any new terms taking effect.')),
+                            p(t('By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the Service.')),
+                        ]),
+                    },
+                    {
+                        title: 'Contact Us',
+                        variant: 'cta',
+                        content: createRichText('If you have any questions about these Terms and Conditions, You can contact us:'),
+                    },
+                ],
+            },
+        })
+        console.log('Terms & Conditions Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Terms & Conditions Page (EN):', error)
+    }
+
+    // Terms & Conditions Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'terms-conditions-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    title: '条款和条件',
+                },
+                introText: createRichText('请在使用我们的服务之前仔细阅读这些条款和条件。'),
+                sections: [
+                    {
+                        title: '解释和定义',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('解释')),
+                            p(t('首字母大写的词语具有以下条件下定义的含义。无论以单数还是复数形式出现，以下定义都具有相同的含义。')),
+                            h4(t('定义')),
+                            p(t('就本条款和条件而言：')),
+                            ul([
+                                [bold('关联公司'), t(' 指控制一方、被一方控制或与一方处于共同控制之下的实体，其中"控制"指拥有50%或以上的股份。')],
+                                [bold('国家'), t(' 指：印度尼西亚')],
+                                [bold('公司'), t(' （称为"公司"、"我们"）指PT Bangun Laksana Persada，地址：Jl. Pantai Indah Selatan No.9 Blok DC, RT.9/RW.6, Kapuk Muara, Penjaringan, 北雅加达 14460。')],
+                                [bold('设备'), t(' 指可以访问服务的任何设备，如计算机、手机或数字平板电脑。')],
+                                [bold('服务'), t(' 指网站。')],
+                                [bold('条款和条件'), t(' （也称为"条款"）指管辖您访问和使用服务的本条款和条件。')],
+                                [bold('第三方社交媒体服务'), t(' 指由第三方提供的通过服务显示或链接的任何服务或内容。')],
+                                [bold('网站'), t(' 指Laksana Business Park | 战略仓储解决方案，可从 https://www.laksanabusinesspark.id 访问')],
+                                [bold('您'), t(' 指访问或使用服务的个人。')],
+                            ]),
+                        ]),
+                    },
+                    {
+                        title: '确认',
+                        variant: 'highlight-blue',
+                        content: createRichTextBlocks([
+                            p(t('这些是管辖本服务使用的条款和条件以及您与公司之间的协议。这些条款和条件规定了所有用户关于使用服务的权利和义务。')),
+                            p(t('您对服务的访问和使用以您接受并遵守这些条款和条件为条件。这些条款和条件适用于所有访问或使用服务的访客、用户和其他人。')),
+                            p(t('通过访问或使用服务，您同意受这些条款和条件的约束。如果您不同意这些条款和条件的任何部分，则您不得访问服务。')),
+                            p(t('您声明您已年满18岁。公司不允许18岁以下的人使用服务。')),
+                            p(t('您对服务的访问和使用还受我们隐私政策的约束。请在使用我们的服务之前仔细阅读我们的隐私政策。')),
+                        ]),
+                    },
+                    {
+                        title: '其他网站的链接',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们的服务可能包含指向非公司拥有或控制的第三方网站或服务的链接。')),
+                            p(t('公司无法控制任何第三方网站或服务的内容、隐私政策或做法，也不对此承担任何责任。')),
+                            p(t('我们强烈建议您阅读您访问的任何第三方网站或服务的条款和条件及隐私政策。')),
+                        ]),
+                    },
+                    {
+                        title: '终止',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们可能会立即终止或暂停您的访问，无需事先通知或承担责任，原因包括但不限于您违反这些条款和条件。')),
+                            p(t('终止后，您使用服务的权利将立即停止。')),
+                        ]),
+                    },
+                    {
+                        title: '责任限制',
+                        variant: 'highlight-red',
+                        content: createRichTextBlocks([
+                            p(t('尽管您可能遭受任何损害，公司及其供应商根据本条款任何规定的全部责任以及您对上述所有情况的唯一补救措施仅限于您通过服务实际支付的金额或100美元（如果您未通过服务购买任何东西）。')),
+                            p(t('在适用法律允许的最大范围内，公司或其供应商在任何情况下均不对任何特殊、附带、间接或后果性损害承担责任。')),
+                            p(t('某些司法管辖区不允许排除默示保证或限制附带或后果性损害的责任，这意味着上述某些限制可能不适用。')),
+                        ]),
+                    },
+                    {
+                        title: '"按原样"和"按可用性"免责声明',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('服务按"原样"和"可用性"提供给您，包含所有故障和缺陷，不提供任何形式的保证。')),
+                            p(t('在不限制上述内容的情况下，公司及其任何提供商均不作任何明示或暗示的陈述或保证。')),
+                            p(t('某些司法管辖区不允许排除某些类型的保证或限制消费者的适用法定权利，因此上述部分或全部排除和限制可能不适用于您。')),
+                        ]),
+                    },
+                    {
+                        title: '适用法律',
+                        variant: 'default',
+                        content: createRichText('本国法律（不包括其法律冲突规则）管辖本条款和您对服务的使用。您对应用程序的使用也可能受到其他地方、州、国家或国际法律的约束。'),
+                    },
+                    {
+                        title: '争议解决',
+                        variant: 'default',
+                        content: createRichText('如果您对服务有任何顾虑或争议，您同意首先尝试通过联系公司非正式地解决争议。'),
+                    },
+                    {
+                        title: '欧盟（EU）用户',
+                        variant: 'default',
+                        content: createRichText('如果您是欧盟消费者，您将受益于您居住国法律的任何强制性规定。'),
+                    },
+                    {
+                        title: '美国法律合规',
+                        variant: 'default',
+                        content: createRichText('您声明并保证(i)您不位于受美国政府禁运的国家，或被美国政府指定为"支持恐怖主义"的国家，(ii)您未被列入美国政府任何禁止或受限方名单。'),
+                    },
+                    {
+                        title: '可分割性和弃权',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            h4(t('可分割性')),
+                            p(t('如果本条款的任何规定被认为不可执行或无效，该规定将被更改和解释，以在适用法律下尽可能实现该规定的目标，其余规定将继续完全有效。')),
+                            h4(t('弃权')),
+                            p(t('除本文规定外，未能行使权利或要求履行本条款规定的义务不影响当事方在此后任何时候行使该权利或要求履行该义务的能力。')),
+                        ]),
+                    },
+                    {
+                        title: '翻译解释',
+                        variant: 'default',
+                        content: createRichText('如果我们已在我们的服务上向您提供这些条款和条件的翻译版本，您同意在发生争议时以英文原文为准。'),
+                    },
+                    {
+                        title: '本条款和条件的变更',
+                        variant: 'default',
+                        content: createRichTextBlocks([
+                            p(t('我们保留自行决定随时修改或替换这些条款的权利。如果修订是实质性的，我们将在新条款生效前至少提前30天合理努力通知。')),
+                            p(t('在这些修订生效后继续访问或使用我们的服务，即表示您同意受修订条款的约束。如果您不同意新条款的全部或部分内容，请停止使用服务。')),
+                        ]),
+                    },
+                    {
+                        title: '联系我们',
+                        variant: 'cta',
+                        content: createRichText('如果您对这些条款和条件有任何疑问，您可以联系我们：'),
+                    },
+                ],
+            },
+        })
+        console.log('Terms & Conditions Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Terms & Conditions Page (ZH):', error)
     }
 
     console.log('\n--- Seed Complete ---')
