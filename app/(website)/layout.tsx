@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Montserrat } from "next/font/google";
 import Script from 'next/script'
 import "../globals.css";
 import "../style-component.css";
@@ -7,6 +7,11 @@ import "../style-menu.css";
 
 const manrope = Manrope({
   variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -22,7 +27,7 @@ export default async function WebsiteLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} antialiased font-sans mb-0`}>
+      <body className={`${manrope.variable} ${montserrat.variable} antialiased font-sans mb-0`}>
         <Script src="https://unpkg.com/lucide@latest" />
         {children}
       </body>

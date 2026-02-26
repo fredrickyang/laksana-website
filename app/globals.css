@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Luxima brand colors */
+  --luxima-gold: #E0C977;
+  --luxima-blue: #0E2F9A;
+  --luxima-gold-hover: rgba(204, 170, 66, 0.8);
 }
 
 @theme inline {
@@ -11,6 +16,12 @@
   --font-sans: var(--font-manrope);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
     "Courier New", monospace;
+  --font-montserrat: var(--font-montserrat);
+
+  /* Luxima brand colors for Tailwind v4 */
+  --color-luxima-gold: #E0C977;
+  --color-luxima-blue: #0E2F9A;
+  --color-luxima-gold-hover: rgba(204, 170, 66, 0.8);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +35,157 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Utility classes for Luxima brand colors */
+.text-luxima-gold {
+  color: var(--luxima-gold);
+}
+
+.text-luxima-blue {
+  color: var(--luxima-blue);
+}
+
+.bg-luxima-gold {
+  background-color: var(--luxima-gold);
+}
+
+.bg-luxima-blue {
+  background-color: var(--luxima-blue);
+}
+
+.hover\:text-luxima-gold:hover {
+  color: var(--luxima-gold);
+}
+
+.hover\:text-luxima-blue:hover {
+  color: var(--luxima-blue);
+}
+
+.hover\:bg-luxima-gold:hover {
+  background-color: var(--luxima-gold);
+}
+
+.hover\:bg-luxima-blue:hover {
+  background-color: var(--luxima-blue);
+}
+
+.hover\:bg-luxima-gold-hover:hover {
+  background-color: var(--luxima-gold-hover);
+}
+
+.border-luxima-gold {
+  border-color: var(--luxima-gold);
+}
+
+.border-luxima-blue {
+  border-color: var(--luxima-blue);
+}
+
+/* Animation for the scroll indicator */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Gold sparkle/star animation for facility cards */
+.facility-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.facility-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-size: 20px 20px, 15px 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.facility-card:hover::before {
+  opacity: 0.4;
+  animation: sparkleRotate 10s linear infinite;
+}
+
+@keyframes sparkleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Create a sparkling star animation */
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0deg);
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(45deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(90deg);
+    filter: blur(0.5px);
+  }
+}
+
+.sparkle-effect {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  /* Create star shape using clip-path */
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  background-color: var(--luxima-gold);
+  box-shadow: 0 0 5px 2px rgba(224, 201, 119, 0.7);
+}
+
+.facility-card:hover .sparkle-effect {
+  animation: sparkle 1.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+/* This class will be added via JS to complete the animation */
+.sparkle-finishing {
+  animation: sparkle 2.5s ease-in-out forwards !important;
 }
