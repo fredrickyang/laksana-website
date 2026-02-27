@@ -34,7 +34,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.2, ease: 'easeInOut' }}
-              className="text-4xl md:text-6xl font-black text-luxima-gold drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] tracking-wider mb-6 leading-[1.1]"
+              className="text-4xl md:text-6xl font-bold text-luxima-gold drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] tracking-wider mb-6 leading-[1.1]"
             >
               CLUSTER GUDANG INDUSTRI MODERN
             </motion.h1>

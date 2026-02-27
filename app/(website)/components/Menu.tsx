@@ -16,6 +16,11 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
   const pathname = usePathname();
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
+  // Hide this global menu on Luxima pages
+  if (pathname.includes('/luxima')) {
+    return null;
+  }
+
   // Get display code for current locale
   const currentLocaleCode = localeCodes[locale as Locale] || 'ID';
 
