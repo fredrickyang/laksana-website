@@ -6,6 +6,36 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import { locales, localeCodes, localeNames, type Locale } from '@/i18n.config';
 
+const menuTranslations: Record<string, Record<string, string>> = {
+  id: {
+    freeConsultation: 'Konsultasi Gratis',
+    contactTitle: 'Hubungi Kami',
+    contactLabel: 'Kontak',
+    headOffice: 'Kantor Pusat',
+    marketingOffice: 'Kantor Pemasaran',
+    downloadBrochure: 'Download e-Brochure',
+    close: 'Tutup',
+  },
+  en: {
+    freeConsultation: 'Free Consultation',
+    contactTitle: 'Contact Us',
+    contactLabel: 'Contact',
+    headOffice: 'Head Office',
+    marketingOffice: 'Marketing Office',
+    downloadBrochure: 'Download e-Brochure',
+    close: 'Close',
+  },
+  zh: {
+    freeConsultation: '免费咨询',
+    contactTitle: '联系我们',
+    contactLabel: '联系方式',
+    headOffice: '总部',
+    marketingOffice: '营销办公室',
+    downloadBrochure: '下载电子手册',
+    close: '关闭',
+  },
+};
+
 interface MenuProps {
   settings?: any;
   locale?: string;
@@ -15,6 +45,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const t = menuTranslations[locale] || menuTranslations.id;
 
   // Hide this global menu on Luxima pages
   if (pathname.includes('/luxima')) {
@@ -160,7 +191,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           href="/our-company#contact"
           className="hidden md:flex items-center gap-2 bg-brand hover:bg-sand hover:text-white px-6 py-3 text-xs tracking-[0.15em] font-medium uppercase transition-all duration-300 shadow-lg text-black z-10 border border-transparent"
         >
-          <span className="font-sans relative z-10">Konsultasi Gratis</span>
+          <span className="font-sans relative z-10">{t.freeConsultation}</span>
         </a>
 
         {/* Language Selector */}
@@ -180,8 +211,8 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
                   key={lang.locale}
                   onClick={() => handleLanguageSelect(lang.locale)}
                   className={`w-full px-4 py-3 text-left text-sm transition-all duration-300 font-sans ${locale === lang.locale
-                      ? 'bg-black text-white text-bold cursor-pointer'
-                      : 'text-white/70 hover:bg-[#1d2088] hover:text-white cursor-pointer'
+                    ? 'bg-black text-white text-bold cursor-pointer'
+                    : 'text-white/70 hover:bg-[#1d2088] hover:text-white cursor-pointer'
                     }`}
                 >
                   {lang.label}
@@ -217,7 +248,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           className="group cursor-pointer flex items-center gap-3 transition-colors text-white/60"
         >
           <span className="text-xs uppercase tracking-[0.2em] font-sans font-normal">
-            Close
+            {t.close}
           </span>
           <div className="relative w-10 h-10 flex items-center justify-center border group-hover:border-sand transition-all duration-300 group-hover:rotate-90 group-hover:bg-[#1d2088] border-white/20">
             <svg
@@ -262,12 +293,12 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
         <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col justify-end gap-12 border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12 border-white/10">
           <div className="menu-item delay-500">
             <h1 className="text-2xl uppercase tracking-[0.2em] text-white font-sans font-normal">
-              Hubungi Kami
+              {t.contactTitle}
             </h1>
           </div>
           <div className="menu-item delay-500">
             <h3 className="text-xs uppercase tracking-[0.2em] text-brand mb-4 font-sans font-normal">
-              Kontak
+              {t.contactLabel}
             </h3>
             <p className="text-base leading-relaxed font-sans font-normal text-white/70">
               {phoneNumbers.map((phone: any, idx: number) => (
@@ -282,7 +313,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           </div>
           <div className="menu-item delay-500">
             <h3 className="text-xs uppercase tracking-[0.2em] text-brand mb-4 font-sans font-normal">
-              Kantor Pusat
+              {t.headOffice}
             </h3>
             <p className="text-base leading-relaxed font-sans font-normal text-white/70">
               {headOfficeAddress.map((line: string, idx: number) => (
@@ -295,7 +326,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           </div>
           <div className="menu-item delay-500">
             <h3 className="text-xs uppercase tracking-[0.2em] text-brand mb-4 font-sans font-normal">
-              Kantor Pemasaran
+              {t.marketingOffice}
             </h3>
             <p className="text-base leading-relaxed font-sans font-normal text-white/70">
               {marketingOfficeAddress.map((line: string, idx: number) => (
@@ -311,7 +342,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
               href="#"
               className="block w-full py-4 border text-center uppercase text-sm tracking-[0.2em] hover:bg-sand hover:border-sand hover:text-white transition-all duration-300 font-sans font-normal bg-white border-white/10 text-black"
             >
-              Download e-Brochure
+              {t.downloadBrochure}
             </a>
           </div>
         </div>
