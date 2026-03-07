@@ -324,7 +324,7 @@ export default function FacilitiesClient({ facilitiesPage, settings }: Facilitie
         </div>
       </div>
 
-      <Form />
+      <Form settings={settings} />
       <Footer settings={settings} />
     </>
   );

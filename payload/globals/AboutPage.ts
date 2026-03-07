@@ -46,6 +46,16 @@ export const AboutPage: GlobalConfig = {
             ],
         },
         {
+            name: 'timelineHeading',
+            type: 'text',
+            localized: true,
+        },
+        {
+            name: 'timelineSubheading',
+            type: 'text',
+            localized: true,
+        },
+        {
             name: 'timeline',
             type: 'array',
             fields: [

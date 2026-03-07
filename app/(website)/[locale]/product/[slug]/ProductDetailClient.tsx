@@ -432,7 +432,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
         </div>
       </section>
 
-      <Form />
+      <Form settings={settings} />
       <Footer settings={settings} />
     </>
   );

@@ -9,6 +9,8 @@ const ITEMS_PER_PAGE = 6;
 interface ArticleClientProps {
   articles: any[];
   settings?: any;
+  articlePage?: any;
+  categories?: any[];
 }
 
 // Fallback hardcoded articles
@@ -39,8 +41,9 @@ const defaultArticles = [
   },
 ];
 
-export default function ArticleClient({ articles: cmsArticles, settings }: ArticleClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState("Semua");
+export default function ArticleClient({ articles: cmsArticles, settings, articlePage, categories: cmsCategories }: ArticleClientProps) {
+  const allCategoryLabel = articlePage?.allCategoryOption || "Semua";
+  const [selectedCategory, setSelectedCategory] = useState(allCategoryLabel);
   const [currentPage, setCurrentPage] = useState(1);
 
   // Use CMS articles or fallback to default
@@ -53,7 +56,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
     return category.name || '';
   };
 
-  const filteredArticles = selectedCategory === "Semua"
+  const filteredArticles = selectedCategory === allCategoryLabel
     ? articles
     : articles.filter((article: any) =>
       getCategoryName(article.category)?.toLowerCase() === selectedCategory.toLowerCase()
@@ -104,7 +107,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
             {/* Left side - Title and description */}
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl md:text-5xl sm:text-4xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
-                <span className="text-white bg-clip-text">ARTIKEL</span>
+                <span className="text-white bg-clip-text">{articlePage?.heroTitle || "ARTIKEL"}</span>
               </h1>
             </div>
           </div>
@@ -113,11 +116,11 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
 
       <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between -mb-10 mt-20 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
         <h1 className="text-5xl text-neutral-900 tracking-tighter leading-[0.9]">
-          Semua Artikel
+          {articlePage?.allArticlesHeading || "Semua Artikel"}
         </h1>
         {/* Dropdown Selector Kategori Article */}
         <div className="relative inline-flex items-center gap-4">
-          <p className="text-gray-600">Kategori</p>
+          <p className="text-gray-600">{articlePage?.categoryLabel || "Kategori"}</p>
           <svg
             className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
@@ -134,10 +137,17 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            <option>Semua</option>
-            <option>News</option>
-            <option>Tips & Trick</option>
-            <option>Article</option>
+            <option>{allCategoryLabel}</option>
+            {cmsCategories && cmsCategories.length > 0
+              ? cmsCategories.map((cat: any) => (
+                  <option key={cat.id} value={cat.name}>{cat.name}</option>
+                ))
+              : <>
+                  <option>News</option>
+                  <option>Tips & Trick</option>
+                  <option>Article</option>
+                </>
+            }
           </select>
         </div>
       </div>
@@ -177,7 +187,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
                 <div className="flex items-center justify-start">
                   <div className="flex items-center gap-4"></div>
                   <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                    <span>Baca Berita</span>
+                    <span>{articlePage?.readMoreButton || "Baca Berita"}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={24}
@@ -226,7 +236,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
                     strokeLinejoin="round"
                   />
                 </svg>
-                Previous
+                {articlePage?.previousButton || "Previous"}
               </button>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
@@ -245,7 +255,7 @@ export default function ArticleClient({ articles: cmsArticles, settings }: Artic
                 disabled={currentPage === totalPages}
                 className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 bg-transparent border-transparent text-stone-800 hover:bg-stone-800/5 hover:border-stone-800/5 shadow-none hover:shadow-none cursor-pointer"
               >
-                Next
+                {articlePage?.nextButton || "Next"}
                 <svg
                   width="1.5em"
                   height="1.5em"

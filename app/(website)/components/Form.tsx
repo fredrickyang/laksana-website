@@ -1,10 +1,32 @@
 "use client";
 import React, { useState } from 'react';
 
-export default function Form() {
+interface FormProps {
+  settings?: any;
+}
+
+export default function Form({ settings }: FormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const f = settings?.form || {};
+
+  const buildingSizeOptions = f.buildingSizeOptions?.length > 0
+    ? f.buildingSizeOptions
+    : [
+        { label: '500 m2', value: 'small' },
+        { label: '1000 m2', value: 'medium' },
+        { label: 'Lebih dari 1000 m2', value: 'large' },
+      ];
+
+  const serviceTypeOptions = f.serviceTypeOptions?.length > 0
+    ? f.serviceTypeOptions
+    : [
+        { label: 'Beli Gudang Baru', value: 'full' },
+        { label: 'Beli Kavling Baru', value: 'legal' },
+        { label: 'Jual Kavling / Gudang Laksana', value: 'consult' },
+      ];
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -40,11 +62,11 @@ export default function Form() {
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
-        setErrorMessage(result.error || 'Terjadi kesalahan, silakan coba lagi.');
+        setErrorMessage(result.error || f.errorMessage || 'Terjadi kesalahan, silakan coba lagi.');
       }
     } catch (error) {
       setStatus('error');
-      setErrorMessage('Gagal mengirim form. Periksa koneksi internet Anda.');
+      setErrorMessage(f.networkErrorMessage || 'Gagal mengirim form. Periksa koneksi internet Anda.');
     } finally {
       setIsLoading(false);
     }
@@ -58,10 +80,10 @@ export default function Form() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12">
           <h3 className="text-3xl lg:text-4xl font-medium tracking-tight text-neutral-900 tracking-tighter mb-4">
-            Konsultasi Gratis Dengan Tim Kami
+            {f.heading || "Konsultasi Gratis Dengan Tim Kami"}
           </h3>
           <p className="text-neutral-500 text-xs sm:text-sm font-light">
-            Lihat Unit yang tersedia, Buat janji dengan tim kami.
+            {f.subheading || "Lihat Unit yang tersedia, Buat janji dengan tim kami."}
           </p>
         </div>
         <div className="relative p-[1px] bg-gradient-to-b from-neutral-200 to-neutral-300 shadow-sm">
@@ -73,57 +95,57 @@ export default function Form() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Nama Lengkap
+                  {f.nameLabel || "Nama Lengkap"}
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
                   className="w-full input-base border border-neutral-400 px-3 py-3 text-sm"
-                  placeholder="Nama Lengkap"
+                  placeholder={f.namePlaceholder || "Nama Lengkap"}
                 />
               </div>
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Email Anda
+                  {f.emailLabel || "Email Anda"}
                 </label>
                 <input
                   type="email"
                   name="email"
                   required
                   className="w-full input-base px-3 py-3 text-sm border border-neutral-400"
-                  placeholder="email@contoh-email.com"
+                  placeholder={f.emailPlaceholder || "email@contoh-email.com"}
                 />
               </div>
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Nomor Telfon
+                  {f.phoneLabel || "Nomor Telfon"}
                 </label>
                 <input
                   type="text"
                   name="phone"
                   required
                   className="w-full input-base border border-neutral-400 px-3 py-3 text-sm"
-                  placeholder="0812XXXXX"
+                  placeholder={f.phonePlaceholder || "0812XXXXX"}
                 />
               </div>
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Domisili
+                  {f.domicileLabel || "Domisili"}
                 </label>
                 <input
                   type="text"
                   name="domicile"
                   required
                   className="w-full input-base border border-neutral-400 px-3 py-3 text-sm"
-                  placeholder="Contoh: Jakarta Utara"
+                  placeholder={f.domicilePlaceholder || "Contoh: Jakarta Utara"}
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Kebutuhan Luas Bangunan
+                  {f.buildingSizeLabel || "Kebutuhan Luas Bangunan"}
                 </label>
                 <select
                   name="budget"
@@ -132,16 +154,16 @@ export default function Form() {
                   defaultValue=""
                 >
                   <option value="" disabled>
-                    Pilihan
+                    {f.buildingSizePlaceholder || "Pilihan"}
                   </option>
-                  <option value="small">500 m2</option>
-                  <option value="medium">1000 m2</option>
-                  <option value="large">Lebih dari 1000 m2</option>
+                  {buildingSizeOptions.map((opt: any) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
                 </select>
               </div>
               <div className="">
                 <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                  Pilihan Layanan
+                  {f.serviceTypeLabel || "Pilihan Layanan"}
                 </label>
                 <select
                   name="timeline"
@@ -150,24 +172,24 @@ export default function Form() {
                   defaultValue=""
                 >
                   <option value="" disabled>
-                    Pilihan
+                    {f.serviceTypePlaceholder || "Pilihan"}
                   </option>
-                  <option value="full">Beli Gudang Baru</option>
-                  <option value="legal">Beli Kavling Baru</option>
-                  <option value="consult">Jual Kavling / Gudang Laksana</option>
+                  {serviceTypeOptions.map((opt: any) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
                 </select>
               </div>
             </div>
             <div className="">
               <label className="block text-[10px] uppercase text-neutral-500 mb-1.5">
-                Pesan Tambahan
+                {f.messageLabel || "Pesan Tambahan"}
               </label>
               <textarea
                 name="message"
                 rows={4}
                 required
                 className="w-full input-base px-3 py-3 border border-neutral-400 text-sm"
-                placeholder="Buat janji dengan tim kami untuk konsultasi gratis. Lihat Unit yang tersedia, Isi tanggal visit dengan tim kami."
+                placeholder={f.messagePlaceholder || "Buat janji dengan tim kami untuk konsultasi gratis. Lihat Unit yang tersedia, Isi tanggal visit dengan tim kami."}
                 defaultValue={""}
               />
             </div>
@@ -184,11 +206,11 @@ export default function Form() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    MENGIRIM...
+                    {f.submittingButton || "MENGIRIM..."}
                   </>
                 ) : (
                   <>
-                    KIRIM PESAN
+                    {f.submitButton || "KIRIM PESAN"}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={14}
@@ -210,7 +232,7 @@ export default function Form() {
             </div>
             {status === 'success' && (
               <div className="text-center text-sm mt-4 text-green-600 font-medium">
-                ✓ Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.
+                {f.successMessage || "✓ Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda."}
               </div>
             )}
             {status === 'error' && (

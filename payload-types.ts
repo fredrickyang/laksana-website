@@ -102,6 +102,7 @@ export interface Config {
     'facilities-page': FacilitiesPage;
     'privacy-policy-page': PrivacyPolicyPage;
     'terms-conditions-page': TermsConditionsPage;
+    'article-page': ArticlePage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
@@ -110,6 +111,7 @@ export interface Config {
     'facilities-page': FacilitiesPageSelect<false> | FacilitiesPageSelect<true>;
     'privacy-policy-page': PrivacyPolicyPageSelect<false> | PrivacyPolicyPageSelect<true>;
     'terms-conditions-page': TermsConditionsPageSelect<false> | TermsConditionsPageSelect<true>;
+    'article-page': ArticlePageSelect<false> | ArticlePageSelect<true>;
   };
   locale: 'id' | 'en' | 'zh';
   user: User;
@@ -666,6 +668,43 @@ export interface Setting {
         }[]
       | null;
   };
+  form?: {
+    heading?: string | null;
+    subheading?: string | null;
+    nameLabel?: string | null;
+    namePlaceholder?: string | null;
+    emailLabel?: string | null;
+    emailPlaceholder?: string | null;
+    phoneLabel?: string | null;
+    phonePlaceholder?: string | null;
+    domicileLabel?: string | null;
+    domicilePlaceholder?: string | null;
+    buildingSizeLabel?: string | null;
+    buildingSizePlaceholder?: string | null;
+    buildingSizeOptions?:
+      | {
+          label?: string | null;
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    serviceTypeLabel?: string | null;
+    serviceTypePlaceholder?: string | null;
+    serviceTypeOptions?:
+      | {
+          label?: string | null;
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    messageLabel?: string | null;
+    messagePlaceholder?: string | null;
+    submitButton?: string | null;
+    submittingButton?: string | null;
+    successMessage?: string | null;
+    errorMessage?: string | null;
+    networkErrorMessage?: string | null;
+  };
   brochure?: (number | null) | Media;
   navigation?:
     | {
@@ -994,6 +1033,8 @@ export interface AboutPage {
         }[]
       | null;
   };
+  timelineHeading?: string | null;
+  timelineSubheading?: string | null;
   timeline?:
     | {
         year?: string | null;
@@ -1199,6 +1240,24 @@ export interface TermsConditionsPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-page".
+ */
+export interface ArticlePage {
+  id: number;
+  heroTitle?: string | null;
+  allArticlesHeading?: string | null;
+  categoryLabel?: string | null;
+  allCategoryOption?: string | null;
+  readMoreButton?: string | null;
+  previousButton?: string | null;
+  nextButton?: string | null;
+  relatedArticlesHeading?: string | null;
+  backToArticlesText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -1226,6 +1285,45 @@ export interface SettingsSelect<T extends boolean = true> {
               icon?: T;
               id?: T;
             };
+      };
+  form?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        nameLabel?: T;
+        namePlaceholder?: T;
+        emailLabel?: T;
+        emailPlaceholder?: T;
+        phoneLabel?: T;
+        phonePlaceholder?: T;
+        domicileLabel?: T;
+        domicilePlaceholder?: T;
+        buildingSizeLabel?: T;
+        buildingSizePlaceholder?: T;
+        buildingSizeOptions?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        serviceTypeLabel?: T;
+        serviceTypePlaceholder?: T;
+        serviceTypeOptions?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        messageLabel?: T;
+        messagePlaceholder?: T;
+        submitButton?: T;
+        submittingButton?: T;
+        successMessage?: T;
+        errorMessage?: T;
+        networkErrorMessage?: T;
       };
   brochure?: T;
   navigation?:
@@ -1372,6 +1470,8 @@ export interface AboutPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  timelineHeading?: T;
+  timelineSubheading?: T;
   timeline?:
     | T
     | {
@@ -1484,6 +1584,24 @@ export interface TermsConditionsPageSelect<T extends boolean = true> {
         id?: T;
       };
   contactEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-page_select".
+ */
+export interface ArticlePageSelect<T extends boolean = true> {
+  heroTitle?: T;
+  allArticlesHeading?: T;
+  categoryLabel?: T;
+  allCategoryOption?: T;
+  readMoreButton?: T;
+  previousButton?: T;
+  nextButton?: T;
+  relatedArticlesHeading?: T;
+  backToArticlesText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,4 +1,4 @@
-import { getArticleBySlug, getArticles, getSettings, getMediaUrl } from '@/lib/payload'
+import { getArticleBySlug, getArticles, getSettings, getArticlePage, getMediaUrl } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Footer from '../../../components/Footer'
@@ -10,9 +10,10 @@ interface ArticleDetailPageProps {
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   const { locale, slug } = await params
-  const [article, settings] = await Promise.all([
+  const [article, settings, articlePage] = await Promise.all([
     getArticleBySlug(slug, locale as Locale),
     getSettings(locale as Locale),
+    getArticlePage(locale as Locale),
   ])
 
   if (!article) {
@@ -219,7 +220,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         {/* Related Articles */}
         {article.relatedArticles && article.relatedArticles.length > 0 && (
           <div className="mt-16 pt-8 border-t border-neutral-200">
-            <h3 className="text-2xl font-semibold text-neutral-900 mb-6">Artikel Terkait</h3>
+            <h3 className="text-2xl font-semibold text-neutral-900 mb-6">{articlePage?.relatedArticlesHeading || "Artikel Terkait"}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {article.relatedArticles.map((related: any) => (
                 <a
@@ -256,7 +257,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
               <path d="M19 12H5" />
               <path d="m12 19-7-7 7-7" />
             </svg>
-            Kembali ke Semua Artikel
+            {articlePage?.backToArticlesText || "Kembali ke Semua Artikel"}
           </a>
         </div>
       </div>

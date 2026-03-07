@@ -68,6 +68,28 @@ export async function getTermsConditionsPage(locale: Locale = 'id') {
     })
 }
 
+// Fetch ArticlePage global
+export async function getArticlePage(locale: Locale = 'id') {
+    const payload = await getPayloadClient()
+    return await payload.findGlobal({
+        slug: 'article-page',
+        locale,
+        depth: 2,
+    })
+}
+
+// Fetch all Categories
+export async function getCategories(locale: Locale = 'id') {
+    const payload = await getPayloadClient()
+    const result = await payload.find({
+        collection: 'categories',
+        locale,
+        limit: 100,
+        depth: 1,
+    })
+    return result.docs
+}
+
 // Fetch all Products
 export async function getProducts(locale: Locale = 'id', limit: number = 100) {
     const payload = await getPayloadClient()

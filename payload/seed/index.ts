@@ -782,6 +782,8 @@ export async function seed() {
                         { name: 'Netty Rusli', position: 'Direktur Keuangan', photo: pimpinan4Id },
                     ],
                 },
+                timelineHeading: 'Sejarah dimulainya perjalanan perusahaan untuk membangun masa depan.',
+                timelineSubheading: 'Perjalanan kami dimulai dari sebuah visi yang berani untuk membangun masa depan properti yang berkelanjutan.',
                 timeline: [
                     { year: '2010', title: 'Pendirian Perusahaan', description: 'Agung Intiland didirikan dengan visi menjadi pengembang kawasan industri terkemuka.' },
                     { year: '2012', title: 'Laksana Tahap 1', description: 'Peluncuran Laksana Business Park Tahap 1 dengan unit gudang pertama.' },
@@ -824,6 +826,8 @@ export async function seed() {
                         { name: 'Netty Rusli', position: 'Finance Director', photo: pimpinan4Id },
                     ],
                 },
+                timelineHeading: 'The history of our company\'s journey to build the future.',
+                timelineSubheading: 'Our journey began with a bold vision to build a sustainable property future.',
                 timeline: [
                     { year: '2010', title: 'Company Establishment', description: 'Agung Intiland was established with the vision of becoming a leading industrial estate developer.' },
                     { year: '2012', title: 'Laksana Phase 1', description: 'Launch of Laksana Business Park Phase 1 with the first warehouse units.' },
@@ -866,6 +870,8 @@ export async function seed() {
                         { name: 'Netty Rusli', position: '财务总监', photo: pimpinan4Id },
                     ],
                 },
+                timelineHeading: '公司建设未来的历程起源。',
+                timelineSubheading: '我们的旅程始于一个大胆的愿景——打造可持续发展的房地产未来。',
                 timeline: [
                     { year: '2010', title: '公司成立', description: 'Agung Intiland以成为领先工业园区开发商的愿景而成立。' },
                     { year: '2012', title: 'Laksana第一期', description: 'Laksana Business Park第一期启动，推出首批仓库单元。' },
@@ -1273,6 +1279,39 @@ export async function seed() {
                         { platformName: 'YouTube', url: 'https://www.youtube.com/@laksanabusinesspark' },
                     ],
                 },
+                form: {
+                    heading: 'Konsultasi Gratis Dengan Tim Kami',
+                    subheading: 'Lihat Unit yang tersedia, Buat janji dengan tim kami.',
+                    nameLabel: 'Nama Lengkap',
+                    namePlaceholder: 'Nama Lengkap',
+                    emailLabel: 'Email Anda',
+                    emailPlaceholder: 'email@contoh-email.com',
+                    phoneLabel: 'Nomor Telfon',
+                    phonePlaceholder: '0812XXXXX',
+                    domicileLabel: 'Domisili',
+                    domicilePlaceholder: 'Contoh: Jakarta Utara',
+                    buildingSizeLabel: 'Kebutuhan Luas Bangunan',
+                    buildingSizePlaceholder: 'Pilihan',
+                    buildingSizeOptions: [
+                        { label: '500 m2', value: 'small' },
+                        { label: '1000 m2', value: 'medium' },
+                        { label: 'Lebih dari 1000 m2', value: 'large' },
+                    ],
+                    serviceTypeLabel: 'Pilihan Layanan',
+                    serviceTypePlaceholder: 'Pilihan',
+                    serviceTypeOptions: [
+                        { label: 'Beli Gudang Baru', value: 'full' },
+                        { label: 'Beli Kavling Baru', value: 'legal' },
+                        { label: 'Jual Kavling / Gudang Laksana', value: 'consult' },
+                    ],
+                    messageLabel: 'Pesan Tambahan',
+                    messagePlaceholder: 'Buat janji dengan tim kami untuk konsultasi gratis. Lihat Unit yang tersedia, Isi tanggal visit dengan tim kami.',
+                    submitButton: 'KIRIM PESAN',
+                    submittingButton: 'MENGIRIM...',
+                    successMessage: 'Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.',
+                    errorMessage: 'Terjadi kesalahan, silakan coba lagi.',
+                    networkErrorMessage: 'Gagal mengirim form. Periksa koneksi internet Anda.',
+                },
                 navigation: [
                     { label: 'Home', link: '/' },
                     { label: 'Produk', link: '/product' },
@@ -1315,6 +1354,39 @@ export async function seed() {
                         'Kabupaten Tangerang, Banten 15570',
                     ]),
                 },
+                form: {
+                    heading: 'Free Consultation With Our Team',
+                    subheading: 'View available units, make an appointment with our team.',
+                    nameLabel: 'Full Name',
+                    namePlaceholder: 'Full Name',
+                    emailLabel: 'Your Email',
+                    emailPlaceholder: 'email@example.com',
+                    phoneLabel: 'Phone Number',
+                    phonePlaceholder: '0812XXXXX',
+                    domicileLabel: 'Domicile',
+                    domicilePlaceholder: 'Example: North Jakarta',
+                    buildingSizeLabel: 'Building Size Requirement',
+                    buildingSizePlaceholder: 'Select',
+                    buildingSizeOptions: [
+                        { label: '500 m2', value: 'small' },
+                        { label: '1000 m2', value: 'medium' },
+                        { label: 'More than 1000 m2', value: 'large' },
+                    ],
+                    serviceTypeLabel: 'Service Option',
+                    serviceTypePlaceholder: 'Select',
+                    serviceTypeOptions: [
+                        { label: 'Buy New Warehouse', value: 'full' },
+                        { label: 'Buy New Land Plot', value: 'legal' },
+                        { label: 'Sell Laksana Plot / Warehouse', value: 'consult' },
+                    ],
+                    messageLabel: 'Additional Message',
+                    messagePlaceholder: 'Make an appointment with our team for a free consultation. View available units, schedule a visit with our team.',
+                    submitButton: 'SEND MESSAGE',
+                    submittingButton: 'SENDING...',
+                    successMessage: 'Your message has been sent successfully! Our team will contact you shortly.',
+                    errorMessage: 'An error occurred, please try again.',
+                    networkErrorMessage: 'Failed to send form. Please check your internet connection.',
+                },
                 navigation: [
                     { label: 'Home', link: '/' },
                     { label: 'Products', link: '/product' },
@@ -1356,6 +1428,39 @@ export async function seed() {
                         'Paku Haji镇,',
                         '丹格朗县, 万丹省 15570',
                     ]),
+                },
+                form: {
+                    heading: '免费咨询我们的团队',
+                    subheading: '查看可用单元，与我们的团队预约。',
+                    nameLabel: '全名',
+                    namePlaceholder: '全名',
+                    emailLabel: '您的邮箱',
+                    emailPlaceholder: 'email@example.com',
+                    phoneLabel: '电话号码',
+                    phonePlaceholder: '0812XXXXX',
+                    domicileLabel: '住所',
+                    domicilePlaceholder: '例如：北雅加达',
+                    buildingSizeLabel: '建筑面积需求',
+                    buildingSizePlaceholder: '请选择',
+                    buildingSizeOptions: [
+                        { label: '500 平方米', value: 'small' },
+                        { label: '1000 平方米', value: 'medium' },
+                        { label: '超过 1000 平方米', value: 'large' },
+                    ],
+                    serviceTypeLabel: '服务选项',
+                    serviceTypePlaceholder: '请选择',
+                    serviceTypeOptions: [
+                        { label: '购买新仓库', value: 'full' },
+                        { label: '购买新地块', value: 'legal' },
+                        { label: '出售Laksana地块/仓库', value: 'consult' },
+                    ],
+                    messageLabel: '附加信息',
+                    messagePlaceholder: '与我们的团队预约免费咨询。查看可用单元，安排与我们团队的参观。',
+                    submitButton: '发送消息',
+                    submittingButton: '发送中...',
+                    successMessage: '您的消息已成功发送！我们的团队将尽快与您联系。',
+                    errorMessage: '发生错误，请重试。',
+                    networkErrorMessage: '发送表单失败。请检查您的网络连接。',
                 },
                 navigation: [
                     { label: '首页', link: '/' },
@@ -2497,6 +2602,76 @@ export async function seed() {
         console.log('Terms & Conditions Page (ZH) seeded successfully')
     } catch (error) {
         console.error('Failed to seed Terms & Conditions Page (ZH):', error)
+    }
+
+    // ========================================
+    // SEED ARTICLE PAGE GLOBAL
+    // ========================================
+    console.log('\n--- Seeding Article Page ---')
+
+    // Article Page - Indonesian (default)
+    try {
+        await payload.updateGlobal({
+            slug: 'article-page',
+            data: {
+                heroTitle: 'ARTIKEL',
+                allArticlesHeading: 'Semua Artikel',
+                categoryLabel: 'Kategori',
+                allCategoryOption: 'Semua',
+                readMoreButton: 'Baca Berita',
+                previousButton: 'Sebelumnya',
+                nextButton: 'Selanjutnya',
+                relatedArticlesHeading: 'Artikel Terkait',
+                backToArticlesText: 'Kembali ke Semua Artikel',
+            },
+        })
+        console.log('Article Page seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Article Page:', error)
+    }
+
+    // Article Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'article-page',
+            locale: 'en',
+            data: {
+                heroTitle: 'ARTICLES',
+                allArticlesHeading: 'All Articles',
+                categoryLabel: 'Category',
+                allCategoryOption: 'All',
+                readMoreButton: 'Read Article',
+                previousButton: 'Previous',
+                nextButton: 'Next',
+                relatedArticlesHeading: 'Related Articles',
+                backToArticlesText: 'Back to All Articles',
+            },
+        })
+        console.log('Article Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Article Page (EN):', error)
+    }
+
+    // Article Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'article-page',
+            locale: 'zh',
+            data: {
+                heroTitle: '文章',
+                allArticlesHeading: '所有文章',
+                categoryLabel: '分类',
+                allCategoryOption: '全部',
+                readMoreButton: '阅读文章',
+                previousButton: '上一页',
+                nextButton: '下一页',
+                relatedArticlesHeading: '相关文章',
+                backToArticlesText: '返回所有文章',
+            },
+        })
+        console.log('Article Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Article Page (ZH):', error)
     }
 
     console.log('\n--- Seed Complete ---')

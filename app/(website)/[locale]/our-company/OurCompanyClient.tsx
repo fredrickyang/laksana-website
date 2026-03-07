@@ -231,8 +231,8 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
         </div>
       </section>
 
-      <Timeline timelineData={aboutPage?.timeline} />
-      <Form />
+      <Timeline timelineData={aboutPage?.timeline} heading={aboutPage?.timelineHeading} subheading={aboutPage?.timelineSubheading} />
+      <Form settings={settings} />
       <Footer settings={settings} />
     </>
   );

@@ -48,9 +48,11 @@ interface TimelineProps {
         title: string;
         description: string;
     }>;
+    heading?: string;
+    subheading?: string;
 }
 
-export default function Timeline({ timelineData }: TimelineProps) {
+export default function Timeline({ timelineData, heading, subheading }: TimelineProps) {
     // Transform CMS data or use defaults
     const journeyData = timelineData && timelineData.length > 0
         ? timelineData.map((item, index) => ({
@@ -102,10 +104,10 @@ export default function Timeline({ timelineData }: TimelineProps) {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="max-w-2xl">
                         <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-zinc-900 mb-6">
-                            Sejarah dimulainya perjalanan <br className="hidden md:block"/> perusahaan untuk membangun masa depan.
+                            {heading || "Sejarah dimulainya perjalanan perusahaan untuk membangun masa depan."}
                         </h2>
                         <p className="text-base md:text-lg text-zinc-500 font-normal leading-relaxed max-w-xl">
-                            Perjalanan kami dimulai dari sebuah visi yang berani untuk membangun masa depan properti yang berkelanjutan.
+                            {subheading || "Perjalanan kami dimulai dari sebuah visi yang berani untuk membangun masa depan properti yang berkelanjutan."}
                         </p>
                     </div>
                     <div className="hidden md:flex items-center gap-3">
