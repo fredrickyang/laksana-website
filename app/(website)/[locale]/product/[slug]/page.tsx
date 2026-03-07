@@ -18,7 +18,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     notFound()
   }
 
-  return <ProductDetailClient product={product} settings={settings} />
+  return <ProductDetailClient product={product} settings={settings} locale={locale} />
 }
 
 // Generate static paths for all products and locales

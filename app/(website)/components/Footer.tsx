@@ -1,8 +1,64 @@
+'use client';
+import { usePathname } from 'next/navigation';
+import { locales, type Locale } from '@/i18n.config';
+
+const footerTranslations: Record<string, Record<string, string>> = {
+  id: {
+    company: 'Perusahaan',
+    resources: 'Sumber Daya',
+    contact: 'Kontak',
+    aboutUs: 'Tentang Kami',
+    products: 'Produk',
+    facilities: 'Fasilitas',
+    articles: 'Artikel',
+    buildingProgress: 'Progress Pembangunan',
+    usp: 'Unique Selling Point',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
+  },
+  en: {
+    company: 'Company',
+    resources: 'Resources',
+    contact: 'Contact',
+    aboutUs: 'About Us',
+    products: 'Products',
+    facilities: 'Facilities',
+    articles: 'Articles',
+    buildingProgress: 'Building Progress',
+    usp: 'Unique Selling Point',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
+  },
+  zh: {
+    company: '公司',
+    resources: '资源',
+    contact: '联系方式',
+    aboutUs: '关于我们',
+    products: '产品',
+    facilities: '设施',
+    articles: '文章',
+    buildingProgress: '建设进度',
+    usp: '独特卖点',
+    privacyPolicy: '隐私政策',
+    termsOfService: '服务条款',
+  },
+};
+
 interface FooterProps {
   settings?: any;
 }
 
 export default function Footer({ settings }: FooterProps) {
+  const pathname = usePathname();
+
+  // Extract locale from URL path
+  const pathSegments = pathname.split('/');
+  const locale = pathSegments[1] && locales.includes(pathSegments[1] as Locale)
+    ? pathSegments[1]
+    : 'id';
+
+  const t = footerTranslations[locale] || footerTranslations.id;
+
   // Extract footer data from settings or use defaults
   const footer = settings?.footer || {};
   const contactInfo = settings?.contactInformation || {};
@@ -88,46 +144,46 @@ export default function Footer({ settings }: FooterProps) {
             <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
               <div className="space-y-3">
                 <h3 className="text-xl font-bold text-black/75">
-                  Perusahaan
+                  {t.company}
                 </h3>
                 <ul className="space-y-2 text-neutral-600">
                   <li>
                     <a
-                      href="/our-company"
+                      href={`/${locale}/our-company`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Tentang Kami
+                      {t.aboutUs}
                     </a>
                   </li>
                   <li className="">
                     <a
-                      href="/product"
+                      href={`/${locale}/product`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Produk
+                      {t.products}
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/facilities"
+                      href={`/${locale}/facilities`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Fasilitas
+                      {t.facilities}
                     </a>
                   </li>
                 </ul>
               </div>
               <div className="space-y-3">
                 <h3 className="text-xl font-bold text-black/75">
-                  Sumber Daya
+                  {t.resources}
                 </h3>
                 <ul className="space-y-2 text-neutral-600">
                   <li>
                     <a
-                      href="/article"
+                      href={`/${locale}/article`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Artikel
+                      {t.articles}
                     </a>
                   </li>
                   <li>
@@ -135,7 +191,7 @@ export default function Footer({ settings }: FooterProps) {
                       href="#"
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Progress Pembangunan
+                      {t.buildingProgress}
                     </a>
                   </li>
                   <li className="">
@@ -143,14 +199,14 @@ export default function Footer({ settings }: FooterProps) {
                       href="#"
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      Unique Selling Point
+                      {t.usp}
                     </a>
                   </li>
                 </ul>
               </div>
               <div className="space-y-3">
                 <h3 className="text-xl font-bold text-black/75">
-                  Kontak
+                  {t.contact}
                 </h3>
                 <ul className="space-y-2 text-neutral-600">
                   <li>
@@ -202,13 +258,13 @@ export default function Footer({ settings }: FooterProps) {
                   href="#"
                   className="hover:text-neutral-700 transition-colors"
                 >
-                  Privacy Policy
+                  {t.privacyPolicy}
                 </a>
                 <a
                   href="#"
                   className="hover:text-neutral-700 transition-colors"
                 >
-                  Terms of Service
+                  {t.termsOfService}
                 </a>
               </div>
             </div>

@@ -935,6 +935,17 @@ export interface HomePage {
      */
     buttonLink?: string | null;
   };
+  projectSection?: {
+    headline?: string | null;
+    ctaLabel?: string | null;
+    ctaLink?: string | null;
+  };
+  articleSection?: {
+    headline?: string | null;
+    ctaLabel?: string | null;
+    ctaLink?: string | null;
+    readMoreLabel?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1303,6 +1314,21 @@ export interface HomePageSelect<T extends boolean = true> {
         backgroundStyle?: T;
         button?: T;
         buttonLink?: T;
+      };
+  projectSection?:
+    | T
+    | {
+        headline?: T;
+        ctaLabel?: T;
+        ctaLink?: T;
+      };
+  articleSection?:
+    | T
+    | {
+        headline?: T;
+        ctaLabel?: T;
+        ctaLink?: T;
+        readMoreLabel?: T;
       };
   updatedAt?: T;
   createdAt?: T;

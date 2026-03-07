@@ -23,13 +23,28 @@ export default async function Product({ params }: ProductPageProps) {
     return acc
   }, {})
 
-  // Define phase display order and titles
-  const phaseConfig: Record<string, { title: string; id: string }> = {
-    'Tahap 1': { title: 'Tahap Satu', id: 'tahap-satu' },
-    'Tahap 2': { title: 'Tahap Dua', id: 'tahap-dua' },
-    'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
-    'Kavling Industri': { title: 'Kavling Industri', id: 'kavling-industri' },
+  // Define phase display order and titles per locale
+  const phaseConfigByLocale: Record<string, Record<string, { title: string; id: string }>> = {
+    id: {
+      'Tahap 1': { title: 'Tahap Satu', id: 'tahap-satu' },
+      'Tahap 2': { title: 'Tahap Dua', id: 'tahap-dua' },
+      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
+      'Kavling Industri': { title: 'Kavling Industri', id: 'kavling-industri' },
+    },
+    en: {
+      'Tahap 1': { title: 'Phase One', id: 'tahap-satu' },
+      'Tahap 2': { title: 'Phase Two', id: 'tahap-dua' },
+      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
+      'Kavling Industri': { title: 'Industrial Land', id: 'kavling-industri' },
+    },
+    zh: {
+      'Tahap 1': { title: '第一期', id: 'tahap-satu' },
+      'Tahap 2': { title: '第二期', id: 'tahap-dua' },
+      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
+      'Kavling Industri': { title: '工业用地', id: 'kavling-industri' },
+    },
   }
+  const phaseConfig = phaseConfigByLocale[locale] || phaseConfigByLocale.id
 
   const phaseOrder = ['Tahap 1', 'Tahap 2', 'Luxima', 'Kavling Industri']
 
@@ -89,7 +104,7 @@ export default async function Product({ params }: ProductPageProps) {
               {phaseProducts.map((product: any) => (
                 <a
                   key={product.id}
-                  href={`/product/${product.slug}`}
+                  href={`/${locale}/product/${product.slug}`}
                   className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
                 >
                   <img

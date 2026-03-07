@@ -126,5 +126,24 @@ export const HomePage: GlobalConfig = {
                 { name: 'buttonLink', type: 'text', admin: { description: 'URL for CTA button' } },
             ],
         },
+        {
+            name: 'projectSection',
+            type: 'group',
+            fields: [
+                { name: 'headline', type: 'text', localized: true },
+                { name: 'ctaLabel', type: 'text', localized: true },
+                { name: 'ctaLink', type: 'text' },
+            ],
+        },
+        {
+            name: 'articleSection',
+            type: 'group',
+            fields: [
+                { name: 'headline', type: 'text', localized: true },
+                { name: 'ctaLabel', type: 'text', localized: true },
+                { name: 'ctaLink', type: 'text' },
+                { name: 'readMoreLabel', type: 'text', localized: true },
+            ],
+        },
     ],
 }

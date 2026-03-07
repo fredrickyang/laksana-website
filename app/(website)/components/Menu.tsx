@@ -64,15 +64,15 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
   // Extract navigation from settings or use defaults
   const navigation = settings?.navigation?.length > 0
     ? settings.navigation.map((item: any) => ({
-      href: item.link || '/',
+      href: `/${locale}${item.link || '/'}`,
       label: item.label || 'Link',
     }))
     : [
-      { href: '/', label: 'Home' },
-      { href: '/product', label: 'Produk' },
-      { href: '/our-company', label: 'Tentang Kami' },
-      { href: '/facilities', label: 'Fasilitas' },
-      { href: '/article', label: 'Artikel' },
+      { href: `/${locale}`, label: 'Home' },
+      { href: `/${locale}/product`, label: 'Produk' },
+      { href: `/${locale}/our-company`, label: 'Tentang Kami' },
+      { href: `/${locale}/facilities`, label: 'Fasilitas' },
+      { href: `/${locale}/article`, label: 'Artikel' },
     ];
 
   // Extract contact info from settings or use defaults
@@ -177,7 +177,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
       id="main-nav"
     >
       {/* Brand / Logo */}
-      <a href="/" className="flex items-center gap-3 group z-50 relative">
+      <a href={`/${locale}`} className="flex items-center gap-3 group z-50 relative">
         <img
           src="/images/logo/logo.svg"
           alt="Laksana Logo"
@@ -188,7 +188,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
       {/* Right Side: CTA & Mobile Trigger */}
       <div className="flex items-center gap-6 z-50">
         <a
-          href="/our-company#contact"
+          href={`/${locale}/our-company#contact`}
           className="hidden md:flex items-center gap-2 bg-brand hover:bg-sand hover:text-white px-6 py-3 text-xs tracking-[0.15em] font-medium uppercase transition-all duration-300 shadow-lg text-black z-10 border border-transparent"
         >
           <span className="font-sans relative z-10">{t.freeConsultation}</span>

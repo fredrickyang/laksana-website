@@ -6,12 +6,20 @@ import Image from "next/image";
 import { useState } from "react";
 import { getMediaUrl } from "@/lib/utils";
 
+const productTranslations: Record<string, Record<string, string>> = {
+  id: { breadcrumbPrefix: 'Beranda / Produk /', type: 'Tipe' },
+  en: { breadcrumbPrefix: 'Home / Product /', type: 'Type' },
+  zh: { breadcrumbPrefix: '首页 / 产品 /', type: '类型' },
+};
+
 interface ProductDetailClientProps {
   product: any;
   settings?: any;
+  locale?: string;
 }
 
-export default function ProductDetailClient({ product, settings }: ProductDetailClientProps) {
+export default function ProductDetailClient({ product, settings, locale = 'id' }: ProductDetailClientProps) {
+  const t = productTranslations[locale] || productTranslations.id;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
@@ -79,7 +87,7 @@ export default function ProductDetailClient({ product, settings }: ProductDetail
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl lg:text-5xl font-medium tracking-tight mb-8">
                 <span className="text-white bg-clip-text">
-                  Tipe {product.name}
+                  {t.type} {product.name}
                 </span>
               </h1>
             </div>
@@ -92,7 +100,7 @@ export default function ProductDetailClient({ product, settings }: ProductDetail
         <div className="w-full max-w-300">
           <div className="lg:col-span-5 flex flex-col lg:pt-5 flex items-start relative justify-center">
             <p className="text-neutral-900 justify-center max-w-md mb-5">
-              Beranda / Produk /{" "}
+              {t.breadcrumbPrefix}{" "}
               <span className="font-bold">{product.name}</span>
             </p>
           </div>
@@ -199,7 +207,7 @@ export default function ProductDetailClient({ product, settings }: ProductDetail
 
           <div className="mt-8 mb-16" id="overview">
             <h2 className="text-3xl lg:text-4xl font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8">
-              Tipe {product.name}
+              {t.type} {product.name}
             </h2>
             <p className="text-justify text-neutral-600 mb-6">
               {fullDescription || `${product.name} adalah solusi properti komersial terkemuka yang dirancang untuk memenuhi kebutuhan bisnis modern.`}

@@ -159,7 +159,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
               </a>
               <div className="flex flex-col items-center gap-2">
                 <span className="text-white text-sm text-shadow tracking-wide animate-bounce">
-                  Klik untuk Lihat
+                  {getRichText(homePage?.hero?.secondaryCtaHelperText, 'Klik untuk Lihat')}
                 </span>
                 <a
                   href={secondaryCtaLink}
@@ -203,13 +203,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
         {/* Header (Light Theme) */}
         <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-7 mt-20 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
           <h2 className="text-5xl text-neutral-900 tracking-tighter leading-[0.9]">
-            Proyek Kami
+            {homePage?.projectSection?.headline || 'Proyek Kami'}
           </h2>
           <a
-            href="/product"
+            href={`/${locale}/product`}
             className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]"
           >
-            Lihat Semua Proyek
+            {homePage?.projectSection?.ctaLabel || 'Lihat Semua Proyek'}
             <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
           </a>
         </div>
@@ -223,7 +223,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
           {products.length > 0 ? products.map((product, index) => (
             <a
               key={product.id || index}
-              href={`/product/${product.slug || '#'}`}
+              href={`/${locale}/product/${product.slug || '#'}`}
               className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block"
             >
               <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
@@ -523,9 +523,9 @@ export default function HomePageClient({ homePage, products, articles, settings,
         </div>
 
         <div className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between -mb-10 mt-20 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-          <h2 className="text-5xl text-neutral-900 tracking-tighter leading-[0.9]">Artikel</h2>
-          <a href="/article" className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]">
-            Lihat Semua Artikel
+          <h2 className="text-5xl text-neutral-900 tracking-tighter leading-[0.9]">{homePage?.articleSection?.headline || 'Artikel'}</h2>
+          <a href={`/${locale}/article`} className="group flex items-center gap-4 text-xs font-medium text-neutral-800 hover:text-[#1d2088] transition-colors uppercase tracking-widest pb-2 border-b border-neutral-200 hover:border-[#1d2088]">
+            {homePage?.articleSection?.ctaLabel || 'Lihat Semua Artikel'}
             <span className="iconify" data-icon="solar:arrow-right-up-bold-duotone" />
           </a>
         </div>
@@ -533,7 +533,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
         <div className="w-full px-6 lg:px-12 bg-grey-50">
           <article className="cursor-pointer pt-16 pb-16 flex flex-col lg:flex-row justify-start gap-8 flex-wrap">
             {articles.length > 0 ? articles.map((article, index) => (
-              <a key={article.id || index} href={`/article/${article.slug}`} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
+              <a key={article.id || index} href={`/${locale}/article/${article.slug}`} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                 <div className="relative">
                   <img
                     src={getMediaUrl(article.thumbnail) || "images/card-blog/tahap3.png"}
@@ -555,7 +555,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   </p>
                   <div className="flex items-center justify-start">
                     <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                      <span>Baca Berita</span>
+                      <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                         <path d="M5 12h14" />
                         <path d="m12 5 7 7-7 7" />
@@ -577,7 +577,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>
                     <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3 dengan berbagai keunggulan.</p>
                     <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                      <span>Baca Berita</span>
+                      <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                         <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                       </svg>
