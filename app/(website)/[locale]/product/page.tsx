@@ -3,6 +3,8 @@ import Image from "next/image"
 import Footer from "../../components/Footer"
 import { locales, type Locale } from '@/i18n.config'
 
+export const revalidate = 0; // Disable static cache
+
 interface ProductPageProps {
   params: Promise<{ locale: string }>
 }

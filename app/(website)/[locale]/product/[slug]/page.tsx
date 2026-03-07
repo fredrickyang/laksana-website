@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import ProductDetailClient from './ProductDetailClient'
 import { locales, type Locale } from '@/i18n.config'
 
+export const revalidate = 0; // Disable static cache
+
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>
 }
