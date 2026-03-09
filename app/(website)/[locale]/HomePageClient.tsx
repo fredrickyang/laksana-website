@@ -409,35 +409,27 @@ export default function HomePageClient({ homePage, products, articles, settings,
               </div>
               <div className="mt-14 flex flex-col items-center gap-5">
                 <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
-                  {homePage?.branding?.clientLogos?.length > 0 ? homePage.branding.clientLogos.map((client: any, index: number) => (
-                    <span key={index} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                      <img src={getMediaUrl(client.logo) || "/brand/placeholder.svg"} alt={client.clientName || "Client"} className="w-28 h-28 object-cover relative transition-all" />
-                    </span>
-                  )) : (
-                    <>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/coca-cola.svg" alt="Client" className="w-28 h-28 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/google.svg" alt="Client" className="w-28 h-28 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/heineken.svg" alt="Client" className="w-28 h-28 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/microsoft.svg" alt="Client" className="w-28 h-28 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/underarmour.svg" alt="Client" className="w-20 h-20 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/yamaha.svg" alt="Client" className="w-28 h-28 object-cover relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/mastercard.svg" alt="Client" className="w-20 h-20 object-cover relative transition-all" />
-                      </span>
-                    </>
-                  )}
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-cover relative transition-all" />
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                    <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-cover relative transition-all" />
+                  </span>
                 </div>
               </div>
             </div>

@@ -45,6 +45,9 @@ export default buildConfig({
   },
   admin: {
     user: Users.slug,
+    components: {
+      beforeDashboard: ['./payload/components/S3UsageWidget'],
+    },
   },
   collections: [Users, Media, Products, Articles, Categories, FormSubmissions],
   globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage],

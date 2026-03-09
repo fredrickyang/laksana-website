@@ -1,25 +1,17 @@
 import 'dotenv/config'
-import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import config from './payload.config'
 
-async function run() {
-    const config = await configPromise
+async function test() {
     const payload = await getPayload({ config })
-    const settingsEn = await payload.findGlobal({
+
+    const settings = await payload.findGlobal({
         slug: 'settings',
         locale: 'en',
     })
-    console.log("English Navigation:")
-    console.dir(settingsEn.navigation, { depth: null })
 
-    const settingsId = await payload.findGlobal({
-        slug: 'settings',
-        locale: 'id',
-    })
-    console.log("Indonesian Navigation:")
-    console.dir(settingsId.navigation, { depth: null })
-
+    console.log(JSON.stringify(settings.navigation, null, 2))
     process.exit(0)
 }
 
-run()
+test()

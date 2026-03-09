@@ -100,6 +100,23 @@ const settingsData: Record<string, any> = {
     en: {
         siteTitle: 'Laksana Business Park - Strategic Warehouse & Property Solutions',
         topNotification: 'Contact us for a free consultation!',
+        contactInformation: {
+            phoneNumbers: [
+                { label: 'Sales', number: '+62 21 5960 8888' },
+                { label: 'Marketing', number: '+62 811 1888 999' },
+            ],
+            email: 'info@laksanabusinesspark.com',
+            formNotificationEmail: 'marketing@laksanabusinesspark.com',
+            headOfficeAddress: richText('Jl. Raya Serang KM 24, Balaraja, Tangerang, Banten 15610'),
+            marketingOfficeAddress: richText('Marketing Gallery Laksana Business Park, Jl. Raya Serang KM 24, Balaraja, Tangerang'),
+        },
+        navigation: [
+            { label: 'Home', link: '/' },
+            { label: 'Products', link: '/product' },
+            { label: 'About Us', link: '/our-company' },
+            { label: 'Facilities', link: '/facilities' },
+            { label: 'Articles', link: '/article' },
+        ],
         form: {
             heading: 'Free Consultation',
             subheading: 'Contact us for more information about our products and services.',
@@ -143,6 +160,23 @@ const settingsData: Record<string, any> = {
     zh: {
         siteTitle: 'Laksana商业园 - 战略仓库与房产解决方案',
         topNotification: '联系我们获取免费咨询！',
+        contactInformation: {
+            phoneNumbers: [
+                { label: '销售', number: '+62 21 5960 8888' },
+                { label: '市场营销', number: '+62 811 1888 999' },
+            ],
+            email: 'info@laksanabusinesspark.com',
+            formNotificationEmail: 'marketing@laksanabusinesspark.com',
+            headOfficeAddress: richText('Jl. Raya Serang KM 24, Balaraja, Tangerang, Banten 15610'),
+            marketingOfficeAddress: richText('Marketing Gallery Laksana Business Park, Jl. Raya Serang KM 24, Balaraja, Tangerang'),
+        },
+        navigation: [
+            { label: '首页', link: '/' },
+            { label: '产品', link: '/product' },
+            { label: '关于我们', link: '/our-company' },
+            { label: '设施', link: '/facilities' },
+            { label: '文章', link: '/article' },
+        ],
         form: {
             heading: '免费咨询',
             subheading: '联系我们了解更多关于我们产品和服务的信息。',

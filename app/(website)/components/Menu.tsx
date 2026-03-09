@@ -61,19 +61,45 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
     label: localeNames[loc],
   }));
 
-  // Extract navigation from settings or use defaults
+  // Locale-aware fallback navigation
+  const defaultNavLabels: Record<string, { label: string; link: string }[]> = {
+    id: [
+      { label: 'Beranda', link: '/' },
+      { label: 'Produk', link: '/product' },
+      { label: 'Tentang Kami', link: '/our-company' },
+      { label: 'Fasilitas', link: '/facilities' },
+      { label: 'Artikel', link: '/article' },
+    ],
+    en: [
+      { label: 'Home', link: '/' },
+      { label: 'Products', link: '/product' },
+      { label: 'About Us', link: '/our-company' },
+      { label: 'Facilities', link: '/facilities' },
+      { label: 'Articles', link: '/article' },
+    ],
+    zh: [
+      { label: '首页', link: '/' },
+      { label: '产品', link: '/product' },
+      { label: '关于我们', link: '/our-company' },
+      { label: '设施', link: '/facilities' },
+      { label: '文章', link: '/article' },
+    ],
+  };
+
+  // Extract navigation from settings or use locale-aware defaults
   const navigation = settings?.navigation?.length > 0
-    ? settings.navigation.map((item: any) => ({
-      href: `/${locale}${item.link || '/'}`,
-      label: item.label || 'Link',
-    }))
-    : [
-      { href: `/${locale}`, label: 'Home' },
-      { href: `/${locale}/product`, label: 'Produk' },
-      { href: `/${locale}/our-company`, label: 'Tentang Kami' },
-      { href: `/${locale}/facilities`, label: 'Fasilitas' },
-      { href: `/${locale}/article`, label: 'Artikel' },
-    ];
+    ? settings.navigation.map((item: any, index: number) => {
+      // Fallback to default labels if CMS label is empty/null due to locale array syncing issues
+      const defaultItemName = (defaultNavLabels[locale] || defaultNavLabels.id)[index]?.label || 'Link';
+      return {
+        href: `/${locale}${item.link || '/'}`,
+        label: item.label || defaultItemName,
+      };
+    })
+    : (defaultNavLabels[locale] || defaultNavLabels.id).map(item => ({
+      href: `/${locale}${item.link}`,
+      label: item.label,
+    }));
 
   // Extract contact info from settings or use defaults
   const contactInfo = settings?.contactInformation || {};
