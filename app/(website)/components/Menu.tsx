@@ -99,10 +99,6 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
   ]);
 
   useEffect(() => {
-    // Initialize Lucide icons if available
-    if (typeof window !== 'undefined' && (window as any).lucide) {
-      (window as any).lucide.createIcons();
-    }
     const menuToggle = document.getElementById('menu-toggle');
     const menuClose = document.getElementById('menu-close');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -239,7 +235,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
       id="menu-overlay"
       className="fixed inset-0 z-[60] transition-transform duration-[800ms] cubic-bezier(0.76, 0, 0.24, 1) flex flex-col bg-navy translate-x-full"
     >
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-22 pointer-events-none"></div>
+      <div className="absolute inset-0 opacity-22 pointer-events-none" style={{ backgroundImage: "repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, transparent 0% 50%)", backgroundSize: "20px 20px" }}></div>
 
       {/* Close Button Area */}
       <div className="w-full flex justify-end p-6 md:p-12 z-10">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope, Montserrat } from "next/font/google";
-import Script from 'next/script'
 import "../globals.css";
 import "../style-component.css";
 import "../style-menu.css";
@@ -28,7 +27,6 @@ export default async function WebsiteLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${montserrat.variable} antialiased font-sans mb-0`}>
-        <Script src="https://unpkg.com/lucide@latest" />
         {children}
       </body>
     </html>

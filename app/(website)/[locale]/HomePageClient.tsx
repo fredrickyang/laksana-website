@@ -177,23 +177,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
       </header>
 
       <div className="text-neutral-800 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#FACC15] selection:text-black">
-        <div
-          className="aura-background-component top-0 w-full h-screen -z-10 mix-blend-darken saturate-0 brightness-150 absolute opacity-50"
-          data-alpha-mask="80"
-          style={{
-            maskImage: "linear-gradient(to bottom, transparent, white 0%, white 80%, transparent)",
-            WebkitMaskImage: "linear-gradient(to bottom, transparent, white 0%, white 80%, transparent)",
-          }}
-        >
-          <div className="aura-background-component top-0 w-full -z-10 absolute h-full">
-            <div
-              data-us-project="inzENTvhzS9plyop7Z6g"
-              className="absolute w-full h-full left-0 top-0 -z-10"
-              data-us-initialized="true"
-              data-scene-id="id-e069jmsq6g6thr8klsgcd"
-            ></div>
-          </div>
-        </div>
+
 
         {/* Navigation Section */}
         <nav className="w-full px-6 lg:px-12 flex justify-between items-center relative z-50 [animation:fadeSlideIn_0.8s_ease-out_0s_both] animate-on-scroll animate">
