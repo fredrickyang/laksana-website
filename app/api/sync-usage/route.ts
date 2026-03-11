@@ -26,11 +26,11 @@ export async function GET(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.DASHBOARD_API_KEY}`,
+        'X-API-Key': process.env.DASHBOARD_API_KEY!,
       },
       body: JSON.stringify({
-        service_uuid: SERVICE_UUID,
-        usage_bytes: usageBytes,
+        serviceKey: SERVICE_UUID,
+        usedAmount: usageBytes,
       }),
     })
 
