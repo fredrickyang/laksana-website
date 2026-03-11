@@ -7,13 +7,8 @@ const DASHBOARD_API_URL =
   'https://dashboard.anakweb.com/api/clients/8769740a-566a-474c-b67f-3368b1ef4998/usage'
 const SERVICE_UUID = 'b81c3090-092c-4a98-b4e5-6d6ba3cc54d0'
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
-    const authHeader = request.headers.get('authorization')
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     const payload = await getPayload({ config })
 
     const result = await payload.db.drizzle.execute(
