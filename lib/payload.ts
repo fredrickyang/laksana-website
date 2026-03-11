@@ -14,7 +14,7 @@ export async function getHomePage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'home-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -24,7 +24,7 @@ export async function getAboutPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'about-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -34,7 +34,7 @@ export async function getFacilitiesPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'facilities-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -44,7 +44,7 @@ export async function getSettings(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'settings',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -54,7 +54,7 @@ export async function getPrivacyPolicyPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'privacy-policy-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -64,7 +64,7 @@ export async function getTermsConditionsPage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'terms-conditions-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -74,7 +74,7 @@ export async function getArticlePage(locale: Locale = 'id') {
     return await payload.findGlobal({
         slug: 'article-page',
         locale,
-        depth: 2,
+        depth: 1,
     })
 }
 
@@ -97,7 +97,7 @@ export async function getProducts(locale: Locale = 'id', limit: number = 100) {
         collection: 'products',
         locale,
         limit,
-        depth: 2,
+        depth: 1,
     })
     return result.docs
 }
@@ -111,7 +111,7 @@ export async function getProductsByPhase(phase: string, locale: Locale = 'id') {
         where: {
             phase: { equals: phase },
         },
-        depth: 2,
+        depth: 1,
     })
     return result.docs
 }
@@ -125,7 +125,7 @@ export async function getProductBySlug(slug: string, locale: Locale = 'id') {
         where: {
             slug: { equals: slug },
         },
-        depth: 2,
+        depth: 1,
         limit: 1,
     })
     return result.docs[0] || null
@@ -138,7 +138,7 @@ export async function getArticles(locale: Locale = 'id', limit: number = 100) {
         collection: 'articles',
         locale,
         limit,
-        depth: 2,
+        depth: 1,
         sort: '-publicationDate',
     })
     return result.docs
@@ -153,7 +153,7 @@ export async function getArticlesByCategory(category: string, locale: Locale = '
         where: {
             category: { equals: category },
         },
-        depth: 2,
+        depth: 1,
         sort: '-publicationDate',
     })
     return result.docs
@@ -168,7 +168,7 @@ export async function getArticleBySlug(slug: string, locale: Locale = 'id') {
         where: {
             slug: { equals: slug },
         },
-        depth: 2,
+        depth: 1,
         limit: 1,
     })
     return result.docs[0] || null

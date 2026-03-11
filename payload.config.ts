@@ -66,7 +66,13 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true,
+        media: {
+          disableLocalStorage: true,
+          generateFileURL: ({ filename, prefix }) => {
+            const baseUrl = process.env.NEXT_PUBLIC_S3_URL || `https://d2ml0yc0mb1c0r.cloudfront.net`
+            return `${baseUrl}/${prefix ? prefix + '/' : ''}${filename}`
+          },
+        },
       },
       bucket: process.env.S3_BUCKET!,
       config: {
