@@ -1,4 +1,4 @@
-import { getProductBySlug, getProducts, getSettings, getMediaUrl } from '@/lib/payload'
+import { getProductBySlug, getProducts, getSettings, getProductPage, getMediaUrl } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import ProductDetailClient from './ProductDetailClient'
 import { locales, type Locale } from '@/i18n.config'
@@ -11,16 +11,17 @@ interface ProductDetailPageProps {
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { locale, slug } = await params
-  const [product, settings] = await Promise.all([
+  const [product, settings, productPage] = await Promise.all([
     getProductBySlug(slug, locale as Locale),
     getSettings(locale as Locale),
+    getProductPage(locale as Locale),
   ])
 
   if (!product) {
     notFound()
   }
 
-  return <ProductDetailClient product={product} settings={settings} locale={locale} />
+  return <ProductDetailClient product={product} settings={settings} locale={locale} productPage={productPage} />
 }
 
 // Generate static paths for all products and locales

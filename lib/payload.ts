@@ -68,6 +68,16 @@ export async function getTermsConditionsPage(locale: Locale = 'id') {
     })
 }
 
+// Fetch ProductPage global
+export async function getProductPage(locale: Locale = 'id') {
+    const payload = await getPayloadClient()
+    return await payload.findGlobal({
+        slug: 'product-page',
+        locale,
+        depth: 1,
+    })
+}
+
 // Fetch ArticlePage global
 export async function getArticlePage(locale: Locale = 'id') {
     const payload = await getPayloadClient()

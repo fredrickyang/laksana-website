@@ -346,20 +346,45 @@ export default function HomePageClient({ homePage, products, articles, settings,
         <div className="lg:col-span-3 flex flex-col relative z-20 pt-10 pl-6 [animation:fadeSlideIn_0.8s_ease-out_0.4s_both] animate-on-scroll animate">
           <div className="beam-border-v"></div>
           <div className="flex-1 flex flex-col justify-between h-full pb-10">
-            {homePage?.mainFeature?.stats?.length > 0 ? homePage.mainFeature.stats.map((stat: any, index: number) => (
-              <div
-                key={index}
-                className={`stat-item ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
-                data-img-id={String(index + 1)}
-              >
-                <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
-                  {stat.number || `0${index + 1}`}
-                </span>
-                <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">
-                  {stat.title?.root?.children?.[0]?.children?.[0]?.text || `Stat ${index + 1}`}
-                </span>
-              </div>
-            )) : (
+            {homePage?.mainFeature?.stats?.length > 0 ? (<>
+              {homePage.mainFeature.stats.map((stat: any, index: number) => (
+                <div
+                  key={index}
+                  className={`stat-item ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
+                  data-img-id={String(index + 1)}
+                >
+                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
+                    {stat.number || `0${index + 1}`}
+                  </span>
+                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">
+                    {stat.title?.root?.children?.[0]?.children?.[0]?.text || `Stat ${index + 1}`}
+                  </span>
+                </div>
+              ))}
+              {homePage?.mainFeature?.badges?.length > 0 && (
+                <div className="border-t border-black/5 border-dashed pt-12">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="relative group cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                          <img
+                            key={idx}
+                            src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
+                            alt={badge.label || `Badge ${idx + 1}`}
+                            width={80}
+                            height={80}
+                            className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
+                    {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
+                  </p>
+                </div>
+              )}
+            </>) : (
               <>
                 <div className="stat-item mt-10" data-img-id="1">
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">01</span>
@@ -370,17 +395,43 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">Dikembangkan Oleh Manajemen Estate Terbaik</span>
                 </div>
                 <div className="stat-item border-t border-black/5 border-dashed pt-12" data-img-id="3">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="relative group cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <Image src="/images/usp/usp-1.png" alt="Lead Architect" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
-                        <Image src="/images/usp/usp-2.png" alt="Lead Architect 2" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                  {homePage?.mainFeature?.badges?.length > 0 ? (
+                    <>
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="relative group cursor-pointer">
+                          <div className="flex items-center gap-3">
+                            {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                              <img
+                                key={idx}
+                                src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
+                                alt={badge.label || `Badge ${idx + 1}`}
+                                width={80}
+                                height={80}
+                                className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
+                              />
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                    Akses Mudah ke Bandara Tersertifikasi UIKI
-                  </p>
+                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
+                        {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="relative group cursor-pointer">
+                          <div className="flex items-center gap-3">
+                            <Image src="/images/usp/usp-1.png" alt="Lead Architect" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                            <Image src="/images/usp/usp-2.png" alt="Lead Architect 2" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
+                        Akses Mudah ke Bandara Tersertifikasi UIKI
+                      </p>
+                    </>
+                  )}
                 </div>
               </>
             )}

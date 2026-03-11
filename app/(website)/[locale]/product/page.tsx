@@ -1,4 +1,4 @@
-import { getProducts, getSettings, getMediaUrl } from '@/lib/payload'
+import { getProducts, getSettings, getProductPage, getMediaUrl } from '@/lib/payload'
 import Image from "next/image"
 import Footer from "../../components/Footer"
 import { locales, type Locale } from '@/i18n.config'
@@ -12,9 +12,10 @@ interface ProductPageProps {
 export default async function Product({ params }: ProductPageProps) {
   const { locale } = await params
 
-  const [products, settings] = await Promise.all([
+  const [products, settings, productPage] = await Promise.all([
     getProducts(locale as Locale),
     getSettings(locale as Locale),
+    getProductPage(locale as Locale),
   ])
 
   // Group products by phase
@@ -76,7 +77,7 @@ export default async function Product({ params }: ProductPageProps) {
             {/* Left side - Title and description */}
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl md:text-5xl sm:text-4xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
-                <span className="text-white bg-clip-text">SEMUA PRODUK</span>
+                <span className="text-white bg-clip-text">{productPage?.pageTitle || 'SEMUA PRODUK'}</span>
               </h1>
             </div>
           </div>

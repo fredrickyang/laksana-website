@@ -20,6 +20,7 @@ import { FacilitiesPage } from './payload/globals/FacilitiesPage'
 import { PrivacyPolicyPage } from './payload/globals/PrivacyPolicyPage'
 import { TermsConditionsPage } from './payload/globals/TermsConditionsPage'
 import { ArticlePage } from './payload/globals/ArticlePage'
+import { ProductPage } from './payload/globals/ProductPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,7 +51,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Products, Articles, Categories, FormSubmissions],
-  globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage],
+  globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage, ProductPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

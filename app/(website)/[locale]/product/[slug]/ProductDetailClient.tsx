@@ -16,9 +16,10 @@ interface ProductDetailClientProps {
   product: any;
   settings?: any;
   locale?: string;
+  productPage?: any;
 }
 
-export default function ProductDetailClient({ product, settings, locale = 'id' }: ProductDetailClientProps) {
+export default function ProductDetailClient({ product, settings, locale = 'id', productPage }: ProductDetailClientProps) {
   const t = productTranslations[locale] || productTranslations.id;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMore, setShowMore] = useState(false);
@@ -165,21 +166,21 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
         <section className="highlight-specs w-full max-w-300 pb-5">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-stone-50 border-stone-200 border pt-2 pr-2 pb-2 pl-2 gap-x-2 gap-y-4">
             <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">Dimensi</p>
+              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.dimensionLabel || 'Dimensi'}</p>
               <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{dimension}</h3>
             </div>
             <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">Luas Tanah</p>
+              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.landAreaLabel || 'Luas Tanah'}</p>
               <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{landArea}</h3>
             </div>
             <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">Luas Bangunan</p>
+              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.buildingAreaLabel || 'Luas Bangunan'}</p>
               <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{buildingArea}</h3>
             </div>
             <div className="bg-white hover:bg-[#1d2088] hover:text-white p-6 flex justify-center items-center border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
               <a href="https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park" className="flex items-center justify-center gap-2">
                 <h3 className="text-2xl font-medium tracking-tight mr-2 flex justify-center items-center gap-3">
-                  Konsultasi Gratis
+                  {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
                     <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
                   </svg>
@@ -195,13 +196,13 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
         <div className="w-full max-w-300">
           <div className="lg:pt-5 flex items-start relative border-b border-gray-200 justify-start gap-8">
             <p className="text-lg font-medium text-gray-400 justify-start max-w-md mb-2 hover:text-gray-600 cursor-pointer">
-              <a href="#overview">Ringkasan</a>
+              <a href="#overview">{productPage?.detailLabels?.summaryLabel || 'Ringkasan'}</a>
             </p>
             <p className="text-lg font-medium text-gray-400 justify-start max-w-md mb-2 hover:text-gray-600 cursor-pointer">
-              <a href="#facilities">Fasilitas</a>
+              <a href="#facilities">{productPage?.detailLabels?.facilitiesLabel || 'Fasilitas'}</a>
             </p>
             <p className="text-lg font-medium text-gray-400 justify-start max-w-md mb-2 hover:text-gray-600 cursor-pointer">
-              <a href="#spesifikasi">Spesifikasi</a>
+              <a href="#spesifikasi">{productPage?.detailLabels?.specificationsLabel || 'Spesifikasi'}</a>
             </p>
           </div>
 
@@ -219,7 +220,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
                 {detailedSpecs.length > 0 && (
                   <>
                     <h2 className="text-3xl lg:text-4xl mt-4 sm:mt-8 font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8" id="spesifikasi">
-                      Spesifikasi
+                      {productPage?.detailLabels?.specificationsLabel || 'Spesifikasi'}
                     </h2>
                     <div className="relative z-30 mt-4 sm:mt-8 grid grid-cols-2 md:grid-cols-4 border-y border-neutral-200 animate-in animate-in-delay-3 bg-white/60 backdrop-blur-sm">
                       {detailedSpecs.slice(0, 4).map((spec: any, index: number) => (
@@ -271,17 +272,17 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
                 onClick={() => setShowMore((s) => !s)}
                 className="font-medium text-gray-400 cursor-pointer"
               >
-                {showMore ? "Sembunyikan" : "Lihat Detail"}
+                {showMore ? (productPage?.detailLabels?.hideDetailLabel || "Sembunyikan") : (productPage?.detailLabels?.viewDetailLabel || "Lihat Detail")}
               </button>
             </div>
           </div>
 
           {/* Facilities Section */}
           <h2 className="text-3xl lg:text-4xl font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8">
-            Fasilitas & Layanan
+            {productPage?.detailLabels?.facilitiesTitle || 'Fasilitas & Layanan'}
           </h2>
           <p className="text-justify text-neutral-600 mb-6">
-            On-site amenities include 24/7 security, ample parking, reliable utilities, and customizable units to support warehousing, light manufacturing, and office use.
+            {productPage?.detailLabels?.facilitiesDescription || 'On-site amenities include 24/7 security, ample parking, reliable utilities, and customizable units to support warehousing, light manufacturing, and office use.'}
           </p>
           <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center items-center" id="facilities">
             {facilities.length > 0 ? facilities.map((facility: any, index: number) => (
@@ -325,17 +326,17 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-white/5 blur-3xl pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-5xl text-white tracking-tighter mb-6 font-montserrat font-medium">
-                Punya kebutuhan spesifik mengenai Gudang ?
+                {productPage?.detailLabels?.ctaTitle || 'Punya kebutuhan spesifik mengenai Gudang ?'}
               </h2>
               <p className="text-zinc-400 text-base md:text-lg mb-10 max-w-2xl mx-auto font-manrope">
-                Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.
+                {productPage?.detailLabels?.ctaDescription || 'Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.'}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#contact" className="button-cta1 w-full sm:w-auto px-8 py-3 bg-white hover:bg-[#1d2088] hover:text-white text-black text-sm font-semibold transition-colors tracking-tight cursor-pointer">
-                  Konsultasi Gratis
+                  {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer">
-                  Download E-Brochure
+                <a href={getMediaUrl(settings?.brochure) || '#'} target="_blank" rel="noopener noreferrer" download className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer">
+                  {productPage?.detailLabels?.downloadBrochureLabel || 'Download E-Brochure'}
                 </a>
               </div>
             </div>
@@ -349,52 +350,69 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
               <h2 className="text-4xl lg:text-5xl font-medium tracking-tight text-stone-900 mb-8">
-                Kenapa Investor memilih <br />
-                <span className="text-[#1d2088]">Laksana Business Park</span>
+                {productPage?.detailLabels?.virtualTourTitle?.root?.children?.map((p: any) =>
+                  p.children?.map((c: any) => c.text).join('')
+                ).join(' ') || (<>Kenapa Investor memilih <br /><span className="text-[#1d2088]">Laksana Business Park</span></>)}
               </h2>
               <p className="text-stone-600 mb-6">
-                Kami satu-satunya kawasan pergudangan yang terus berkembang dengan fasilitas lengkap dan serta pengembangan hingga Tahap 3 & Township.
+                {productPage?.detailLabels?.virtualTourDescription || 'Kami satu-satunya kawasan pergudangan yang terus berkembang dengan fasilitas lengkap dan serta pengembangan hingga Tahap 3 & Township.'}
               </p>
             </div>
             <div className="flex flex-col justify-center space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield-check w-4 h-4 text-stone-700">
-                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-                    <path d="m9 12 2 2 4-4" />
-                  </svg>
+              {productPage?.detailLabels?.virtualTourReasons?.length > 0 ? productPage.detailLabels.virtualTourReasons.map((reason: any, index: number) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check w-4 h-4 text-stone-700">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-stone-900">{reason.title}</h4>
+                    <p className="text-stone-500 text-sm">{reason.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-lg font-medium text-stone-900">Dukungan Izin IUKI</h4>
-                  <p className="text-stone-500 text-sm">Kawasan pergudangan dengan izin produksi dan izin industri terlengkap di Tangerang.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-3 w-4 h-4 text-stone-700">
-                    <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-                    <path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-stone-900">Nilai Jual Kembali Tinggi</h4>
-                  <p className="text-stone-500 text-sm">Kebutuhan gudang dan properti industri yang terus meningkat.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users w-4 h-4 text-stone-700">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <circle cx={9} cy={7} r={4} />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-stone-900">Dikelola oleh tim estate profesional</h4>
-                  <p className="text-stone-500 text-sm">Memberikan kemudahan dan kenyamanan bagi para investor dan penghuni.</p>
-                </div>
-              </div>
+              )) : (
+                <>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield-check w-4 h-4 text-stone-700">
+                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                        <path d="m9 12 2 2 4-4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-medium text-stone-900">Dukungan Izin IUKI</h4>
+                      <p className="text-stone-500 text-sm">Kawasan pergudangan dengan izin produksi dan izin industri terlengkap di Tangerang.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-3 w-4 h-4 text-stone-700">
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-medium text-stone-900">Nilai Jual Kembali Tinggi</h4>
+                      <p className="text-stone-500 text-sm">Kebutuhan gudang dan properti industri yang terus meningkat.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users w-4 h-4 text-stone-700">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <circle cx={9} cy={7} r={4} />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-medium text-stone-900">Dikelola oleh tim estate profesional</h4>
+                      <p className="text-stone-500 text-sm">Memberikan kemudahan dan kenyamanan bagi para investor dan penghuni.</p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -424,7 +442,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id' }
                       <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
                     </svg>
                   </button>
-                  <p className="text-white text-xl font-medium tracking-tight">See Virtual 3D Tour</p>
+                  <p className="text-white text-xl font-medium tracking-tight">{productPage?.detailLabels?.virtualTourButtonLabel || 'See Virtual 3D Tour'}</p>
                 </div>
               </>
             )}

@@ -5,6 +5,7 @@ import {
 } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { locales, localeCodes, localeNames, type Locale } from '@/i18n.config';
+import { getMediaUrl } from '@/lib/utils';
 
 const menuTranslations: Record<string, Record<string, string>> = {
   id: {
@@ -361,7 +362,10 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           </div>
           <div className="menu-item delay-500">
             <a
-              href="#"
+              href={getMediaUrl(settings?.brochure) || '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
               className="block w-full py-4 border text-center uppercase text-sm tracking-[0.2em] hover:bg-sand hover:border-sand hover:text-white transition-all duration-300 font-sans font-normal bg-white border-white/10 text-black"
             >
               {t.downloadBrochure}

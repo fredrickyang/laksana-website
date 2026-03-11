@@ -13,7 +13,7 @@ export const Media: CollectionConfig = {
     upload: {
         staticDir: path.resolve(dirname, '../../public/media'),
         adminThumbnail: 'thumbnail',
-        mimeTypes: ['image/*', 'video/*'],
+        mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     },
     fields: [
         {
