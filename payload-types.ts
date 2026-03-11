@@ -269,6 +269,10 @@ export interface Product {
    */
   virtualTourUrl?: string | null;
   /**
+   * Upload a PDF brochure for this product (Download Brochure button)
+   */
+  brochure?: (number | null) | Media;
+  /**
    * Unit-specific facilities (icon + label)
    */
   facilities?:
@@ -516,6 +520,7 @@ export interface ProductsSelect<T extends boolean = true> {
   shortDescription?: T;
   fullDescription?: T;
   virtualTourUrl?: T;
+  brochure?: T;
   facilities?:
     | T
     | {

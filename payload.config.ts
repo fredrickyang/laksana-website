@@ -47,6 +47,10 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     components: {
+      graphics: {
+        Logo: './payload/components/Logo#Logo',
+        Icon: './payload/components/Icon#Icon',
+      },
       beforeDashboard: ['./payload/components/S3UsageWidget'],
     },
   },

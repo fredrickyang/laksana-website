@@ -163,6 +163,14 @@ export const Products: CollectionConfig = {
             },
         },
         {
+            name: 'brochure',
+            type: 'upload',
+            relationTo: 'media',
+            admin: {
+                description: 'Upload a PDF brochure for this product (Download Brochure button)',
+            },
+        },
+        {
             name: 'facilities',
             type: 'array',
             admin: {
