@@ -103,6 +103,7 @@ export interface Config {
     'privacy-policy-page': PrivacyPolicyPage;
     'terms-conditions-page': TermsConditionsPage;
     'article-page': ArticlePage;
+    'product-page': ProductPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
@@ -112,6 +113,7 @@ export interface Config {
     'privacy-policy-page': PrivacyPolicyPageSelect<false> | PrivacyPolicyPageSelect<true>;
     'terms-conditions-page': TermsConditionsPageSelect<false> | TermsConditionsPageSelect<true>;
     'article-page': ArticlePageSelect<false> | ArticlePageSelect<true>;
+    'product-page': ProductPageSelect<false> | ProductPageSelect<true>;
   };
   locale: 'id' | 'en' | 'zh';
   user: User;
@@ -1258,6 +1260,56 @@ export interface ArticlePage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-page".
+ */
+export interface ProductPage {
+  id: number;
+  pageTitle?: string | null;
+  detailLabels?: {
+    dimensionLabel?: string | null;
+    landAreaLabel?: string | null;
+    buildingAreaLabel?: string | null;
+    freeConsultationLabel?: string | null;
+    summaryLabel?: string | null;
+    facilitiesLabel?: string | null;
+    specificationsLabel?: string | null;
+    viewDetailLabel?: string | null;
+    hideDetailLabel?: string | null;
+    facilitiesTitle?: string | null;
+    facilitiesDescription?: string | null;
+    ctaTitle?: string | null;
+    ctaDescription?: string | null;
+    downloadBrochureLabel?: string | null;
+    virtualTourTitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    virtualTourDescription?: string | null;
+    virtualTourButtonLabel?: string | null;
+    virtualTourReasons?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -1602,6 +1654,44 @@ export interface ArticlePageSelect<T extends boolean = true> {
   nextButton?: T;
   relatedArticlesHeading?: T;
   backToArticlesText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-page_select".
+ */
+export interface ProductPageSelect<T extends boolean = true> {
+  pageTitle?: T;
+  detailLabels?:
+    | T
+    | {
+        dimensionLabel?: T;
+        landAreaLabel?: T;
+        buildingAreaLabel?: T;
+        freeConsultationLabel?: T;
+        summaryLabel?: T;
+        facilitiesLabel?: T;
+        specificationsLabel?: T;
+        viewDetailLabel?: T;
+        hideDetailLabel?: T;
+        facilitiesTitle?: T;
+        facilitiesDescription?: T;
+        ctaTitle?: T;
+        ctaDescription?: T;
+        downloadBrochureLabel?: T;
+        virtualTourTitle?: T;
+        virtualTourDescription?: T;
+        virtualTourButtonLabel?: T;
+        virtualTourReasons?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
