@@ -723,6 +723,14 @@ export interface Setting {
   footer?: {
     companyDescription?: string | null;
     copyrightText?: string | null;
+    /**
+     * Path for Privacy Policy page (e.g. /privacy-policy)
+     */
+    privacyPolicyLink?: string | null;
+    /**
+     * Path for Terms of Service page (e.g. /tnc)
+     */
+    termsOfServiceLink?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1047,6 +1055,7 @@ export interface AboutPage {
         year?: string | null;
         title?: string | null;
         description?: string | null;
+        image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -1395,6 +1404,8 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         companyDescription?: T;
         copyrightText?: T;
+        privacyPolicyLink?: T;
+        termsOfServiceLink?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1535,6 +1546,7 @@ export interface AboutPageSelect<T extends boolean = true> {
         year?: T;
         title?: T;
         description?: T;
+        image?: T;
         id?: T;
       };
   updatedAt?: T;

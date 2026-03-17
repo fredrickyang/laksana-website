@@ -35,7 +35,26 @@ export default function HomePageClient({ homePage, products, articles, settings,
   }, {}) || {}, [homePage?.mainFeature?.stats]);
 
   const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string || '/images/placeholder.png');
+  const [activeStatIndex, setActiveStatIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const mainImageRef = useRef<HTMLImageElement>(null);
+
+  const handleStatClick = (imgId: string, index: number) => {
+    setActiveStatIndex(index);
+    if (statsImages[imgId]) {
+      const newSrc = statsImages[imgId];
+      const mainImage = mainImageRef.current;
+      if (mainImage) mainImage.classList.add("fade-out");
+      const loader = new window.Image();
+      loader.src = newSrc;
+      loader.onload = () => {
+        setCurrentImage(newSrc);
+        setTimeout(() => {
+          if (mainImage) mainImage.classList.remove("fade-out");
+        }, 50);
+      };
+    }
+  };
 
   useEffect(() => {
     const initInViewAnimations = function (selector = ".animate-on-scroll") {
@@ -57,37 +76,6 @@ export default function HomePageClient({ homePage, products, articles, settings,
     };
     initInViewAnimations();
 
-    const stats = Array.from(document.querySelectorAll(".stat-item")) as HTMLElement[];
-    const mainImage = document.getElementById("main-image") as HTMLImageElement | null;
-
-    if (stats.length > 0) {
-      stats.forEach((s) => s.classList.remove("active"));
-      stats[0].classList.add("active");
-    }
-
-    const statListeners: { el: HTMLElement; handler: EventListener }[] = [];
-    stats.forEach((stat) => {
-      const handler = () => {
-        stats.forEach((s) => s.classList.remove("active"));
-        stat.classList.add("active");
-        const imgId = stat.dataset.imgId;
-        if (imgId && statsImages[imgId]) {
-          const newSrc = statsImages[imgId];
-          if (mainImage) mainImage.classList.add("fade-out");
-          const loader = document.createElement('img') as HTMLImageElement;
-          loader.src = newSrc;
-          loader.onload = () => {
-            setCurrentImage(newSrc);
-            setTimeout(() => {
-              if (mainImage) mainImage.classList.remove("fade-out");
-            }, 50);
-          };
-        }
-      };
-      stat.addEventListener("click", handler);
-      statListeners.push({ el: stat, handler });
-    });
-
     // Carousel navigation
     const carouselContainer = carouselRef.current;
     const leftBtn = document.querySelector('.carousel-btn-left') as HTMLButtonElement | null;
@@ -104,11 +92,10 @@ export default function HomePageClient({ homePage, products, articles, settings,
     rightBtn?.addEventListener('click', onRight);
 
     return () => {
-      statListeners.forEach(({ el, handler }) => el.removeEventListener('click', handler));
       leftBtn?.removeEventListener('click', onLeft);
       rightBtn?.removeEventListener('click', onRight);
     };
-  }, [statsImages]);
+  }, []);
 
   // Get CTA URLs from CMS or use defaults
   const primaryCtaLink = homePage?.hero?.primaryCtaLink || "#";
@@ -336,6 +323,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
           <div className="absolute inset-0 grid-bg opacity-100 z-0 mx-[-2rem] mask-image-linear-gradient(to bottom, black, transparent)"></div>
           <div className="relative z-10 w-full aspect-[3/4] overflow-hidden shadow-2xl border border-black/10 group">
             <img
+              ref={mainImageRef}
               id="main-image"
               src={currentImage}
               alt="Architectural Detail"
@@ -351,8 +339,10 @@ export default function HomePageClient({ homePage, products, articles, settings,
               {homePage.mainFeature.stats.map((stat: any, index: number) => (
                 <div
                   key={index}
-                  className={`stat-item ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
+                  className={`stat-item ${index === activeStatIndex ? 'active' : ''} ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
                   data-img-id={String(index + 1)}
+                  onClick={() => handleStatClick(String(index + 1), index)}
+                  style={{ cursor: 'pointer' }}
                 >
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
                     {stat.number || `0${index + 1}`}
@@ -387,15 +377,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
               )}
             </>) : (
               <>
-                <div className="stat-item mt-10" data-img-id="1">
+                <div className={`stat-item ${activeStatIndex === 0 ? 'active' : ''} mt-10`} data-img-id="1" onClick={() => handleStatClick('1', 0)} style={{ cursor: 'pointer' }}>
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">01</span>
                   <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">Menjaga Kualitas Produk</span>
                 </div>
-                <div className="stat-item py-12 border-t border-black/5 border-dashed" data-img-id="2">
+                <div className={`stat-item ${activeStatIndex === 1 ? 'active' : ''} py-12 border-t border-black/5 border-dashed`} data-img-id="2" onClick={() => handleStatClick('2', 1)} style={{ cursor: 'pointer' }}>
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">02</span>
                   <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">Dikembangkan Oleh Manajemen Estate Terbaik</span>
                 </div>
-                <div className="stat-item border-t border-black/5 border-dashed pt-12" data-img-id="3">
+                <div className={`stat-item ${activeStatIndex === 2 ? 'active' : ''} border-t border-black/5 border-dashed pt-12`} data-img-id="3" onClick={() => handleStatClick('3', 2)} style={{ cursor: 'pointer' }}>
                   {homePage?.mainFeature?.badges?.length > 0 ? (
                     <>
                       <div className="flex items-start gap-4 mb-4">

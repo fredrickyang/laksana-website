@@ -122,6 +122,8 @@ export const Settings: GlobalConfig = {
             fields: [
                 { name: 'companyDescription', type: 'textarea', localized: true },
                 { name: 'copyrightText', type: 'text', localized: true },
+                { name: 'privacyPolicyLink', type: 'text', admin: { description: 'Path for Privacy Policy page (e.g. /privacy-policy)' } },
+                { name: 'termsOfServiceLink', type: 'text', admin: { description: 'Path for Terms of Service page (e.g. /tnc)' } },
             ],
         },
     ],

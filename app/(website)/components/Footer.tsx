@@ -69,6 +69,9 @@ export default function Footer({ settings }: FooterProps) {
   const copyrightText = footer.copyrightText ||
     '[No Data: footer.copyrightText]';
 
+  const privacyPolicyLink = footer.privacyPolicyLink || '/privacy-policy';
+  const termsOfServiceLink = footer.termsOfServiceLink || '/tnc';
+
   const email = contactInfo.email || '[No Data: email]';
   const phoneNumber = contactInfo.phoneNumbers?.[0]?.number || '[No Data: phoneNumbers]';
 
@@ -255,13 +258,13 @@ export default function Footer({ settings }: FooterProps) {
               <p>{copyrightText}</p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href={`/${locale}/privacy-policy`}
+                  href={`/${locale}${privacyPolicyLink}`}
                   className="hover:text-neutral-700 transition-colors"
                 >
                   {t.privacyPolicy}
                 </a>
                 <a
-                  href={`/${locale}/tnc`}
+                  href={`/${locale}${termsOfServiceLink}`}
                   className="hover:text-neutral-700 transition-colors"
                 >
                   {t.termsOfService}
