@@ -1,6 +1,7 @@
 "use client";
 import {
   useEffect,
+  useMemo,
   useState,
   useRef
 } from "react";
@@ -27,11 +28,11 @@ interface HomePageClientProps {
 
 export default function HomePageClient({ homePage, products, articles, settings, locale }: HomePageClientProps) {
   // Build images map from CMS stats data
-  const statsImages = homePage?.mainFeature?.stats?.reduce((acc: Record<string, string>, stat: any, index: number) => {
+  const statsImages = useMemo(() => homePage?.mainFeature?.stats?.reduce((acc: Record<string, string>, stat: any, index: number) => {
     const imageUrl = getMediaUrl(stat.image) || `/images/hero${index + 1}.png`;
     acc[String(index + 1)] = imageUrl;
     return acc;
-  }, {}) || {};
+  }, {}) || {}, [homePage?.mainFeature?.stats]);
 
   const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string || '/images/placeholder.png');
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -460,27 +461,37 @@ export default function HomePageClient({ homePage, products, articles, settings,
               </div>
               <div className="mt-14 flex flex-col items-center gap-5">
                 <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-cover relative transition-all" />
-                  </span>
-                  <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                    <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-cover relative transition-all" />
-                  </span>
+                  {homePage?.branding?.clientLogos?.length > 0 ? (
+                    homePage.branding.clientLogos.map((logo: any, idx: number) => (
+                      <span key={idx} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                    ))
+                  ) : (
+                    <>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-cover relative transition-all" />
+                      </span>
+                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
+                        <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-cover relative transition-all" />
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

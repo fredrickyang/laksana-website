@@ -23,6 +23,9 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
       <span className="border-[#1d2088] absolute -bottom-px -right-px block size-2 border-b-2 border-r-2" />
       {/* CardHeader */}
       <div className="p-4 md:p-6">
+        <p className="text-xs uppercase tracking-wider text-[#1d2088] font-medium">
+          {title}
+        </p>
         <p className="mt-4 text-xl md:text-2xl font-semibold tracking-tight text-black/95">
           {description}
         </p>

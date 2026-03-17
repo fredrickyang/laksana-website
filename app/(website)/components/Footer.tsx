@@ -255,13 +255,13 @@ export default function Footer({ settings }: FooterProps) {
               <p>{copyrightText}</p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="#"
+                  href={`/${locale}/privacy-policy`}
                   className="hover:text-neutral-700 transition-colors"
                 >
                   {t.privacyPolicy}
                 </a>
                 <a
-                  href="#"
+                  href={`/${locale}/tnc`}
                   className="hover:text-neutral-700 transition-colors"
                 >
                   {t.termsOfService}

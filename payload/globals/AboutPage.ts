@@ -62,6 +62,7 @@ export const AboutPage: GlobalConfig = {
                 { name: 'year', type: 'text' },
                 { name: 'title', type: 'text', localized: true },
                 { name: 'description', type: 'textarea', localized: true },
+                { name: 'image', type: 'upload', relationTo: 'media' },
             ],
         },
     ],

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { getMediaUrl } from '@/lib/utils';
 
 const defaultJourneyData = [
     {
@@ -47,6 +48,7 @@ interface TimelineProps {
         year: string;
         title: string;
         description: string;
+        image?: any;
     }>;
     heading?: string;
     subheading?: string;
@@ -59,7 +61,7 @@ export default function Timeline({ timelineData, heading, subheading }: Timeline
             year: item.year,
             title: item.title,
             desc: item.description,
-            image: `/images/timeline/tl-${index + 1}.jpg`
+            image: getMediaUrl(item.image) || `/images/timeline/tl-${index + 1}.jpg`
         }))
         : defaultJourneyData;
     const [currentIndex, setCurrentIndex] = useState(0);
