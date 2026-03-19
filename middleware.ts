@@ -8,21 +8,6 @@ function getLocale(request: NextRequest): string {
     return cookieLocale
   }
 
-  // Check Accept-Language header
-  const acceptLanguage = request.headers.get('Accept-Language')
-  if (acceptLanguage) {
-    const preferredLocale = acceptLanguage
-      .split(',')
-      .map(lang => lang.split(';')[0].trim().substring(0, 2).toLowerCase())
-      .find(lang => {
-        if (lang === 'zh') return true
-        if (lang === 'en') return true
-        if (lang === 'id') return true
-        return false
-      })
-    if (preferredLocale) return preferredLocale
-  }
-
   return defaultLocale
 }
 
