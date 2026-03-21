@@ -7,6 +7,26 @@ export const Articles: CollectionConfig = {
     admin: {
         useAsTitle: 'title',
     },
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/article')
+                    revalidatePath('/en/article')
+                    revalidatePath('/zh/article')
+                    if (doc.slug) {
+                        revalidatePath(`/id/article-detail/${doc.slug}`)
+                        revalidatePath(`/en/article-detail/${doc.slug}`)
+                        revalidatePath(`/zh/article-detail/${doc.slug}`)
+                    }
+                } catch (err: any) {
+                    console.error('Error revalidating article:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'title',

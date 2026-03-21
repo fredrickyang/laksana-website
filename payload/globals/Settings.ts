@@ -2,6 +2,19 @@ import type { GlobalConfig } from 'payload'
 
 export const Settings: GlobalConfig = {
     slug: 'settings',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/', 'layout')
+                } catch (err: any) {
+                    console.error('Error revalidating settings:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'siteTitle',

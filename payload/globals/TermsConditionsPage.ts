@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const TermsConditionsPage: GlobalConfig = {
     slug: 'terms-conditions-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/tnc')
+                    revalidatePath('/en/tnc')
+                    revalidatePath('/zh/tnc')
+                } catch (err: any) {
+                    console.error('Error revalidating tnc page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'hero',

@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const ProductPage: GlobalConfig = {
     slug: 'product-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/product')
+                    revalidatePath('/en/product')
+                    revalidatePath('/zh/product')
+                } catch (err: any) {
+                    console.error('Error revalidating product page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         { name: 'pageTitle', type: 'text', localized: true },
         {

@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const FacilitiesPage: GlobalConfig = {
     slug: 'facilities-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/facilities')
+                    revalidatePath('/en/facilities')
+                    revalidatePath('/zh/facilities')
+                } catch (err: any) {
+                    console.error('Error revalidating facilities page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'hero',

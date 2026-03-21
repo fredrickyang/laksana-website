@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const PrivacyPolicyPage: GlobalConfig = {
     slug: 'privacy-policy-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/privacy-policy')
+                    revalidatePath('/en/privacy-policy')
+                    revalidatePath('/zh/privacy-policy')
+                } catch (err: any) {
+                    console.error('Error revalidating privacy policy page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'hero',

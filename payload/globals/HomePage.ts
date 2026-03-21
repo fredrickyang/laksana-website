@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const HomePage: GlobalConfig = {
     slug: 'home-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id')
+                    revalidatePath('/en')
+                    revalidatePath('/zh')
+                } catch (err: any) {
+                    console.error('Error revalidating home page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'hero',

@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const ArticlePage: GlobalConfig = {
     slug: 'article-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/article')
+                    revalidatePath('/en/article')
+                    revalidatePath('/zh/article')
+                } catch (err: any) {
+                    console.error('Error revalidating article page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'heroTitle',

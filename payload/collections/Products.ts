@@ -5,6 +5,26 @@ export const Products: CollectionConfig = {
     admin: {
         useAsTitle: 'name',
     },
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/product')
+                    revalidatePath('/en/product')
+                    revalidatePath('/zh/product')
+                    if (doc.slug) {
+                        revalidatePath(`/id/unit-detail/${doc.slug}`)
+                        revalidatePath(`/en/unit-detail/${doc.slug}`)
+                        revalidatePath(`/zh/unit-detail/${doc.slug}`)
+                    }
+                } catch (err: any) {
+                    console.error('Error revalidating product:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'name',
