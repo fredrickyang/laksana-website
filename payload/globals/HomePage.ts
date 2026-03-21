@@ -67,8 +67,6 @@ export const HomePage: GlobalConfig = {
                             type: 'select',
                             options: ['01', '02', '03', '04'],
                         },
-                        { name: 'title', type: 'richText', localized: true },
-                        { name: 'subtitle', type: 'richText', localized: true },
                         // Images change when stat is clicked
                         {
                             type: 'row',

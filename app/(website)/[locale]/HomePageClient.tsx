@@ -347,9 +347,6 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
                     {stat.number || `0${index + 1}`}
                   </span>
-                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">
-                    {stat.title?.root?.children?.[0]?.children?.[0]?.text || `Stat ${index + 1}`}
-                  </span>
                 </div>
               ))}
               {homePage?.mainFeature?.badges?.length > 0 && (
@@ -379,11 +376,9 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <>
                 <div className={`stat-item ${activeStatIndex === 0 ? 'active' : ''} mt-10`} data-img-id="1" onClick={() => handleStatClick('1', 0)} style={{ cursor: 'pointer' }}>
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">01</span>
-                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">Menjaga Kualitas Produk</span>
                 </div>
                 <div className={`stat-item ${activeStatIndex === 1 ? 'active' : ''} py-12 border-t border-black/5 border-dashed`} data-img-id="2" onClick={() => handleStatClick('2', 1)} style={{ cursor: 'pointer' }}>
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">02</span>
-                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-hover:text-black">Dikembangkan Oleh Manajemen Estate Terbaik</span>
                 </div>
                 <div className={`stat-item ${activeStatIndex === 2 ? 'active' : ''} border-t border-black/5 border-dashed pt-12`} data-img-id="3" onClick={() => handleStatClick('3', 2)} style={{ cursor: 'pointer' }}>
                   {homePage?.mainFeature?.badges?.length > 0 ? (
@@ -454,31 +449,31 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {homePage?.branding?.clientLogos?.length > 0 ? (
                     homePage.branding.clientLogos.map((logo: any, idx: number) => (
                       <span key={idx} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} className="w-28 h-28 object-cover relative transition-all" />
+                        <img src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                     ))
                   ) : (
                     <>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-cover relative transition-all" />
+                        <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-cover relative transition-all" />
+                        <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-cover relative transition-all" />
+                        <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-cover relative transition-all" />
+                        <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-cover relative transition-all" />
+                        <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-cover relative transition-all" />
+                        <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-cover relative transition-all" />
+                        <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-contain relative transition-all" />
                       </span>
                     </>
                   )}

@@ -142,6 +142,9 @@ body {
 .stat-item:hover {
   opacity: 0.8;
 }
+.stat-item:hover .stat-value:not(.active .stat-value) {
+  color: #1d2088;
+}
 .stat-item.active {
   opacity: 1;
 }
