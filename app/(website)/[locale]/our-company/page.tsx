@@ -1,9 +1,7 @@
 import { getAboutPage, getSettings, getMediaUrl } from '@/lib/payload'
 import OurCompanyClient from './OurCompanyClient'
 import { locales, type Locale } from '@/i18n.config'
-
-export const revalidate = 3600; // Cache for 1 hour (3600 seconds)
-
+export const revalidate = 0; // Cache turned off for testing
 interface OurCompanyPageProps {
   params: Promise<{ locale: string }>
 }
