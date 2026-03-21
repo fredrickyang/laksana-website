@@ -1,7 +1,7 @@
 import { getAboutPage, getSettings, getMediaUrl } from '@/lib/payload'
 import OurCompanyClient from './OurCompanyClient'
 import { locales, type Locale } from '@/i18n.config'
-export const revalidate = 0; // Cache turned off for testing
+export const revalidate = 3600; // Cache for 1 hour, cleared via Payload webhook
 interface OurCompanyPageProps {
   params: Promise<{ locale: string }>
 }

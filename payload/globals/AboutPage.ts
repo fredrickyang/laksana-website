@@ -2,6 +2,21 @@ import type { GlobalConfig } from 'payload'
 
 export const AboutPage: GlobalConfig = {
     slug: 'about-page',
+    hooks: {
+        afterChange: [
+            ({ doc }) => {
+                try {
+                    const { revalidatePath } = require('next/cache')
+                    revalidatePath('/id/our-company')
+                    revalidatePath('/en/our-company')
+                    revalidatePath('/zh/our-company')
+                } catch (err: any) {
+                    console.error('Error revalidating about page:', err)
+                }
+                return doc
+            }
+        ]
+    },
     fields: [
         {
             name: 'hero',
