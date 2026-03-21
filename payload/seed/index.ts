@@ -264,17 +264,14 @@ export async function seed() {
                     stats: [
                         {
                             number: '01',
-                            title: createRichText('Menjaga Kualitas Produk'),
                             image: hero1Id,
                         },
                         {
                             number: '02',
-                            title: createRichText('Dikembangkan Oleh Manajemen Estate Terbaik'),
                             image: img2Id,
                         },
                         {
                             number: '03',
-                            title: createRichText('Akses Mudah ke Bandara Tersertifikasi UIKI'),
                             image: hero2Id,
                         },
                     ],
@@ -332,17 +329,14 @@ export async function seed() {
                     stats: [
                         {
                             number: '01',
-                            title: createRichText('Maintaining Product Quality'),
                             image: hero1Id,
                         },
                         {
                             number: '02',
-                            title: createRichText('Developed by the Best Estate Management'),
                             image: img2Id,
                         },
                         {
                             number: '03',
-                            title: createRichText('Easy Access to IUKI-Certified Airport'),
                             image: hero2Id,
                         },
                     ],
@@ -389,17 +383,14 @@ export async function seed() {
                     stats: [
                         {
                             number: '01',
-                            title: createRichText('保持产品质量'),
                             image: hero1Id,
                         },
                         {
                             number: '02',
-                            title: createRichText('由最佳园区管理团队开发'),
                             image: img2Id,
                         },
                         {
                             number: '03',
-                            title: createRichText('便捷通往IUKI认证机场'),
                             image: hero2Id,
                         },
                     ],
