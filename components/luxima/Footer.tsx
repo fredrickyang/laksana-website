@@ -4,7 +4,33 @@ import Link from 'next/link';
 import { FaYoutube, FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { COMPANY_CONTACT } from '@/constants/contacts';
 
-const Footer = () => {
+interface FooterProps {
+  settings?: any;
+}
+
+const Footer = ({ settings }: FooterProps) => {
+  const footer = settings?.footer || {};
+  const contactInfo = settings?.contactInformation || {};
+
+  const companyDescription = footer.companyDescription ||
+    'Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.';
+
+  const copyrightText = footer.copyrightText ||
+    `© ${new Date().getFullYear()} PT Bangun Laksana Persada. All rights reserved.`;
+
+  const email = contactInfo.email || COMPANY_CONTACT.EMAIL;
+  const phone = contactInfo.phoneNumbers?.[0]?.number || COMPANY_CONTACT.PHONE;
+  
+  // Extract address from richText
+  const getAddressText = (richText: any) => {
+    if (!richText?.root?.children) return COMPANY_CONTACT.ADDRESS;
+    return richText.root.children.map((p: any) =>
+      p.children?.map((c: any) => c.text).join('') || ''
+    ).filter(Boolean).join(' ');
+  };
+
+  const address = getAddressText(contactInfo.headOfficeAddress);
+
   return (
     <footer className="bg-gray-900 text-white py-12 leading-[125%] font-montserrat">
       <div className="container mx-auto px-6">
@@ -21,7 +47,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-gray-400 max-w-lg leading-[125%] text-justify mb-6">
-              Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.
+              {companyDescription}
             </p>
 
             {/* Social Media Icons */}
@@ -77,9 +103,9 @@ const Footer = () => {
           <div className="md:col-span-4 lg:col-span-4">
             <h3 className="text-xl font-semibold mb-6 text-luxima-gold leading-[125%]">Contact</h3>
             <ul className="space-y-3">
-              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.EMAIL}</li>
-              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.PHONE}</li>
-              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.ADDRESS}</li>
+              <li className="text-gray-400 leading-[125%]">{email}</li>
+              <li className="text-gray-400 leading-[125%]">{phone}</li>
+              <li className="text-gray-400 leading-[125%]">{address}</li>
             </ul>
           </div>
         </div>

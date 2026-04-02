@@ -1,4 +1,30 @@
-export default function Footer() {
+interface FooterProps {
+  settings?: any;
+}
+
+export default function Footer({ settings }: FooterProps) {
+  const footer = settings?.footer || {};
+  const contactInfo = settings?.contactInformation || {};
+
+  const companyDescription = footer.companyDescription ||
+    'Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.';
+
+  const copyrightText = footer.copyrightText ||
+    `© ${new Date().getFullYear()} PT Bangun Laksana Persada. All rights reserved.`;
+
+  const email = contactInfo.email || 'contact@agungintiland.com';
+  const phone = contactInfo.phoneNumbers?.[0]?.number || '+62 8180 588 6000';
+  
+  // Extract address from richText
+  const getAddressText = (richText: any) => {
+    if (!richText?.root?.children) return 'Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570';
+    return richText.root.children.map((p: any) =>
+      p.children?.map((c: any) => c.text).join('') || ''
+    ).filter(Boolean).join(' ');
+  };
+
+  const address = getAddressText(contactInfo.headOfficeAddress);
+
   return (
     <footer className="w-full justify-between border-t border-neutral-100 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
       <div className="container mx-auto">
@@ -14,7 +40,7 @@ export default function Footer() {
                 />
               </div>
               <p className="text-sm text-neutral-500 max-w-sm text-justify">
-                Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.
+                {companyDescription}
               </p>
               <div className="flex items-center gap-3 text-neutral-500 mb-8">
                 <a
@@ -91,7 +117,7 @@ export default function Footer() {
                       <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
                     </svg>
                     <span className="hover:text-neutral-900 transition-colors">
-                      Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570
+                      {address}
                     </span>
                   </div>
                 </li>
@@ -100,8 +126,8 @@ export default function Footer() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0" viewBox="0 0 16 16">
                       <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                     </svg>
-                    <a href="tel:+6281805886000" className="hover:text-neutral-900 transition-colors">
-                      +62 8180 588 6000
+                    <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="hover:text-neutral-900 transition-colors">
+                      {phone}
                     </a>
                   </div>
                 </li>
@@ -110,8 +136,8 @@ export default function Footer() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-fill shrink-0" viewBox="0 0 16 16">
                       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
                     </svg>
-                    <a href="mailto:contact@agungintiland.com" className="hover:text-neutral-900 transition-colors">
-                      contact@agungintiland.com
+                    <a href={`mailto:${email}`} className="hover:text-neutral-900 transition-colors">
+                      {email}
                     </a>
                   </div>
                 </li>
@@ -121,7 +147,7 @@ export default function Footer() {
           {/* Logos + Bottom row */}
           <div className="mt-10 border-t border-neutral-100 pt-6 flex flex-col gap-4">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-neutral-400">
-              <p>© 2026 PT Bangun Laksana Persada. All rights reserved.</p>
+              <p>{copyrightText}</p>
               <div className="flex flex-wrap gap-4">
                 <a
                   href="/privacy-policy"
