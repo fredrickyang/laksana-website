@@ -26,7 +26,8 @@ export const WHATSAPP_CONTACT = {
 
 // Company contact information
 export const COMPANY_CONTACT = {
-  EMAIL: 'info@luxima.com',
+  EMAIL: 'contact@agungintiland.com',
   PHONE: '+62 8180 588 6000',
-  ADDRESS: 'Kramat, Pakuhaji, Tangerang Regency, Banten'
+  ADDRESS: 'Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570'
 };
+

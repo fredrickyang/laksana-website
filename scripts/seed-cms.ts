@@ -42,13 +42,12 @@ const settingsData: Record<string, any> = {
         topNotification: 'Hubungi kami untuk konsultasi gratis!',
         contactInformation: {
             phoneNumbers: [
-                { label: 'Sales', number: '+62 21 5960 8888' },
-                { label: 'Marketing', number: '+62 811 1888 999' },
+                { label: 'Marketing', number: '+62 8180 588 6000' },
             ],
-            email: 'info@laksanabusinesspark.com',
-            formNotificationEmail: 'marketing@laksanabusinesspark.com',
-            headOfficeAddress: richText('Jl. Raya Serang KM 24, Balaraja, Tangerang, Banten 15610'),
-            marketingOfficeAddress: richText('Marketing Gallery Laksana Business Park, Jl. Raya Serang KM 24, Balaraja, Tangerang'),
+            email: 'contact@agungintiland.com',
+            formNotificationEmail: 'contact@agungintiland.com',
+            headOfficeAddress: richText('Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570'),
+            marketingOfficeAddress: richText('Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570'),
         },
         navigation: [
             { label: 'Beranda', link: '/' },
@@ -93,8 +92,8 @@ const settingsData: Record<string, any> = {
             networkErrorMessage: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.',
         },
         footer: {
-            companyDescription: 'Laksana Business Park adalah kawasan industri dan komersial terintegrasi yang berlokasi strategis di Tangerang Utara, menawarkan solusi gudang dan properti terbaik untuk bisnis Anda.',
-            copyrightText: '© 2026 Laksana Business Park. All rights reserved.',
+            companyDescription: 'Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.',
+            copyrightText: '© 2026 PT Bangun Laksana Persada. All rights reserved.',
         },
     },
     en: {
@@ -102,13 +101,12 @@ const settingsData: Record<string, any> = {
         topNotification: 'Contact us for a free consultation!',
         contactInformation: {
             phoneNumbers: [
-                { label: 'Sales', number: '+62 21 5960 8888' },
-                { label: 'Marketing', number: '+62 811 1888 999' },
+                { label: 'Marketing', number: '+62 8180 588 6000' },
             ],
-            email: 'info@laksanabusinesspark.com',
-            formNotificationEmail: 'marketing@laksanabusinesspark.com',
-            headOfficeAddress: richText('Jl. Raya Serang KM 24, Balaraja, Tangerang, Banten 15610'),
-            marketingOfficeAddress: richText('Marketing Gallery Laksana Business Park, Jl. Raya Serang KM 24, Balaraja, Tangerang'),
+            email: 'contact@agungintiland.com',
+            formNotificationEmail: 'contact@agungintiland.com',
+            headOfficeAddress: richText('Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570'),
+            marketingOfficeAddress: richText('Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570'),
         },
         navigation: [
             { label: 'Home', link: '/' },
@@ -153,8 +151,8 @@ const settingsData: Record<string, any> = {
             networkErrorMessage: 'Unable to connect to the server. Please check your internet connection.',
         },
         footer: {
-            companyDescription: 'Laksana Business Park is an integrated industrial and commercial area strategically located in North Tangerang, offering the best warehouse and property solutions for your business.',
-            copyrightText: '© 2026 Laksana Business Park. All rights reserved.',
+            companyDescription: 'Laksana Business Park The largest modern industrial area in North Tangerang, part of Agung Intiland. Premium property development with a focus on quality, innovation, and sustainability.',
+            copyrightText: '© 2026 PT Bangun Laksana Persada. All rights reserved.',
         },
     },
     zh: {
@@ -224,7 +222,7 @@ const homePageData: Record<string, any> = {
         hero: {
             overlayOpacity: 40,
             headline: richText('Kawasan Industri & Komersial Terintegrasi'),
-            subheadline: richText('Berlokasi strategis di Tangerang Utara dengan akses langsung ke jalan tol dan bandara internasional, Laksana Business Park menawarkan solusi terbaik untuk bisnis Anda.'),
+            subheadline: richText('Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.'),
             primaryCta: 'Hubungi Kami',
             primaryCtaLink: '/id/our-company#contact',
             secondaryCta: 'Lihat Video',
@@ -233,7 +231,7 @@ const homePageData: Record<string, any> = {
         },
         mainFeature: {
             headline: richText('Mengapa Memilih Laksana Business Park?'),
-            description: richText('Dengan pengembangan lebih dari 550 hektar, Laksana Business Park dilengkapi infrastruktur modern dan dikelola oleh manajemen estate profesional untuk mendukung pertumbuhan bisnis Anda.'),
+            description: richText('Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.'),
             ctaButtonLabel: 'TENTANG PERUSAHAAN',
             ctaButtonLink: '/id/our-company',
             stats: [

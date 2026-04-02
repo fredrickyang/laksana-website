@@ -64,10 +64,10 @@ export default function Footer({ settings }: FooterProps) {
   const contactInfo = settings?.contactInformation || {};
 
   const companyDescription = footer.companyDescription ||
-    '[No Data: footer.companyDescription]';
+    'Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.';
 
   const copyrightText = footer.copyrightText ||
-    '[No Data: footer.copyrightText]';
+    `© ${new Date().getFullYear()} PT Bangun Laksana Persada. All rights reserved.`;
 
   const privacyPolicyLink = footer.privacyPolicyLink || '/privacy-policy';
   const termsOfServiceLink = footer.termsOfServiceLink || '/tnc';
@@ -98,9 +98,9 @@ export default function Footer({ settings }: FooterProps) {
     <footer className="w-full justify-between border-t border-neutral-100 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
       <div className="container mx-auto">
         <div className="px-6 py-10 lg:px-10 lg:py-12">
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
             {/* Brand */}
-            <div className="lg:w-1/3 space-y-5">
+            <div className="md:col-span-4 space-y-5">
               <div className="flex items-center gap-3">
                 <img
                   src="/images/logo/logo.svg"
@@ -144,112 +144,113 @@ export default function Footer({ settings }: FooterProps) {
                 />
               </div>
             </div>
-            <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-black/75">
-                  {t.company}
-                </h3>
-                <ul className="space-y-2 text-neutral-600">
-                  <li>
+
+            <div className="md:col-span-2 space-y-3">
+              <h3 className="text-xl font-bold text-black/75">
+                {t.company}
+              </h3>
+              <ul className="space-y-2 text-neutral-600">
+                <li>
+                  <a
+                    href={`/${locale}/our-company`}
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.aboutUs}
+                  </a>
+                </li>
+                <li className="">
+                  <a
+                    href={`/${locale}/product`}
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.products}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/${locale}/facilities`}
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.facilities}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="md:col-span-2 space-y-3">
+              <h3 className="text-xl font-bold text-black/75">
+                {t.resources}
+              </h3>
+              <ul className="space-y-2 text-neutral-600">
+                <li>
+                  <a
+                    href={`/${locale}/article`}
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.articles}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.buildingProgress}
+                  </a>
+                </li>
+                <li className="">
+                  <a
+                    href="#"
+                    className="hover:text-neutral-900 transition-colors"
+                  >
+                    {t.usp}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="md:col-span-4 space-y-3">
+              <h3 className="text-xl font-bold text-black/75">
+                {t.contact}
+              </h3>
+              <ul className="space-y-4 text-neutral-600">
+                <li>
+                  <div className="flex justify-start gap-3 items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt-fill shrink-0 mt-1" viewBox="0 0 16 16">
+                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <span className="hover:text-neutral-900 transition-colors">
+                      {headOfficeAddress}
+                    </span>
+                  </div>
+                </li>
+                <li>
+                  <div className="flex justify-start gap-3 items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0 mt-1" viewBox="0 0 16 16">
+                      <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                    </svg>
                     <a
-                      href={`/${locale}/our-company`}
+                      href={`tel:${phoneNumber.replace(/[^0-9+]/g, '')}`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      {t.aboutUs}
+                      {phoneNumber}
                     </a>
-                  </li>
-                  <li className="">
+                  </div>
+                </li>
+                <li>
+                  <div className="flex justify-start gap-3 items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-fill shrink-0 mt-1" viewBox="0 0 16 16">
+                      <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+                    </svg>
                     <a
-                      href={`/${locale}/product`}
+                      href={`mailto:${email}`}
                       className="hover:text-neutral-900 transition-colors"
                     >
-                      {t.products}
+                      {email}
                     </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${locale}/facilities`}
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      {t.facilities}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-black/75">
-                  {t.resources}
-                </h3>
-                <ul className="space-y-2 text-neutral-600">
-                  <li>
-                    <a
-                      href={`/${locale}/article`}
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      {t.articles}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      {t.buildingProgress}
-                    </a>
-                  </li>
-                  <li className="">
-                    <a
-                      href="#"
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      {t.usp}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-black/75">
-                  {t.contact}
-                </h3>
-                <ul className="space-y-2 text-neutral-600">
-                  <li>
-                    <div className="flex justify-start gap-3 items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt-fill shrink-0 mt-1" viewBox="0 0 16 16">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                      </svg>
-                      <span className="hover:text-neutral-900 transition-colors">
-                        {headOfficeAddress}
-                      </span>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="flex justify-start gap-3 items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0 mt-1" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
-                      </svg>
-                      <a
-                        href={`tel:${phoneNumber.replace(/[^0-9+]/g, '')}`}
-                        className="hover:text-neutral-900 transition-colors"
-                      >
-                        {phoneNumber}
-                      </a>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="flex justify-start gap-3 items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-fill shrink-0 mt-1" viewBox="0 0 16 16">
-                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
-                      </svg>
-                      <a
-                        href={`mailto:${email}`}
-                        className="hover:text-neutral-900 transition-colors"
-                      >
-                        {email}
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
           {/* Logos + Bottom row */}

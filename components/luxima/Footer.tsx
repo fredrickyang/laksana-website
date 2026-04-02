@@ -8,8 +8,9 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-12 leading-[125%] font-montserrat">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="mb-8 md:mb-0">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+          {/* Brand & Description */}
+          <div className="md:col-span-5 lg:col-span-6">
             <Link href="/luxima" className="cursor-pointer hover:opacity-80 transition-opacity inline-block">
               <Image
                 src="/luxima/images/luxima-logo-white.png"
@@ -19,12 +20,12 @@ const Footer = () => {
                 className="h-24 w-auto mb-4"
               />
             </Link>
-            <p className="text-gray-400 max-w-md leading-[125%]">
-              Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.
+            <p className="text-gray-400 max-w-lg leading-[125%] text-justify mb-6">
+              Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.
             </p>
 
             {/* Social Media Icons */}
-            <div className="flex space-x-4 mt-4">
+            <div className="flex space-x-4">
               <a
                 href="https://www.youtube.com/@laksanabusinesspark1393"
                 target="_blank"
@@ -63,26 +64,27 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-luxima-gold leading-[125%]">Projects</h3>
-              <ul className="space-y-2">
-                <li><a href="/luxima" className="text-gray-400 hover:text-white transition duration-300 leading-[125%]">Commercial</a></li>
-                <li><a href="/luxima" className="text-gray-400 hover:text-white transition duration-300 leading-[125%]">Retail</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-luxima-gold leading-[125%]">Contact</h3>
-              <ul className="space-y-2">
-                <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.EMAIL}</li>
-                <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.PHONE}</li>
-                <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.ADDRESS}</li>
-              </ul>
-            </div>
+
+          {/* Links Section */}
+          <div className="md:col-span-3 lg:col-span-2">
+            <h3 className="text-xl font-semibold mb-6 text-luxima-gold leading-[125%]">Projects</h3>
+            <ul className="space-y-3">
+              <li><a href="/luxima" className="text-gray-400 hover:text-white transition duration-300 leading-[125%]">Commercial</a></li>
+              <li><a href="/luxima" className="text-gray-400 hover:text-white transition duration-300 leading-[125%]">Retail</a></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-4">
+            <h3 className="text-xl font-semibold mb-6 text-luxima-gold leading-[125%]">Contact</h3>
+            <ul className="space-y-3">
+              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.EMAIL}</li>
+              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.PHONE}</li>
+              <li className="text-gray-400 leading-[125%]">{COMPANY_CONTACT.ADDRESS}</li>
+            </ul>
           </div>
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p className="leading-[125%]">&copy; {new Date().getFullYear()} Luxima. All rights reserved.</p>
+          <p className="leading-[125%]">&copy; {new Date().getFullYear()} PT Bangun Laksana Persada. All rights reserved.</p>
         </div>
       </div>
     </footer>
