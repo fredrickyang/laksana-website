@@ -17,6 +17,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Laksana Business Park - Solusi Gudang & Properti Strategis",
   description: "Kawasan industri dan komersial terintegrasi di Tangerang Utara",
+  icons: {
+    icon: "/images/logo/logo.svg",
+    shortcut: "/images/logo/logo.svg",
+    apple: "/images/logo/logo.svg",
+  },
 };
 
 export default async function WebsiteLayout({
