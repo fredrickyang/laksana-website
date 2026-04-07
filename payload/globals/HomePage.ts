@@ -82,6 +82,11 @@ export const HomePage: GlobalConfig = {
                             type: 'select',
                             options: ['01', '02', '03', '04'],
                         },
+                        {
+                            name: 'label',
+                            type: 'text',
+                            localized: true,
+                        },
                         // Images change when stat is clicked
                         {
                             type: 'row',

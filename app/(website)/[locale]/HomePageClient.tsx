@@ -339,13 +339,20 @@ export default function HomePageClient({ homePage, products, articles, settings,
               {homePage.mainFeature.stats.map((stat: any, index: number) => (
                 <div
                   key={index}
-                  className={`stat-item ${index === activeStatIndex ? 'active' : ''} ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
+                  className={`stat-item group ${index === activeStatIndex ? 'active' : ''} ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
                   data-img-id={String(index + 1)}
                   onClick={() => handleStatClick(String(index + 1), index)}
                   style={{ cursor: 'pointer' }}
                 >
                   <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
                     {stat.number || `0${index + 1}`}
+                  </span>
+                  <span className="stat-label text-xs font-medium text-neutral-500 mt-2 block uppercase tracking-widest transition-colors group-[.active]:text-neutral-900">
+                    {stat.label || (
+                      index === 0 ? "Lokasi Strategis" : 
+                      index === 1 ? "Fasilitas Lengkap" : 
+                      index === 2 ? "Investasi Terbaik" : "Keunggulan Utama"
+                    )}
                   </span>
                 </div>
               ))}

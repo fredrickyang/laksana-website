@@ -839,6 +839,7 @@ export interface HomePage {
     stats?:
       | {
           number?: ('01' | '02' | '03' | '04') | null;
+          label?: string | null;
           image?: (number | null) | Media;
           mobileImage?: (number | null) | Media;
           id?: string | null;
@@ -1413,6 +1414,7 @@ export interface HomePageSelect<T extends boolean = true> {
           | T
           | {
               number?: T;
+              label?: T;
               image?: T;
               mobileImage?: T;
               id?: T;
