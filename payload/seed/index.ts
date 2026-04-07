@@ -2605,7 +2605,10 @@ export async function seed() {
         await payload.updateGlobal({
             slug: 'article-page',
             data: {
-                heroTitle: 'ARTIKEL',
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'ARTIKEL',
+                },
                 allArticlesHeading: 'Semua Artikel',
                 categoryLabel: 'Kategori',
                 allCategoryOption: 'Semua',
@@ -2627,7 +2630,10 @@ export async function seed() {
             slug: 'article-page',
             locale: 'en',
             data: {
-                heroTitle: 'ARTICLES',
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'ARTICLES',
+                },
                 allArticlesHeading: 'All Articles',
                 categoryLabel: 'Category',
                 allCategoryOption: 'All',
@@ -2649,7 +2655,10 @@ export async function seed() {
             slug: 'article-page',
             locale: 'zh',
             data: {
-                heroTitle: '文章',
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: '文章',
+                },
                 allArticlesHeading: '所有文章',
                 categoryLabel: '分类',
                 allCategoryOption: '全部',

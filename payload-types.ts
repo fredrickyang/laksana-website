@@ -1231,7 +1231,11 @@ export interface TermsConditionsPage {
  */
 export interface ArticlePage {
   id: number;
-  heroTitle?: string | null;
+  hero?: {
+    backgroundImage?: (number | null) | Media;
+    mobileBackgroundImage?: (number | null) | Media;
+    title?: string | null;
+  };
   allArticlesHeading?: string | null;
   categoryLabel?: string | null;
   allCategoryOption?: string | null;
@@ -1632,7 +1636,13 @@ export interface TermsConditionsPageSelect<T extends boolean = true> {
  * via the `definition` "article-page_select".
  */
 export interface ArticlePageSelect<T extends boolean = true> {
-  heroTitle?: T;
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        mobileBackgroundImage?: T;
+        title?: T;
+      };
   allArticlesHeading?: T;
   categoryLabel?: T;
   allCategoryOption?: T;

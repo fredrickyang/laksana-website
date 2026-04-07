@@ -92,7 +92,7 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
-            src="/images/bg-produk.png"
+            src={getMediaUrl(articlePage?.hero?.backgroundImage) || "/images/bg-produk.png"}
             alt="Background Image"
             width={1400}
             height={400}
@@ -107,7 +107,7 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
             {/* Left side - Title and description */}
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl md:text-5xl sm:text-4xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
-                <span className="text-white bg-clip-text">{articlePage?.heroTitle || "ARTIKEL"}</span>
+                <span className="text-white bg-clip-text uppercase">{articlePage?.hero?.title || articlePage?.heroTitle || "ARTIKEL"}</span>
               </h1>
             </div>
           </div>

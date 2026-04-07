@@ -19,9 +19,13 @@ export const ArticlePage: GlobalConfig = {
     },
     fields: [
         {
-            name: 'heroTitle',
-            type: 'text',
-            localized: true,
+            name: 'hero',
+            type: 'group',
+            fields: [
+                { name: 'backgroundImage', type: 'upload', relationTo: 'media' },
+                { name: 'mobileBackgroundImage', type: 'upload', relationTo: 'media' },
+                { name: 'title', type: 'text', localized: true },
+            ],
         },
         {
             name: 'allArticlesHeading',
