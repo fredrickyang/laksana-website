@@ -12,21 +12,28 @@ export default function Form({ settings }: FormProps) {
 
   const f = settings?.form || {};
 
-  const buildingSizeOptions = f.buildingSizeOptions?.length > 0
-    ? f.buildingSizeOptions
-    : [
-        { label: '500 m2', value: 'small' },
-        { label: '1000 m2', value: 'medium' },
-        { label: 'Lebih dari 1000 m2', value: 'large' },
-      ];
+  // Handle building size options with filtering and localization fallbacks
+  const getOptions = (rawOptions: any, fallbackOptions: { label: string; value: string }[]) => {
+    if (!Array.isArray(rawOptions) || rawOptions.length === 0) return fallbackOptions;
+    const filtered = rawOptions.filter(opt => opt.label || opt.value);
+    if (filtered.length === 0) return fallbackOptions;
+    return filtered.map(opt => ({
+      label: opt.label || opt.value || 'Option',
+      value: opt.value || (typeof opt.label === 'string' ? opt.label.toLowerCase() : '') || 'default'
+    }));
+  };
 
-  const serviceTypeOptions = f.serviceTypeOptions?.length > 0
-    ? f.serviceTypeOptions
-    : [
-        { label: 'Beli Gudang Baru', value: 'full' },
-        { label: 'Beli Kavling Baru', value: 'legal' },
-        { label: 'Jual Kavling / Gudang Laksana', value: 'consult' },
-      ];
+  const buildingSizeOptions = getOptions(f.buildingSizeOptions, [
+    { label: '500 m2', value: 'small' },
+    { label: '1000 m2', value: 'medium' },
+    { label: 'Lebih dari 1000 m2', value: 'large' },
+  ]);
+
+  const serviceTypeOptions = getOptions(f.serviceTypeOptions, [
+    { label: 'Beli Gudang Baru', value: 'full' },
+    { label: 'Beli Kavling Baru', value: 'legal' },
+    { label: 'Jual Kavling / Gudang Laksana', value: 'consult' },
+  ]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

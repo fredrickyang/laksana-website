@@ -55,10 +55,17 @@ export async function POST(request: NextRequest) {
         }
 
         return NextResponse.json({ success: true, message: 'Form submitted successfully' })
-    } catch (error) {
-        console.error('Form submission error:', error)
+    } catch (error: any) {
+        console.error('Full form submission error object:', JSON.stringify(error, null, 2))
+        console.error('Error stack trace:', error.stack)
+        if (error.data) console.error('Error data:', JSON.stringify(error.data, null, 2))
+        
         return NextResponse.json(
-            { success: false, error: 'Failed to submit form' },
+            { 
+                success: false, 
+                error: 'Failed to submit form',
+                details: process.env.NODE_ENV === 'development' ? error.message : undefined 
+            },
             { status: 500 }
         )
     }

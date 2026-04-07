@@ -343,8 +343,8 @@ export interface FormSubmission {
   email: string;
   phone: string;
   domicile?: string | null;
-  buildingSize?: ('small' | 'medium' | 'large') | null;
-  serviceType?: ('full' | 'legal' | 'consult') | null;
+  buildingSize?: string | null;
+  serviceType?: string | null;
   message?: string | null;
   updatedAt: string;
   createdAt: string;

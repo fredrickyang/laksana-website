@@ -42,23 +42,13 @@ export const FormSubmissions: CollectionConfig = {
         },
         {
             name: 'buildingSize',
-            type: 'select',
+            type: 'text',
             label: 'Kebutuhan Luas Bangunan',
-            options: [
-                { label: '500 m2', value: 'small' },
-                { label: '1000 m2', value: 'medium' },
-                { label: 'Lebih dari 1000 m2', value: 'large' },
-            ],
         },
         {
             name: 'serviceType',
-            type: 'select',
+            type: 'text',
             label: 'Pilihan Layanan',
-            options: [
-                { label: 'Beli Gudang Baru', value: 'full' },
-                { label: 'Beli Kavling Baru', value: 'legal' },
-                { label: 'Jual Kavling / Gudang Laksana', value: 'consult' },
-            ],
         },
         {
             name: 'message',
