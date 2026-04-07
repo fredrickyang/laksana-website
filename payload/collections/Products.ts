@@ -7,9 +7,9 @@ export const Products: CollectionConfig = {
     },
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
+                    const { revalidatePath } = await import('next/cache')
                     revalidatePath('/id/product')
                     revalidatePath('/en/product')
                     revalidatePath('/zh/product')
