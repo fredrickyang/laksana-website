@@ -1,6 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import { locales, type Locale } from '@/i18n.config';
+import Image from 'next/image';
 
 const footerTranslations: Record<string, Record<string, string>> = {
   id: {
@@ -102,10 +103,12 @@ export default function Footer({ settings }: FooterProps) {
             {/* Brand */}
             <div className="md:col-span-4 space-y-5">
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src="/images/logo/logo.svg"
+                  width={150}
+                  height={40}
                   className="h-8 sm:h-10 md:h-10 w-auto object-contain"
-                  alt="Abstract"
+                  alt="Laksana Logo"
                 />
               </div>
               <p className="text-sm text-neutral-500 max-w-sm text-justify">
@@ -137,8 +140,10 @@ export default function Footer({ settings }: FooterProps) {
                 <span className="text-[11px] font-medium text-neutral-400">
                   Developed by
                 </span>
-                <img
+                <Image
                   src="/images/logo/agung-logo.svg"
+                  width={120}
+                  height={28}
                   className="h-7 object-contain"
                   alt="Agung Intiland"
                 />

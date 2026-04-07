@@ -357,11 +357,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
         <div className="lg:col-span-4 relative flex items-center justify-center py-20 lg:py-0 [animation:fadeSlideIn_1s_ease-out_0.2s_both] animate-on-scroll animate">
           <div className="absolute inset-0 grid-bg opacity-100 z-0 mx-[-2rem] mask-image-linear-gradient(to bottom, black, transparent)"></div>
           <div className="relative z-10 w-full aspect-[3/4] overflow-hidden shadow-2xl border border-black/10 group">
-            <img
+            <Image
               ref={mainImageRef}
               id="main-image"
               src={currentImage}
               alt="Architectural Detail"
+              fill
+              priority
               className="opacity-90 w-full h-full object-cover scale-110"
             />
           </div>
@@ -397,12 +399,12 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     <div className="relative group cursor-pointer">
                       <div className="flex items-center gap-3">
                         {homePage.mainFeature.badges.map((badge: any, idx: number) => (
-                          <img
+                          <Image
                             key={idx}
                             src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
                             alt={badge.label || `Badge ${idx + 1}`}
-                            width={80}
-                            height={80}
+                            width={112}
+                            height={112}
                             className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
                           />
                         ))}
@@ -491,7 +493,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {homePage?.branding?.clientLogos?.length > 0 ? (
                     homePage.branding.clientLogos.map((logo: any, idx: number) => (
                       <span key={idx} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                     ))
                   ) : (
@@ -600,9 +602,10 @@ export default function HomePageClient({ homePage, products, articles, settings,
             {articles.length > 0 ? articles.map((article, index) => (
               <a key={article.id || index} href={`/${locale}/article/${article.slug}`} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                 <div className="relative">
-                  <img
+                  <Image
                     src={getMediaUrl(article.thumbnail) || "images/card-blog/tahap3.png"}
                     alt={article.title || "Article"}
+                    fill
                     className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">

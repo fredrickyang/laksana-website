@@ -161,9 +161,10 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
               className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1"
             >
               <div className="relative">
-                <img
+                <Image
                   src={getMediaUrl(article.thumbnail) || article.thumbnail || "images/card-blog/tahap3.png"}
                   alt={article.title || "Article Image"}
+                  fill
                   className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
                 />
                 <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">

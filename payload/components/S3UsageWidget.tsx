@@ -12,20 +12,31 @@ function getTierGB(usageBytes: number): number {
   return TIERS_GB.find((tier) => usageGB <= tier) ?? TIERS_GB[TIERS_GB.length - 1]
 }
 
+let cachedUsage: { bytes: number, timestamp: number } | null = null
+const CACHE_DURATION = 1000 * 60 * 5 // 5 minutes
+
 export default async function S3UsageWidget() {
   try {
-    const payload = await getPayload({ config })
+    const now = Date.now()
+    let usageBytes = 0
 
-    const { docs } = await payload.find({
-      collection: 'media',
-      limit: 0,
-      pagination: false,
-      select: {
-        filesize: true,
-      },
-    })
+    if (cachedUsage && (now - cachedUsage.timestamp < CACHE_DURATION)) {
+      usageBytes = cachedUsage.bytes
+    } else {
+      const payload = await getPayload({ config })
 
-    const usageBytes = docs.reduce((sum, doc) => sum + (Number(doc.filesize) || 0), 0)
+      const { docs } = await payload.find({
+        collection: 'media',
+        limit: 1000, // Reasonable limit for size calculation
+        pagination: false,
+        select: {
+          filesize: true,
+        },
+      })
+
+      usageBytes = docs.reduce((sum, doc) => sum + (Number(doc.filesize) || 0), 0)
+      cachedUsage = { bytes: usageBytes, timestamp: now }
+    }
     const tierGB = getTierGB(usageBytes)
     const tierBytes = tierGB * 1_073_741_824
     const percentage = Math.min((usageBytes / tierBytes) * 100, 100)

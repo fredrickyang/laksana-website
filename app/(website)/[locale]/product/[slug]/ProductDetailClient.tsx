@@ -149,9 +149,10 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <img
+                  <Image
                     src={slide.src}
                     alt={slide.label}
+                    fill
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -230,7 +231,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
               <div key={index} className="flex items-center gap-3">
                 {spec.icon && (
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 p-2">
-                    <img src={getMediaUrl(spec.icon)} alt={spec.label} className="w-full h-full object-contain" />
+                    <Image src={getMediaUrl(spec.icon)} alt={spec.label} width={40} height={40} className="w-full h-full object-contain" />
                   </div>
                 )}
                 <span className="text-sm font-medium text-neutral-700">{spec.label}</span>
@@ -338,9 +339,9 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
             {facilities.length > 0 ? facilities.map((facility: any, index: number) => (
               <div key={index} className="flex flex-col items-center gap-2">
                 {facility.icon ? (
-                  <img className="mx-auto" src={getMediaUrl(facility.icon)} width="56" height="56" alt={facility.label} />
+                  <Image className="mx-auto" src={getMediaUrl(facility.icon)} width={56} height={56} alt={facility.label} />
                 ) : (
-                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width="56" height="56" alt={facility.label} />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt={facility.label} />
                 )}
                 <span className="text-xs text-neutral-600 uppercase tracking-widest">{facility.label}</span>
               </div>
@@ -477,9 +478,10 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
               ></iframe>
             ) : (
               <>
-                <img
+                <Image
                   src="https://agungintiland.com/assets/source/assets/thumbs/images/cover_1280_700_laksana-business-park---view-semi-bev-05.png.webp"
                   alt="Video cover"
+                  fill
                   className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 flex items-center justify-center flex-col gap-6">

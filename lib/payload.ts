@@ -37,6 +37,14 @@ export async function getHomePage(locale: Locale = 'id') {
         slug: 'home-page',
         locale,
         depth: 1,
+        select: {
+            hero: true,
+            mainFeature: true,
+            branding: true,
+            ctaSection: true,
+            articleSection: true,
+            projectSection: true,
+        }
     })
 }
 
@@ -67,6 +75,14 @@ export async function getSettings(locale: Locale = 'id') {
         slug: 'settings',
         locale,
         depth: 1,
+        select: {
+            siteTitle: true,
+            logo: true,
+            contactInfo: true,
+            socialMedia: true,
+            footer: true,
+            brochure: true,
+        }
     })
 }
 
@@ -138,6 +154,15 @@ export async function getProducts(locale: Locale = 'id', limit: number = 100, fe
         where: featured !== undefined ? {
             featured: { equals: featured }
         } : undefined,
+        select: {
+            name: true,
+            slug: true,
+            thumbnail: true,
+            keySpecs: true,
+            type: true,
+            highlightSpecs: true,
+            shortDescription: true,
+        }
     })
     return result.docs
 }
@@ -180,6 +205,14 @@ export async function getArticles(locale: Locale = 'id', limit: number = 100) {
         limit,
         depth: 1,
         sort: '-publicationDate',
+        select: {
+            title: true,
+            slug: true,
+            thumbnail: true,
+            excerpt: true,
+            category: true,
+            publicationDate: true,
+        }
     })
     return result.docs
 }

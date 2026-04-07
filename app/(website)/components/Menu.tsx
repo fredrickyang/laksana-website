@@ -6,6 +6,7 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import { locales, localeCodes, localeNames, type Locale } from '@/i18n.config';
 import { getMediaUrl } from '@/lib/utils';
+import Image from 'next/image';
 
 const menuTranslations: Record<string, Record<string, string>> = {
   id: {
@@ -201,9 +202,12 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
     >
       {/* Brand / Logo */}
       <a href={`/${locale}`} className="flex items-center gap-3 group z-50 relative">
-        <img
+        <Image
           src="/images/logo/logo.svg"
           alt="Laksana Logo"
+          width={180}
+          height={48}
+          priority
           className="group-hover:opacity-90 transition-opacity duration-300 h-8 sm:h-10 md:h-12 lg:h-9 w-auto object-contain invert brightness-0"
         />
       </a>
