@@ -58,14 +58,15 @@ export default async function Product({ params }: ProductPageProps) {
         <title>
           Laksana Business Park - Solusi Gudang & Properti Strategis
         </title>
-        {/* Background Video (fixed) */}
+        {/* Background Image from CMS */}
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
-            src="/images/bg-produk.png"
-            alt="Background Image"
-            width={1400}
-            height={400}
+            src={getMediaUrl(productPage?.hero?.backgroundImage) || "/images/bg-produk.png"}
+            alt="Hero Background"
+            width={1920}
+            height={1080}
+            priority
           />
           {/* Gradient overlay from top to bottom - 50% black to transparent */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
@@ -77,7 +78,7 @@ export default async function Product({ params }: ProductPageProps) {
             {/* Left side - Title and description */}
             <div className="lg:flex-1 fade-in-up mb-[10%] mt-[10%] justify-center text-center">
               <h1 className="text-4xl md:text-5xl sm:text-4xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
-                <span className="text-white bg-clip-text">{productPage?.pageTitle || 'SEMUA PRODUK'}</span>
+                <span className="text-white bg-clip-text uppercase">{productPage?.hero?.title || productPage?.pageTitle || 'SEMUA PRODUK'}</span>
               </h1>
             </div>
           </div>
@@ -123,6 +124,17 @@ export default async function Product({ params }: ProductPageProps) {
                     <h3 className="text-xl sm:text-2xl font-medium text-white">
                       {product.name}
                     </h3>
+                    {/* Key Specs Icons */}
+                    <div className="flex gap-2 mt-2">
+                      {product.keySpecs?.slice(0, 3).map((spec: any, idx: number) => (
+                        <div key={idx} className="bg-white/20 backdrop-blur-sm p-1 rounded flex items-center gap-1">
+                          {spec.icon && (
+                            <img src={getMediaUrl(spec.icon)} alt={spec.label} className="w-3 h-3 object-contain invert grayscale" />
+                          )}
+                          <span className="text-[8px] text-white/90 uppercase tracking-tighter">{spec.label}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </a>
               ))}

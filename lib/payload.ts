@@ -128,13 +128,16 @@ export async function getCategories(locale: Locale = 'id') {
 }
 
 // Fetch all Products
-export async function getProducts(locale: Locale = 'id', limit: number = 100) {
+export async function getProducts(locale: Locale = 'id', limit: number = 100, featured?: boolean) {
     const payload = await getPayloadClient()
     const result = await payload.find({
         collection: 'products',
         locale,
         limit,
         depth: 1,
+        where: featured !== undefined ? {
+            featured: { equals: featured }
+        } : undefined,
     })
     return result.docs
 }

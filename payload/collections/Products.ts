@@ -33,6 +33,15 @@ export const Products: CollectionConfig = {
             localized: true,
         },
         {
+            name: 'featured',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+                description: 'Show this product on the home page',
+            },
+        },
+        {
             name: 'slug',
             type: 'text',
             admin: {

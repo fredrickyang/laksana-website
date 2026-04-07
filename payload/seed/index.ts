@@ -2596,6 +2596,135 @@ export async function seed() {
     }
 
     // ========================================
+    // SEED PRODUCT PAGE GLOBAL
+    // ========================================
+    console.log('\n--- Seeding Product Page ---')
+
+    try {
+        await payload.updateGlobal({
+            slug: 'product-page',
+            data: {
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'SEMUA PRODUK',
+                },
+                pageTitle: 'SEMUA PRODUK',
+                detailLabels: {
+                    dimensionLabel: 'Dimensi',
+                    landAreaLabel: 'Luas Tanah',
+                    buildingAreaLabel: 'Luas Bangunan',
+                    freeConsultationLabel: 'Konsultasi Gratis',
+                    summaryLabel: 'Ringkasan Unit',
+                    facilitiesLabel: 'Fasilitas Terdekat',
+                    specificationsLabel: 'Spesifikasi Teknis',
+                    viewDetailLabel: 'Lihat Detail',
+                    hideDetailLabel: 'Sembunyikan',
+                    facilitiesTitle: 'Kawasan Berkembang dengan Fasilitas Lengkap',
+                    facilitiesDescription: 'Laksana Business Park dikelilingi oleh berbagai fasilitas penting yang mendukung operasional bisnis dan kesejahteraan karyawan.',
+                    ctaTitle: 'Temukan Unit Terbaik Anda Sekarang',
+                    ctaDescription: 'Hubungi konsultan properti kami untuk mendapatkan penawaran spesial dan kunjungan lokasi eksklusif.',
+                    downloadBrochureLabel: 'Unduh Brosur',
+                    virtualTourTitle: createRichText('Solusi Gudang Modern di lokasi Strategis'),
+                    virtualTourDescription: 'Rasakan pengalaman menjelajahi unit-unit unggulan kami secara virtual dari mana saja.',
+                    virtualTourButtonLabel: 'Mulai Tur Virtual',
+                    virtualTourReasons: [
+                        { title: 'Tampilan Realistis', description: 'Visualisasi detail setiap sudut unit' },
+                        { title: 'Akses 24/7', description: 'Lihat kapan pun Anda inginkan' },
+                        { title: 'Efisien', description: 'Hemat waktu sebelum kunjungan fisik' },
+                    ],
+                },
+            },
+        })
+        console.log('Product Page seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Product Page:', error)
+    }
+
+    // Product Page - English
+    try {
+        await payload.updateGlobal({
+            slug: 'product-page',
+            locale: 'en',
+            data: {
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: 'ALL PRODUCTS',
+                },
+                pageTitle: 'ALL PRODUCTS',
+                detailLabels: {
+                    dimensionLabel: 'Dimension',
+                    landAreaLabel: 'Land Area',
+                    buildingAreaLabel: 'Building Area',
+                    freeConsultationLabel: 'Free Consultation',
+                    summaryLabel: 'Unit Summary',
+                    facilitiesLabel: 'Nearby Facilities',
+                    specificationsLabel: 'Technical Specifications',
+                    viewDetailLabel: 'View Detail',
+                    hideDetailLabel: 'Hide Detail',
+                    facilitiesTitle: 'Growing Area with Complete Facilities',
+                    facilitiesDescription: 'Laksana Business Park is surrounded by various essential facilities that support business operations and employee well-being.',
+                    ctaTitle: 'Find Your Best Unit Now',
+                    ctaDescription: 'Contact our property consultant to get special offers and exclusive site visits.',
+                    downloadBrochureLabel: 'Download Brochure',
+                    virtualTourTitle: createRichText('Modern Warehouse Solutions in Strategic Locations'),
+                    virtualTourDescription: 'Experience exploring our flagship units virtually from anywhere.',
+                    virtualTourButtonLabel: 'Start Virtual Tour',
+                    virtualTourReasons: [
+                        { title: 'Realistic View', description: 'Detailed visualization of every unit corner' },
+                        { title: '24/7 Access', description: 'View whenever you want' },
+                        { title: 'Efficient', description: 'Save time before physical visit' },
+                    ],
+                },
+            },
+        })
+        console.log('Product Page (EN) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Product Page (EN):', error)
+    }
+
+    // Product Page - Chinese
+    try {
+        await payload.updateGlobal({
+            slug: 'product-page',
+            locale: 'zh',
+            data: {
+                hero: {
+                    backgroundImage: bgProdukId,
+                    title: '所有产品',
+                },
+                pageTitle: '所有产品',
+                detailLabels: {
+                    dimensionLabel: '尺寸',
+                    landAreaLabel: '土地面积',
+                    buildingAreaLabel: '建筑面积',
+                    freeConsultationLabel: '免费咨询',
+                    summaryLabel: '单元摘要',
+                    facilitiesLabel: '周边设施',
+                    specificationsLabel: '技术规格',
+                    viewDetailLabel: '查看详情',
+                    hideDetailLabel: '隐藏详情',
+                    facilitiesTitle: '设施齐全的发展中地区',
+                    facilitiesDescription: 'Laksana Business Park 周边拥有各种支持业务运营和员工福利的基本设施。',
+                    ctaTitle: '立即寻找您的最佳单元',
+                    ctaDescription: '联系我们的物业顾问获取特别优惠和独家实地考察。',
+                    downloadBrochureLabel: '下载手册',
+                    virtualTourTitle: createRichText('战略位置的现代仓储解决方案'),
+                    virtualTourDescription: '随时随地虚拟体验探索我们的旗舰单元。',
+                    virtualTourButtonLabel: '开始虚拟导览',
+                    virtualTourReasons: [
+                        { title: '逼真视图', description: '每个单元角落的详细可视化' },
+                        { title: '24/7 访问', description: '随时查看' },
+                        { title: '高效', description: '在实地考察前节省时间' },
+                    ],
+                },
+            },
+        })
+        console.log('Product Page (ZH) seeded successfully')
+    } catch (error) {
+        console.error('Failed to seed Product Page (ZH):', error)
+    }
+
+    // ========================================
     // SEED ARTICLE PAGE GLOBAL
     // ========================================
     console.log('\n--- Seeding Article Page ---')

@@ -191,6 +191,10 @@ export interface Media {
 export interface Product {
   id: number;
   name: string;
+  /**
+   * Show this product on the home page
+   */
+  featured?: boolean | null;
   slug?: string | null;
   /**
    * Product label shown on cards (e.g., "Gudang Siap Pakai", "Kavling Siap Bangun")
@@ -485,6 +489,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   name?: T;
+  featured?: T;
   slug?: T;
   label?: T;
   phase?: T;
@@ -1253,6 +1258,14 @@ export interface ArticlePage {
  */
 export interface ProductPage {
   id: number;
+  hero?: {
+    backgroundImage?: (number | null) | Media;
+    mobileBackgroundImage?: (number | null) | Media;
+    title?: string | null;
+  };
+  /**
+   * Legacy field - use hero.title instead
+   */
   pageTitle?: string | null;
   detailLabels?: {
     dimensionLabel?: string | null;
@@ -1660,6 +1673,13 @@ export interface ArticlePageSelect<T extends boolean = true> {
  * via the `definition` "product-page_select".
  */
 export interface ProductPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        mobileBackgroundImage?: T;
+        title?: T;
+      };
   pageTitle?: T;
   detailLabels?:
     | T

@@ -3,7 +3,7 @@
 import Footer from "../../../components/Footer";
 import Form from "../../../components/Form";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getMediaUrl } from "@/lib/utils";
 
 const productTranslations: Record<string, Record<string, string>> = {
@@ -24,6 +24,37 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
+
+  useEffect(() => {
+    // Scroll to hash and expand details if hash is #spesifikasi
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === '#spesifikasi') {
+        setShowMore(true);
+        // Delay scroll to allow state update and re-render
+        setTimeout(() => {
+          const element = document.getElementById('spesifikasi');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else if (hash === '#facilities-section') {
+        const element = document.getElementById('facilities-section');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (hash === '#overview') {
+        const element = document.getElementById('overview');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   // Build slides from gallery or use default images
   const slides = product.gallery?.length > 0
@@ -53,6 +84,9 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
 
   // Get detailed specs
   const detailedSpecs = product.detailedSpecs || [];
+
+  // Get key specs
+  const keySpecs = product.keySpecs || [];
 
   // Get facilities
   const facilities = product.facilities || [];
@@ -164,30 +198,46 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
       {/* Highlight Specs */}
       <div className="w-full flex items-center justify-center px-6">
         <section className="highlight-specs w-full max-w-300 pb-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-stone-50 border-stone-200 border pt-2 pr-2 pb-2 pl-2 gap-x-2 gap-y-4">
-            <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.dimensionLabel || 'Dimensi'}</p>
-              <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{dimension}</h3>
-            </div>
-            <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.landAreaLabel || 'Luas Tanah'}</p>
-              <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{landArea}</h3>
-            </div>
-            <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.buildingAreaLabel || 'Luas Bangunan'}</p>
-              <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{buildingArea}</h3>
-            </div>
-            <div className="bg-white hover:bg-[#1d2088] hover:text-white p-6 flex justify-center items-center border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
-              <a href="https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park" className="flex items-center justify-center gap-2">
-                <h3 className="text-2xl font-medium tracking-tight mr-2 flex justify-center items-center gap-3">
-                  {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
-                    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                  </svg>
-                </h3>
-              </a>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-stone-50 border-stone-200 border pt-2 pr-2 pb-2 pl-2 gap-x-2 gap-y-4">
+          <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
+            <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.dimensionLabel || 'Dimensi'}</p>
+            <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{dimension}</h3>
           </div>
+          <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
+            <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.landAreaLabel || 'Luas Tanah'}</p>
+            <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{landArea}</h3>
+          </div>
+          <div className="bg-white p-6 border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-shadow duration-300">
+            <p className="text-[15px] leading-relaxed text-neutral-500 font-geist">{productPage?.detailLabels?.buildingAreaLabel || 'Luas Bangunan'}</p>
+            <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{buildingArea}</h3>
+          </div>
+          <div className="bg-white hover:bg-[#1d2088] hover:text-white p-6 flex justify-center items-center border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+            <a href="https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park" className="flex items-center justify-center gap-2">
+              <h3 className="text-2xl font-medium tracking-tight mr-2 flex justify-center items-center gap-3">
+                {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
+                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                </svg>
+              </h3>
+            </a>
+          </div>
+        </div>
+
+        {/* Key Specs Row */}
+        {keySpecs.length > 0 && (
+          <div className="mt-4 flex flex-wrap justify-center gap-8 mb-4">
+            {keySpecs.map((spec: any, index: number) => (
+              <div key={index} className="flex items-center gap-3">
+                {spec.icon && (
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 p-2">
+                    <img src={getMediaUrl(spec.icon)} alt={spec.label} className="w-full h-full object-contain" />
+                  </div>
+                )}
+                <span className="text-sm font-medium text-neutral-700">{spec.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
         </section>
       </div>
 
@@ -199,7 +249,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
               <a href="#overview">{productPage?.detailLabels?.summaryLabel || 'Ringkasan'}</a>
             </p>
             <p className="text-lg font-medium text-gray-400 justify-start max-w-md mb-2 hover:text-gray-600 cursor-pointer">
-              <a href="#facilities">{productPage?.detailLabels?.facilitiesLabel || 'Fasilitas'}</a>
+              <a href="#facilities-section">{productPage?.detailLabels?.facilitiesLabel || 'Fasilitas'}</a>
             </p>
             <p className="text-lg font-medium text-gray-400 justify-start max-w-md mb-2 hover:text-gray-600 cursor-pointer">
               <a href="#spesifikasi">{productPage?.detailLabels?.specificationsLabel || 'Spesifikasi'}</a>
@@ -278,13 +328,13 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           </div>
 
           {/* Facilities Section */}
-          <h2 className="text-3xl lg:text-4xl font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8">
+          <h2 className="text-3xl lg:text-4xl font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8" id="facilities-section">
             {productPage?.detailLabels?.facilitiesTitle || 'Fasilitas & Layanan'}
           </h2>
           <p className="text-justify text-neutral-600 mb-6">
             {productPage?.detailLabels?.facilitiesDescription || 'On-site amenities include 24/7 security, ample parking, reliable utilities, and customizable units to support warehousing, light manufacturing, and office use.'}
           </p>
-          <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center items-center" id="facilities">
+          <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center items-center">
             {facilities.length > 0 ? facilities.map((facility: any, index: number) => (
               <div key={index} className="flex flex-col items-center gap-2">
                 {facility.icon ? (

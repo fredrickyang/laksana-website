@@ -18,7 +18,30 @@ export const ProductPage: GlobalConfig = {
         ]
     },
     fields: [
-        { name: 'pageTitle', type: 'text', localized: true },
+        {
+            name: 'hero',
+            type: 'group',
+            fields: [
+                {
+                    name: 'backgroundImage',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'mobileBackgroundImage',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'title',
+                    type: 'text',
+                    localized: true,
+                },
+            ],
+        },
+        { name: 'pageTitle', type: 'text', localized: true, admin: { description: 'Legacy field - use hero.title instead' } },
         {
             name: 'detailLabels',
             type: 'group',

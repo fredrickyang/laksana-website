@@ -14,7 +14,7 @@ export default async function Home({ params }: HomePageProps) {
   // Fetch data from Payload CMS with locale
   const [homePage, products, articles, settings] = await Promise.all([
     getHomePage(locale as Locale),
-    getProducts(locale as Locale, 10),
+    getProducts(locale as Locale, 10, true),
     getArticles(locale as Locale, 3),
     getSettings(locale as Locale),
   ])
