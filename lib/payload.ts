@@ -4,9 +4,31 @@ import config from '@payload-config'
 
 type Locale = 'id' | 'en' | 'zh' | 'all'
 
-export async function getPayloadClient() {
-    return await getPayload({ config })
+let cached = (global as any).payload
+
+if (!cached) {
+    cached = (global as any).payload = { client: null, promise: null }
 }
+
+export async function getPayloadClient() {
+    if (cached.client) {
+        return cached.client
+    }
+
+    if (!cached.promise) {
+        cached.promise = getPayload({ config })
+    }
+
+    try {
+        cached.client = await cached.promise
+    } catch (e) {
+        cached.promise = null
+        throw e
+    }
+
+    return cached.client
+}
+
 
 // Fetch HomePage global
 export async function getHomePage(locale: Locale = 'id') {

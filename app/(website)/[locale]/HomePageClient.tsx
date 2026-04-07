@@ -101,6 +101,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
   const primaryCtaLink = homePage?.hero?.primaryCtaLink || "#";
   const secondaryCtaLink = homePage?.hero?.secondaryCtaLink || "#";
   const heroVideoUrl = getMediaUrl(homePage?.hero?.backgroundVideo) || "/videos/hero-video.mp4";
+  const heroPosterUrl = getMediaUrl(homePage?.hero?.fallbackImage) || "";
+
 
   return (
     <>
@@ -115,11 +117,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
             loop
             playsInline
             preload="metadata"
+            poster={heroPosterUrl}
             className="w-full h-full object-cover"
           >
             <source src={heroVideoUrl} type="video/mp4" />
             Video tidak Support.
           </video>
+
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
         </div>
@@ -200,11 +204,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
             >
               <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
                 <div className="absolute top-0 right-0 bottom-0 left-0">
-                  <img
+                  <Image
                     src={getMediaUrl(product.thumbnail) || "/images/card-unit/luxima.png"}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                     alt={product.name || "Product"}
+                    fill
+                    sizes="(max-width: 768px) 300px, 360px"
+                    priority={index < 3}
                   />
+
                 </div>
                 <div className="opacity-10 absolute top-0 right-0 bottom-0 left-0"></div>
               </div>
@@ -238,7 +246,14 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
                 <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
                   <div className="absolute top-0 right-0 bottom-0 left-0">
-                    <img src="/images/card-unit/luxima.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Luxima" />
+                    <Image 
+                      src="/images/card-unit/luxima.png" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
+                      alt="Luxima" 
+                      fill
+                      sizes="(max-width: 768px) 300px, 360px"
+                    />
+
                   </div>
                 </div>
                 <div className="justify-start mt-6 border-l border-black/5 pl-4">
