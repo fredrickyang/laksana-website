@@ -109,10 +109,11 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
-            src="/images/bg-produk.png"
-            alt="Background Image"
+            src={getMediaUrl(product.thumbnail) || "/images/bg-produk.png"}
+            alt={product.name || "Product Background"}
             width={1400}
             height={400}
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />

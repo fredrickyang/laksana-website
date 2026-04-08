@@ -256,6 +256,7 @@ export const getProductBySlug = cache(async (slug: string, locale: Locale = 'id'
                 select: {
                     name: true,
                     slug: true,
+                    thumbnail: true,
                     gallery: true,
                     highlightSpecs: true,
                     detailedSpecs: true,
