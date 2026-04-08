@@ -4,12 +4,10 @@ export const HomePage: GlobalConfig = {
     slug: 'home-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id')
-                    revalidatePath('/en')
-                    revalidatePath('/zh')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('home-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating home page:', err)
                 }

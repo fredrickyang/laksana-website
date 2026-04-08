@@ -4,12 +4,10 @@ export const TermsConditionsPage: GlobalConfig = {
     slug: 'terms-conditions-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/tnc')
-                    revalidatePath('/en/tnc')
-                    revalidatePath('/zh/tnc')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('terms-conditions-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating tnc page:', err)
                 }

@@ -4,12 +4,10 @@ export const AboutPage: GlobalConfig = {
     slug: 'about-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/our-company')
-                    revalidatePath('/en/our-company')
-                    revalidatePath('/zh/our-company')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('about-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating about page:', err)
                 }

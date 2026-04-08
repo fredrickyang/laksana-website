@@ -9,14 +9,10 @@ export const Products: CollectionConfig = {
         afterChange: [
             async ({ doc }) => {
                 try {
-                    const { revalidatePath } = await import('next/cache')
-                    revalidatePath('/id/product')
-                    revalidatePath('/en/product')
-                    revalidatePath('/zh/product')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('products', { expire: 0 })
                     if (doc.slug) {
-                        revalidatePath(`/id/unit-detail/${doc.slug}`)
-                        revalidatePath(`/en/unit-detail/${doc.slug}`)
-                        revalidatePath(`/zh/unit-detail/${doc.slug}`)
+                        revalidateTag(`product-${doc.slug}`, { expire: 0 })
                     }
                 } catch (err: any) {
                     console.error('Error revalidating product:', err)

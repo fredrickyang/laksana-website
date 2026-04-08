@@ -4,12 +4,10 @@ export const PrivacyPolicyPage: GlobalConfig = {
     slug: 'privacy-policy-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/privacy-policy')
-                    revalidatePath('/en/privacy-policy')
-                    revalidatePath('/zh/privacy-policy')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('privacy-policy-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating privacy policy page:', err)
                 }

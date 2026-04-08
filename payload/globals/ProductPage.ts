@@ -4,12 +4,10 @@ export const ProductPage: GlobalConfig = {
     slug: 'product-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/product')
-                    revalidatePath('/en/product')
-                    revalidatePath('/zh/product')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('product-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating product page:', err)
                 }

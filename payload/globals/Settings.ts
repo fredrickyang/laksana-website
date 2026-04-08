@@ -4,10 +4,10 @@ export const Settings: GlobalConfig = {
     slug: 'settings',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/', 'layout')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('settings', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating settings:', err)
                 }

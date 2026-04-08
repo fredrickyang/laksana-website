@@ -9,16 +9,12 @@ export const Articles: CollectionConfig = {
     },
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/article')
-                    revalidatePath('/en/article')
-                    revalidatePath('/zh/article')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('articles', { expire: 0 })
                     if (doc.slug) {
-                        revalidatePath(`/id/article-detail/${doc.slug}`)
-                        revalidatePath(`/en/article-detail/${doc.slug}`)
-                        revalidatePath(`/zh/article-detail/${doc.slug}`)
+                        revalidateTag(`article-${doc.slug}`, { expire: 0 })
                     }
                 } catch (err: any) {
                     console.error('Error revalidating article:', err)

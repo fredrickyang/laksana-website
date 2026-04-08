@@ -58,11 +58,13 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
 
   // Build slides from gallery or use default images
   const slides = product.gallery?.length > 0
-    ? product.gallery.map((item: any, index: number) => ({
-        src: getMediaUrl(item.image) || `/images/unit-detail/opxima-${index + 1}.png`,
-        label: `${product.name} ${index + 1}`,
-        desc: `Slide ${index + 1}`,
-      }))
+    ? product.gallery
+        .filter((item: any) => getMediaUrl(item.image))
+        .map((item: any, index: number) => ({
+          src: getMediaUrl(item.image),
+          label: `${product.name} - ${index + 1}`,
+          desc: `Slide ${index + 1}`,
+        }))
     : [
         { src: "/images/unit-detail/opxima-1.png", label: "Image 1", desc: "Slide 1" },
         { src: "/images/unit-detail/opxima-2.png", label: "Image 2", desc: "Slide 2" },
@@ -103,9 +105,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
     <>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>
-          {product.name} - Laksana Business Park
-        </title>
+        <title>{`${product.name} - Laksana Business Park`}</title>
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
@@ -229,9 +229,9 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           <div className="mt-4 flex flex-wrap justify-center gap-8 mb-4">
             {keySpecs.map((spec: any, index: number) => (
               <div key={index} className="flex items-center gap-3">
-                {spec.icon && (
+                {spec.icon && getMediaUrl(spec.icon) && (
                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 p-2">
-                    <Image src={getMediaUrl(spec.icon)} alt={spec.label} width={40} height={40} className="w-full h-full object-contain" />
+                    <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={40} height={40} className="w-full h-full object-contain" />
                   </div>
                 )}
                 <span className="text-sm font-medium text-neutral-700">{spec.label}</span>
@@ -338,29 +338,29 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center items-center">
             {facilities.length > 0 ? facilities.map((facility: any, index: number) => (
               <div key={index} className="flex flex-col items-center gap-2">
-                {facility.icon ? (
-                  <Image className="mx-auto" src={getMediaUrl(facility.icon)} width={56} height={56} alt={facility.label} />
+                {facility.icon && getMediaUrl(facility.icon) ? (
+                  <Image className="mx-auto" src={getMediaUrl(facility.icon)} width={56} height={56} alt={facility.label || "Facility"} />
                 ) : (
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt={facility.label} />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt={facility.label || "Facility"} />
                 )}
                 <span className="text-xs text-neutral-600 uppercase tracking-widest">{facility.label}</span>
               </div>
             )) : (
               <>
                 <div className="flex flex-col items-center gap-2">
-                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width="56" height="56" alt="One Gate System" />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt="One Gate System" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">One Gate System</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/2062/2062582.png" width="46" height="46" alt="Keamanan CCTV 24Jam" />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/2062/2062582.png" width={46} height={46} alt="Keamanan CCTV 24Jam" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Keamanan CCTV 24Jam</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/7969/7969430.png" width="46" height="46" alt="Porter Bongkar Muat" />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/7969/7969430.png" width={46} height={46} alt="Porter Bongkar Muat" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Tersedia Porter Bongkar Muat</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/25/25276.png" width="46" height="46" alt="Akses Jalan Luas" />
+                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/25/25276.png" width={46} height={46} alt="Akses Jalan Luas" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Akses Jalan Luas</span>
                 </div>
               </>

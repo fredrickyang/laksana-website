@@ -224,8 +224,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     {product.keySpecs && product.keySpecs.length > 0 ? (
                       product.keySpecs.slice(0, 2).map((spec: any, idx: number) => (
                         <div key={idx} className="flex items-center gap-1.5 min-w-0">
-                          {spec.icon ? (
-                            <img src={getMediaUrl(spec.icon)} alt={spec.label} className="w-3.5 h-3.5 object-contain" />
+                          {spec.icon && getMediaUrl(spec.icon) ? (
+                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-3.5 h-3.5 object-contain" />
                           ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi bi-check-circle" viewBox="0 0 16 16">
                               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -431,7 +431,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                         <div className="relative group cursor-pointer">
                           <div className="flex items-center gap-3">
                             {homePage.mainFeature.badges.map((badge: any, idx: number) => (
-                              <img
+                              <Image
                                 key={idx}
                                 src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
                                 alt={badge.label || `Badge ${idx + 1}`}
@@ -493,31 +493,31 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {homePage?.branding?.clientLogos?.length > 0 ? (
                     homePage.branding.clientLogos.map((logo: any, idx: number) => (
                       <span key={idx} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
+                        {getMediaUrl(logo.logo) && <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />}
                       </span>
                     ))
                   ) : (
                     <>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/coca-cola.svg" alt="Coca Cola" className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src="/brand/coca-cola.svg" alt="Coca Cola" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/google.svg" alt="Google" className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src="/brand/google.svg" alt="Google" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/heineken.svg" alt="Heineken" className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src="/brand/heineken.svg" alt="Heineken" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/microsoft.svg" alt="Microsoft" className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src="/brand/microsoft.svg" alt="Microsoft" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/underarmour.svg" alt="Under Armour" className="w-20 h-20 object-contain relative transition-all" />
+                        <Image src="/brand/underarmour.svg" alt="Under Armour" width={80} height={80} className="w-20 h-20 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/yamaha.svg" alt="Yamaha" className="w-28 h-28 object-contain relative transition-all" />
+                        <Image src="/brand/yamaha.svg" alt="Yamaha" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
                       </span>
                       <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <img src="/brand/mastercard.svg" alt="Mastercard" className="w-20 h-20 object-contain relative transition-all" />
+                        <Image src="/brand/mastercard.svg" alt="Mastercard" width={80} height={80} className="w-20 h-20 object-contain relative transition-all" />
                       </span>
                     </>
                   )}
@@ -636,7 +636,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <>
                 <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                   <div className="relative">
-                    <img src="images/card-blog/tahap3.png" alt="Article" className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110" />
+                    <Image src="/images/card-blog/tahap3.png" alt="Article" width={600} height={400} className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-2">
                       <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">NEWS</span>
                     </div>

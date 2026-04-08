@@ -4,12 +4,10 @@ export const ArticlePage: GlobalConfig = {
     slug: 'article-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/article')
-                    revalidatePath('/en/article')
-                    revalidatePath('/zh/article')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('article-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating article page:', err)
                 }

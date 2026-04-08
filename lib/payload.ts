@@ -1,4 +1,6 @@
 import 'server-only'
+import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
@@ -29,223 +31,314 @@ export async function getPayloadClient() {
     return cached.client
 }
 
+// Cache duration for unstable_cache (seconds)
+const CACHE_REVALIDATE = 3600
 
-// Fetch HomePage global
-export async function getHomePage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'home-page',
-        locale,
-        depth: 1,
-        select: {
-            hero: true,
-            mainFeature: true,
-            branding: true,
-            ctaSection: true,
-            articleSection: true,
-            projectSection: true,
-        }
-    })
-}
+// ─── Globals ────────────────────────────────────────────────
 
-// Fetch AboutPage global
-export async function getAboutPage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'about-page',
-        locale,
-        depth: 1,
-    })
-}
-
-// Fetch FacilitiesPage global
-export async function getFacilitiesPage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'facilities-page',
-        locale,
-        depth: 1,
-    })
-}
-
-// Fetch Settings global
-export async function getSettings(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'settings',
-        locale,
-        depth: 1,
-        select: {
-            siteTitle: true,
-            logo: true,
-            contactInfo: true,
-            socialMedia: true,
-            footer: true,
-            brochure: true,
-        }
-    })
-}
-
-// Fetch PrivacyPolicyPage global
-export async function getPrivacyPolicyPage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'privacy-policy-page',
-        locale,
-        depth: 1,
-    })
-}
-
-// Fetch TermsConditionsPage global
-export async function getTermsConditionsPage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'terms-conditions-page',
-        locale,
-        depth: 1,
-    })
-}
-
-// Fetch ProductPage global
-export async function getProductPage(locale: Locale = 'id') {
-    try {
-        const payload = await getPayloadClient()
-        return await payload.findGlobal({
-            slug: 'product-page',
-            locale,
-            depth: 1,
-        })
-    } catch {
-        // Table may not exist yet if migration hasn't run
-        return null
-    }
-}
-
-// Fetch ArticlePage global
-export async function getArticlePage(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    return await payload.findGlobal({
-        slug: 'article-page',
-        locale,
-        depth: 1,
-    })
-}
-
-// Fetch all Categories
-export async function getCategories(locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'categories',
-        locale,
-        limit: 100,
-        depth: 1,
-    })
-    return result.docs
-}
-
-// Fetch all Products
-export async function getProducts(locale: Locale = 'id', limit: number = 100, featured?: boolean) {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'products',
-        locale,
-        limit,
-        depth: 1,
-        where: featured !== undefined ? {
-            featured: { equals: featured }
-        } : undefined,
-        select: {
-            name: true,
-            slug: true,
-            thumbnail: true,
-            keySpecs: true,
-            type: true,
-            highlightSpecs: true,
-            shortDescription: true,
-        }
-    })
-    return result.docs
-}
-
-// Fetch Products by phase
-export async function getProductsByPhase(phase: string, locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'products',
-        locale,
-        where: {
-            phase: { equals: phase },
+export const getHomePage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'home-page',
+                locale,
+                depth: 1,
+                select: {
+                    hero: true,
+                    mainFeature: true,
+                    branding: true,
+                    ctaSection: true,
+                    articleSection: true,
+                    projectSection: true,
+                }
+            })
         },
-        depth: 1,
-    })
-    return result.docs
-}
+        [`home-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['home-page', `home-page-${locale}`] }
+    )()
+})
 
-// Fetch single Product by slug
-export async function getProductBySlug(slug: string, locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'products',
-        locale,
-        where: {
-            slug: { equals: slug },
+export const getAboutPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'about-page',
+                locale,
+                depth: 1,
+            })
         },
-        depth: 1,
-        limit: 1,
-    })
-    return result.docs[0] || null
-}
+        [`about-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['about-page', `about-page-${locale}`] }
+    )()
+})
 
-// Fetch all Articles
-export async function getArticles(locale: Locale = 'id', limit: number = 100) {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'articles',
-        locale,
-        limit,
-        depth: 1,
-        sort: '-publicationDate',
-        select: {
-            title: true,
-            slug: true,
-            thumbnail: true,
-            excerpt: true,
-            category: true,
-            publicationDate: true,
-        }
-    })
-    return result.docs
-}
-
-// Fetch Articles by category
-export async function getArticlesByCategory(category: string, locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'articles',
-        locale,
-        where: {
-            category: { equals: category },
+export const getFacilitiesPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'facilities-page',
+                locale,
+                depth: 1,
+            })
         },
-        depth: 1,
-        sort: '-publicationDate',
-    })
-    return result.docs
-}
+        [`facilities-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['facilities-page', `facilities-page-${locale}`] }
+    )()
+})
 
-// Fetch single Article by slug
-export async function getArticleBySlug(slug: string, locale: Locale = 'id') {
-    const payload = await getPayloadClient()
-    const result = await payload.find({
-        collection: 'articles',
-        locale,
-        where: {
-            slug: { equals: slug },
+export const getSettings = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            if (!payload || typeof payload.findGlobal !== 'function') {
+                console.error('Payload client is not initialized correctly or findGlobal missing', payload)
+                throw new Error('Payload client is not initialized correctly')
+            }
+            return await payload.findGlobal({
+                slug: 'settings',
+                locale,
+                depth: 1,
+            })
         },
-        depth: 1,
-        limit: 1,
-    })
-    return result.docs[0] || null
-}
+        [`settings-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['settings', `settings-${locale}`] }
+    )()
+})
+
+export const getPrivacyPolicyPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'privacy-policy-page',
+                locale,
+                depth: 1,
+            })
+        },
+        [`privacy-policy-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['privacy-policy-page', `privacy-policy-page-${locale}`] }
+    )()
+})
+
+export const getTermsConditionsPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'terms-conditions-page',
+                locale,
+                depth: 1,
+            })
+        },
+        [`terms-conditions-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['terms-conditions-page', `terms-conditions-page-${locale}`] }
+    )()
+})
+
+export const getProductPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            try {
+                const payload = await getPayloadClient()
+                return await payload.findGlobal({
+                    slug: 'product-page',
+                    locale,
+                    depth: 1,
+                })
+            } catch {
+                return null
+            }
+        },
+        [`product-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['product-page', `product-page-${locale}`] }
+    )()
+})
+
+export const getArticlePage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'article-page',
+                locale,
+                depth: 1,
+            })
+        },
+        [`article-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['article-page', `article-page-${locale}`] }
+    )()
+})
+
+// ─── Collections ────────────────────────────────────────────
+
+export const getCategories = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'categories',
+                locale,
+                limit: 100,
+                depth: 1,
+            })
+            return result.docs
+        },
+        [`categories-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['categories'] }
+    )()
+})
+
+export const getProducts = cache(async (locale: Locale = 'id', limit: number = 100, featured?: boolean) => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'products',
+                locale,
+                limit,
+                depth: 1,
+                where: featured !== undefined ? {
+                    featured: { equals: featured }
+                } : undefined,
+                select: {
+                    name: true,
+                    slug: true,
+                    thumbnail: true,
+                    keySpecs: true,
+                    type: true,
+                    highlightSpecs: true,
+                    shortDescription: true,
+                    label: true,
+                    phase: true,
+                }
+            })
+            return result.docs
+        },
+        [`products-${locale}-${limit}-${featured ?? 'all'}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['products'] }
+    )()
+})
+
+export const getProductsByPhase = cache(async (phase: string, locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'products',
+                locale,
+                where: {
+                    phase: { equals: phase },
+                },
+                depth: 1,
+            })
+            return result.docs
+        },
+        [`products-phase-${phase}-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['products'] }
+    )()
+})
+
+export const getProductBySlug = cache(async (slug: string, locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'products',
+                locale,
+                where: {
+                    slug: { equals: slug },
+                },
+                depth: 1,
+                limit: 1,
+                select: {
+                    name: true,
+                    slug: true,
+                    gallery: true,
+                    highlightSpecs: true,
+                    detailedSpecs: true,
+                    keySpecs: true,
+                    facilities: true,
+                    virtualTourUrl: true,
+                    fullDescription: true,
+                    shortDescription: true,
+                    brochure: true,
+                }
+            })
+            return result.docs[0] || null
+        },
+        [`product-${slug}-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['products', `product-${slug}`] }
+    )()
+})
+
+export const getArticles = cache(async (locale: Locale = 'id', limit: number = 100) => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'articles',
+                locale,
+                limit,
+                depth: 1,
+                sort: '-publicationDate',
+                select: {
+                    title: true,
+                    slug: true,
+                    thumbnail: true,
+                    excerpt: true,
+                    category: true,
+                    publicationDate: true,
+                }
+            })
+            return result.docs
+        },
+        [`articles-${locale}-${limit}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['articles'] }
+    )()
+})
+
+export const getArticlesByCategory = cache(async (category: string, locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'articles',
+                locale,
+                where: {
+                    category: { equals: category },
+                },
+                depth: 1,
+                sort: '-publicationDate',
+            })
+            return result.docs
+        },
+        [`articles-category-${category}-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['articles'] }
+    )()
+})
+
+export const getArticleBySlug = cache(async (slug: string, locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'articles',
+                locale,
+                where: {
+                    slug: { equals: slug },
+                },
+                depth: 1,
+                limit: 1,
+            })
+            return result.docs[0] || null
+        },
+        [`article-${slug}-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['articles', `article-${slug}`] }
+    )()
+})
 
 // Re-export getMediaUrl for server components
 export { getMediaUrl } from './utils'

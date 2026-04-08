@@ -115,7 +115,7 @@ export default async function Product({ params }: ProductPageProps) {
                     src={getMediaUrl(product.thumbnail) || "/images/card-unit/kavling-card.png"}
                     fill
                     className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
-                    alt={product.name}
+                    alt={product.name || "Product"}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
@@ -129,8 +129,8 @@ export default async function Product({ params }: ProductPageProps) {
                     <div className="flex gap-2 mt-2">
                       {product.keySpecs?.slice(0, 3).map((spec: any, idx: number) => (
                         <div key={idx} className="bg-white/20 backdrop-blur-sm p-1 rounded flex items-center gap-1">
-                          {spec.icon && (
-                            <Image src={getMediaUrl(spec.icon)} alt={spec.label} width={12} height={12} className="w-3 h-3 object-contain invert grayscale" />
+                          {spec.icon && getMediaUrl(spec.icon) && (
+                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={12} height={12} className="w-3 h-3 object-contain invert grayscale" />
                           )}
                           <span className="text-[8px] text-white/90 uppercase tracking-tighter">{spec.label}</span>
                         </div>
@@ -177,7 +177,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <img src="/images/card-unit/kavling-card.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <Image src="/images/card-unit/kavling-card.png" alt="Kavling" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
@@ -192,7 +192,7 @@ export default async function Product({ params }: ProductPageProps) {
           </div>
           <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <img src="/images/card-unit/kavling-card.png" className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <Image src="/images/card-unit/kavling-card.png" alt="Kavling" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>

@@ -2,7 +2,7 @@ import { getHomePage, getProducts, getArticles, getSettings, getMediaUrl } from 
 import HomePageClient from './HomePageClient'
 import { locales, type Locale } from '@/i18n.config'
 
-export const revalidate = 60; // Cache for 1 minute (60 seconds)
+export const revalidate = 3600; // Cache for 1 hour
 
 interface HomePageProps {
   params: Promise<{ locale: string }>

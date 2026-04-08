@@ -4,12 +4,10 @@ export const FacilitiesPage: GlobalConfig = {
     slug: 'facilities-page',
     hooks: {
         afterChange: [
-            ({ doc }) => {
+            async ({ doc }) => {
                 try {
-                    const { revalidatePath } = require('next/cache')
-                    revalidatePath('/id/facilities')
-                    revalidatePath('/en/facilities')
-                    revalidatePath('/zh/facilities')
+                    const { revalidateTag } = await import('next/cache')
+                    revalidateTag('facilities-page', { expire: 0 })
                 } catch (err: any) {
                     console.error('Error revalidating facilities page:', err)
                 }

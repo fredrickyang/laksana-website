@@ -41,7 +41,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     <>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>{article.title} - Laksana Business Park</title>
+        <title>{`${article.title} - Laksana Business Park`}</title>
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
@@ -228,9 +228,11 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                   href={`/article/${related.slug}`}
                   className="group flex gap-4 p-4 border border-neutral-200 hover:border-[#1d2088] transition-colors"
                 >
-                  <img
+                  <Image
                     src={getMediaUrl(related.thumbnail) || "/images/card-blog/tahap3.png"}
                     alt={related.title}
+                    width={96}
+                    height={96}
                     className="w-24 h-24 object-cover shrink-0"
                   />
                   <div>
