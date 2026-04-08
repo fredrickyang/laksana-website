@@ -7,7 +7,7 @@ import {
 } from "react";
 import Image from "next/image";
 import Footer from "../components/Footer";
-import { getMediaUrl } from "@/lib/utils";
+import { getMediaUrl, formatNumberInString } from "@/lib/utils";
 
 // Helper to extract plain text from Payload richText field
 function getRichText(richText: any, fallback: string = ''): string {
@@ -250,7 +250,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                           <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
                         </svg>
                         <p className="ml-[2%] text-sm leading-relaxed max-w-[90%]">
-                          {product.highlightSpecs?.landArea || "Luas 550 ha"}
+                          {formatNumberInString(product.highlightSpecs?.landArea || "Luas 550 ha")}
                         </p>
                       </>
                     )}

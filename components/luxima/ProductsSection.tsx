@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { WHATSAPP_CONTACT } from '@/constants/contacts';
+import { formatNumberInString } from '@/lib/utils';
 
 // Define interface for product data
 interface Product {
@@ -306,11 +307,11 @@ export default function ProductsSection() {
                   <div className="grid grid-cols-2 gap-2 mb-4">
                     <div className="bg-gray-50 p-2 md:p-3 rounded-lg">
                       <span className="block text-gray-500 text-xs">Luas Tanah</span>
-                      <span className="font-bold text-gray-800 text-sm md:text-base">{product.landArea}</span>
+                      <span className="font-bold text-gray-800 text-sm md:text-base">{formatNumberInString(product.landArea)}</span>
                     </div>
                     <div className="bg-gray-50 p-2 md:p-3 rounded-lg">
                       <span className="block text-gray-500 text-xs">Luas Bangunan</span>
-                      <span className="font-bold text-gray-800 text-sm md:text-base">{product.buildingArea}</span>
+                      <span className="font-bold text-gray-800 text-sm md:text-base">{formatNumberInString(product.buildingArea)}</span>
                     </div>
                   </div>
 
@@ -467,11 +468,11 @@ export default function ProductsSection() {
                       </div>
                       <div className="bg-gray-50 p-3 md:p-4 rounded-lg">
                         <span className="text-gray-500 text-xs md:text-sm block mb-1">Luas Tanah</span>
-                        <span className="font-bold text-gray-800 text-base md:text-lg">{selectedProduct.landArea}</span>
+                        <span className="font-bold text-gray-800 text-base md:text-lg">{formatNumberInString(selectedProduct.landArea)}</span>
                       </div>
                       <div className="bg-gray-50 p-3 md:p-4 rounded-lg">
                         <span className="text-gray-500 text-xs md:text-sm block mb-1">Luas Bangunan</span>
-                        <span className="font-bold text-gray-800 text-base md:text-lg">{selectedProduct.buildingArea}</span>
+                        <span className="font-bold text-gray-800 text-base md:text-lg">{formatNumberInString(selectedProduct.buildingArea)}</span>
                       </div>
                     </div>
                   </div>

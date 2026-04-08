@@ -22,3 +22,16 @@ function stripLocalhostOrigin(url: string): string {
     }
     return url
 }
+
+/**
+ * Formats all numbers within a string with thousand separators (commas).
+ * Example: "360000 m²" -> "360,000 m²"
+ */
+export function formatNumberInString(str: string): string {
+    if (!str) return '';
+    // This regex finds integer-looking number sequences
+    return str.replace(/\d+/g, (match) => {
+        const number = parseInt(match, 10);
+        return number.toLocaleString('en-US');
+    });
+}

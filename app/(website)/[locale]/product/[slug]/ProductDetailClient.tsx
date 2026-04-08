@@ -4,7 +4,7 @@ import Footer from "../../../components/Footer";
 import Form from "../../../components/Form";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getMediaUrl } from "@/lib/utils";
+import { getMediaUrl, formatNumberInString } from "@/lib/utils";
 
 const productTranslations: Record<string, Record<string, string>> = {
   id: { breadcrumbPrefix: 'Beranda / Produk /', type: 'Tipe' },
@@ -81,8 +81,8 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
 
   // Get highlight specs
   const dimension = product.highlightSpecs?.dimension || "6 x 24 Meter";
-  const landArea = product.highlightSpecs?.landArea || "144 m²";
-  const buildingArea = product.highlightSpecs?.buildingArea || "126 m²";
+  const landArea = formatNumberInString(product.highlightSpecs?.landArea || "144 m²");
+  const buildingArea = formatNumberInString(product.highlightSpecs?.buildingArea || "126 m²");
 
   // Get detailed specs
   const detailedSpecs = product.detailedSpecs || [];
