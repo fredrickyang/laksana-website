@@ -2,6 +2,9 @@ import type { GlobalConfig } from 'payload'
 
 export const Settings: GlobalConfig = {
     slug: 'settings',
+    access: {
+        read: () => true,
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

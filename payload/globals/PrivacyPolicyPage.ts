@@ -2,6 +2,9 @@ import type { GlobalConfig } from 'payload'
 
 export const PrivacyPolicyPage: GlobalConfig = {
     slug: 'privacy-policy-page',
+    access: {
+        read: () => true,
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

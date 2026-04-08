@@ -2,6 +2,9 @@ import type { GlobalConfig } from 'payload'
 
 export const FacilitiesPage: GlobalConfig = {
     slug: 'facilities-page',
+    access: {
+        read: () => true,
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

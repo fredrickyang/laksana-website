@@ -2,6 +2,9 @@ import type { GlobalConfig } from 'payload'
 
 export const TermsConditionsPage: GlobalConfig = {
     slug: 'terms-conditions-page',
+    access: {
+        read: () => true,
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

@@ -2,6 +2,9 @@ import type { GlobalConfig } from 'payload'
 
 export const ArticlePage: GlobalConfig = {
     slug: 'article-page',
+    access: {
+        read: () => true,
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {
