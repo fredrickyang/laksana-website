@@ -248,7 +248,7 @@ export interface Product {
         /**
          * Spec value (e.g., "Tiang Pancang", "UPVC 2 Layer")
          */
-        value: string;
+        value?: string | null;
         id?: string | null;
       }[]
     | null;

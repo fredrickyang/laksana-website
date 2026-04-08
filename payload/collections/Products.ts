@@ -165,7 +165,6 @@ export const Products: CollectionConfig = {
                 {
                     name: 'value',
                     type: 'text',
-                    required: true,
                     localized: true,
                     admin: {
                         description: 'Spec value (e.g., "Tiang Pancang", "UPVC 2 Layer")',
