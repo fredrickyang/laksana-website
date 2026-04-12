@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { sendFormNotification } from '@/lib/email'
+
 
 export async function POST(request: NextRequest) {
     try {
@@ -34,25 +34,7 @@ export async function POST(request: NextRequest) {
             },
         })
 
-        // Fetch notification email from Settings
-        const settings = await payload.findGlobal({
-            slug: 'settings',
-        })
 
-        const notificationEmail = settings?.contactInformation?.formNotificationEmail
-
-        // Send email notification if configured
-        if (notificationEmail) {
-            await sendFormNotification(notificationEmail, {
-                name,
-                email,
-                phone,
-                domicile,
-                buildingSize,
-                serviceType,
-                message,
-            })
-        }
 
         return NextResponse.json({ success: true, message: 'Form submitted successfully' })
     } catch (error: any) {

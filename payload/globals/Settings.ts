@@ -45,14 +45,7 @@ export const Settings: GlobalConfig = {
                     name: 'email',
                     type: 'text',
                 },
-                {
-                    name: 'formNotificationEmail',
-                    type: 'email',
-                    label: 'Form Notification Email',
-                    admin: {
-                        description: 'Email address to receive form submissions from the website contact form',
-                    },
-                },
+
                 {
                     name: 'headOfficeAddress',
                     type: 'richText',
