@@ -217,9 +217,49 @@ export const Products: CollectionConfig = {
             ],
         },
         {
-            name: 'callToAction',
+            name: 'ctaTitle',
             type: 'text',
             localized: true,
+            admin: {
+                description: 'Override global CTA title for only this product',
+            },
+        },
+        {
+            name: 'ctaDescription',
+            type: 'text',
+            localized: true,
+            admin: {
+                description: 'Override global CTA description for only this product',
+            },
+        },
+        {
+            name: 'virtualTourTitle',
+            type: 'richText',
+            localized: true,
+            admin: {
+                description: 'Override global Virtual Tour title for only this product',
+            },
+        },
+        {
+            name: 'virtualTourDescription',
+            type: 'text',
+            localized: true,
+            admin: {
+                description: 'Override global Virtual Tour description for only this product',
+            },
+        },
+        {
+            name: 'virtualTourReasons',
+            type: 'array',
+            localized: true,
+            maxRows: 3,
+            admin: {
+                description: 'Override global Virtual Tour reasons for only this product',
+            },
+            fields: [
+                { name: 'title', type: 'text', localized: true },
+                { name: 'description', type: 'text', localized: true },
+            ],
         },
     ],
 }

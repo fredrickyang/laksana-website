@@ -225,21 +225,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           </div>
         </div>
 
-        {/* Key Specs Row */}
-        {keySpecs.length > 0 && (
-          <div className="mt-4 flex flex-wrap justify-center gap-8 mb-4">
-            {keySpecs.map((spec: any, index: number) => (
-              <div key={index} className="flex items-center gap-3">
-                {spec.icon && getMediaUrl(spec.icon) && (
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 p-2">
-                    <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={40} height={40} className="w-full h-full object-contain" />
-                  </div>
-                )}
-                <span className="text-sm font-medium text-neutral-700">{spec.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
+
         </section>
       </div>
 
@@ -378,10 +364,10 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-white/5 blur-3xl pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-5xl text-white tracking-tighter mb-6 font-montserrat font-medium">
-                {productPage?.detailLabels?.ctaTitle || 'Punya kebutuhan spesifik mengenai Gudang ?'}
+                {product.ctaTitle || productPage?.detailLabels?.ctaTitle || 'Punya kebutuhan spesifik mengenai Gudang ?'}
               </h2>
               <p className="text-zinc-400 text-base md:text-lg mb-10 max-w-2xl mx-auto font-manrope">
-                {productPage?.detailLabels?.ctaDescription || 'Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.'}
+                {product.ctaDescription || productPage?.detailLabels?.ctaDescription || 'Coba diskusikan dengan tim kami, buat janji visit anda ke Marketing Gallery kami.'}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#contact" className="button-cta1 w-full sm:w-auto px-8 py-3 bg-white hover:bg-[#1d2088] hover:text-white text-black text-sm font-semibold transition-colors tracking-tight cursor-pointer">
@@ -402,16 +388,16 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
               <h2 className="text-4xl lg:text-5xl font-medium tracking-tight text-stone-900 mb-8">
-                {productPage?.detailLabels?.virtualTourTitle?.root?.children?.map((p: any) =>
+                {(product.virtualTourTitle || productPage?.detailLabels?.virtualTourTitle)?.root?.children?.map((p: any) =>
                   p.children?.map((c: any) => c.text).join('')
                 ).join(' ') || (<>Kenapa Investor memilih <br /><span className="text-[#1d2088]">Laksana Business Park</span></>)}
               </h2>
               <p className="text-stone-600 mb-6">
-                {productPage?.detailLabels?.virtualTourDescription || 'Kami satu-satunya kawasan pergudangan yang terus berkembang dengan fasilitas lengkap dan serta pengembangan hingga Tahap 3 & Township.'}
+                {product.virtualTourDescription || productPage?.detailLabels?.virtualTourDescription || 'Kami satu-satunya kawasan pergudangan yang terus berkembang dengan fasilitas lengkap dan serta pengembangan hingga Tahap 3 & Township.'}
               </p>
             </div>
             <div className="flex flex-col justify-center space-y-6">
-              {productPage?.detailLabels?.virtualTourReasons?.length > 0 ? productPage.detailLabels.virtualTourReasons.map((reason: any, index: number) => (
+              {(product.virtualTourReasons?.length > 0 ? product.virtualTourReasons : productPage?.detailLabels?.virtualTourReasons)?.length > 0 ? (product.virtualTourReasons?.length > 0 ? product.virtualTourReasons : productPage.detailLabels.virtualTourReasons).map((reason: any, index: number) => (
                 <div key={index} className="flex items-start gap-4">
                   <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check w-4 h-4 text-stone-700">

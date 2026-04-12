@@ -601,12 +601,12 @@ export default function HomePageClient({ homePage, products, articles, settings,
           <article className="cursor-pointer pt-16 pb-16 flex flex-col lg:flex-row justify-start gap-8 flex-wrap">
             {articles.length > 0 ? articles.map((article, index) => (
               <a key={article.id || index} href={`/${locale}/article/${article.slug}`} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
-                <div className="relative">
+                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                   <Image
-                    src={getMediaUrl(article.thumbnail) || "images/card-blog/tahap3.png"}
+                    src={getMediaUrl(article.thumbnail) || "/images/card-blog/tahap3.png"}
                     alt={article.title || "Article"}
                     fill
-                    className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
+                    className="object-cover transition-all duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
                     <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">

@@ -49,8 +49,12 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const t = menuTranslations[locale] || menuTranslations.id;
 
-  // Hide this global menu on Luxima pages
-  if (pathname.includes('/luxima')) {
+  // Hide this global menu ONLY on the specific Luxima landing/sub-pages
+  // Example: /[locale]/luxima -> segments[1] is 'luxima'
+  const pathSegments = pathname.split('/').filter(Boolean);
+  const isLuximaLanding = pathSegments[1] === 'luxima';
+  
+  if (isLuximaLanding) {
     return null;
   }
 

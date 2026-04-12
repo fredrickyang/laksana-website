@@ -286,7 +286,46 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
-  callToAction?: string | null;
+  /**
+   * Override global CTA title for only this product
+   */
+  ctaTitle?: string | null;
+  /**
+   * Override global CTA description for only this product
+   */
+  ctaDescription?: string | null;
+  /**
+   * Override global Virtual Tour title for only this product
+   */
+  virtualTourTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Override global Virtual Tour description for only this product
+   */
+  virtualTourDescription?: string | null;
+  /**
+   * Override global Virtual Tour reasons for only this product
+   */
+  virtualTourReasons?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -533,7 +572,17 @@ export interface ProductsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
-  callToAction?: T;
+  ctaTitle?: T;
+  ctaDescription?: T;
+  virtualTourTitle?: T;
+  virtualTourDescription?: T;
+  virtualTourReasons?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
