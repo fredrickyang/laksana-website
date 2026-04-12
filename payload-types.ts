@@ -326,6 +326,10 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Legacy field - data has been migrated to ctaTitle
+   */
+  call_to_action?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -583,6 +587,7 @@ export interface ProductsSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  call_to_action?: T;
   updatedAt?: T;
   createdAt?: T;
 }

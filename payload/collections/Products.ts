@@ -251,7 +251,6 @@ export const Products: CollectionConfig = {
         {
             name: 'virtualTourReasons',
             type: 'array',
-            localized: true,
             maxRows: 3,
             admin: {
                 description: 'Override global Virtual Tour reasons for only this product',
@@ -260,6 +259,15 @@ export const Products: CollectionConfig = {
                 { name: 'title', type: 'text', localized: true },
                 { name: 'description', type: 'text', localized: true },
             ],
+        },
+        {
+            name: 'call_to_action',
+            type: 'text',
+            localized: true,
+            admin: {
+                hidden: true,
+                description: 'Legacy field - data has been migrated to ctaTitle',
+            },
         },
     ],
 }
