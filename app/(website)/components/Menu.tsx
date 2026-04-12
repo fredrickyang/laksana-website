@@ -334,8 +334,9 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
             <p className="text-base leading-relaxed font-sans font-normal text-white/70">
               {phoneNumbers.map((phone: any, idx: number) => (
                 <span key={idx}>
+                  {phone.label && <span className="text-xs uppercase tracking-widest text-brand block mb-1">{phone.label}</span>}
                   {phone.number}
-                  {idx < phoneNumbers.length - 1 && <br />}
+                  {idx < phoneNumbers.length - 1 && <div className="mb-4" />}
                 </span>
               ))}
               <br />

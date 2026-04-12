@@ -73,8 +73,8 @@ export default function Footer({ settings }: FooterProps) {
   const privacyPolicyLink = footer.privacyPolicyLink || '/privacy-policy';
   const termsOfServiceLink = footer.termsOfServiceLink || '/tnc';
 
+  const phoneNumbers = contactInfo.phoneNumbers || [];
   const email = contactInfo.email || '[No Data: email]';
-  const phoneNumber = contactInfo.phoneNumbers?.[0]?.number || '[No Data: phoneNumbers]';
 
   // Extract address from richText
   const getAddressText = (richText: any, fallback: string) => {
@@ -229,19 +229,33 @@ export default function Footer({ settings }: FooterProps) {
                     </span>
                   </div>
                 </li>
-                <li>
-                  <div className="flex justify-start gap-3 items-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0 mt-1" viewBox="0 0 16 16">
-                      <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
-                    </svg>
-                    <a
-                      href={`tel:${phoneNumber.replace(/[^0-9+]/g, '')}`}
-                      className="hover:text-neutral-900 transition-colors"
-                    >
-                      {phoneNumber}
-                    </a>
-                  </div>
-                </li>
+                {phoneNumbers.length > 0 ? phoneNumbers.map((phone: any, idx: number) => (
+                  <li key={idx}>
+                    <div className="flex justify-start gap-3 items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0 mt-1" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                      </svg>
+                      <div className="flex flex-col gap-0.5">
+                        {phone.label && <span className="text-[10px] uppercase tracking-widest text-[#1d2088] font-bold">{phone.label}</span>}
+                        <a
+                          href={`tel:${phone.number?.replace(/[^0-9+]/g, '')}`}
+                          className="hover:text-neutral-900 transition-colors"
+                        >
+                          {phone.number}
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                )) : (
+                  <li>
+                    <div className="flex justify-start gap-3 items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill shrink-0 mt-1" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                      </svg>
+                      <span className="text-neutral-400 font-sans">[No Data: phoneNumbers]</span>
+                    </div>
+                  </li>
+                )}
                 <li>
                   <div className="flex justify-start gap-3 items-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-fill shrink-0 mt-1" viewBox="0 0 16 16">
