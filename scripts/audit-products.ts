@@ -194,12 +194,12 @@ async function audit() {
             }
 
             // 6. Call to Action
-            if (!localizedProduct.callToAction) {
-                if (product.callToAction) {
-                    updateData.callToAction = product.callToAction
+            if (!localizedProduct.ctaTitle) {
+                if (product.ctaTitle) {
+                    updateData.ctaTitle = product.ctaTitle
                     needsUpdate = true
                 } else {
-                    updateData.callToAction = 'Hubungi Kami' // Default CTA
+                    updateData.ctaTitle = 'Hubungi Kami' // Default CTA
                     needsUpdate = true
                 }
             }
