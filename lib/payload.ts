@@ -191,6 +191,24 @@ export const getCategories = cache(async (locale: Locale = 'id') => {
     )()
 })
 
+export const getPhases = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            const result = await payload.find({
+                collection: 'phases',
+                locale,
+                limit: 100,
+                sort: 'order',
+                depth: 1,
+            })
+            return result.docs
+        },
+        [`phases-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['phases'] }
+    )()
+})
+
 export const getProducts = cache(async (locale: Locale = 'id', limit: number = 100, featured?: boolean) => {
     return unstable_cache(
         async () => {

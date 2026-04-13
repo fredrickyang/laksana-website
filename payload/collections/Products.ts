@@ -69,13 +69,12 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'phase',
-            type: 'select',
-            options: [
-                'Tahap 1',
-                'Tahap 2',
-                'Luxima',
-                'Kavling Industri'
-            ]
+            type: 'relationship',
+            relationTo: 'phases' as any,
+            required: false,
+            admin: {
+                position: 'sidebar',
+            },
         },
         {
             name: 'type',

@@ -1,4 +1,4 @@
-import { getProducts, getSettings, getProductPage, getMediaUrl } from '@/lib/payload'
+import { getProducts, getSettings, getProductPage, getMediaUrl, getPhases } from '@/lib/payload'
 import Image from "next/image"
 import Footer from "../../components/Footer"
 import { locales, type Locale } from '@/i18n.config'
@@ -12,44 +12,21 @@ interface ProductPageProps {
 export default async function Product({ params }: ProductPageProps) {
   const { locale } = await params
 
-  const [products, settings, productPage] = await Promise.all([
+  const [products, settings, productPage, phases] = await Promise.all([
     getProducts(locale as Locale),
     getSettings(locale as Locale),
     getProductPage(locale as Locale),
+    getPhases(locale as Locale),
   ])
 
-  // Group products by phase
+  // Group products by phase ID
   const productsByPhase = products.reduce((acc: Record<string, any[]>, product: any) => {
-    const phase = product.phase || 'Other'
-    if (!acc[phase]) acc[phase] = []
-    acc[phase].push(product)
+    const phaseId = typeof product.phase === 'object' ? product.phase?.id : product.phase
+    if (!phaseId) return acc
+    if (!acc[phaseId]) acc[phaseId] = []
+    acc[phaseId].push(product)
     return acc
   }, {})
-
-  // Define phase display order and titles per locale
-  const phaseConfigByLocale: Record<string, Record<string, { title: string; id: string }>> = {
-    id: {
-      'Tahap 1': { title: 'Tahap Satu', id: 'tahap-satu' },
-      'Tahap 2': { title: 'Tahap Dua', id: 'tahap-dua' },
-      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
-      'Kavling Industri': { title: 'Kavling Industri', id: 'kavling-industri' },
-    },
-    en: {
-      'Tahap 1': { title: 'Phase One', id: 'tahap-satu' },
-      'Tahap 2': { title: 'Phase Two', id: 'tahap-dua' },
-      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
-      'Kavling Industri': { title: 'Industrial Land', id: 'kavling-industri' },
-    },
-    zh: {
-      'Tahap 1': { title: '第一期', id: 'tahap-satu' },
-      'Tahap 2': { title: '第二期', id: 'tahap-dua' },
-      'Luxima': { title: 'Luxima Bizhub 4 in 1', id: 'luxima-product' },
-      'Kavling Industri': { title: '工业用地', id: 'kavling-industri' },
-    },
-  }
-  const phaseConfig = phaseConfigByLocale[locale] || phaseConfigByLocale.id
-
-  const phaseOrder = ['Tahap 1', 'Tahap 2', 'Luxima', 'Kavling Industri']
 
   return (
     <>
@@ -86,20 +63,19 @@ export default async function Product({ params }: ProductPageProps) {
       </div>
 
       {/* Render products by phase */}
-      {phaseOrder.map((phase) => {
-        const phaseProducts = productsByPhase[phase]
+      {phases.map((phase: any) => {
+        const phaseProducts = productsByPhase[phase.id]
         if (!phaseProducts || phaseProducts.length === 0) return null
 
-        const config = phaseConfig[phase]
         return (
-          <div key={phase}>
+          <div key={phase.id}>
             {/* Phase Header */}
             <div
               className="w-full px-6 lg:px-12 flex flex-col md:flex-row md:items-end justify-between mb-5 mt-15 gap-8 [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate"
-              id={config.id}
+              id={phase.slug}
             >
               <h2 className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tighter leading-[0.9]">
-                {config.title}
+                {phase.name}
               </h2>
             </div>
 

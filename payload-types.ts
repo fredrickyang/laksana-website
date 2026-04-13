@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     products: Product;
+    phases: Phase;
     articles: Article;
     categories: Category;
     'form-submissions': FormSubmission;
@@ -83,6 +84,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    phases: PhasesSelect<false> | PhasesSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -200,7 +202,7 @@ export interface Product {
    * Product label shown on cards (e.g., "Gudang Siap Pakai", "Kavling Siap Bangun")
    */
   label?: string | null;
-  phase?: ('Tahap 1' | 'Tahap 2' | 'Luxima' | 'Kavling Industri') | null;
+  phase?: (number | null) | Phase;
   type?: string | null;
   thumbnail?: (number | null) | Media;
   gallery?:
@@ -335,6 +337,24 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "phases".
+ */
+export interface Phase {
+  id: number;
+  name: string;
+  /**
+   * Used for URL anchors and internal identification (e.g., "tahap-1")
+   */
+  slug: string;
+  /**
+   * Lower numbers appear first on the products page
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles".
  */
 export interface Article {
@@ -431,6 +451,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'phases';
+        value: number | Phase;
       } | null)
     | ({
         relationTo: 'articles';
@@ -588,6 +612,17 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   call_to_action?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "phases_select".
+ */
+export interface PhasesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

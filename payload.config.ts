@@ -9,6 +9,7 @@ import sharp from 'sharp'
 import { Users } from './payload/collections/Users'
 import { Media } from './payload/collections/Media'
 import { Products } from './payload/collections/Products'
+import { Phases } from './payload/collections/Phases'
 import { Articles } from './payload/collections/Articles'
 import { Categories } from './payload/collections/Categories'
 import { FormSubmissions } from './payload/collections/FormSubmissions'
@@ -54,7 +55,7 @@ export default buildConfig({
       beforeDashboard: ['./payload/components/S3UsageWidget'],
     },
   },
-  collections: [Users, Media, Products, Articles, Categories, FormSubmissions],
+  collections: [Users, Media, Products, Phases, Articles, Categories, FormSubmissions],
   globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage, ProductPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
