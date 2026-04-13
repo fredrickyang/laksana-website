@@ -331,7 +331,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
             <h3 className="text-xs uppercase tracking-[0.2em] text-brand mb-4 font-sans font-normal">
               {t.contactLabel}
             </h3>
-            <p className="text-base leading-relaxed font-sans font-normal text-white/70">
+            <div className="text-base leading-relaxed font-sans font-normal text-white/70">
               {phoneNumbers.map((phone: any, idx: number) => (
                 <span key={idx}>
                   {phone.label && <span className="text-xs uppercase tracking-widest text-brand block mb-1">{phone.label}</span>}
@@ -341,7 +341,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
               ))}
               <br />
               {email}
-            </p>
+            </div>
           </div>
           <div className="menu-item delay-500">
             <h3 className="text-xs uppercase tracking-[0.2em] text-brand mb-4 font-sans font-normal">

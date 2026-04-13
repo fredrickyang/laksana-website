@@ -691,10 +691,6 @@ export interface Setting {
         }[]
       | null;
     email?: string | null;
-    /**
-     * Email address to receive form submissions from the website contact form
-     */
-    formNotificationEmail?: string | null;
     headOfficeAddress?: {
       root: {
         type: string;
@@ -1382,7 +1378,6 @@ export interface SettingsSelect<T extends boolean = true> {
               id?: T;
             };
         email?: T;
-        formNotificationEmail?: T;
         headOfficeAddress?: T;
         marketingOfficeAddress?: T;
         socialMediaLinks?:
