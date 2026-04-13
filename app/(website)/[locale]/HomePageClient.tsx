@@ -396,28 +396,28 @@ export default function HomePageClient({ homePage, products, articles, settings,
               {homePage?.mainFeature?.badges?.length > 0 && (
                 <div className="border-t border-black/5 border-dashed pt-12">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="relative group cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                    <div className="flex items-center gap-4">
+                      {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                        <div key={idx} className="flex flex-col items-center gap-3">
                           <Image
-                            key={idx}
                             src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
                             alt={badge.label || `Badge ${idx + 1}`}
                             width={112}
                             height={112}
                             className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
                           />
-                        ))}
-                      </div>
+                          {badge.label && (
+                            <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-widest text-center max-w-[112px]">
+                              {badge.label}
+                            </span>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <div className="mt-6">
-                    {homePage.mainFeature.badges.map((badge: any, bIdx: number) => (
-                      <p key={bIdx} className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">
-                        {badge.label}
-                      </p>
-                    ))}
-                  </div>
+                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
+                    {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
+                  </p>
                 </div>
               )}
             </>) : (
@@ -432,28 +432,28 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {homePage?.mainFeature?.badges?.length > 0 ? (
                     <>
                       <div className="flex items-start gap-4 mb-4">
-                        <div className="relative group cursor-pointer">
-                          <div className="flex items-center gap-3">
-                            {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                        <div className="flex items-center gap-4">
+                          {homePage.mainFeature.badges.map((badge: any, idx: number) => (
+                            <div key={idx} className="flex flex-col items-center gap-3">
                               <Image
-                                key={idx}
                                 src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
                                 alt={badge.label || `Badge ${idx + 1}`}
                                 width={80}
                                 height={80}
                                 className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
                               />
-                            ))}
-                          </div>
+                              {badge.label && (
+                                <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-widest text-center max-w-[112px]">
+                                  {badge.label}
+                                </span>
+                              )}
+                            </div>
+                          ))}
                         </div>
                       </div>
-                      <div className="mt-6">
-                        {homePage.mainFeature.badges.map((badge: any, bIdx: number) => (
-                          <p key={bIdx} className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">
-                            {badge.label}
-                          </p>
-                        ))}
-                      </div>
+                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
+                        {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
+                      </p>
                     </>
                   ) : (
                     <>
