@@ -411,9 +411,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
                       </div>
                     </div>
                   </div>
-                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                    {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
-                  </p>
+                  <div className="mt-6">
+                    {homePage.mainFeature.badges.map((badge: any, bIdx: number) => (
+                      <p key={bIdx} className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">
+                        {badge.label}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               )}
             </>) : (
@@ -443,9 +447,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
                           </div>
                         </div>
                       </div>
-                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                        {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
-                      </p>
+                      <div className="mt-6">
+                        {homePage.mainFeature.badges.map((badge: any, bIdx: number) => (
+                          <p key={bIdx} className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">
+                            {badge.label}
+                          </p>
+                        ))}
+                      </div>
                     </>
                   ) : (
                     <>
