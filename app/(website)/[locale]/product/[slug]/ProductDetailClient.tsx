@@ -5,6 +5,7 @@ import Form from "../../../components/Form";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getMediaUrl, formatNumberInString } from "@/lib/utils";
+import RichTextContent from "../../../components/RichTextContent";
 
 const productTranslations: Record<string, Record<string, string>> = {
   id: { breadcrumbPrefix: 'Beranda / Produk /', type: 'Tipe' },
@@ -96,10 +97,8 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
   // Get virtual tour URL
   const virtualTourUrl = product.virtualTourUrl || "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/";
 
-  // Extract description text from richText
-  const fullDescription = product.fullDescription?.root?.children?.map((p: any) =>
-    p.children?.map((c: any) => c.text).join('')
-  ).join('\n\n') || product.shortDescription || "";
+  const fullDescription = product.fullDescription;
+  const virtualTourTitle = product.virtualTourTitle || productPage?.detailLabels?.virtualTourTitle;
 
   return (
     <>
@@ -248,9 +247,13 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
             <h2 className="text-3xl lg:text-4xl font-medium tracking-tight border-l-4 border-[#1d2088] pl-6 mb-8">
               {t.type} {product.name}
             </h2>
-            <p className="text-justify text-neutral-600 mb-6">
-              {fullDescription || `${product.name} adalah solusi properti komersial terkemuka yang dirancang untuk memenuhi kebutuhan bisnis modern.`}
-            </p>
+            <div className={`text-justify text-neutral-600 mb-6 transition-all duration-500 overflow-hidden ${!showMore ? 'max-h-24 md:max-h-32' : 'max-h-[2000px]'}`}>
+              {fullDescription ? (
+                <RichTextContent data={fullDescription} className="prose-p:leading-relaxed prose-p:mb-4" />
+              ) : (
+                <p>{product.name} adalah solusi properti komersial terkemuka yang dirancang untuk memenuhi kebutuhan bisnis modern.</p>
+              )}
+            </div>
 
             {showMore && (
               <>
@@ -388,9 +391,11 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
               <h2 className="text-4xl lg:text-5xl font-medium tracking-tight text-stone-900 mb-8">
-                {(product.virtualTourTitle || productPage?.detailLabels?.virtualTourTitle)?.root?.children?.map((p: any) =>
-                  p.children?.map((c: any) => c.text).join('')
-                ).join(' ') || (<>Kenapa Investor memilih <br /><span className="text-[#1d2088]">Laksana Business Park</span></>)}
+                {virtualTourTitle ? (
+                  <RichTextContent data={virtualTourTitle} />
+                ) : (
+                  <>Kenapa Investor memilih <br /><span className="text-[#1d2088]">Laksana Business Park</span></>
+                )}
               </h2>
               <p className="text-stone-600 mb-6">
                 {product.virtualTourDescription || productPage?.detailLabels?.virtualTourDescription || 'Kami satu-satunya kawasan pergudangan yang terus berkembang dengan fasilitas lengkap dan serta pengembangan hingga Tahap 3 & Township.'}

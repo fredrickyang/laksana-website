@@ -1,53 +1,23 @@
 "use client"
+import Image from "next/image"
+import { getMediaUrl } from "@/lib/utils"
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
-interface TextNode {
-    type: 'text'
-    text: string
-    format?: number
+interface Node {
+    type: string
+    [key: string]: any
 }
-
-interface LinkNode {
-    type: 'link'
-    children: TextNode[]
-    fields: {
-        url: string
-        newTab?: boolean
-        linkType?: string
-    }
-}
-
-interface ListItemNode {
-    type: 'listitem'
-    children: (TextNode | LinkNode)[]
-}
-
-interface ListNode {
-    type: 'list'
-    listType: 'bullet' | 'number'
-    children: ListItemNode[]
-}
-
-interface HeadingNode {
-    type: 'heading'
-    tag: string
-    children: (TextNode | LinkNode)[]
-}
-
-interface ParagraphNode {
-    type: 'paragraph'
-    children: (TextNode | LinkNode)[]
-}
-
-type BlockNode = ParagraphNode | HeadingNode | ListNode
 
 interface RichTextData {
     root: {
-        children: BlockNode[]
+        children: Node[]
     }
 }
 
-// Lexical format bitmask: 1=bold, 2=italic
-function renderInlineNodes(nodes: (TextNode | LinkNode)[]) {
+// Lexical format bitmask: 1=bold, 2=italic, 4=strikethrough, 8=underline
+function renderInlineNodes(nodes: Node[]) {
+    if (!nodes) return null
     return nodes.map((node, i) => {
         if (node.type === 'link') {
             const url = node.fields?.url || '#'
@@ -56,64 +26,113 @@ function renderInlineNodes(nodes: (TextNode | LinkNode)[]) {
                 <a
                     key={i}
                     href={url}
-                    className="text-blue-600 hover:text-blue-800 font-semibold underline"
+                    className="text-[#1d2088] hover:underline font-medium"
                     {...(newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
-                    {node.children?.map((c, j) => renderTextNode(c, j))}
+                    {renderInlineNodes(node.children)}
                 </a>
             )
         }
-        return renderTextNode(node, i)
+        if (node.type === 'linebreak') {
+            return <br key={i} />
+        }
+        if (node.type === 'text') {
+            const format = node.format || 0
+            const text: string = node.text || ''
+
+            // Split text at \n characters and insert <br> elements
+            const parts = text.split('\n')
+            let content: React.ReactNode
+            if (parts.length > 1) {
+                content = parts.map((part, pi) => (
+                    <span key={`t-${i}-${pi}`}>
+                        {pi > 0 && <br />}
+                        {part}
+                    </span>
+                ))
+            } else {
+                content = text
+            }
+
+            if (format & 1) content = <strong key={`b-${i}`}>{content}</strong>
+            if (format & 2) content = <em key={`i-${i}`}>{content}</em>
+            if (format & 4) content = <s key={`s-${i}`}>{content}</s>
+            if (format & 8) content = <span key={`u-${i}`} className="underline">{content}</span>
+            return <span key={i}>{content}</span>
+        }
+        return null
     })
 }
 
-function renderTextNode(node: TextNode, key: number) {
-    const format = node.format || 0
-    let content: React.ReactNode = node.text
-    if (format & 1) content = <strong key={`b-${key}`}>{content}</strong>
-    if (format & 2) content = <em key={`i-${key}`}>{content}</em>
-    return <span key={key}>{content}</span>
-}
-
 interface RichTextContentProps {
-    data: RichTextData | null | undefined
+    data: RichTextData | string | null | undefined
     className?: string
 }
 
 export default function RichTextContent({ data, className = '' }: RichTextContentProps) {
-    if (!data?.root?.children) return null
+    if (!data) return null
+
+    // Fallback for string/markdown data
+    if (typeof data === 'string') {
+        return (
+            <div className={`prose prose-neutral max-w-none ${className}`}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {data.replace(/<br\s*\/?>/gi, '  \n')}
+                </ReactMarkdown>
+            </div>
+        )
+    }
+
+    if (!data.root?.children) return null
 
     return (
-        <div className={className}>
+        <div className={`prose prose-neutral max-w-none ${className}`}>
             {data.root.children.map((block, i) => {
                 switch (block.type) {
                     case 'heading': {
-                        const tag = (block as HeadingNode).tag
+                        const tag = block.tag
                         const inner = renderInlineNodes(block.children)
-                        if (tag === 'h3') return <h3 key={i} className="text-2xl font-bold text-gray-900 mb-4">{inner}</h3>
-                        if (tag === 'h4') return <h4 key={i} className="text-xl font-semibold text-gray-800 mb-3">{inner}</h4>
-                        if (tag === 'h5') return <h5 key={i} className="font-bold text-gray-900 mb-2">{inner}</h5>
-                        return <h3 key={i} className="text-2xl font-bold text-gray-900 mb-4">{inner}</h3>
+                        if (tag === 'h1') return <h1 key={i} className="text-4xl font-bold mb-6">{inner}</h1>
+                        if (tag === 'h2') return <h2 key={i} className="text-3xl font-bold mb-5">{inner}</h2>
+                        if (tag === 'h3') return <h3 key={i} className="text-2xl font-bold mb-4">{inner}</h3>
+                        if (tag === 'h4') return <h4 key={i} className="text-xl font-semibold mb-3">{inner}</h4>
+                        return <h3 key={i} className="text-2xl font-bold mb-4">{inner}</h3>
                     }
                     case 'list': {
-                        const listNode = block as ListNode
-                        const items = listNode.children.map((li, j) => (
-                            <li key={j} className="flex gap-3 text-gray-700">
-                                <span className="text-blue-600 font-bold shrink-0">
-                                    {listNode.listType === 'number' ? `${j + 1}.` : '•'}
-                                </span>
-                                <span>{renderInlineNodes(li.children)}</span>
+                        const items = block.children.map((li: Node, j: number) => (
+                            <li key={j}>
+                                {renderInlineNodes(li.children)}
                             </li>
                         ))
-                        return listNode.listType === 'number'
-                            ? <ol key={i} className="space-y-3">{items}</ol>
-                            : <ul key={i} className="space-y-3">{items}</ul>
+                        return block.listType === 'number'
+                            ? <ol key={i} className="list-decimal pl-6 space-y-2">{items}</ol>
+                            : <ul key={i} className="list-disc pl-6 space-y-2">{items}</ul>
+                    }
+                    case 'upload': {
+                        const media = block.value
+                        if (!media) return null
+                        const src = getMediaUrl(media)
+                        if (!src) return null
+                        return (
+                            <div key={i} className="my-8 relative aspect-video w-full overflow-hidden rounded-lg">
+                                <Image
+                                    src={src}
+                                    alt={media.alt || 'Content image'}
+                                    fill
+                                    className="object-cover"
+                                />
+                                {media.caption && (
+                                    <p className="mt-2 text-sm text-gray-500 text-center">{media.caption}</p>
+                                )}
+                            </div>
+                        )
                     }
                     case 'paragraph':
                     default:
+                        if (!block.children || block.children.length === 0) return null
                         return (
-                            <p key={i} className="text-gray-700 leading-relaxed">
-                                {renderInlineNodes((block as ParagraphNode).children || [])}
+                            <p key={i} className="mb-4 last:mb-0">
+                                {renderInlineNodes(block.children)}
                             </p>
                         )
                 }
