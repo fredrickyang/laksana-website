@@ -563,7 +563,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <p className="text-[#A1A1AA] text-sm lg:text-base mb-8 font-geist">
                 {getRichText(homePage?.ctaSection?.cardDescription, '[No Data: ctaSection.cardDescription]')}
               </p>
-              <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
+              <div className="flex flex-col sm:flex-row items-center gap-6 mt-4 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
                 <a
                   href={homePage?.ctaSection?.buttonLink || "/our-company#contact"}
                   className="btn-wrapper"
@@ -593,15 +593,21 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <div className="dot top right"></div>
                   <div className="dot bottom right"></div>
                   <div className="dot bottom left"></div>
-                  <button className="btn bg-neutral-900 text-white border-transparent hover:bg-neutral-800 transition-colors rounded-md">
-                    <span className="btn-text tracking-tight text-white">
-                      {homePage?.ctaSection?.button || "[No Data: ctaSection.button]"}
+                  <button className="btn bg-white text-black border-transparent hover:bg-neutral-100 transition-colors">
+                    <span className="btn-text tracking-tight">
+                      {homePage?.ctaSection?.button || "Konsultasi Gratis"}
                     </span>
-                    <svg className="btn-svg text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14"></path>
-                      <path d="m12 5 7 7-7 7"></path>
-                    </svg>
                   </button>
+                </a>
+
+                {/* Download Brochure Button */}
+                <a
+                  href={getMediaUrl(settings?.brochure) || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap min-w-[200px] text-center"
+                >
+                  {locale === 'id' ? 'Unduh Brosur' : locale === 'zh' ? '下载电子手册' : 'Download Brochure'}
                 </a>
               </div>
             </div>

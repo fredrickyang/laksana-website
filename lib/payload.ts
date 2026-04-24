@@ -284,6 +284,11 @@ export const getProductBySlug = cache(async (slug: string, locale: Locale = 'id'
                     fullDescription: true,
                     shortDescription: true,
                     brochure: true,
+                    virtualTourTitle: true,
+                    virtualTourDescription: true,
+                    virtualTourReasons: true,
+                    ctaTitle: true,
+                    ctaDescription: true,
                 }
             })
             return result.docs[0] || null
