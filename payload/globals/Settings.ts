@@ -49,21 +49,6 @@ export const Settings: GlobalConfig = {
                     type: 'text',
                 },
                 {
-                    name: 'whatsAppUrl',
-                    type: 'text',
-                    admin: {
-                        hidden: true,
-                    },
-                },
-                {
-                    name: 'whatsAppMessage',
-                    type: 'text',
-                    localized: true,
-                    admin: {
-                        hidden: true,
-                    },
-                },
-                {
                     name: 'headOfficeAddress',
                     type: 'richText',
                     localized: true,

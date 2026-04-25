@@ -1,0 +1,74 @@
+[
+  {
+    "id": 6,
+    "name": "jason",
+    "email": "jason@gmail.com",
+    "phone": "081234321321",
+    "domicile": "Jakarta",
+    "buildingSize": "medium",
+    "serviceType": "warehouse",
+    "message": "Halo!",
+    "updatedAt": "2026-04-24T07:27:24.057Z",
+    "createdAt": "2026-04-24T07:27:24.056Z"
+  },
+  {
+    "id": 5,
+    "name": "Oswin Wilke",
+    "email": "gilang.id@yahoo.com",
+    "phone": "08132094958",
+    "domicile": "Jakarta",
+    "buildingSize": "small",
+    "serviceType": "land",
+    "message": "test",
+    "updatedAt": "2026-04-10T03:34:49.339Z",
+    "createdAt": "2026-04-10T03:34:49.339Z"
+  },
+  {
+    "id": 4,
+    "name": "test",
+    "email": "test@gmail.copm",
+    "phone": "1231312",
+    "domicile": "ada",
+    "buildingSize": "large",
+    "serviceType": "land",
+    "message": "test",
+    "updatedAt": "2026-04-08T14:35:40.530Z",
+    "createdAt": "2026-04-08T14:35:40.529Z"
+  },
+  {
+    "id": 3,
+    "name": "ftest",
+    "email": "test@gmail.com",
+    "phone": "test",
+    "domicile": "test",
+    "buildingSize": "medium",
+    "serviceType": "land",
+    "message": "etes",
+    "updatedAt": "2026-04-07T14:15:59.758Z",
+    "createdAt": "2026-04-07T14:15:59.756Z"
+  },
+  {
+    "id": 2,
+    "name": "Validation Test",
+    "email": "val@test.com",
+    "phone": "08123456789",
+    "domicile": null,
+    "buildingSize": "extra-large",
+    "serviceType": "full",
+    "message": null,
+    "updatedAt": "2026-04-07T13:12:25.147Z",
+    "createdAt": "2026-04-07T13:12:25.145Z"
+  },
+  {
+    "id": 1,
+    "name": "Debug Test 8:10:18 PM",
+    "email": "debug@test.com",
+    "phone": "08123456789",
+    "domicile": "Jakarta",
+    "buildingSize": "small",
+    "serviceType": "full",
+    "message": "Testing for database errors.",
+    "updatedAt": "2026-04-07T13:10:18.876Z",
+    "createdAt": "2026-04-07T13:10:18.874Z"
+  }
+]

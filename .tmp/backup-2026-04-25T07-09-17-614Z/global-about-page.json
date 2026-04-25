@@ -1,0 +1,144 @@
+{
+  "id": 1,
+  "hero": {
+    "backgroundImage": 185,
+    "mobileBackgroundImage": null,
+    "title": "Tentang Perusahaan"
+  },
+  "history": {
+    "headline": "Perjalanan Agung Intiland Dimulai 2010",
+    "content": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Sejak itu, Agung Intiland telah berkembang menjadi pengembang kawasan industri terbesar di Tangerang Utara, dengan komitmen untuk menciptakan ekosistem produktif yang mendorong pertumbuhan bisnis berkelanjutan. Dimulai dari pengembangan Laksana Business Park, kini kami telah menjadi tolok ukur kawasan industri dan komersial terintegrasi di wilayah ini.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Setiap proyek yang kami hadirkan dibangun di atas dasar perencanaan matang, infrastruktur andal, serta fasilitas lengkap yang menunjang kebutuhan bisnis modern. Laksana Business Park, sebagai tonggak pertama kami, telah berkembang menjadi pusat industri dan komersial yang dinamis, didukung oleh komunitas yang dirancang untuk meningkatkan efisiensi sekaligus pertumbuhan.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Dengan dedikasi lebih dari 300 profesional, Agung Intiland terus memperkuat reputasinya melalui konsistensi, inovasi, dan praktik berkelanjutan. Ke depan, kami bersiap untuk mengembangkan proyek residensial, melengkapi visi kami dalam menciptakan kawasan terintegrasi yang menyatukan bisnis dan kehidupan secara harmonis.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    }
+  },
+  "videoSection": {
+    "youtubeUrl": "https://www.youtube.com/embed/aIA9kDBlJDc?start=1",
+    "thumbnail": 5
+  },
+  "leadership": {
+    "headline": "Pimpinan Perusahaan",
+    "description": "Tim manajemen yang terdiri dari para profesional dengan pengalaman luas di berbagai bidang.",
+    "leaders": [
+      {
+        "id": "69d51bbcd56feab84063528e",
+        "name": "Francis Cahyadi",
+        "photo": 174,
+        "position": "Komisaris Utama"
+      },
+      {
+        "id": "69d51bbcd56feab84063528f",
+        "name": "Jimmy Widjaja",
+        "photo": 175,
+        "position": "Komisaris"
+      },
+      {
+        "id": "69d51bbcd56feab840635290",
+        "name": "Paberd Leonard Hutagaol",
+        "photo": 35,
+        "position": "Direktur Utama"
+      },
+      {
+        "id": "69d51bbcd56feab840635291",
+        "name": "Netty Rusli",
+        "photo": 34,
+        "position": "Direktur Keuangan"
+      }
+    ]
+  },
+  "timelineHeading": "Sejarah dimulainya perjalanan perusahaan untuk membangun masa depan ",
+  "timelineSubheading": "Perjalanan kami dimulai dari sebuah visi yang berani untuk membangun masa depan properti yang berkelanjutan.",
+  "timeline": [
+    {
+      "id": "69d51bbcd56feab840635292",
+      "year": "2010",
+      "image": null,
+      "title": "Agung Intiland didirikan",
+      "description": "Dimulai perusahaan kami dengan visi untuk menjadi pelopor dalam industri properti pergudangan, mengutamakan inovasi dan keberlanjutan dalam setiap proyek yang kami jalankan."
+    },
+    {
+      "id": "69d51bbcd56feab840635293",
+      "year": "2015",
+      "image": null,
+      "title": "Pembangunan Proyek Perdana",
+      "description": "Laksana Business Park Tahap 1 dibangun, menandai tonggak penting dalam perjalanan kami. Proyek ini menampilkan desain modern dan fasilitas ramah lingkungan yang menetapkan standar baru untuk pergudangan di kawasan ini."
+    },
+    {
+      "id": "69d51bbcd56feab840635294",
+      "year": "2017",
+      "image": null,
+      "title": "Pembangunan Infrastruktur & Fasilitas Komersial",
+      "description": "Pembangunan infrastruktur pendukung seperti jalan akses utama, sistem drainase tertutup, dan fasilitas komersial untuk mendukung kebutuhan operasional tenant kami."
+    },
+    {
+      "id": "69d51bbcd56feab840635295",
+      "year": "2019",
+      "image": null,
+      "title": "Pembangunan Laksana Business Park Tahap 2",
+      "description": "Pengembangan Laksana Business Park Tahap 2 dengan penambahan area kawasan, seiring bertambahnya permintaan pasar terhadap fasilitas pergudangan modern dan terintegrasi."
+    },
+    {
+      "id": "69d51bbcd56feab840635296",
+      "year": "2022",
+      "image": null,
+      "title": "Peluncuran Pasar Laksana Business Park Tahap 2",
+      "description": "Peresmian peluncuran Laksana Business Park Tahap 2, menandai ekspansi besar-besaran dengan fasilitas yang lebih canggih, area kawasan yang luas, dan row jalan lebar untuk mendukung operasional tenant kami."
+    },
+    {
+      "id": "69d51bbcd56feab840635297",
+      "year": "2025",
+      "image": null,
+      "title": "Peluncuran Luxima Bizhub, Gudang dengan konsep 4 in 1",
+      "description": "Peluncuran Luxima Bizhub, gudang dengan konsep 4 in 1 yang mengintegrasikan fungsi pergudangan, kantor, ruko, dan fasilitas pendukung lainnya dalam satu kawasan terpadu untuk memenuhi kebutuhan bisnis modern."
+    }
+  ],
+  "updatedAt": "2026-04-15T06:28:12.311Z",
+  "createdAt": "2026-02-26T16:26:38.296Z",
+  "globalType": "about-page"
+}

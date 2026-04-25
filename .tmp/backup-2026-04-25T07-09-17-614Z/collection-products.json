@@ -1,0 +1,2082 @@
+[
+  {
+    "id": 13,
+    "name": "Test Produk",
+    "featured": true,
+    "slug": "test-produk",
+    "label": "Test Label Produk",
+    "phase": null,
+    "type": "Test Tipe Produk",
+    "thumbnail": 213,
+    "gallery": [],
+    "keySpecs": [],
+    "highlightSpecs": {
+      "dimension": null,
+      "landArea": null,
+      "buildingArea": null,
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Test%20Produk"
+    },
+    "detailedSpecs": [],
+    "shortDescription": null,
+    "fullDescription": null,
+    "virtualTourUrl": null,
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": null,
+    "ctaDescription": null,
+    "virtualTourTitle": null,
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:38:38.440Z",
+    "createdAt": "2026-04-24T07:18:13.270Z"
+  },
+  {
+    "id": 12,
+    "name": "Gudang Blok C",
+    "featured": true,
+    "slug": "gudang-blok-c",
+    "label": "Gudang Siap Pakai",
+    "phase": 2,
+    "type": "Industrial",
+    "thumbnail": 210,
+    "gallery": [
+      {
+        "id": "69e7168f63c239baf5f5cac6",
+        "image": 211
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69e716bc63c239baf5f5cac7",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69e716d663c239baf5f5cac8",
+        "icon": 191,
+        "label": "450 m² - 600 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "15 x 40 Meter",
+      "landArea": "450 m² - 600 m²",
+      "buildingArea": "N/A ",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Gudang%20Blok%20C"
+    },
+    "detailedSpecs": [],
+    "shortDescription": "Gudang dijual ukuran 450 m² dan 600 m² di kawasan industri strategis dekat bandara dan tol, ideal untuk logistik dan distribusi.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Gudang Blok C di Laksana Business Park merupakan solusi ideal bagi pelaku usaha yang membutuhkan gudang dijual di kawasan industri strategis. Cocok untuk bisnis logistik, distribusi, maupun operasional skala menengah.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Tersedia dalam ukuran 450 m² dan 600 m², unit ini dirancang untuk memberikan efisiensi ruang serta kemudahan operasional sehari-hari.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keamanan 24 jam memberikan rasa aman dalam penyimpanan barang dan aktivitas bisnis. Jalan kawasan yang lebar memudahkan kendaraan besar bergerak tanpa hambatan, sehingga distribusi menjadi lebih cepat.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Lokasinya yang hanya 20 menit dari Bandara Soekarno-Hatta serta akses tol Kataraja memberikan efisiensi tinggi dalam rantai logistik. Ditambah legalitas IUKI, bisnis Anda berjalan dengan aman dan profesional.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Gudang ini tidak hanya mendukung operasional, tetapi juga menjadi investasi properti industri yang menjanjikan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Segera hubungi WhatsApp untuk cek harga dan jadwalkan survey sebelum unit habis.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ],
+        "direction": null
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": null,
+    "ctaDescription": null,
+    "virtualTourTitle": null,
+    "virtualTourDescription": null,
+    "virtualTourReasons": [
+      {
+        "id": "69eb0bb5a00f0c6d735a733b",
+        "title": "test",
+        "description": "testsetsetsetse "
+      }
+    ],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:56:20.573Z",
+    "createdAt": "2026-04-21T06:23:52.455Z"
+  },
+  {
+    "id": 11,
+    "name": "Gudang Blok B",
+    "featured": true,
+    "slug": "gudang-blok-b",
+    "label": "Gudang Siap Pakai",
+    "phase": 2,
+    "type": "Industrial",
+    "thumbnail": 207,
+    "gallery": [
+      {
+        "id": "69e6f81c63c239baf5f5cabf",
+        "image": 207
+      },
+      {
+        "id": "69e6f85a63c239baf5f5cac0",
+        "image": 208
+      },
+      {
+        "id": "69e6f88863c239baf5f5cac1",
+        "image": 209
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69e7148e63c239baf5f5cac2",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69e7159f63c239baf5f5cac3",
+        "icon": 191,
+        "label": "450 m² - 600 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "12 X 35 Meter",
+      "landArea": "450 m² - 600 m²",
+      "buildingArea": "N/A",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Gudang%20Blok%20B"
+    },
+    "detailedSpecs": [],
+    "shortDescription": "Gudang dijual ukuran 450 m² dan 600 m² di kawasan industri strategis dekat bandara dan tol, ideal untuk logistik dan distribusi.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Gudang Blok B di Laksana Business Park merupakan pilihan ideal bagi pelaku usaha yang mencari gudang dijual di kawasan industri strategis dengan akses mudah dan fasilitas lengkap.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Tersedia dalam ukuran 450 m² dan 600 m², unit ini dirancang untuk memberikan efisiensi ruang serta mendukung berbagai kebutuhan operasional bisnis.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dengan keamanan 24 jam, aktivitas bisnis berjalan lebih aman tanpa gangguan. Jalan kawasan yang lebar memungkinkan kendaraan besar bergerak lancar, sehingga distribusi menjadi lebih cepat dan efisien.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Lokasinya yang hanya 20 menit dari bandara serta akses langsung ke tol memberikan keunggulan dalam kecepatan pengiriman dan efisiensi logistik. Ditambah dengan IUKI, bisnis Anda memiliki legalitas yang kuat dan terpercaya.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Gudang ini menjadi pilihan tepat untuk operasional sekaligus investasi properti industri.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Segera hubungi WhatsApp untuk cek harga dan jadwalkan survey sebelum unit habis.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ],
+        "direction": null
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": null,
+    "ctaDescription": null,
+    "virtualTourTitle": null,
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:38:38.920Z",
+    "createdAt": "2026-04-21T04:16:07.745Z"
+  },
+  {
+    "id": 10,
+    "name": "Gudang Blok L",
+    "featured": true,
+    "slug": "gudang-blok-l",
+    "label": "Gudang Siap Pakai",
+    "phase": 2,
+    "type": "Industrial",
+    "thumbnail": 205,
+    "gallery": [
+      {
+        "id": "69e6e89c63c239baf5f5cabc",
+        "image": 205
+      },
+      {
+        "id": "69e6e8f763c239baf5f5cabe",
+        "image": 206
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69e715e563c239baf5f5cac4",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69e715f963c239baf5f5cac5",
+        "icon": 191,
+        "label": "525 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "15 x 35 Metre",
+      "landArea": "525 m²",
+      "buildingArea": "N/A",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Gudang%20Blok%20L"
+    },
+    "detailedSpecs": [],
+    "shortDescription": "Gudang 525 m² dijual di kawasan industri strategis dekat bandara dan tol, cocok untuk distribusi dan operasional bisnis.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "h3",
+            "type": "heading",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Solusi Untuk Semua Jenis Kebutuhan Anda",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Gudang Blok L di Laksana Business Park merupakan solusi ideal bagi bisnis yang membutuhkan gudang dengan ukuran efisien dan lokasi strategis. Dengan luas 525 m², unit ini cocok untuk berbagai kebutuhan operasional seperti penyimpanan dan distribusi.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keamanan 24 jam memberikan rasa aman dalam operasional, sementara jalan lebar mendukung kelancaran distribusi kendaraan besar. Lokasi dekat bandara dan tol meningkatkan efisiensi logistik dan jangkauan bisnis. Dukungan IUKI memastikan legalitas usaha. Gudang ini cocok untuk operasional maupun investasi jangka panjang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Klik WhatsApp sekarang untuk konsultasi dan cek unit tersedia hari ini.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ],
+        "direction": null
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": null,
+    "ctaDescription": null,
+    "virtualTourTitle": null,
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:38:39.404Z",
+    "createdAt": "2026-04-21T03:06:58.396Z"
+  },
+  {
+    "id": 9,
+    "name": "Kavling Industri",
+    "featured": true,
+    "slug": "kavling-industri-2",
+    "label": "Kavlling Siap Bangun",
+    "phase": 4,
+    "type": "Industrial",
+    "thumbnail": 192,
+    "gallery": [
+      {
+        "id": "69e052a537c67745efc3a00c",
+        "image": 194
+      },
+      {
+        "id": "69e052bd37c67745efc3a00d",
+        "image": 195
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69e04c62d507a4aa3cfa2311",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69e04c73d507a4aa3cfa2312",
+        "icon": 191,
+        "label": "920 m² - 1.426 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "Dapat disesuikan",
+      "landArea": "920 m² - 1.426 m²",
+      "buildingArea": "N/A",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Kavling%20Industri"
+    },
+    "detailedSpecs": [],
+    "shortDescription": "Kavling industri siap bangun dengan infrastruktur lengkap dan izin IUKI. Dirancang untuk mendukung kegiatan distribusi, logistik, manufaktur ringan, hingga penyimpanan barang skala menengah dan besar.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "h3",
+            "type": "heading",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Kavling Industri Strategis untuk Pengembangan Bisnis Anda",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 1,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textFormat": 1
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Laksana Business Park menghadirkan kavling industri premium yang dirancang khusus untuk memenuhi kebutuhan pengembangan bisnis jangka panjang. Berlokasi di kawasan strategis dengan aksesibilitas tinggi, kavling industri ini menjadi solusi ideal bagi perusahaan yang ingin membangun fasilitas usaha sesuai kebutuhan spesifik, mulai dari pabrik, gudang, workshop, hingga pusat distribusi.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Kavling industri di Laksana Business Park menawarkan fleksibilitas penuh bagi para pelaku usaha untuk merancang dan mengembangkan bangunan sesuai dengan karakter bisnis masing-masing. Dengan tata kawasan yang terencana, infrastruktur yang matang, serta dukungan utilitas yang memadai, setiap kavling memberikan fondasi yang kuat untuk operasional bisnis yang efisien dan berkelanjutan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Didukung dengan jalan kawasan yang lebar dan mampu dilalui kendaraan berat, sistem drainase yang baik, serta jaringan listrik dan utilitas yang siap pakai, Laksana Business Park memastikan setiap aktivitas industri dapat berjalan dengan lancar. Selain itu, kawasan ini juga dilengkapi dengan sistem keamanan 24 jam dan manajemen kawasan profesional yang memberikan rasa aman dan kenyamanan bagi seluruh tenant.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Kavling industri ini sangat cocok bagi perusahaan yang ingin melakukan ekspansi, relokasi, maupun investasi properti industri dengan nilai jangka panjang. Lingkungan kawasan yang berkembang pesat juga memberikan potensi peningkatan nilai aset yang signifikan di masa depan. Dengan konsep kawasan industri modern yang terintegrasi, Laksana Business Park tidak hanya menawarkan lahan, tetapi juga menghadirkan peluang pertumbuhan bisnis yang lebih besar. Ini adalah pilihan tepat bagi Anda yang ingin memiliki kontrol penuh dalam membangun fasilitas usaha sekaligus berinvestasi di kawasan bisnis yang terus berkembang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ],
+        "direction": null
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": null,
+    "ctaDescription": null,
+    "virtualTourTitle": null,
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:38:39.894Z",
+    "createdAt": "2026-04-16T02:43:48.152Z"
+  },
+  {
+    "id": 8,
+    "name": "Kluster Gudang",
+    "featured": false,
+    "slug": "kluster-gudang",
+    "label": "Kluster Siap Bangun",
+    "phase": 4,
+    "type": "Kavling",
+    "thumbnail": 189,
+    "gallery": [
+      {
+        "id": "69df35840b88164fae87a065",
+        "image": 188
+      },
+      {
+        "id": "69df35b40b88164fae87a067",
+        "image": 5
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69df35ac0b88164fae87a066",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69df53330b88164fae87a069",
+        "icon": 191,
+        "label": "920 m² - 1.426 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "Dapat disesuikan",
+      "landArea": "920 m² - 1.426 m²",
+      "buildingArea": "N/A",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Kluster%20Gudang"
+    },
+    "detailedSpecs": [],
+    "shortDescription": "Didesain untuk menjawab kebutuhan ruang usaha dan tempat tinggal dalam satu atap yang sama sebagai solusi nyata khususnya bagi start-up business.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Cluster Gudang Modern untuk Kebutuhan Bisnis Anda",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 1,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Laksana Business Park menghadirkan kawasan pergudangan modern yang dirancang untuk mendukung pertumbuhan bisnis secara optimal, strategis, dan berkelanjutan. Terletak di lokasi yang mudah diakses dan terintegrasi dengan jaringan infrastruktur utama, Laksana Business Park menjadi pilihan ideal bagi pelaku usaha yang membutuhkan gudang representatif sekaligus fungsional untuk berbagai kebutuhan industri, distribusi, hingga logistik.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Cluster gudang di Laksana Business Park dikembangkan dengan konsep kawasan bisnis terpadu yang mengutamakan efisiensi operasional dan kenyamanan. Setiap unit dirancang dengan standar konstruksi berkualitas tinggi, memiliki akses kendaraan besar yang memadai, serta tata ruang yang fleksibel untuk mendukung aktivitas penyimpanan maupun operasional bisnis Anda.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Pada ",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              },
+              {
+                "mode": "normal",
+                "text": "Laksana Business Park Tahap 1",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 1,
+                "version": 1
+              },
+              {
+                "mode": "normal",
+                "text": ", tersedia unit gudang dengan luas bangunan ±920 m² yang sangat ideal untuk perusahaan skala menengah yang membutuhkan ruang penyimpanan optimal dengan biaya investasi yang efisien. Sementara itu, pada ",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              },
+              {
+                "mode": "normal",
+                "text": "Laksana Business Park Tahap 2",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 1,
+                "version": 1
+              },
+              {
+                "mode": "normal",
+                "text": ", tersedia pilihan unit yang lebih luas mulai dari 1.150 m² hingga 1.426 m², memberikan fleksibilitas lebih bagi bisnis yang sedang berkembang maupun perusahaan dengan kebutuhan kapasitas yang lebih besar.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utama dari cluster gudang ini tidak hanya terletak pada ukuran dan desainnya, tetapi juga pada lingkungan kawasan yang tertata rapi, sistem keamanan 24 jam, serta manajemen kawasan profesional yang memastikan operasional bisnis Anda berjalan dengan lancar tanpa hambatan. Selain itu, area ini juga dirancang untuk mendukung mobilitas logistik yang efisien, sehingga mempercepat distribusi barang dan meningkatkan produktivitas bisnis Anda.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dengan konsep modern, lokasi strategis, serta pilihan unit yang variatif, Laksana Business Park menjadi solusi tepat bagi Anda yang ingin memiliki atau mengembangkan pusat operasional bisnis dalam satu kawasan yang prestisius dan bernilai investasi tinggi.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ],
+        "textFormat": 1
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": "TEST",
+    "ctaDescription": "TEST",
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": null,
+    "updatedAt": "2026-04-25T06:38:40.389Z",
+    "createdAt": "2026-04-15T06:50:42.215Z"
+  },
+  {
+    "id": 7,
+    "name": "Luxima - Maxima+",
+    "featured": false,
+    "slug": "unit-maxima-plus",
+    "label": "Gudang Modern 4 in 1",
+    "phase": 3,
+    "type": "Industrial",
+    "thumbnail": 196,
+    "gallery": [
+      {
+        "id": "69a8e2bb0dac0e307ede73d4",
+        "image": 72
+      },
+      {
+        "id": "69a8e2f50dac0e307ede73d6",
+        "image": 71
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69d63c8e19fdc48780ba37d3",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69d63c8e19fdc48780ba37d4",
+        "icon": 191,
+        "label": "432 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "12 x 36 Meter",
+      "landArea": "432 m²",
+      "buildingArea": "396 m²",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Luxima%20-%20Maxima%2B"
+    },
+    "detailedSpecs": [
+      {
+        "id": "69d64b5ad3ec54d22db4f785",
+        "key": "Pondasi",
+        "value": "Tiang Pancang"
+      },
+      {
+        "id": "69d64b5ad3ec54d22db4f786",
+        "key": "Struktur",
+        "value": "Baja WF"
+      },
+      {
+        "id": "69d64b5ad3ec54d22db4f787",
+        "key": "Dinding",
+        "value": "Bata Merah (Finish Dulux Setara)"
+      },
+      {
+        "id": "69d64b5ad3ec54d22db4f788",
+        "key": "Atap",
+        "value": "UPVC 2 Layer"
+      },
+      {
+        "id": "69d64b5ad3ec54d22db4f789",
+        "key": "Lantai",
+        "value": "Cor Beton"
+      },
+      {
+        "id": "69d64b5ad3ec54d22db4f78a",
+        "key": "Listrik / Daya",
+        "value": "4.400 VA"
+      },
+      {
+        "id": "69e82919b1f300476a310998",
+        "key": "Pintu & Kusen",
+        "value": "Rolling Door Otomatis"
+      },
+      {
+        "id": "69e8294ab1f300476a310999",
+        "key": "Internet",
+        "value": "Fiber Optik"
+      }
+    ],
+    "shortDescription": "Gudanng Maxima+ dengan luas tanah 432 m² dan luas bangunan 396 m² di kawasan industri strategis, akses tol dekat, cocok untuk operasional bisnis dan investasi properti industri menguntungkan. Fasad modern dengan konsep 4 in 1.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Maxima+ merupakan pilihan ideal bagi pelaku usaha dan investor yang mencari gudang dijual di kawasan industri strategis dengan akses logistik yang efisien. Produk ini dirancang untuk mendukung berbagai kebutuhan bisnis seperti distribusi, manufaktur ringan, hingga penyimpanan skala besar.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dengan luas tanah 432 m² dan dimensi optimal 12 x 36 meter, unit ini memberikan fleksibilitas tinggi untuk pengaturan ruang operasional. Tata letak yang proporsional memudahkan mobilitas barang dan kendaraan, sehingga aktivitas bisnis berjalan lebih efisien.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utama terletak pada lingkungan industri yang aman dengan sistem keamanan 24 jam, memastikan operasional bisnis berjalan tanpa gangguan. Ditambah dengan akses jalan lebar yang mendukung pergerakan truk besar, distribusi menjadi lebih cepat dan hemat waktu. Lokasi yang dekat akses tol dan bandara memberikan efisiensi logistik yang signifikan, membantu menekan biaya operasional.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dari sisi investasi, kavling industri dijual seperti Unit Maxima+ memiliki potensi kenaikan nilai yang stabil seiring berkembangnya kawasan industri. Legalitas lengkap (IUKI) juga memberikan kepastian hukum dan keberlanjutan bisnis jangka panjang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Jangan lewatkan kesempatan memiliki aset industri bernilai tinggi yang tidak hanya menunjang operasional, tetapi juga meningkatkan profit bisnis Anda.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ]
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": "",
+    "ctaDescription": null,
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park",
+    "updatedAt": "2026-04-25T06:38:40.882Z",
+    "createdAt": "2026-03-05T02:00:50.983Z"
+  },
+  {
+    "id": 5,
+    "name": "Luxima - Maxima",
+    "featured": true,
+    "slug": "luxima-maxima",
+    "label": "Gudang Modern 4 in 1",
+    "phase": 3,
+    "type": "Industrial & Komersial",
+    "thumbnail": 196,
+    "gallery": [
+      {
+        "id": "69a8dd4f0dac0e307ede73ce",
+        "image": 71
+      },
+      {
+        "id": "69a8dd550dac0e307ede73cf",
+        "image": 72
+      },
+      {
+        "id": "69d3733aca8df5e691c51a07",
+        "image": 141
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69d63cbd19fdc48780ba37fe",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69d63cbd19fdc48780ba37ff",
+        "icon": 191,
+        "label": "360 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "12 X 30 Meter",
+      "landArea": "360 m²",
+      "buildingArea": "324 m²",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Luxima%20-%20Maxima"
+    },
+    "detailedSpecs": [
+      {
+        "id": "69d64b69d3ec54d22db4f794",
+        "key": "Pondasi",
+        "value": "Tiang Pancang"
+      },
+      {
+        "id": "69d64b69d3ec54d22db4f795",
+        "key": "Struktur",
+        "value": "Baja WF"
+      },
+      {
+        "id": "69d64b69d3ec54d22db4f796",
+        "key": "Dinding",
+        "value": "Bata Merah (Finish Dulux Setara)"
+      },
+      {
+        "id": "69d64b69d3ec54d22db4f797",
+        "key": "Atap",
+        "value": "UPVC 2 Layer"
+      },
+      {
+        "id": "69d64b69d3ec54d22db4f798",
+        "key": "Lantai",
+        "value": "Cor Beton"
+      },
+      {
+        "id": "69d64b69d3ec54d22db4f799",
+        "key": "Listrik / Daya",
+        "value": "4.400 VA"
+      },
+      {
+        "id": "69e833c2b1f300476a31099a",
+        "key": "Pintu & Kusen",
+        "value": "Rolling Door Otomatis"
+      },
+      {
+        "id": "69e833ccb1f300476a31099b",
+        "key": "Internet",
+        "value": "Fiber Optik"
+      }
+    ],
+    "shortDescription": "Kavling industri dengan fasad modern dengan luasan tanah 360 m², lokasi strategis dekat tol dan bandara, ideal untuk gudang dan investasi properti industri berkembang.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Maxima+ hadir sebagai solusi tepat bagi pengusaha dan investor yang membutuhkan gudang dijual di kawasan industri strategis dengan akses logistik unggulan. Produk ini dirancang untuk menunjang aktivitas bisnis modern yang menuntut kecepatan, efisiensi, dan keamanan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Memiliki luas tanah 360 m² dengan dimensi 12 x 30 meter, unit ini menawarkan ruang optimal untuk berbagai kebutuhan usaha. Proporsi lahan yang ideal memudahkan pengaturan area produksi, penyimpanan, hingga distribusi dalam satu lokasi terintegrasi.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utamanya memberikan dampak langsung bagi bisnis Anda. Sistem keamanan 24 jam memastikan operasional tetap stabil tanpa gangguan. Jalan kawasan yang lebar memungkinkan truk besar keluar masuk dengan lancar, sehingga distribusi menjadi lebih cepat dan efisien. Ditambah akses tol dan bandara yang dapat dijangkau dalam waktu singkat, proses logistik menjadi jauh lebih hemat waktu dan biaya.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Sebagai investasi properti industri, Unit Maxima menawarkan prospek nilai yang terus meningkat seiring pertumbuhan kawasan industri. Legalitas IUKI memberikan jaminan kepastian usaha, sehingga aset Anda aman dan siap berkembang dalam jangka panjang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Saatnya memiliki properti industri yang tidak hanya mendukung operasional, tetapi juga memperkuat posisi bisnis Anda di masa depan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ]
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": 143,
+    "facilities": [],
+    "ctaTitle": "{\"id\":\"google.com\",\"en\":\"google.com\",\"zh\":\"google.com\"}",
+    "ctaDescription": null,
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": "{\"id\":\"google.com\",\"en\":\"google.com\",\"zh\":\"google.com\"}",
+    "updatedAt": "2026-04-25T06:38:41.402Z",
+    "createdAt": "2026-02-26T16:27:07.077Z"
+  },
+  {
+    "id": 4,
+    "name": "Luxima - Nexima+",
+    "featured": false,
+    "slug": "unit-nexima-plus",
+    "label": "Gudang Modern 4 in 1",
+    "phase": 3,
+    "type": "Industrial",
+    "thumbnail": 197,
+    "gallery": [
+      {
+        "id": "69e5e4dfd4fe62b740d1385e",
+        "image": 197
+      },
+      {
+        "id": "69e5e4efd4fe62b740d1385f",
+        "image": 198
+      },
+      {
+        "id": "69e5e50ad4fe62b740d13860",
+        "image": 201
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69d63cd319fdc48780ba3819",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69d63cd319fdc48780ba381a",
+        "icon": 191,
+        "label": "240 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "8 x 30 Meter",
+      "landArea": "240 m²",
+      "buildingArea": "216 m²",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Luxima%20-%20Nexima%2B"
+    },
+    "detailedSpecs": [
+      {
+        "id": "69d64b71d3ec54d22db4f79a",
+        "key": "Pondasi",
+        "value": "Tiang Pancang"
+      },
+      {
+        "id": "69d64b71d3ec54d22db4f79b",
+        "key": "Struktur",
+        "value": "Baja WF"
+      },
+      {
+        "id": "69d64b71d3ec54d22db4f79c",
+        "key": "Dinding",
+        "value": "Bata Ringan (Plester & Cat)"
+      },
+      {
+        "id": "69d64b71d3ec54d22db4f79d",
+        "key": "Atap",
+        "value": "UPVC 2 Layer"
+      },
+      {
+        "id": "69d64b71d3ec54d22db4f79e",
+        "key": "Lantai",
+        "value": "Cor Beton"
+      },
+      {
+        "id": "69d64b71d3ec54d22db4f79f",
+        "key": "Listrik / Daya",
+        "value": "4.400 VA"
+      },
+      {
+        "id": "69e836feb1f300476a31099c",
+        "key": "Pintu & Kusen",
+        "value": "Rolling Door Otomatis"
+      },
+      {
+        "id": "69e83706b1f300476a31099d",
+        "key": "Internet"
+      }
+    ],
+    "shortDescription": "Luxima Bizhub menawarkan Gudang 240 m² bangunan 216 m² di kawasan industri strategis, akses tol mudah, cocok untuk operasional dan investasi properti industri. Dengan Fasad Modern dan didukung oleh fleksibilitas kebutuhan produksi hingga penyimpanan logistik terpadu.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Nexima+ merupakan pilihan tepat bagi pelaku usaha dan investor yang mencari gudang dijual di kawasan industri strategis dengan efisiensi ruang dan biaya operasional. Dirancang untuk mendukung bisnis modern seperti distribusi, e-commerce fulfillment, hingga manufaktur ringan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Memiliki luas tanah 240 m² dengan dimensi 8 x 30 meter serta luas bangunan 216 m², unit ini menawarkan pemanfaatan ruang yang optimal. Desain bangunan yang efisien memungkinkan aktivitas operasional berjalan lebih terstruktur, mulai dari penyimpanan hingga pengiriman barang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utama memberikan dampak nyata bagi bisnis Anda. Lingkungan dengan keamanan 24 jam memastikan operasional berjalan tanpa gangguan. Akses jalan kawasan yang lebar memudahkan mobilitas kendaraan besar, sehingga distribusi menjadi lebih cepat dan lancar. Ditambah lokasi yang dekat dengan akses tol dan bandara, efisiensi logistik meningkat signifikan dan membantu menekan biaya operasional.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dari sisi investasi, properti ini menawarkan potensi kenaikan nilai yang menarik seiring pertumbuhan kawasan industri. Legalitas IUKI memberikan kepastian hukum sehingga bisnis Anda dapat berkembang dengan aman dan berkelanjutan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Nexima+ bukan hanya tempat usaha, tetapi aset strategis untuk meningkatkan produktivitas sekaligus nilai investasi Anda.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ]
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "ctaDescription": null,
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [
+      {
+        "id": "69eb1ff1cd1e4c818e61c973",
+        "title": "Test Nexima +",
+        "description": "testestestsetests Nexima "
+      }
+    ],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "updatedAt": "2026-04-25T06:38:42.033Z",
+    "createdAt": "2026-02-26T16:27:03.819Z"
+  },
+  {
+    "id": 3,
+    "name": "Luxima - Nexima",
+    "featured": true,
+    "slug": "unit-nexima",
+    "label": "Gudang Modern 4 in 1",
+    "phase": 3,
+    "type": "Industrial",
+    "thumbnail": 197,
+    "gallery": [
+      {
+        "id": "69e5e21b0c65649cc38e6e0b",
+        "image": 197
+      },
+      {
+        "id": "69e5e22b0c65649cc38e6e0c",
+        "image": 198
+      },
+      {
+        "id": "69e5e2570c65649cc38e6e0d",
+        "image": 200
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69d63ce819fdc48780ba3834",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69d63ce819fdc48780ba3835",
+        "icon": 191,
+        "label": "192 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "8 x 24 Meter",
+      "landArea": "192 m²",
+      "buildingArea": "168 m²",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Luxima%20-%20Nexima"
+    },
+    "detailedSpecs": [
+      {
+        "id": "69d64b78d3ec54d22db4f7a0",
+        "key": "Pondasi",
+        "value": "Tiang Pancang"
+      },
+      {
+        "id": "69d64b78d3ec54d22db4f7a1",
+        "key": "Struktur",
+        "value": "Baja WF"
+      },
+      {
+        "id": "69d64b78d3ec54d22db4f7a2",
+        "key": "Dinding",
+        "value": "Bata Merah (Finish Dulux Setara)"
+      },
+      {
+        "id": "69d64b78d3ec54d22db4f7a3",
+        "key": "Atap",
+        "value": "UPVC 2 Layer"
+      },
+      {
+        "id": "69d64b78d3ec54d22db4f7a4",
+        "key": "Lantai",
+        "value": "Cor Beton"
+      },
+      {
+        "id": "69d64b78d3ec54d22db4f7a5",
+        "key": "Listrik / Daya",
+        "value": "4.400 VA"
+      },
+      {
+        "id": "69e838c9b1f300476a31099e",
+        "key": "Pintu & Kusen",
+        "value": "Rolling Door Otomatis"
+      },
+      {
+        "id": "69e838cfb1f300476a31099f",
+        "key": "Internet",
+        "value": "Fiber Optik"
+      }
+    ],
+    "shortDescription": "Luxima Bizhub menawarkan gudang Nexima+ dijual dengan luasan tanah 192 m² dan bangunan 168 m² di kawasan industri strategis, akses tol dekat, ideal untuk operasional bisnis dan investasi properti industri.  Dirancang untuk mendukung bisnis modern seperti distribusi, e-commerce fulfillment, hingga manufaktur ringan.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Nexima dirancang untuk pelaku usaha dan investor yang membutuhkan gudang dijual di kawasan industri strategis dengan efisiensi maksimal. Sangat cocok untuk bisnis distribusi, e-commerce, maupun manufaktur ringan yang membutuhkan ruang operasional fungsional dan hemat biaya.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dengan luas tanah 192 m², dimensi 8 x 24 meter, serta luas bangunan 168 m², unit ini menawarkan tata ruang yang compact namun tetap optimal. Desainnya memungkinkan alur kerja yang efisien, sehingga aktivitas penyimpanan dan distribusi dapat berjalan lebih cepat dan terorganisir.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utama memberikan manfaat langsung bagi bisnis Anda. Sistem keamanan 24 jam memastikan operasional berjalan aman tanpa hambatan. Jalan kawasan yang lebar mendukung akses kendaraan besar, sehingga proses logistik menjadi lebih lancar. Lokasi yang dekat dengan akses tol dan bandara memberikan efisiensi tinggi dalam pengiriman barang, membantu menekan waktu dan biaya operasional.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Sebagai investasi properti industri, unit ini memiliki potensi kenaikan nilai yang menarik seiring berkembangnya kawasan industri. Didukung legalitas IUKI, memberikan kepastian usaha dan keamanan investasi jangka panjang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Nexima adalah solusi ideal untuk Anda yang ingin mengembangkan bisnis sekaligus memiliki aset industri bernilai tinggi",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              },
+              {
+                "mode": "normal",
+                "text": ".",
+                "type": "text",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "ctaDescription": null,
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "updatedAt": "2026-04-25T06:38:42.598Z",
+    "createdAt": "2026-02-26T16:27:00.615Z"
+  },
+  {
+    "id": 2,
+    "name": "Luxima - Opxima",
+    "featured": true,
+    "slug": "unit-opxima",
+    "label": "Gudang Modern 4 in 1",
+    "phase": 3,
+    "type": "Industrial",
+    "thumbnail": 202,
+    "gallery": [
+      {
+        "id": "69df33200b88164fae87a064",
+        "image": 202
+      },
+      {
+        "id": "69e5e734d4fe62b740d13861",
+        "image": 203
+      },
+      {
+        "id": "69e5e80dd4fe62b740d13862",
+        "image": 204
+      }
+    ],
+    "keySpecs": [
+      {
+        "id": "69d63cfc19fdc48780ba384f",
+        "icon": 190,
+        "label": "Industrial"
+      },
+      {
+        "id": "69d63cfc19fdc48780ba3850",
+        "icon": 191,
+        "label": "144 m²"
+      }
+    ],
+    "highlightSpecs": {
+      "dimension": "6 x 24 Meter",
+      "landArea": "144 m²",
+      "buildingArea": "126 m²",
+      "customLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Luxima%20-%20Opxima"
+    },
+    "detailedSpecs": [
+      {
+        "id": "69d64b7fd3ec54d22db4f7a6",
+        "key": "Pondasi",
+        "value": "Tiang Pancang"
+      },
+      {
+        "id": "69d64b7fd3ec54d22db4f7a7",
+        "key": "Struktur",
+        "value": "Beton Bertulang & Baja"
+      },
+      {
+        "id": "69d64b7fd3ec54d22db4f7a8",
+        "key": "Dinding",
+        "value": "Bata Ringan (Plester & Cat)"
+      },
+      {
+        "id": "69d64b7fd3ec54d22db4f7a9",
+        "key": "Atap",
+        "value": "Zincalume & Glasswool"
+      },
+      {
+        "id": "69d64b7fd3ec54d22db4f7aa",
+        "key": "Lantai",
+        "value": "Lantai Beton Reinforced"
+      },
+      {
+        "id": "69d64b7fd3ec54d22db4f7ab",
+        "key": "Listrik / Daya",
+        "value": "4.400 VA"
+      }
+    ],
+    "shortDescription": "Luxima Bizhub menawarkan gudang modern dengan luasan tanah 144 m² dan bangunan 126 m² di kawasan industri strategis, akses tol dekat, ideal untuk bisnis efisien dan investasi properti industri. Ideal untuk operasional bisnis dan investasi properti industri. Dirancang untuk mendukung bisnis modern seperti distribusi, e-commerce fulfillment, hingga manufaktur ringan.",
+    "fullDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit Opxima menjadi solusi tepat bagi pelaku usaha dan investor yang mencari gudang dijual dengan ukuran compact namun tetap fungsional di kawasan industri strategis. Sangat cocok untuk bisnis skala berkembang seperti distribusi, e-commerce, hingga workshop produksi ringan.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dengan luas tanah 144 m², dimensi 6 x 24 meter, serta luas bangunan 126 m², unit ini dirancang untuk memaksimalkan setiap meter ruang. Tata letak yang efisien memungkinkan alur kerja lebih cepat, sehingga operasional menjadi lebih produktif meskipun dalam ukuran yang lebih ringkas.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Keunggulan utama memberikan manfaat langsung bagi pengguna. Lingkungan dengan keamanan 24 jam memastikan bisnis berjalan tanpa gangguan. Akses jalan kawasan yang lebar memudahkan kendaraan logistik, termasuk truk, untuk keluar masuk dengan lancar. Ditambah lokasi yang dekat dengan akses tol dan bandara, distribusi menjadi lebih cepat dan biaya operasional lebih terkendali.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Dari sisi investasi, kavling industri dijual seperti Unit Opxima menawarkan peluang kenaikan nilai yang menjanjikan seiring berkembangnya kawasan industri. Legalitas IUKI memberikan jaminan kepastian usaha, menjadikan properti ini aman untuk dimiliki dalam jangka panjang.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Unit ini adalah pilihan cerdas untuk Anda yang ingin memulai atau mengembangkan bisnis dengan efisien sekaligus membangun aset industri bernilai tinggi.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null,
+            "textStyle": "",
+            "textFormat": 0
+          }
+        ]
+      }
+    },
+    "virtualTourUrl": "https://www.vr-illustratorasia.xyz/Laksana%20Business%20Park/250831/",
+    "brochure": null,
+    "facilities": [],
+    "ctaTitle": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "ctaDescription": null,
+    "virtualTourTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    "virtualTourDescription": null,
+    "virtualTourReasons": [],
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "call_to_action": "{\"id\":\"Hubungi Kami\",\"en\":\"Hubungi Kami\",\"zh\":\"Hubungi Kami\"}",
+    "updatedAt": "2026-04-25T06:38:43.141Z",
+    "createdAt": "2026-02-26T16:26:57.388Z"
+  }
+]

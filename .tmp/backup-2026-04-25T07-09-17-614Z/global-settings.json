@@ -1,0 +1,179 @@
+{
+  "id": 1,
+  "siteTitle": "Laksana Business Park - Solusi Gudang & Properti Strategis",
+  "topNotification": "Hubungi kami untuk konsultasi gratis!",
+  "contactInformation": {
+    "phoneNumbers": [
+      {
+        "id": "69ce2562e63c5da37ead5d40",
+        "number": "+62 21 5960 8888",
+        "label": ""
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d41",
+        "number": "+62 811 1888 999",
+        "label": ""
+      }
+    ],
+    "email": "info@laksanabusinesspark.com",
+    "whatsAppUrl": null,
+    "whatsAppMessage": null,
+    "headOfficeAddress": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "version": 1,
+            "children": [
+              {
+                "text": "Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570",
+                "type": "text",
+                "version": 1
+              }
+            ]
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "marketingOfficeAddress": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "version": 1,
+            "children": [
+              {
+                "text": "Jl. Raya Kali Baru, Laksana, Kecamatan Pakuhaji, Kabupaten Tangerang, Banten 15570",
+                "type": "text",
+                "version": 1
+              }
+            ]
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "socialMediaLinks": [
+      {
+        "id": "69abcd7abd1a473be2dad396",
+        "platformName": "Instagram",
+        "url": "https://www.instagram.com/laksanabusinesspark.id/",
+        "icon": null
+      },
+      {
+        "id": "69abcd7abd1a473be2dad397",
+        "platformName": "YouTube",
+        "url": "https://www.youtube.com/@laksanabusinesspark",
+        "icon": null
+      }
+    ]
+  },
+  "form": {
+    "heading": "Konsultasi Gratis",
+    "subheading": "Hubungi kami untuk informasi lebih lanjut tentang produk dan layanan kami.",
+    "nameLabel": "Nama Lengkap",
+    "namePlaceholder": "Masukkan nama lengkap Anda",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Masukkan email Anda",
+    "phoneLabel": "Nomor Telepon",
+    "phonePlaceholder": "Masukkan nomor telepon Anda",
+    "domicileLabel": "Domisili",
+    "domicilePlaceholder": "Masukkan kota domisili Anda",
+    "buildingSizeLabel": "Ukuran Bangunan",
+    "buildingSizePlaceholder": "Pilih ukuran bangunan",
+    "buildingSizeOptions": [
+      {
+        "id": "69ce2562e63c5da37ead5d42",
+        "value": "small",
+        "label": "Kecil"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d43",
+        "value": "medium",
+        "label": "Sedang"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d44",
+        "value": "large",
+        "label": "Besar"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d45",
+        "value": "xlarge",
+        "label": "Sangat Besar"
+      }
+    ],
+    "serviceTypeLabel": "Tipe Layanan",
+    "serviceTypePlaceholder": "Pilih tipe layanan",
+    "serviceTypeOptions": [
+      {
+        "id": "69ce2562e63c5da37ead5d46",
+        "value": "warehouse",
+        "label": "Gudang"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d47",
+        "value": "land",
+        "label": "Kavling"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d48",
+        "value": "4in1",
+        "label": "Gudang 4 in 1"
+      },
+      {
+        "id": "69ce2562e63c5da37ead5d49",
+        "value": "other",
+        "label": "Lainnya"
+      }
+    ],
+    "messageLabel": "Pesan",
+    "messagePlaceholder": "Tulis pesan Anda di sini...",
+    "submitButton": "Kirim Pesan",
+    "submittingButton": "Mengirim...",
+    "successMessage": "Pesan Anda telah berhasil dikirim! Kami akan segera menghubungi Anda.",
+    "errorMessage": "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.",
+    "networkErrorMessage": "Tidak dapat terhubung ke server. Periksa koneksi internet Anda."
+  },
+  "brochure": null,
+  "navigation": [
+    {
+      "id": "69ce2562e63c5da37ead5d4a",
+      "link": "/"
+    },
+    {
+      "id": "69ce2562e63c5da37ead5d4b",
+      "link": "/product"
+    },
+    {
+      "id": "69ce2562e63c5da37ead5d4c",
+      "link": "/our-company"
+    },
+    {
+      "id": "69ce2562e63c5da37ead5d4d",
+      "link": "/facilities"
+    },
+    {
+      "id": "69ce2562e63c5da37ead5d4e",
+      "link": "/article"
+    }
+  ],
+  "footer": {
+    "companyDescription": "Laksana Business Park Kawasan industri moderen terbesar di Utara Tangerang, bagian dari Agung Intiland. Pengembangan properti premium dengan fokus pada kualitas, inovasi, dan keberlanjutan.",
+    "copyrightText": "© 2026 PT Bangun Laksana Persada. All rights reserved.",
+    "privacyPolicyLink": null,
+    "termsOfServiceLink": null
+  },
+  "updatedAt": "2026-04-13T13:04:58.686Z",
+  "createdAt": "2026-02-26T16:28:31.071Z",
+  "globalType": "settings"
+}

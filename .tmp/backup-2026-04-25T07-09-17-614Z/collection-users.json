@@ -1,0 +1,65 @@
+[
+  {
+    "id": 5,
+    "role": "article-creator",
+    "updatedAt": "2026-04-25T04:39:24.418Z",
+    "createdAt": "2026-04-25T04:39:24.418Z",
+    "email": "article@laksanabusinesspark.com",
+    "sessions": [],
+    "collection": "users"
+  },
+  {
+    "id": 4,
+    "role": "admin",
+    "updatedAt": "2026-04-24T07:10:39.486Z",
+    "createdAt": "2026-04-24T07:10:39.486Z",
+    "email": "julio@agungintiland.com",
+    "sessions": [
+      {
+        "id": "16bb2dca-7072-41e8-83ad-b57b9775eb1a",
+        "createdAt": "2026-04-24T10:05:34.884Z",
+        "expiresAt": "2026-04-24T12:05:34.884Z"
+      }
+    ],
+    "collection": "users"
+  },
+  {
+    "id": 3,
+    "role": "admin",
+    "updatedAt": "2026-04-13T03:22:26.712Z",
+    "createdAt": "2026-04-13T03:22:26.712Z",
+    "email": "gilang@agungintiland.com",
+    "sessions": [],
+    "collection": "users"
+  },
+  {
+    "id": 2,
+    "role": "admin",
+    "updatedAt": "2026-03-10T07:02:47.262Z",
+    "createdAt": "2026-03-10T07:02:47.260Z",
+    "email": "admin@admin.com",
+    "sessions": [
+      {
+        "id": "e091d279-bd83-4176-bcac-a14be0dc04d9",
+        "createdAt": "2026-03-10T07:04:48.831Z",
+        "expiresAt": "2026-03-10T09:04:48.831Z"
+      }
+    ],
+    "collection": "users"
+  },
+  {
+    "id": 1,
+    "role": "admin",
+    "updatedAt": "2026-02-27T05:58:46.145Z",
+    "createdAt": "2026-02-27T05:58:46.143Z",
+    "email": "test@laksanabusinesspark.com",
+    "sessions": [
+      {
+        "id": "bdc7d7a8-8d84-492f-8b92-3cc719d3c2b6",
+        "createdAt": "2026-04-25T05:05:59.883Z",
+        "expiresAt": "2026-04-25T07:05:59.883Z"
+      }
+    ],
+    "collection": "users"
+  }
+]

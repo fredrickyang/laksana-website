@@ -1,0 +1,34 @@
+[
+  {
+    "id": 4,
+    "name": "Kavling Industri",
+    "slug": "kavling-industri",
+    "order": 4,
+    "updatedAt": "2026-04-16T02:04:59.397Z",
+    "createdAt": "2026-04-13T16:33:46.585Z"
+  },
+  {
+    "id": 3,
+    "name": "Luxima Bizhub",
+    "slug": "luxima",
+    "order": 1,
+    "updatedAt": "2026-04-16T02:06:36.291Z",
+    "createdAt": "2026-04-13T16:33:36.292Z"
+  },
+  {
+    "id": 2,
+    "name": "Laksana Business Park Tahap 2",
+    "slug": "tahap-2",
+    "order": 3,
+    "updatedAt": "2026-04-16T02:07:51.781Z",
+    "createdAt": "2026-04-13T16:33:26.973Z"
+  },
+  {
+    "id": 1,
+    "name": "Laksana Business Park Tahap 1",
+    "slug": "tahap-1",
+    "order": 2,
+    "updatedAt": "2026-04-16T02:07:27.872Z",
+    "createdAt": "2026-04-13T16:25:51.389Z"
+  }
+]

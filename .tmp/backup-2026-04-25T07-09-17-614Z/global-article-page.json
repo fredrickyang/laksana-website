@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "hero": {
+    "backgroundImage": 178,
+    "mobileBackgroundImage": null,
+    "title": "ARTIKEL"
+  },
+  "allArticlesHeading": "Semua Artikel",
+  "categoryLabel": "Kategori",
+  "allCategoryOption": "Semua",
+  "readMoreButton": "Baca Berita",
+  "previousButton": "Sebelumnya",
+  "nextButton": "Selanjutnya",
+  "relatedArticlesHeading": "Artikel Terkait",
+  "backToArticlesText": "Kembali ke Artikel",
+  "updatedAt": "2026-04-07T15:08:49.732Z",
+  "createdAt": "2026-03-07T07:02:27.818Z",
+  "globalType": "article-page"
+}

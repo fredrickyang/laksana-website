@@ -1,0 +1,93 @@
+{
+  "id": 1,
+  "hero": {
+    "backgroundImage": 81,
+    "title": "Syarat & Ketentuan"
+  },
+  "lastUpdated": "2026-01-01T00:00:00.000Z",
+  "introText": {
+    "root": {
+      "type": "root",
+      "format": "",
+      "indent": 0,
+      "version": 1,
+      "children": [
+        {
+          "type": "paragraph",
+          "version": 1,
+          "children": [
+            {
+              "text": "Berikut adalah syarat dan ketentuan yang berlaku untuk penggunaan layanan dan fasilitas Laksana Business Park.",
+              "type": "text",
+              "version": 1
+            }
+          ]
+        }
+      ],
+      "direction": "ltr"
+    }
+  },
+  "highlightText": null,
+  "sections": [
+    {
+      "id": "69abcd83bd1a473be2dad3fd",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad3fe",
+      "variant": "highlight-blue"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad3ff",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad400",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad401",
+      "variant": "highlight-red"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad402",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad403",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad404",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad405",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad406",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad407",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad408",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad409",
+      "variant": "default"
+    },
+    {
+      "id": "69abcd83bd1a473be2dad40a",
+      "variant": "cta"
+    }
+  ],
+  "contactEmail": "legal@laksanabusinesspark.com",
+  "updatedAt": "2026-04-02T08:16:08.272Z",
+  "createdAt": "2026-02-26T16:29:57.328Z",
+  "globalType": "terms-conditions-page"
+}

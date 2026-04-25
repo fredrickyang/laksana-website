@@ -1,0 +1,379 @@
+{
+  "id": 1,
+  "hero": {
+    "backgroundVideo": 144,
+    "mobileBackgroundVideo": 1,
+    "fallbackImage": 145,
+    "mobileFallbackImage": 78,
+    "overlayOpacity": 40,
+    "headline": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Laksana Business Park",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "subheadline": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "primaryCta": "Hubungi Kami",
+    "primaryCtaLink": "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park",
+    "secondaryCta": "Virtual 3D",
+    "secondaryCtaLink": "#virtual",
+    "secondaryCtaHelperText": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Klik untuk Lihat",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    }
+  },
+  "mainFeature": {
+    "headline": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Membangun berkerlanjutan untuk kawasan terpadu",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis. Kami memiliki lebih dari 1200 Hektar total kawasan dengan pilihan unit mulai dari Kavling, Gudang Serbaguna dan Ruko untuk menunjang bisnis anda.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "ctaButtonLabel": "Tentang Perusahaan",
+    "ctaButtonLink": "/our-company",
+    "stats": [
+      {
+        "id": "69d51b96d56feab840635226",
+        "number": "01",
+        "image": 145,
+        "mobileImage": null,
+        "label": "Menjaga Kualitas Produk"
+      },
+      {
+        "id": "69d51b96d56feab840635227",
+        "number": "02",
+        "image": 136,
+        "mobileImage": null,
+        "label": "Dikembangkan Oleh Estate Terbaik"
+      },
+      {
+        "id": "69d51b96d56feab840635228",
+        "number": "03",
+        "image": 146,
+        "mobileImage": null,
+        "label": "Akses Mudah ke Bandara"
+      }
+    ],
+    "badges": [
+      {
+        "id": "69d51b96d56feab840635229",
+        "icon": 155,
+        "label": "Akses Mudah ke Bandara"
+      },
+      {
+        "id": "69d51b96d56feab84063522a",
+        "icon": 156,
+        "label": "Tersertifikasi IUKI"
+      }
+    ],
+    "badgesCaption": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Investasi Gudang, Kami Punya Solusi",
+                "type": "text",
+                "detail": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    }
+  },
+  "branding": {
+    "tag": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Klien Kami",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "sectionTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Dipercaya oleh perusahaan besar",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "clientLogos": [
+      {
+        "id": "69d51b87d56feab84063521a",
+        "logo": 148,
+        "clientName": "Coca Cola"
+      },
+      {
+        "id": "69d51b87d56feab84063521b",
+        "logo": 149,
+        "clientName": "Google"
+      },
+      {
+        "id": "69d51b87d56feab84063521c",
+        "logo": 150,
+        "clientName": "Heineken"
+      },
+      {
+        "id": "69d51b87d56feab84063521d",
+        "logo": 152,
+        "clientName": "Microsoft"
+      },
+      {
+        "id": "69d51b87d56feab84063521e",
+        "logo": 153,
+        "clientName": "Under Armour"
+      },
+      {
+        "id": "69d51b87d56feab84063521f",
+        "logo": 154,
+        "clientName": "Yamaha"
+      },
+      {
+        "id": "69d51b87d56feab840635220",
+        "logo": 151,
+        "clientName": "Mastercard"
+      }
+    ]
+  },
+  "ctaSection": {
+    "cardTitle": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Sekarang giliran anda untuk bergabung dengan komunitas Laksana Business Park",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "cardDescription": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Lebih dari 1000 perusahaan telah mempercayakan kebutuhan industri dan komersialnya bersama kami.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "backgroundStyle": "Dark Gradient",
+    "button": "Bergabung Sekarang",
+    "buttonLink": "/our-company#contact"
+  },
+  "projectSection": {
+    "headline": "Proyek Kami",
+    "ctaLabel": "Lihat Semua Proyek",
+    "ctaLink": "/id/product"
+  },
+  "articleSection": {
+    "headline": "Artikel",
+    "ctaLabel": "Lihat Semua Artikel",
+    "ctaLink": "/id/article",
+    "readMoreLabel": "Baca Berita"
+  },
+  "updatedAt": "2026-04-13T13:17:14.068Z",
+  "createdAt": "2026-02-26T16:25:55.846Z",
+  "globalType": "home-page"
+}

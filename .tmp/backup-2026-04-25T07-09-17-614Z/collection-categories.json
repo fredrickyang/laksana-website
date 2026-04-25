@@ -1,0 +1,50 @@
+[
+  {
+    "id": 6,
+    "name": "Press Release",
+    "slug": "press-release",
+    "description": "Siaran pers resmi perusahaan",
+    "updatedAt": "2026-02-26T16:29:00.399Z",
+    "createdAt": "2026-02-26T16:29:00.399Z"
+  },
+  {
+    "id": 5,
+    "name": "Promo",
+    "slug": "promo",
+    "description": "Promo dan penawaran spesial",
+    "updatedAt": "2026-02-26T16:28:57.916Z",
+    "createdAt": "2026-02-26T16:28:57.916Z"
+  },
+  {
+    "id": 4,
+    "name": "Event",
+    "slug": "event",
+    "description": "Acara dan kegiatan di Laksana Business Park",
+    "updatedAt": "2026-02-26T16:28:55.414Z",
+    "createdAt": "2026-02-26T16:28:55.414Z"
+  },
+  {
+    "id": 3,
+    "name": "Article",
+    "slug": "article",
+    "description": "Artikel informatif tentang properti dan industri",
+    "updatedAt": "2026-02-26T16:28:52.933Z",
+    "createdAt": "2026-02-26T16:28:52.933Z"
+  },
+  {
+    "id": 2,
+    "name": "Tips & Trick",
+    "slug": "tips-trick",
+    "description": "Tips dan trik untuk bisnis dan industri",
+    "updatedAt": "2026-02-26T16:28:50.449Z",
+    "createdAt": "2026-02-26T16:28:50.449Z"
+  },
+  {
+    "id": 1,
+    "name": "News",
+    "slug": "news",
+    "description": "Berita terbaru seputar Laksana Business Park",
+    "updatedAt": "2026-02-26T16:28:47.949Z",
+    "createdAt": "2026-02-26T16:28:47.949Z"
+  }
+]

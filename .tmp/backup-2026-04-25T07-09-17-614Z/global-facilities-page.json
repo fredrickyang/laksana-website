@@ -1,0 +1,221 @@
+{
+  "id": 1,
+  "hero": {
+    "backgroundImage": 147,
+    "mobileBackgroundImage": null,
+    "title": "Fasilitas Kami"
+  },
+  "values": {
+    "headline": "Nilai-Nilai Perusahaan Kami",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Sebagai perusahaan properti yang berkomitmen menghadirkan kawasan terbaik bagi mitra bisnis maupun penghuni, kami menjunjung tinggi nilai-nilai yang menjadi fondasi dalam setiap pengembangan semua kawasan kami. Nilai-nilai ini kami terapkan secara konsisten untuk memastikan kenyamanan, keamanan, dan keberlanjutan kawasan yang kami bangun.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "text": "Setiap proyek yang kami hadirkan dibangun di atas dasar perencanaan matang, infrastruktur andal, serta fasilitas lengkap yang menunjang kebutuhan bisnis modern. Laksana Business Park, sebagai tonggak pertama kami, telah berkembang menjadi pusat industri dan komersial yang dinamis, didukung oleh komunitas yang dirancang untuk meningkatkan efisiensi sekaligus pertumbuhan.",
+                "type": "text"
+              }
+            ],
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "valueCards": [
+      {
+        "id": "69d51bacd56feab84063526d",
+        "image": 157,
+        "title": null,
+        "description": "Row jalan Lebar untuk Kenyamanan Akses Operasional"
+      },
+      {
+        "id": "69d51bacd56feab84063526e",
+        "image": 159,
+        "title": null,
+        "description": "Keamanan yang Terjamin dengan Sistem Pengawasan Security 24 Jam"
+      },
+      {
+        "id": "69d51bacd56feab84063526f",
+        "image": 158,
+        "title": null,
+        "description": "Underground Utility System yang menciptakan kawasan Rapih, Bersih dan Elegan"
+      }
+    ]
+  },
+  "mainServices": {
+    "headline": "Fasilitas Utama Kami",
+    "description": "Semua solusi dari kami dirancang untuk memberikan pengalaman terbaik bagi pemilik bisnis dan penghuni kami",
+    "services": [
+      {
+        "id": "69d51bacd56feab840635274",
+        "icon": 118,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab840635270",
+            "feature": "Koneksi Fiber Optic"
+          },
+          {
+            "id": "69d51bacd56feab840635271",
+            "feature": "Kecepatan Internet Tinggi"
+          },
+          {
+            "id": "69d51bacd56feab840635272",
+            "feature": "Backup Connection"
+          },
+          {
+            "id": "69d51bacd56feab840635273",
+            "feature": "Teknologi Terkini"
+          }
+        ],
+        "title": "Internet Fiber Optic",
+        "subtitle": "Koneksi Internet Cepat & Stabil"
+      },
+      {
+        "id": "69d51bacd56feab840635279",
+        "icon": 120,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab840635275",
+            "feature": "Area Parkir Luas"
+          },
+          {
+            "id": "69d51bacd56feab840635276",
+            "feature": "Keamanan Gate System"
+          },
+          {
+            "id": "69d51bacd56feab840635277",
+            "feature": "Akses Mudah"
+          },
+          {
+            "id": "69d51bacd56feab840635278",
+            "feature": "Area Loading Barang"
+          }
+        ],
+        "title": "Parkir Luas",
+        "subtitle": "Area Parkir Luas dan Aman"
+      },
+      {
+        "id": "69d51bacd56feab84063527e",
+        "icon": 123,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab84063527a",
+            "feature": "Pengawasan CCTV 24 Jam"
+          },
+          {
+            "id": "69d51bacd56feab84063527b",
+            "feature": "Penjagaan Security"
+          },
+          {
+            "id": "69d51bacd56feab84063527c",
+            "feature": "Kontrol Akses"
+          },
+          {
+            "id": "69d51bacd56feab84063527d",
+            "feature": "Monitoring Realtime"
+          }
+        ],
+        "title": "Keamanan 24 Jam",
+        "subtitle": "Sistem Keamanan Terintegrasi CCTV"
+      },
+      {
+        "id": "69d51bacd56feab840635283",
+        "icon": 119,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab84063527f",
+            "feature": "Area Kantor"
+          },
+          {
+            "id": "69d51bacd56feab840635280",
+            "feature": "Area Gudang"
+          },
+          {
+            "id": "69d51bacd56feab840635281",
+            "feature": "Area Ruko"
+          },
+          {
+            "id": "69d51bacd56feab840635282",
+            "feature": "Tempat Tinggal"
+          }
+        ],
+        "title": "Gudang Serbaguna",
+        "subtitle": "Gudang dengan Konsep 4 in 1"
+      },
+      {
+        "id": "69d51bacd56feab840635288",
+        "icon": 122,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab840635284",
+            "feature": "Generator Backup"
+          },
+          {
+            "id": "69d51bacd56feab840635285",
+            "feature": "Panel Distribusi"
+          },
+          {
+            "id": "69d51bacd56feab840635286",
+            "feature": "Listrik Stabil"
+          },
+          {
+            "id": "69d51bacd56feab840635287",
+            "feature": "Maintenance Rutin"
+          }
+        ],
+        "title": "Listrik Stabil",
+        "subtitle": "Terdapat pilihan besaran listrik"
+      },
+      {
+        "id": "69d51bacd56feab84063528d",
+        "icon": 125,
+        "featuresList": [
+          {
+            "id": "69d51bacd56feab840635289",
+            "feature": "Dekat dengan Bandara Soetta"
+          },
+          {
+            "id": "69d51bacd56feab84063528a",
+            "feature": "Akses Tol Baru Kataraja"
+          },
+          {
+            "id": "69d51bacd56feab84063528b",
+            "feature": "Jalan Utama"
+          },
+          {
+            "id": "69d51bacd56feab84063528c",
+            "feature": "Area Berkembang Pesat"
+          }
+        ],
+        "title": "Lokasi Strategis",
+        "subtitle": "Berada di Lokasi Strategis & Berkembang"
+      }
+    ]
+  },
+  "updatedAt": "2026-04-15T04:45:20.298Z",
+  "createdAt": "2026-02-26T16:26:18.688Z",
+  "globalType": "facilities-page"
+}

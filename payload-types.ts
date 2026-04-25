@@ -346,18 +346,6 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
-  /**
-   * Custom WhatsApp URL for this product (overrides global settings)
-   */
-  whatsAppUrl?: string | null;
-  /**
-   * Custom WhatsApp message for this product (overrides global settings)
-   */
-  whatsAppMessage?: string | null;
-  /**
-   * Legacy field - data has been migrated to ctaTitle
-   */
-  call_to_action?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -805,9 +793,6 @@ export interface ProductsSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  whatsAppUrl?: T;
-  whatsAppMessage?: T;
-  call_to_action?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1011,8 +996,6 @@ export interface Setting {
         }[]
       | null;
     email?: string | null;
-    whatsAppUrl?: string | null;
-    whatsAppMessage?: string | null;
     headOfficeAddress?: {
       root: {
         type: string;
@@ -1700,8 +1683,6 @@ export interface SettingsSelect<T extends boolean = true> {
               id?: T;
             };
         email?: T;
-        whatsAppUrl?: T;
-        whatsAppMessage?: T;
         headOfficeAddress?: T;
         marketingOfficeAddress?: T;
         socialMediaLinks?:

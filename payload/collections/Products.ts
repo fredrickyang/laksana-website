@@ -167,28 +167,19 @@ export const Products: CollectionConfig = {
                                         slug: 'settings',
                                     });
 
-                                    // Use data from legacy hidden fields if they exist, otherwise use global phone number
-                                    const legacyUrl = (data as any)?.whatsAppUrl;
-                                    const legacyMsg = (data as any)?.whatsAppMessage;
-                                    
-                                    let waUrl = legacyUrl;
-                                    const waMsg = legacyMsg; // We'll use a fixed default or legacy msg
-
-                                    if (!waUrl) {
-                                        const rawNumber = settings?.contactInformation?.phoneNumbers?.[0]?.number;
-                                        if (rawNumber) {
-                                            const cleanNumber = rawNumber.replace(/[^0-9]/g, '');
-                                            waUrl = `https://wa.me/${cleanNumber}`;
-                                        }
+                                    // Use global phone number
+                                    const rawNumber = settings?.contactInformation?.phoneNumbers?.[0]?.number;
+                                    let waUrl = '';
+                                    if (rawNumber) {
+                                        const cleanNumber = rawNumber.replace(/[^0-9]/g, '');
+                                        waUrl = `https://wa.me/${cleanNumber}`;
                                     }
 
                                     const productName = (data as any)?.name || 'this unit';
 
                                     if (waUrl) {
                                         // Construct the URL
-                                        const message = waMsg 
-                                            ? waMsg 
-                                            : `[WEB] Halo tim marketing Laksana, saya ingin bertanya lebih lanjut tentang unit ${productName}`;
+                                        const message = `[WEB] Halo tim marketing Laksana, saya ingin bertanya lebih lanjut tentang unit ${productName}`;
                                         
                                         return `${waUrl}${waUrl.includes('?') ? '&' : '?'}text=${encodeURIComponent(message)}`;
                                     }
@@ -317,32 +308,6 @@ export const Products: CollectionConfig = {
                 { name: 'title', type: 'text', localized: true },
                 { name: 'description', type: 'text', localized: true },
             ],
-        },
-        {
-            name: 'whatsAppUrl',
-            type: 'text',
-            admin: {
-                hidden: true,
-                description: 'Custom WhatsApp URL for this product (overrides global settings)',
-            },
-        },
-        {
-            name: 'whatsAppMessage',
-            type: 'text',
-            localized: true,
-            admin: {
-                hidden: true,
-                description: 'Custom WhatsApp message for this product (overrides global settings)',
-            },
-        },
-        {
-            name: 'call_to_action',
-            type: 'text',
-            localized: true,
-            admin: {
-                hidden: true,
-                description: 'Legacy field - data has been migrated to ctaTitle',
-            },
         },
     ],
 }
