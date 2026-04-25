@@ -213,16 +213,16 @@ export async function seed() {
 
     // Product thumbnails
     const luximaId = await uploadMedia('images/card-unit/luxima.png', 'Luxima Bizhub')
-    const blokBId = await uploadMedia('images/card-unit/blok-b.png', 'Blok B')
-    const blokCId = await uploadMedia('images/card-unit/blok-c.png', 'Blok C')
-    const blokLId = await uploadMedia('images/card-unit/blok-l.png', 'Blok L')
+    await uploadMedia('images/card-unit/blok-b.png', 'Blok B')
+    await uploadMedia('images/card-unit/blok-c.png', 'Blok C')
+    await uploadMedia('images/card-unit/blok-l.png', 'Blok L')
     const unitMaximaId = await uploadMedia('images/card-unit/unit-maxima.png', 'Unit Maxima')
     const unitNeximaId = await uploadMedia('images/card-unit/unit-nexima.png', 'Unit Nexima')
     const unitNeximaPlusId = await uploadMedia('images/card-unit/unit-nexima-plus.png', 'Unit Nexima Plus')
     const unitOpximaId = await uploadMedia('images/card-unit/unit-opxima.png', 'Unit Opxima')
     const kavlingIndustriId = await uploadMedia('images/card-unit/kavling-industri.png', 'Kavling Industri')
     const kavlingCardId = await uploadMedia('images/card-unit/kavling-card.png', 'Kavling Card')
-    const clusterCardId = await uploadMedia('images/card-unit/cluster-card.png', 'Cluster Card')
+    await uploadMedia('images/card-unit/cluster-card.png', 'Cluster Card')
 
     // Blog thumbnails
     const tahap3BlogId = await uploadMedia('images/card-blog/tahap3.png', 'Pengembangan Tahap 3')

@@ -1,4 +1,4 @@
-import { getFacilitiesPage, getSettings, getMediaUrl } from '@/lib/payload'
+import { getFacilitiesPage, getSettings } from '@/lib/payload'
 import FacilitiesClient from './FacilitiesClient'
 import { locales, type Locale } from '@/i18n.config'
 

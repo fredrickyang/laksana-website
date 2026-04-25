@@ -1,4 +1,4 @@
-import { getHomePage, getProducts, getArticles, getSettings, getMediaUrl } from '@/lib/payload'
+import { getHomePage, getProducts, getArticles, getSettings } from '@/lib/payload'
 import HomePageClient from './HomePageClient'
 import { locales, type Locale } from '@/i18n.config'
 

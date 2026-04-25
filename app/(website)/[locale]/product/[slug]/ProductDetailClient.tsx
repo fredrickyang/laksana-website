@@ -88,8 +88,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
   // Get detailed specs
   const detailedSpecs = product.detailedSpecs || [];
 
-  // Get key specs
-  const keySpecs = product.keySpecs || [];
+
 
   // Get facilities
   const facilities = product.facilities || [];

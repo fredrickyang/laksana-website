@@ -1,7 +1,8 @@
-import { getProductBySlug, getProducts, getSettings, getProductPage, getMediaUrl } from '@/lib/payload'
+import { getProductBySlug, getProducts, getSettings, getProductPage } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import ProductDetailClient from './ProductDetailClient'
 import { locales, type Locale } from '@/i18n.config'
+import type { Product } from '@/payload-types'
 
 export const revalidate = 3600; // Cache for 1 hour (3600 seconds)
 
@@ -28,7 +29,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 export async function generateStaticParams() {
   const products = await getProducts('id')
   return locales.flatMap((locale) =>
-    products.map((product: any) => ({
+    products.map((product: Product) => ({
       locale,
       slug: product.slug,
     }))

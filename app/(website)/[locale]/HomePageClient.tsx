@@ -220,52 +220,52 @@ export default function HomePageClient({ homePage, products, articles, settings,
                 <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
                   {product.name}
                 </h3>
-                  <div className="flex justify-start items-center gap-4">
-                    {product.keySpecs && product.keySpecs.length > 0 ? (
-                      product.keySpecs.slice(0, 2).map((spec: any, idx: number) => (
-                        <div key={idx} className="flex items-center gap-1.5 min-w-0">
-                          {spec.icon && getMediaUrl(spec.icon) ? (
-                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-3.5 h-3.5 object-contain" />
-                          ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi bi-check-circle" viewBox="0 0 16 16">
-                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                              <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
-                            </svg>
-                          )}
-                          <p className="text-sm leading-relaxed truncate max-w-[100px]">
-                            {spec.label}
-                          </p>
-                        </div>
-                      ))
-                    ) : (
-                      <>
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
-                            <path d="M9 22v-4h6v4" />
-                            <path d="M8 6h.01" />
-                            <path d="M16 6h.01" />
-                            <path d="M8 10h.01" />
-                            <path d="M16 10h.01" />
+                <div className="flex justify-start items-center gap-4">
+                  {product.keySpecs && product.keySpecs.length > 0 ? (
+                    product.keySpecs.slice(0, 2).map((spec: any, idx: number) => (
+                      <div key={idx} className="flex items-center gap-1.5 min-w-0">
+                        {spec.icon && getMediaUrl(spec.icon) ? (
+                          <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-3.5 h-3.5 object-contain" />
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi bi-check-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
                           </svg>
-                          <p className="text-sm leading-relaxed truncate max-w-[100px]">
-                            {product.type || "Industrial"}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-                            <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-                            <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-                            <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-                          </svg>
-                          <p className="text-sm leading-relaxed truncate max-w-[100px]">
-                            {formatNumberInString(product.highlightSpecs?.landArea || "Luas 550 ha")}
-                          </p>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                        )}
+                        <p className="text-sm leading-relaxed truncate max-w-[100px]">
+                          {spec.label}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                          <path d="M9 22v-4h6v4" />
+                          <path d="M8 6h.01" />
+                          <path d="M16 6h.01" />
+                          <path d="M8 10h.01" />
+                          <path d="M16 10h.01" />
+                        </svg>
+                        <p className="text-sm leading-relaxed truncate max-w-[100px]">
+                          {product.type || "Industrial"}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                          <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                          <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                        </svg>
+                        <p className="text-sm leading-relaxed truncate max-w-[100px]">
+                          {formatNumberInString(product.highlightSpecs?.landArea || "Luas 550 ha")}
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </div>
                 <p className="mt-5 text-neutral-600 font-light text-xs text-justify leading-relaxed max-w-[90%]">
                   {product.shortDescription || ""}
                 </p>
@@ -277,10 +277,10 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
                 <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
                   <div className="absolute top-0 right-0 bottom-0 left-0">
-                    <Image 
-                      src="/images/card-unit/luxima.png" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
-                      alt="Luxima" 
+                    <Image
+                      src="/images/card-unit/luxima.png"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                      alt="Luxima"
                       fill
                       sizes="(max-width: 768px) 300px, 360px"
                     />
@@ -397,9 +397,9 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   </span>
                   <span className="stat-label text-xs font-medium text-neutral-500 mt-2 block uppercase tracking-widest transition-colors group-[.active]:text-neutral-900">
                     {stat.label || (
-                      index === 0 ? "Lokasi Strategis" : 
-                      index === 1 ? "Fasilitas Lengkap" : 
-                      index === 2 ? "Investasi Terbaik" : "Keunggulan Utama"
+                      index === 0 ? "Lokasi Strategis" :
+                        index === 1 ? "Fasilitas Lengkap" :
+                          index === 2 ? "Investasi Terbaik" : "Keunggulan Utama"
                     )}
                   </span>
                 </div>

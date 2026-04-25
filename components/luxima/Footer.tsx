@@ -1,11 +1,12 @@
-import React from 'react';
+import { locales, type Locale } from '@/i18n.config';
 import Image from 'next/image';
+import type { Setting } from '@/payload-types';
 import Link from 'next/link';
 import { FaYoutube, FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { COMPANY_CONTACT } from '@/constants/contacts';
 
 interface FooterProps {
-  settings?: any;
+  settings?: Setting;
 }
 
 const Footer = ({ settings }: FooterProps) => {

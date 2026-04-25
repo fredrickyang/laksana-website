@@ -45,8 +45,10 @@ const footerTranslations: Record<string, Record<string, string>> = {
   },
 };
 
+import type { Setting } from '@/payload-types';
+
 interface FooterProps {
-  settings?: any;
+  settings?: Setting;
 }
 
 export default function Footer({ settings }: FooterProps) {

@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isArticleCreator, isManager } from '../access'
+
 
 export const Phases: CollectionConfig = {
     slug: 'phases',

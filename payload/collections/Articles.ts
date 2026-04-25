@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { lexicalEditor, BlocksFeature, UploadFeature, LinkFeature, RelationshipFeature } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, BlocksFeature, UploadFeature, LinkFeature } from '@payloadcms/richtext-lexical'
 import { ButtonBlock } from '../blocks/ButtonBlock'
 import { isArticleCreator } from '../access'
 

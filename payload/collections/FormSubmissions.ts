@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isManager, isArticleCreator } from '../access'
+import { isManager } from '../access'
 
 export const FormSubmissions: CollectionConfig = {
     slug: 'form-submissions',

@@ -118,9 +118,10 @@ export default function OurCompanyClient({ aboutPage, settings }: OurCompanyClie
               ></iframe>
             ) : (
               <>
-                <img
+                <Image
                   src={videoThumbnail}
                   alt="thumbnail-photo"
+                  fill
                   className="w-full h-full object-cover group-hover:opacity-40 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/40" />
