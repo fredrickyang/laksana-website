@@ -213,7 +213,18 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
             <h3 className="text-2xl font-medium text-neutral-900 tracking-tight mb-2 font-geist">{buildingArea}</h3>
           </div>
           <div className="bg-white hover:bg-[#1d2088] hover:text-white p-6 flex justify-center items-center border border-neutral-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
-            <a href="https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park" className="flex items-center justify-center gap-2">
+            <a 
+              href={product.highlightSpecs?.customLink || (() => {
+                const rawNumber = settings?.contactInformation?.phoneNumbers?.[0]?.number;
+                const cleanNumber = rawNumber?.replace(/[^0-9]/g, '');
+                const waUrl = cleanNumber ? `https://wa.me/${cleanNumber}` : 'https://wa.me/6281805886000';
+                const message = `[WEB] Halo tim marketing Laksana, saya ingin bertanya lebih lanjut tentang unit ${product.name}`;
+                return `${waUrl}?text=${encodeURIComponent(message)}`;
+              })()} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2"
+            >
               <h3 className="text-2xl font-medium tracking-tight mr-2 flex justify-center items-center gap-3">
                 {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">

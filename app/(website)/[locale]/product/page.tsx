@@ -95,20 +95,20 @@ export default async function Product({ params }: ProductPageProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-                    <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">
+                    <span className="text-[15px] font-sans uppercase tracking-[0.2em] text-white/90 mb-1 block">
                       {product.label || product.type || "Produk"}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-medium text-white">
                       {product.name}
                     </h3>
                     {/* Key Specs Icons */}
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-3 mt-3">
                       {product.keySpecs?.slice(0, 3).map((spec: any, idx: number) => (
-                        <div key={idx} className="bg-white/20 backdrop-blur-sm p-1 rounded flex items-center gap-1">
+                        <div key={idx} className="bg-white/25 backdrop-blur-md px-2 py-1 rounded flex items-center gap-2">
                           {spec.icon && getMediaUrl(spec.icon) && (
-                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={12} height={12} className="w-3 h-3 object-contain invert grayscale" />
+                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={18} height={18} className="w-[18px] h-[18px] object-contain invert grayscale" />
                           )}
-                          <span className="text-[8px] text-white/90 uppercase tracking-tighter">{spec.label}</span>
+                          <span className="text-[12px] text-white font-medium uppercase tracking-tighter">{spec.label}</span>
                         </div>
                       ))}
                     </div>

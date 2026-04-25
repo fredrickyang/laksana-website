@@ -1,12 +1,17 @@
 import type { CollectionConfig } from 'payload'
+import { isArticleCreator, isManager } from '../access'
 
 export const Products: CollectionConfig = {
     slug: 'products',
     access: {
-        read: () => true,
+        read: isArticleCreator,
+        create: isManager,
+        update: isManager,
+        delete: isManager,
     },
     admin: {
         useAsTitle: 'name',
+        hidden: ({ user }) => user?.role === 'article-creator',
     },
     hooks: {
         afterChange: [
@@ -144,6 +149,60 @@ export const Products: CollectionConfig = {
                         description: 'e.g., "126 m²"',
                     },
                 },
+                {
+                    name: 'customLink',
+                    type: 'text',
+                    admin: {
+                        description: 'Custom link for "Konsultasi Kami" button. Leave empty to automatically prefill from global WhatsApp settings on save.',
+                    },
+                    hooks: {
+                        beforeValidate: [
+                            async ({ value, data, req }) => {
+                                // If already has a value, don't override
+                                if (value) return value;
+
+                                try {
+                                    // Fetch global settings
+                                    const settings = await req.payload.findGlobal({
+                                        slug: 'settings',
+                                    });
+
+                                    // Use data from legacy hidden fields if they exist, otherwise use global phone number
+                                    const legacyUrl = (data as any)?.whatsAppUrl;
+                                    const legacyMsg = (data as any)?.whatsAppMessage;
+                                    
+                                    let waUrl = legacyUrl;
+                                    const waMsg = legacyMsg; // We'll use a fixed default or legacy msg
+
+                                    if (!waUrl) {
+                                        const rawNumber = settings?.contactInformation?.phoneNumbers?.[0]?.number;
+                                        if (rawNumber) {
+                                            const cleanNumber = rawNumber.replace(/[^0-9]/g, '');
+                                            waUrl = `https://wa.me/${cleanNumber}`;
+                                        }
+                                    }
+
+                                    const productName = (data as any)?.name || 'this unit';
+
+                                    if (waUrl) {
+                                        // Construct the URL
+                                        const message = waMsg 
+                                            ? waMsg 
+                                            : `[WEB] Halo tim marketing Laksana, saya ingin bertanya lebih lanjut tentang unit ${productName}`;
+                                        
+                                        return `${waUrl}${waUrl.includes('?') ? '&' : '?'}text=${encodeURIComponent(message)}`;
+                                    }
+
+                                    // Absolute fallback if no settings found
+                                    return `https://api.whatsapp.com/send?phone=6281805886000&text=${encodeURIComponent('[WEB] Halo tim marketing Laksana, saya ingin bertanya lebih lanjut tentang unit ' + productName)}`;
+                                } catch (err) {
+                                    console.error('Error prefilling customLink:', err);
+                                    return value;
+                                }
+                            }
+                        ]
+                    }
+                },
             ],
         },
         {
@@ -258,6 +317,23 @@ export const Products: CollectionConfig = {
                 { name: 'title', type: 'text', localized: true },
                 { name: 'description', type: 'text', localized: true },
             ],
+        },
+        {
+            name: 'whatsAppUrl',
+            type: 'text',
+            admin: {
+                hidden: true,
+                description: 'Custom WhatsApp URL for this product (overrides global settings)',
+            },
+        },
+        {
+            name: 'whatsAppMessage',
+            type: 'text',
+            localized: true,
+            admin: {
+                hidden: true,
+                description: 'Custom WhatsApp message for this product (overrides global settings)',
+            },
         },
         {
             name: 'call_to_action',

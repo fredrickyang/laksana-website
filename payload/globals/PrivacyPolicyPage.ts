@@ -5,6 +5,9 @@ export const PrivacyPolicyPage: GlobalConfig = {
     access: {
         read: () => true,
     },
+    admin: {
+        hidden: ({ user }) => user?.role === 'article-creator',
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

@@ -37,18 +37,40 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     typeof author === 'string' ? author : author.email
   ).join(', ')
 
+  // Helper to render Lexical children to HTML string
+  function renderChildren(children: any[]): string {
+    if (!children) return ''
+    return children.map((child: any) => {
+      if (child.type === 'text') {
+        let text = child.text || ''
+        if (child.format & 1) text = `<strong>${text}</strong>` // Bold
+        if (child.format & 2) text = `<em>${text}</em>` // Italic
+        if (child.format & 8) text = `<u>${text}</u>` // Underline
+        if (child.format & 4) text = `<s>${text}</s>` // Strikethrough
+        if (child.format & 16) text = `<code>${text}</code>` // Code
+        return text
+      }
+      if (child.type === 'link') {
+        return `<a href="${child.fields?.url || '#'}" ${child.fields?.newTab ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-[#1d2088] hover:underline">${renderChildren(child.children)}</a>`
+      }
+      return ''
+    }).join('')
+  }
+
   return (
     <>
+      <header>
+        <title>{`${article.title} - Laksana Business Park`}</title>
+      </header>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>{`${article.title} - Laksana Business Park`}</title>
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
             src={getMediaUrl(article.thumbnail) || "/images/bg-produk.png"}
             alt={article.title}
-            width={1400}
-            height={400}
+            fill
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
@@ -63,10 +85,17 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 {article.title}
               </h1>
               {publicationDate && (
-                <p className="text-white/80 text-sm">
-                  {publicationDate}
-                  {authors && ` • ${authors}`}
-                </p>
+                <div className="flex justify-center">
+                  <p className="text-white/90 text-sm bg-black/40 backdrop-blur-md px-4 py-2 rounded-full shadow-2xl border border-white/20">
+                    <span className="opacity-80">{publicationDate}</span>
+                    {authors && (
+                      <>
+                        <span className="mx-2 opacity-30">|</span>
+                        <span className="font-medium">{authors}</span>
+                      </>
+                    )}
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -78,57 +107,80 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         <div className="prose prose-lg max-w-none">
           {/* Render excerpt as intro */}
           {article.excerpt && (
-            <p className="text-xl text-neutral-600 leading-relaxed mb-8 font-light">
-              {article.excerpt}
-            </p>
+            <div className="mb-12">
+              <p className="text-xl text-neutral-600 leading-relaxed font-light italic border-l-4 border-[#1d2088] pl-6 mb-4">
+                {article.excerpt}
+              </p>
+              <div className="flex items-center flex-wrap gap-4 text-sm text-neutral-500 pl-7">
+                {publicationDate && (
+                  <span className="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+                      <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                      <line x1="16" x2="16" y1="2" y2="6"/>
+                      <line x1="8" x2="8" y1="2" y2="6"/>
+                      <line x1="3" x2="21" y1="10" y2="10"/>
+                    </svg>
+                    {publicationDate}
+                  </span>
+                )}
+                {authors && (
+                  <>
+                    <span className="hidden sm:block w-1 h-1 rounded-full bg-neutral-300" />
+                    <span className="flex items-center gap-1.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                      </svg>
+                      {authors}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
           )}
 
           {/* Render richText content */}
           {contentElements.map((element: any, index: number) => {
             if (element.type === 'paragraph') {
-              const text = element.children?.map((child: any) => {
-                if (child.bold) return `<strong>${child.text}</strong>`
-                if (child.italic) return `<em>${child.text}</em>`
-                return child.text
-              }).join('')
+              const html = renderChildren(element.children)
 
-              return text ? (
-                <p
+              return html ? (
+                 <p
                   key={index}
                   className="text-neutral-700 leading-relaxed mb-6"
-                  dangerouslySetInnerHTML={{ __html: text }}
+                  dangerouslySetInnerHTML={{ __html: html }}
                 />
               ) : null
             }
 
             if (element.type === 'heading') {
-              const text = element.children?.map((child: any) => child.text).join('')
-              // Extract heading level, default to h2 for SEO (h1 is page title)
+              const html = renderChildren(element.children)
               const level = element.tag?.replace('h', '') || '2'
-              const safeLevel = ['2', '3', '4', '5', '6'].includes(level) ? level : '2'
+              const Tag = `h${['2', '3', '4', '5', '6'].includes(level) ? level : '2'}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
               return (
-                <h2
+                <Tag
                   key={index}
-                  className={`font-semibold text-neutral-900 mt-8 mb-4 ${
-                    safeLevel === '2' ? 'text-2xl' :
-                    safeLevel === '3' ? 'text-xl' :
-                    safeLevel === '4' ? 'text-lg' : 'text-base'
+                  className={`font-semibold text-neutral-900 mt-10 mb-6 ${
+                    level === '2' ? 'text-3xl' :
+                    level === '3' ? 'text-2xl' :
+                    level === '4' ? 'text-xl' : 'text-lg'
                   }`}
-                >
-                  {text}
-                </h2>
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
               )
             }
 
             if (element.type === 'list') {
               const ListTag = element.listType === 'number' ? 'ol' : 'ul'
               return (
-                <ListTag key={index} className="list-disc pl-6 mb-6 space-y-2">
+                <ListTag key={index} className={`mb-6 space-y-3 ${element.listType === 'number' ? 'list-decimal pl-6' : 'list-disc pl-6'}`}>
                   {element.children?.map((item: any, itemIndex: number) => (
-                    <li key={itemIndex} className="text-neutral-700">
-                      {item.children?.map((child: any) => child.text).join('')}
-                    </li>
+                    <li 
+                      key={itemIndex} 
+                      className="text-neutral-700"
+                      dangerouslySetInnerHTML={{ __html: renderChildren(item.children) }}
+                    />
                   ))}
                 </ListTag>
               )
@@ -216,38 +268,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             </div>
           )}
         </div>
-
-        {/* Related Articles */}
-        {article.relatedArticles && article.relatedArticles.length > 0 && (
-          <div className="mt-16 pt-8 border-t border-neutral-200">
-            <h3 className="text-2xl font-semibold text-neutral-900 mb-6">{articlePage?.relatedArticlesHeading || "Artikel Terkait"}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {article.relatedArticles.map((related: any) => (
-                <a
-                  key={related.id}
-                  href={`/article/${related.slug}`}
-                  className="group flex gap-4 p-4 border border-neutral-200 hover:border-[#1d2088] transition-colors"
-                >
-                  <Image
-                    src={getMediaUrl(related.thumbnail) || "/images/card-blog/tahap3.png"}
-                    alt={related.title}
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 object-cover shrink-0"
-                  />
-                  <div>
-                    <span className="text-xs text-neutral-500 uppercase tracking-wide">
-                      {related.category}
-                    </span>
-                    <h4 className="text-lg font-medium text-neutral-900 group-hover:text-[#1d2088] transition-colors line-clamp-2">
-                      {related.title}
-                    </h4>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Back to Articles */}
         <div className="mt-12">

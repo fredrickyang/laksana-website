@@ -315,6 +315,7 @@ export const getArticles = cache(async (locale: Locale = 'id', limit: number = 1
                     excerpt: true,
                     category: true,
                     publicationDate: true,
+                    authors: true,
                 }
             })
             return result.docs

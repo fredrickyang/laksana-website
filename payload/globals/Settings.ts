@@ -5,6 +5,9 @@ export const Settings: GlobalConfig = {
     access: {
         read: () => true,
     },
+    admin: {
+        hidden: ({ user }) => user?.role === 'article-creator',
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {
@@ -45,7 +48,21 @@ export const Settings: GlobalConfig = {
                     name: 'email',
                     type: 'text',
                 },
-
+                {
+                    name: 'whatsAppUrl',
+                    type: 'text',
+                    admin: {
+                        hidden: true,
+                    },
+                },
+                {
+                    name: 'whatsAppMessage',
+                    type: 'text',
+                    localized: true,
+                    admin: {
+                        hidden: true,
+                    },
+                },
                 {
                     name: 'headOfficeAddress',
                     type: 'richText',

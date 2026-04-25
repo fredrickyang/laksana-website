@@ -167,12 +167,29 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
                   fill
                   className="object-cover transition-all duration-500 group-hover:scale-110"
                 />
-                <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
-                  <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
+                <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+                  <span className="bg-white border border-white/30 text-black/70 text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
                     {(getCategoryName(article.category) || "NEWS").toUpperCase()}
                   </span>
+                  {article.publicationDate && (
+                    <span className="bg-black/40 backdrop-blur-md border border-white/10 text-white/90 text-[10px] px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2">
+                      <span className="opacity-80">
+                        {new Date(article.publicationDate).toLocaleDateString('id-ID', {
+                          day: 'numeric',
+                          month: 'short',
+                        })}
+                      </span>
+                      {article.authors?.length > 0 && (
+                        <>
+                          <span className="opacity-30">|</span>
+                          <span className="font-semibold truncate max-w-[80px]">
+                            {article.authors.map((a: any) => typeof a === 'string' ? a : a.email).join(', ')}
+                          </span>
+                        </>
+                      )}
+                    </span>
+                  )}
                 </div>
-                <div className="absolute top-3 right-3"></div>
                 <div className="absolute bottom-3 left-3 right-3"></div>
               </div>
               <div className="p-3 sm:p-4 bg-neutral-900">

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isManager, isArticleCreator } from '../access'
 
 export const FormSubmissions: CollectionConfig = {
     slug: 'form-submissions',
@@ -9,12 +10,13 @@ export const FormSubmissions: CollectionConfig = {
     admin: {
         useAsTitle: 'name',
         defaultColumns: ['name', 'email', 'phone', 'createdAt'],
+        hidden: ({ user }) => user?.role === 'article-creator',
     },
     access: {
-        read: () => true, // Admin can view
+        read: isManager,
         create: () => true, // Allow API creation
         update: () => false, // No editing submissions
-        delete: () => true, // Admin can delete
+        delete: isManager,
     },
     fields: [
         {

@@ -22,6 +22,7 @@ import { PrivacyPolicyPage } from './payload/globals/PrivacyPolicyPage'
 import { TermsConditionsPage } from './payload/globals/TermsConditionsPage'
 import { ArticlePage } from './payload/globals/ArticlePage'
 import { ProductPage } from './payload/globals/ProductPage'
+import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -70,6 +71,13 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    importExportPlugin({
+      collections: [
+        {
+          slug: 'form-submissions',
+        },
+      ],
+    }),
     s3Storage({
       collections: {
         media: {

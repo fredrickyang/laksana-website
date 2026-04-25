@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isArticleCreator, isManager } from '../access'
 
 export const Phases: CollectionConfig = {
     slug: 'phases',
@@ -7,6 +8,7 @@ export const Phases: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
+        hidden: ({ user }) => user?.role === 'article-creator',
     },
     hooks: {
         afterChange: [

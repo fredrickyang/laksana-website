@@ -1,9 +1,13 @@
 import type { CollectionConfig } from 'payload'
+import { isArticleCreator } from '../access'
 
 export const Categories: CollectionConfig = {
     slug: 'categories',
     access: {
         read: () => true,
+        create: isArticleCreator,
+        update: isArticleCreator,
+        delete: isArticleCreator,
     },
     admin: {
         useAsTitle: 'name',

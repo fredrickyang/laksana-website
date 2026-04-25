@@ -57,7 +57,7 @@ function renderInlineNodes(nodes: Node[]) {
             if (format & 1) content = <strong key={`b-${i}`}>{content}</strong>
             if (format & 2) content = <em key={`i-${i}`}>{content}</em>
             if (format & 4) content = <s key={`s-${i}`}>{content}</s>
-            if (format & 8) content = <span key={`u-${i}`} className="underline">{content}</span>
+            if (format & 8) content = <u key={`u-${i}`}>{content}</u>
             return <span key={i}>{content}</span>
         }
         return null
