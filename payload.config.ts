@@ -13,6 +13,9 @@ import { Phases } from './payload/collections/Phases'
 import { Articles } from './payload/collections/Articles'
 import { Categories } from './payload/collections/Categories'
 import { FormSubmissions } from './payload/collections/FormSubmissions'
+import { FormCompanySubmissions } from './payload/collections/FormCompanySubmissions'
+import { FormPersonalSubmissions } from './payload/collections/FormPersonalSubmissions'
+import { FormAttachments } from './payload/collections/FormAttachments'
 
 import { Settings } from './payload/globals/Settings'
 import { HomePage } from './payload/globals/HomePage'
@@ -22,6 +25,7 @@ import { PrivacyPolicyPage } from './payload/globals/PrivacyPolicyPage'
 import { TermsConditionsPage } from './payload/globals/TermsConditionsPage'
 import { ArticlePage } from './payload/globals/ArticlePage'
 import { ProductPage } from './payload/globals/ProductPage'
+import { SocialPage } from './payload/globals/SocialPage'
 import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 const filename = fileURLToPath(import.meta.url)
@@ -56,8 +60,8 @@ export default buildConfig({
       beforeDashboard: ['./payload/components/S3UsageWidget'],
     },
   },
-  collections: [Users, Media, Products, Phases, Articles, Categories, FormSubmissions],
-  globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage, ProductPage],
+  collections: [Users, Media, Products, Phases, Articles, Categories, FormSubmissions, FormCompanySubmissions, FormPersonalSubmissions, FormAttachments],
+  globals: [Settings, HomePage, AboutPage, FacilitiesPage, PrivacyPolicyPage, TermsConditionsPage, ArticlePage, ProductPage, SocialPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

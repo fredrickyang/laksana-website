@@ -22,6 +22,7 @@ export const Users: CollectionConfig = {
                 { label: 'Admin', value: 'admin' },
                 { label: 'Manager', value: 'manager' },
                 { label: 'Article Creator', value: 'article-creator' },
+                { label: 'Legal Staff', value: 'legal' },
             ],
             defaultValue: 'admin',
             required: true,

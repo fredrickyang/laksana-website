@@ -74,6 +74,9 @@ export interface Config {
     articles: Article;
     categories: Category;
     'form-submissions': FormSubmission;
+    'form-company-submissions': FormCompanySubmission;
+    'form-personal-submissions': FormPersonalSubmission;
+    'form-attachments': FormAttachment;
     exports: Export;
     imports: Import;
     'payload-kv': PayloadKv;
@@ -91,6 +94,9 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    'form-company-submissions': FormCompanySubmissionsSelect<false> | FormCompanySubmissionsSelect<true>;
+    'form-personal-submissions': FormPersonalSubmissionsSelect<false> | FormPersonalSubmissionsSelect<true>;
+    'form-attachments': FormAttachmentsSelect<false> | FormAttachmentsSelect<true>;
     exports: ExportsSelect<false> | ExportsSelect<true>;
     imports: ImportsSelect<false> | ImportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -112,6 +118,7 @@ export interface Config {
     'terms-conditions-page': TermsConditionsPage;
     'article-page': ArticlePage;
     'product-page': ProductPage;
+    'social-page': SocialPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
@@ -122,6 +129,7 @@ export interface Config {
     'terms-conditions-page': TermsConditionsPageSelect<false> | TermsConditionsPageSelect<true>;
     'article-page': ArticlePageSelect<false> | ArticlePageSelect<true>;
     'product-page': ProductPageSelect<false> | ProductPageSelect<true>;
+    'social-page': SocialPageSelect<false> | SocialPageSelect<true>;
   };
   locale: 'id' | 'en' | 'zh';
   user: User;
@@ -161,7 +169,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  role: 'admin' | 'manager' | 'article-creator';
+  role: 'admin' | 'manager' | 'article-creator' | 'legal';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -431,6 +439,73 @@ export interface FormSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-company-submissions".
+ */
+export interface FormCompanySubmission {
+  id: number;
+  fullname: string;
+  employee_id?: string | null;
+  fullname_company: string;
+  phone_company: string;
+  phone_direksi: string;
+  alamat_company: string;
+  expense_date: string;
+  customer_leads: 'walk-in' | 'social-media' | 'website' | 'personal' | 'open-table';
+  catatan_tambahan?: string | null;
+  ktp_kitas: number | FormAttachment;
+  nib: number | FormAttachment;
+  akta_perusahaan: number | FormAttachment;
+  surat_pernyataan: number | FormAttachment;
+  surat_persetujuan?: (number | null) | FormAttachment;
+  booking_form?: (number | null) | FormAttachment;
+  dokumen_tambahan?: (number | FormAttachment)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-attachments".
+ */
+export interface FormAttachment {
+  id: number;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-personal-submissions".
+ */
+export interface FormPersonalSubmission {
+  id: number;
+  fullname: string;
+  employee_id?: string | null;
+  fullname_customer: string;
+  phone_customer: string;
+  alamat_customer: string;
+  expense_date: string;
+  customer_leads: 'walk-in' | 'social-media' | 'website' | 'personal' | 'open-table';
+  catatan_tambahan?: string | null;
+  ktp_kitas: number | FormAttachment;
+  npwp_pribadi: number | FormAttachment;
+  kartu_keluarga?: (number | null) | FormAttachment;
+  akta_kelahiran_pernikahan?: (number | null) | FormAttachment;
+  booking_form?: (number | null) | FormAttachment;
+  dokumen_tambahan?: (number | FormAttachment)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "exports".
  */
 export interface Export {
@@ -647,6 +722,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'form-submissions';
         value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'form-company-submissions';
+        value: number | FormCompanySubmission;
+      } | null)
+    | ({
+        relationTo: 'form-personal-submissions';
+        value: number | FormPersonalSubmission;
+      } | null)
+    | ({
+        relationTo: 'form-attachments';
+        value: number | FormAttachment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -848,6 +935,70 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
   message?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-company-submissions_select".
+ */
+export interface FormCompanySubmissionsSelect<T extends boolean = true> {
+  fullname?: T;
+  employee_id?: T;
+  fullname_company?: T;
+  phone_company?: T;
+  phone_direksi?: T;
+  alamat_company?: T;
+  expense_date?: T;
+  customer_leads?: T;
+  catatan_tambahan?: T;
+  ktp_kitas?: T;
+  nib?: T;
+  akta_perusahaan?: T;
+  surat_pernyataan?: T;
+  surat_persetujuan?: T;
+  booking_form?: T;
+  dokumen_tambahan?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-personal-submissions_select".
+ */
+export interface FormPersonalSubmissionsSelect<T extends boolean = true> {
+  fullname?: T;
+  employee_id?: T;
+  fullname_customer?: T;
+  phone_customer?: T;
+  alamat_customer?: T;
+  expense_date?: T;
+  customer_leads?: T;
+  catatan_tambahan?: T;
+  ktp_kitas?: T;
+  npwp_pribadi?: T;
+  kartu_keluarga?: T;
+  akta_kelahiran_pernikahan?: T;
+  booking_form?: T;
+  dokumen_tambahan?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-attachments_select".
+ */
+export interface FormAttachmentsSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1667,6 +1818,24 @@ export interface ProductPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-page".
+ */
+export interface SocialPage {
+  id: number;
+  socialLinks?:
+    | {
+        title: string;
+        url: string;
+        icon: number | Media;
+        altText?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -2062,6 +2231,24 @@ export interface ProductPageSelect<T extends boolean = true> {
               description?: T;
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-page_select".
+ */
+export interface SocialPageSelect<T extends boolean = true> {
+  socialLinks?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        icon?: T;
+        altText?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
