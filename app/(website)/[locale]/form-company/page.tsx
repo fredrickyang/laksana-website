@@ -1,16 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import { submitForm } from "./actions";
 
 export default function FormCompany() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleAction = async (formData: FormData) => {
-    const result = await submitForm(formData);
-    if (result.success) {
-      console.log("--- Client Log (Browser) ---");
-      console.log(result.data);
-      alert("Form berhasil terkirim, harap menunggu informasi lebih lanjut melalui Admin");
+    setIsSubmitting(true);
+    try {
+      const result = await submitForm(formData);
+      if (result.success) {
+        alert("Form berhasil terkirim, harap menunggu informasi lebih lanjut melalui Admin");
+        window.location.reload();
+      } else {
+        alert("Gagal mengirim form: " + (result.error || "Terjadi kesalahan tidak dikenal"));
+      }
+    } catch (error) {
+      alert("Terjadi kesalahan koneksi. Silakan coba lagi.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -234,7 +245,6 @@ export default function FormCompany() {
                 type="file"
                 name="nib"
                 id="nib"
-                multiple
                 accept=".pdf,.jpg,.jpeg,.png"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
@@ -359,9 +369,10 @@ export default function FormCompany() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full rounded-md bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition duration-300 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer"
+              disabled={isSubmitting}
+              className={`w-full rounded-md bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition duration-300 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              Submit Data UTJ Sekarang
+              {isSubmitting ? 'Mengirim Data...' : 'Submit Data UTJ Sekarang'}
             </button>
           </form>
         </div>

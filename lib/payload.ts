@@ -172,6 +172,21 @@ export const getArticlePage = cache(async (locale: Locale = 'id') => {
     )()
 })
 
+export const getSocialPage = cache(async (locale: Locale = 'id') => {
+    return unstable_cache(
+        async () => {
+            const payload = await getPayloadClient()
+            return await payload.findGlobal({
+                slug: 'social-page',
+                locale,
+                depth: 1,
+            })
+        },
+        [`social-page-${locale}`],
+        { revalidate: CACHE_REVALIDATE, tags: ['social-page', `social-page-${locale}`] }
+    )()
+})
+
 // ─── Collections ────────────────────────────────────────────
 
 export const getCategories = cache(async (locale: Locale = 'id') => {
