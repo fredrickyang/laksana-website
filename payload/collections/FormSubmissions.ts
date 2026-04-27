@@ -10,7 +10,7 @@ export const FormSubmissions: CollectionConfig = {
     admin: {
         useAsTitle: 'name',
         defaultColumns: ['name', 'email', 'phone', 'createdAt'],
-        hidden: ({ user }) => user?.role === 'article-creator',
+        hidden: ({ user }) => user?.role !== 'admin',
     },
     access: {
         read: isAdmin,

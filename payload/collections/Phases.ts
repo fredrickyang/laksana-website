@@ -8,7 +8,7 @@ export const Phases: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
-        hidden: ({ user }) => user?.role === 'article-creator',
+        hidden: ({ user }) => user?.role !== 'admin',
     },
     hooks: {
         afterChange: [

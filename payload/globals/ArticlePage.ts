@@ -5,6 +5,9 @@ export const ArticlePage: GlobalConfig = {
     access: {
         read: () => true,
     },
+    admin: {
+        hidden: ({ user }) => user?.role === 'legal',
+    },
     hooks: {
         afterChange: [
             async ({ doc }) => {

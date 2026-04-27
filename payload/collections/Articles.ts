@@ -13,6 +13,7 @@ export const Articles: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'title',
+        hidden: ({ user }) => user?.role === 'legal',
     },
     hooks: {
         afterChange: [

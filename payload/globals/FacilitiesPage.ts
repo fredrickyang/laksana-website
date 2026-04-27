@@ -6,7 +6,7 @@ export const FacilitiesPage: GlobalConfig = {
         read: () => true,
     },
     admin: {
-        hidden: ({ user }) => user?.role === 'article-creator',
+        hidden: ({ user }) => user?.role !== 'admin',
     },
     hooks: {
         afterChange: [

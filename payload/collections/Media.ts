@@ -15,6 +15,9 @@ export const Media: CollectionConfig = {
         update: isArticleCreator,
         delete: isArticleCreator,
     },
+    admin: {
+        hidden: ({ user }) => user?.role === 'legal',
+    },
     upload: {
         staticDir: path.resolve(dirname, '../../public/media'),
         adminThumbnail: 'thumbnail',
