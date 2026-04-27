@@ -302,7 +302,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 const relatedSlug = relatedArticle.slug;
                 const relatedTitle = relatedArticle.title || 'Article';
                 const relatedThumbnail = getMediaUrl(relatedArticle.thumbnail);
-                const relatedCategory = typeof relatedArticle.category === 'object' ? relatedArticle.category?.name : relatedArticle.category || 'ARTICLE';
+                const relatedCategory = (typeof relatedArticle.category === 'object' && relatedArticle.category !== null) ? relatedArticle.category?.name : 'ARTICLE';
                 const relatedExcerpt = relatedArticle.excerpt;
 
                 if (!relatedSlug) return null;
