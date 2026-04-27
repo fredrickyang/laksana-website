@@ -1,13 +1,13 @@
 import type { CollectionConfig } from 'payload'
-import { isArticleCreator, isManager } from '../access'
+import { isArticleCreator, isAdmin } from '../access'
 
 export const Products: CollectionConfig = {
     slug: 'products',
     access: {
         read: isArticleCreator,
-        create: isManager,
-        update: isManager,
-        delete: isManager,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
     },
     admin: {
         useAsTitle: 'name',

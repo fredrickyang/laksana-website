@@ -1,15 +1,15 @@
 import type { GlobalConfig } from 'payload'
-import { isManager } from '../access'
+import { isAdmin } from '../access'
 
 export const SocialPage: GlobalConfig = {
     slug: 'social-page',
     label: 'Social Page',
     admin: {
-        hidden: ({ user }) => !user || !['admin', 'manager'].includes(user.role),
+        hidden: ({ user }) => user?.role !== 'admin',
     },
     access: {
         read: () => true, // Publicly readable for the website
-        update: isManager,
+        update: isAdmin,
     },
     fields: [
         {

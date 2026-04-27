@@ -284,6 +284,74 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         </div>
       </div>
 
+      {article.relatedArticles && article.relatedArticles.length > 0 && (
+        <>
+          <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 mt-10">
+            <h1 className="text-1xl md:text-3xl font-medium tracking-tight text-black mb-4 leading-tight brand-font text-center mt-32">
+              Artikel Lainnya
+            </h1>
+          </div>
+          <div className="article-more max-w-7xl mx-auto px-6 lg:px-12 bg-grey-50">
+            <div className="cursor-pointer pt-16 pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {article.relatedArticles.map((relatedArticle: any, index: number) => {
+                const isObject = typeof relatedArticle === 'object' && relatedArticle !== null;
+                
+                // Do not show the fallback UI with just IDs if the relationship isn't populated
+                if (!isObject) return null;
+
+                const relatedSlug = relatedArticle.slug;
+                const relatedTitle = relatedArticle.title || 'Article';
+                const relatedThumbnail = getMediaUrl(relatedArticle.thumbnail);
+                const relatedCategory = typeof relatedArticle.category === 'object' ? relatedArticle.category?.name : relatedArticle.category || 'ARTICLE';
+                const relatedExcerpt = relatedArticle.excerpt;
+
+                if (!relatedSlug) return null;
+
+                return (
+                  <div key={index} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1 rounded-xl">
+                    <a href={`/${locale}/article/${relatedSlug}`} className="block relative h-full flex flex-col">
+                      <div className="relative">
+                        <img
+                          src={relatedThumbnail || '/images/bg-produk.png'}
+                          alt={relatedTitle}
+                          className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
+                          <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
+                            {relatedCategory || 'ARTICLE'}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-4 sm:p-6 bg-neutral-900 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-2 group-hover:text-[#1d2088] transition-colors duration-300 text-white line-clamp-2">
+                            {relatedTitle}
+                          </h2>
+                          {relatedExcerpt && (
+                            <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-4 line-clamp-3">
+                              {relatedExcerpt}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-start mt-auto pt-2">
+                          <div className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
+                            <span>Baca Berita</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                              <path d="M5 12h14" />
+                              <path d="m12 5 7 7-7 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
+
       <Footer settings={settings} />
     </>
   )

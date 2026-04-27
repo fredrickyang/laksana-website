@@ -169,7 +169,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  role: 'admin' | 'manager' | 'article-creator' | 'legal';
+  role: 'admin' | 'article-creator' | 'legal';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -406,6 +406,7 @@ export interface Article {
     [k: string]: unknown;
   } | null;
   authors?: (number | User)[] | null;
+  relatedArticles?: (number | Article)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -907,6 +908,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   excerpt?: T;
   content?: T;
   authors?: T;
+  relatedArticles?: T;
   updatedAt?: T;
   createdAt?: T;
 }

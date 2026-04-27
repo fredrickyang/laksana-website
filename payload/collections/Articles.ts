@@ -154,5 +154,14 @@ export const Articles: CollectionConfig = {
                 position: 'sidebar',
             },
         },
+        {
+            name: 'relatedArticles',
+            type: 'relationship',
+            relationTo: 'articles',
+            hasMany: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
     ],
 }

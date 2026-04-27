@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isManagerOrLegal } from '../access'
+import { isLegal } from '../access'
 
 export const FormCompanySubmissions: CollectionConfig = {
     slug: 'form-company-submissions',
@@ -10,13 +10,13 @@ export const FormCompanySubmissions: CollectionConfig = {
     admin: {
         useAsTitle: 'fullname_company',
         defaultColumns: ['fullname_company', 'phone_company', 'expense_date', 'createdAt'],
-        hidden: ({ user }) => !user || !['admin', 'manager', 'legal'].includes(user.role),
+        hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
     },
     access: {
-        read: isManagerOrLegal,
+        read: isLegal,
         create: () => true, // Allow API creation
         update: () => false, // No editing submissions
-        delete: isManagerOrLegal,
+        delete: isLegal,
     },
     fields: [
         {

@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isManagerOrLegal } from '../access'
+import { isLegal } from '../access'
 
 export const FormAttachments: CollectionConfig = {
     slug: 'form-attachments',
@@ -8,13 +8,13 @@ export const FormAttachments: CollectionConfig = {
         plural: 'Form Attachments',
     },
     admin: {
-        hidden: ({ user }) => !user || !['admin', 'manager', 'legal'].includes(user.role),
+        hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
     },
     access: {
-        read: isManagerOrLegal,
+        read: isLegal,
         create: () => true, // Allow API creation from the form
         update: () => false,
-        delete: isManagerOrLegal,
+        delete: isLegal,
     },
     upload: {
         disableLocalStorage: true, 

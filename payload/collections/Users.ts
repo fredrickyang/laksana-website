@@ -20,7 +20,6 @@ export const Users: CollectionConfig = {
             type: 'select',
             options: [
                 { label: 'Admin', value: 'admin' },
-                { label: 'Manager', value: 'manager' },
                 { label: 'Article Creator', value: 'article-creator' },
                 { label: 'Legal Staff', value: 'legal' },
             ],
