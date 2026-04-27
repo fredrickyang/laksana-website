@@ -8,10 +8,17 @@ import { submitForm } from "./actions";
 export default function FormPersonal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAction = async (formData: FormData) => {
+  const handleAction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submission started");
+    const formData = new FormData(e.currentTarget);
+    
     setIsSubmitting(true);
     try {
+      console.log("Calling submitForm server action...");
       const result = await submitForm(formData);
+      console.log("Server action result:", result);
+      
       if (result.success) {
         alert("Form berhasil terkirim, harap menunggu informasi lebih lanjut melalui Admin");
         window.location.reload();
@@ -19,6 +26,7 @@ export default function FormPersonal() {
         alert("Gagal mengirim form: " + (result.error || "Terjadi kesalahan tidak dikenal"));
       }
     } catch (error) {
+      console.error("Submission error:", error);
       alert("Terjadi kesalahan koneksi. Silakan coba lagi.");
     } finally {
       setIsSubmitting(false);
@@ -64,7 +72,7 @@ export default function FormPersonal() {
             alt="Form Illustration"
             className="mb-8 w-full rounded-lg sm:mb-12"
           />
-          <form action={handleAction}>
+          <form onSubmit={handleAction}>
             {/* Title and Description */}
             <div className="mb-8 text-center">
               <p className="mt-2 text-sm text-gray-600 sm:text-base">
@@ -336,7 +344,7 @@ export default function FormPersonal() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full rounded-md bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition duration-300 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`relative z-30 w-full rounded-md bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition duration-300 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {isSubmitting ? 'Mengirim Data...' : 'Submit Data UTJ Sekarang'}
             </button>

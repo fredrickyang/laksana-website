@@ -80,6 +80,12 @@ export default buildConfig({
         {
           slug: 'form-submissions',
         },
+        {
+          slug: 'form-personal-submissions',
+        },
+        {
+          slug: 'form-company-submissions',
+        },
       ],
     }),
     s3Storage({
