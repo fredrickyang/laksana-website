@@ -127,6 +127,12 @@ export const FormCompanySubmissions: CollectionConfig = {
             hasMany: true,
             label: 'Dokumen Tambahan',
         },
+        {
+            name: 'declaration',
+            type: 'checkbox',
+            label: 'Pernyataan Keaslian Data',
+            required: true,
+        },
     ],
     timestamps: true,
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Footer from "../../components/Footer";
 import Image from "next/image";
+import { compressImage } from "@/lib/image-compression";
 import { submitForm } from "./actions";
 
 export default function FormPersonal() {
@@ -15,8 +16,27 @@ export default function FormPersonal() {
     
     setIsSubmitting(true);
     try {
+      console.log("Compressing images...");
+      const compressedFormData = new FormData();
+      
+      // Separate array to handle promises for performance
+      const promises: Promise<void>[] = [];
+      
+      for (const [key, value] of formData.entries()) {
+        if (value instanceof File && value.size > 0) {
+          promises.push((async () => {
+             const compressed = await compressImage(value);
+             compressedFormData.append(key, compressed);
+          })());
+        } else {
+          compressedFormData.append(key, value);
+        }
+      }
+      
+      await Promise.all(promises);
+
       console.log("Calling submitForm server action...");
-      const result = await submitForm(formData);
+      const result = await submitForm(compressedFormData);
       console.log("Server action result:", result);
       
       if (result.success) {

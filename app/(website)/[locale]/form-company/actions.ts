@@ -42,7 +42,11 @@ export async function submitForm(formData: FormData) {
         }
       } else {
         if (value !== '') {
-            data[key] = value;
+            if (key === 'declaration') {
+                data[key] = value === 'on';
+            } else {
+                data[key] = value;
+            }
         }
       }
     }
