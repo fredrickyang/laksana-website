@@ -31,22 +31,58 @@ export default function FormPersonal() {
           }
 
           uploadPromises.push((async () => {
-             // Compress images, leave PDFs as is
+             // 1. Compression (for images)
              const fileToUpload = value.type.startsWith('image/') ? await compressImage(value) : value;
              
-             // Upload individually to bypass total body size limit
-             const uploadData = new FormData();
-             uploadData.append('file', fileToUpload);
+             // 2. Decide Upload Strategy
+             // Use Direct-to-S3 for PDFs or any file over 4MB
+             const isLargeFile = fileToUpload.size > 4 * 1024 * 1024;
+             const isPDF = fileToUpload.type === 'application/pdf';
              
-             const uploadRes = await fetch('/api/upload', {
-               method: 'POST',
-               body: uploadData,
-             });
-             
-             if (!uploadRes.ok) throw new Error(`Failed to upload ${value.name}`);
-             
-             const { id } = await uploadRes.json();
-             compressedFormData.append(key, id);
+             if (isLargeFile || isPDF) {
+                console.log(`Using Direct-to-S3 for ${value.name}...`);
+                // Get Presigned URL
+                const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(value.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
+                if (!signRes.ok) throw new Error(`Failed to get upload link for ${value.name}`);
+                const { url, key } = await signRes.json();
+                
+                // Upload to S3
+                const s3Res = await fetch(url, {
+                  method: 'PUT',
+                  body: fileToUpload,
+                  headers: { 'Content-Type': fileToUpload.type }
+                });
+                if (!s3Res.ok) throw new Error(`Failed to upload ${value.name} to S3`);
+                
+                // Register with Payload
+                const regData = new FormData();
+                regData.append('s3Key', key);
+                regData.append('filename', value.name);
+                regData.append('filesize', fileToUpload.size.toString());
+                regData.append('filetype', fileToUpload.type);
+                
+                const regRes = await fetch('/api/upload', {
+                  method: 'POST',
+                  body: regData,
+                });
+                if (!regRes.ok) throw new Error(`Failed to register ${value.name} in CMS`);
+                const { id } = await regRes.json();
+                compressedFormData.append(key, id);
+             } else {
+                console.log(`Using Standard Upload for ${value.name}...`);
+                const uploadData = new FormData();
+                uploadData.append('file', fileToUpload);
+                
+                const uploadRes = await fetch('/api/upload', {
+                  method: 'POST',
+                  body: uploadData,
+                });
+                
+                if (!uploadRes.ok) throw new Error(`Failed to upload ${value.name}`);
+                
+                const { id } = await uploadRes.json();
+                compressedFormData.append(key, id);
+             }
           })());
         } else {
           compressedFormData.append(key, value);

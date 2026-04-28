@@ -8,6 +8,25 @@ export async function POST(req: NextRequest) {
     const payload = await getPayloadClient();
     const formData = await req.formData();
     const file = formData.get('file') as File;
+    const s3Key = formData.get('s3Key') as string;
+    const fileName = formData.get('filename') as string;
+    const fileSize = formData.get('filesize') as string;
+    const fileType = formData.get('filetype') as string;
+
+    if (s3Key) {
+      // Direct-to-S3 registration: Create the record in Payload without uploading again
+      // We manually populate the fields that the S3 plugin expects
+      const doc = await payload.create({
+        collection: 'form-attachments',
+        data: {
+          alt: fileName || s3Key,
+          filename: s3Key,
+          mimeType: fileType || 'application/pdf',
+          filesize: parseInt(fileSize || '0'),
+        },
+      });
+      return NextResponse.json({ id: doc.id });
+    }
 
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
