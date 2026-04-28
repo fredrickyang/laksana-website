@@ -11,6 +11,7 @@ export const FormPersonalSubmissions: CollectionConfig = {
         useAsTitle: 'fullname_customer',
         defaultColumns: ['fullname_customer', 'phone_customer', 'expense_date', 'createdAt'],
         hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
+        group: 'Forms',
     },
     access: {
         read: isLegal,

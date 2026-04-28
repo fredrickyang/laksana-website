@@ -11,6 +11,7 @@ export const FormSubmissions: CollectionConfig = {
         useAsTitle: 'name',
         defaultColumns: ['name', 'email', 'phone', 'createdAt'],
         hidden: ({ user }) => user?.role !== 'admin',
+        group: 'Forms',
     },
     access: {
         read: isAdmin,

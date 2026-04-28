@@ -11,6 +11,7 @@ export const FormCompanySubmissions: CollectionConfig = {
         useAsTitle: 'fullname_company',
         defaultColumns: ['fullname_company', 'phone_company', 'expense_date', 'createdAt'],
         hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
+        group: 'Forms',
     },
     access: {
         read: isLegal,
