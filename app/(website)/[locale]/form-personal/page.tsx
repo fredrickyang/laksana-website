@@ -16,24 +16,44 @@ export default function FormPersonal() {
     
     setIsSubmitting(true);
     try {
-      console.log("Compressing images...");
       const compressedFormData = new FormData();
       
-      // Separate array to handle promises for performance
-      const promises: Promise<void>[] = [];
+      // Separate array to handle promises for performance/concurrency
+      const uploadPromises: Promise<void>[] = [];
       
       for (const [key, value] of formData.entries()) {
         if (value instanceof File && value.size > 0) {
-          promises.push((async () => {
-             const compressed = await compressImage(value);
-             compressedFormData.append(key, compressed);
+          // Check if file is too big for Vercel (4.5MB limit)
+          if (value.size > 4.5 * 1024 * 1024) {
+             alert(`File ${value.name} is too large (> 4.5MB). Please use a smaller file or compress the PDF.`);
+             setIsSubmitting(false);
+             return;
+          }
+
+          uploadPromises.push((async () => {
+             // Compress images, leave PDFs as is
+             const fileToUpload = value.type.startsWith('image/') ? await compressImage(value) : value;
+             
+             // Upload individually to bypass total body size limit
+             const uploadData = new FormData();
+             uploadData.append('file', fileToUpload);
+             
+             const uploadRes = await fetch('/api/upload', {
+               method: 'POST',
+               body: uploadData,
+             });
+             
+             if (!uploadRes.ok) throw new Error(`Failed to upload ${value.name}`);
+             
+             const { id } = await uploadRes.json();
+             compressedFormData.append(key, id);
           })());
         } else {
           compressedFormData.append(key, value);
         }
       }
       
-      await Promise.all(promises);
+      await Promise.all(uploadPromises);
 
       console.log("Calling submitForm server action...");
       const result = await submitForm(compressedFormData);
