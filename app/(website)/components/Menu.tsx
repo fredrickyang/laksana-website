@@ -212,7 +212,7 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           width={180}
           height={48}
           priority
-          className="group-hover:opacity-90 transition-opacity duration-300 h-8 sm:h-10 md:h-12 lg:h-9 w-auto object-contain invert brightness-0"
+          className="group-hover:opacity-90 transition-opacity duration-300 h-8 sm:h-10 md:h-12 lg:h-9 w-auto object-contain brightness-0 invert"
         />
       </a>
 
