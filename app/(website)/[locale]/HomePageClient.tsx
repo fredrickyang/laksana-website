@@ -593,7 +593,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <div className="dot top right"></div>
                   <div className="dot bottom right"></div>
                   <div className="dot bottom left"></div>
-                  <button className="btn bg-white text-black border-transparent hover:bg-neutral-100 transition-colors">
+                  <button className="btn bg-transparent !text-white border-transparent transition-colors">
                     <span className="btn-text tracking-tight">
                       {homePage?.ctaSection?.button || "Konsultasi Gratis"}
                     </span>
