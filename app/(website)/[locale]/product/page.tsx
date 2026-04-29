@@ -95,20 +95,20 @@ export default async function Product({ params }: ProductPageProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-                    <span className="text-[15px] font-sans uppercase tracking-[0.2em] text-white/90 mb-1 block">
+                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-white/90 mb-1 block">
                       {product.label || product.type || "Produk"}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-medium text-white">
+                    <h3 className="text-lg sm:text-xl font-medium text-white">
                       {product.name}
                     </h3>
                     {/* Key Specs Icons */}
                     <div className="flex gap-3 mt-3">
                       {product.keySpecs?.slice(0, 3).map((spec: any, idx: number) => (
-                        <div key={idx} className="bg-white/25 backdrop-blur-md px-2 py-1 rounded flex items-center gap-2">
+                        <div key={idx} className="bg-white/25 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-2">
                           {spec.icon && getMediaUrl(spec.icon) && (
-                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={18} height={18} className="w-[18px] h-[18px] object-contain invert grayscale" />
+                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-[14px] h-[14px] object-contain invert grayscale" />
                           )}
-                          <span className="text-[12px] text-white font-medium uppercase tracking-tighter">{spec.label}</span>
+                          <span className="text-[10px] text-white font-medium uppercase tracking-tighter">{spec.label}</span>
                         </div>
                       ))}
                     </div>
@@ -133,7 +133,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok B</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Blok B</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -141,7 +141,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok C</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Blok C</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -149,7 +149,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Blok L</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Blok L</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -157,7 +157,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Kavling</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Kavling</h3>
               </div>
             </a>
           </div>
@@ -172,7 +172,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Kavling</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Kavling</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -180,7 +180,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Cluster Siap Bangun</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Cluster</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Cluster</h3>
               </div>
             </a>
           </div>
@@ -195,7 +195,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Opxima</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Opxima</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -203,7 +203,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Nexima</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Nexima</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -211,7 +211,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Nexima +</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Nexima +</h3>
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
@@ -219,7 +219,7 @@ export default async function Product({ params }: ProductPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
-                <h3 className="text-xl sm:text-2xl font-medium text-white">Maxima</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-white">Maxima</h3>
               </div>
             </a>
           </div>

@@ -460,6 +460,7 @@ export interface FormCompanySubmission {
   surat_persetujuan?: (number | null) | FormAttachment;
   booking_form?: (number | null) | FormAttachment;
   dokumen_tambahan?: (number | FormAttachment)[] | null;
+  declaration: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -502,6 +503,7 @@ export interface FormPersonalSubmission {
   akta_kelahiran_pernikahan?: (number | null) | FormAttachment;
   booking_form?: (number | null) | FormAttachment;
   dokumen_tambahan?: (number | FormAttachment)[] | null;
+  declaration: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -959,6 +961,7 @@ export interface FormCompanySubmissionsSelect<T extends boolean = true> {
   surat_persetujuan?: T;
   booking_form?: T;
   dokumen_tambahan?: T;
+  declaration?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -981,6 +984,7 @@ export interface FormPersonalSubmissionsSelect<T extends boolean = true> {
   akta_kelahiran_pernikahan?: T;
   booking_form?: T;
   dokumen_tambahan?: T;
+  declaration?: T;
   updatedAt?: T;
   createdAt?: T;
 }
