@@ -12,6 +12,11 @@ export const FormCompanySubmissions: CollectionConfig = {
         defaultColumns: ['fullname_company', 'phone_company', 'expense_date', 'createdAt'],
         hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
         group: 'Forms',
+        components: {
+            beforeListTable: [
+                '/payload/components/ExportAssetsButton#ExportAssetsButton',
+            ],
+        },
     },
     access: {
         read: isLegal,

@@ -21,6 +21,10 @@ export default function FormPersonal() {
       // Separate array to handle promises for performance/concurrency
       const uploadPromises: Promise<void>[] = [];
       
+      // Get name prefix for file naming
+      const namePrefix = (formData.get('fullname_customer') as string) || 'submission';
+      const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+
       for (const [key, value] of formData.entries()) {
         if (value instanceof File && value.size > 0) {
           // Check if file is too big for Vercel (4.5MB limit)
@@ -32,19 +36,25 @@ export default function FormPersonal() {
 
           uploadPromises.push((async () => {
              // 1. Compression (for images)
-             const fileToUpload = value.type.startsWith('image/') ? await compressImage(value) : value;
+             const processedFile = value.type.startsWith('image/') ? await compressImage(value) : value;
              
-             // 2. Decide Upload Strategy
+             // 2. Rename file for better organization
+             const ext = value.name.split('.').pop();
+             const baseName = value.name.replace(`.${ext}`, '');
+             const newName = `${slugify(namePrefix)}_${slugify(key)}_${slugify(baseName)}.${ext}`;
+             const fileToUpload = new File([processedFile], newName, { type: processedFile.type });
+
+             // 3. Decide Upload Strategy
              // Use Direct-to-S3 for PDFs or any file over 4MB
              const isLargeFile = fileToUpload.size > 4 * 1024 * 1024;
              const isPDF = fileToUpload.type === 'application/pdf';
              
              if (isLargeFile || isPDF) {
-                console.log(`Using Direct-to-S3 for ${value.name}...`);
+                console.log(`Using Direct-to-S3 for ${fileToUpload.name}...`);
                 // Get Presigned URL
-                const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(value.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
-                if (!signRes.ok) throw new Error(`Failed to get upload link for ${value.name}`);
-                const { url, key } = await signRes.json();
+                const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(fileToUpload.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
+                if (!signRes.ok) throw new Error(`Failed to get upload link for ${fileToUpload.name}`);
+                const { url, key: s3Key } = await signRes.json();
                 
                 // Upload to S3
                 const s3Res = await fetch(url, {
@@ -52,12 +62,12 @@ export default function FormPersonal() {
                   body: fileToUpload,
                   headers: { 'Content-Type': fileToUpload.type }
                 });
-                if (!s3Res.ok) throw new Error(`Failed to upload ${value.name} to S3`);
+                if (!s3Res.ok) throw new Error(`Failed to upload ${fileToUpload.name} to S3`);
                 
                 // Register with Payload
                 const regData = new FormData();
-                regData.append('s3Key', key);
-                regData.append('filename', value.name);
+                regData.append('s3Key', s3Key);
+                regData.append('filename', fileToUpload.name);
                 regData.append('filesize', fileToUpload.size.toString());
                 regData.append('filetype', fileToUpload.type);
                 
@@ -65,11 +75,11 @@ export default function FormPersonal() {
                   method: 'POST',
                   body: regData,
                 });
-                if (!regRes.ok) throw new Error(`Failed to register ${value.name} in CMS`);
+                if (!regRes.ok) throw new Error(`Failed to register ${fileToUpload.name} in CMS`);
                 const { id } = await regRes.json();
                 compressedFormData.append(key, id);
              } else {
-                console.log(`Using Standard Upload for ${value.name}...`);
+                console.log(`Using Standard Upload for ${fileToUpload.name}...`);
                 const uploadData = new FormData();
                 uploadData.append('file', fileToUpload);
                 
@@ -78,7 +88,7 @@ export default function FormPersonal() {
                   body: uploadData,
                 });
                 
-                if (!uploadRes.ok) throw new Error(`Failed to upload ${value.name}`);
+                if (!uploadRes.ok) throw new Error(`Failed to upload ${fileToUpload.name}`);
                 
                 const { id } = await uploadRes.json();
                 compressedFormData.append(key, id);
