@@ -34,17 +34,16 @@ body {
 }
 .animate-on-scroll.animate {
   animation-play-state: running !important;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 @keyframes fadeSlideIn {
   0% {
     opacity: 0;
     transform: translateY(30px);
-    filter: blur(8px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
-    filter: none;
+    transform: none;
   }
 }
 .beam-border-v {
@@ -117,6 +116,10 @@ body {
     transform: translateY(100%);
     opacity: 0;
   }
+}
+.snap-center {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 @keyframes beam-slide {
   0% {

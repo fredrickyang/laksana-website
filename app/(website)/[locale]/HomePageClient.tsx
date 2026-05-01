@@ -203,19 +203,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
               className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block"
             >
               <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
-                <div className="absolute top-0 right-0 bottom-0 left-0">
-                  <Image
-                    src={getMediaUrl(product.thumbnail) || "/images/card-unit/luxima.png"}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                    alt={product.name || "Product"}
-                    fill
-                    quality={90}
-                    sizes="(max-width: 768px) 600px, 720px"
-                    priority={index < 3}
-                  />
-
-                </div>
-                <div className="opacity-10 absolute top-0 right-0 bottom-0 left-0"></div>
+                <Image
+                  src={getMediaUrl(product.thumbnail) || "/images/card-unit/luxima.png"}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                  alt={product.name || "Product"}
+                  fill
+                  quality={100}
+                  sizes="100vw"
+                  priority={index < 6}
+                />
               </div>
               <div className="justify-start mt-6 border-l border-black/5 pl-4">
                 <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
@@ -277,17 +273,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
             <>
               <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
                 <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
-                  <div className="absolute top-0 right-0 bottom-0 left-0">
-                    <Image
-                      src="/images/card-unit/luxima.png"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                      alt="Luxima"
-                      fill
-                      quality={90}
-                      sizes="(max-width: 768px) 600px, 720px"
-                    />
-
-                  </div>
+                  <Image
+                    src="/images/card-unit/luxima.png"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                    alt="Luxima"
+                    fill
+                    quality={100}
+                    sizes="100vw"
+                    priority
+                  />
                 </div>
                 <div className="justify-start mt-6 border-l border-black/5 pl-4">
                   <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">Luxima Bizhub 4 in 1</h3>
