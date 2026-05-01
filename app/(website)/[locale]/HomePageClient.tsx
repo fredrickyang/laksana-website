@@ -135,7 +135,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {getRichText(homePage?.hero?.headline, '[No Data: hero.headline]')}
                 </span>
               </h1>
-              <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
+              <p className="text-sm lg:text-lg text-white max-w-2xl font-normal leading-relaxed">
                 {getRichText(homePage?.hero?.subheadline, '[No Data: hero.subheadline]')}
               </p>
             </div>
@@ -209,7 +209,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                     alt={product.name || "Product"}
                     fill
-                    sizes="(max-width: 768px) 300px, 360px"
+                    quality={90}
+                    sizes="(max-width: 768px) 600px, 720px"
                     priority={index < 3}
                   />
 
@@ -266,7 +267,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     </>
                   )}
                 </div>
-                <p className="mt-5 text-neutral-600 font-light text-xs text-justify leading-relaxed max-w-[90%]">
+                <p className="mt-5 text-neutral-600 font-normal text-xs leading-relaxed max-w-[90%]">
                   {product.shortDescription || ""}
                 </p>
               </div>
@@ -282,14 +283,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                       alt="Luxima"
                       fill
-                      sizes="(max-width: 768px) 300px, 360px"
+                      quality={90}
+                      sizes="(max-width: 768px) 600px, 720px"
                     />
 
                   </div>
                 </div>
                 <div className="justify-start mt-6 border-l border-black/5 pl-4">
                   <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">Luxima Bizhub 4 in 1</h3>
-                  <p className="mt-5 text-neutral-600 font-light text-xs text-justify leading-relaxed max-w-[90%]">
+                  <p className="mt-5 text-neutral-600 font-normal text-xs leading-relaxed max-w-[90%]">
                     Didesain untuk menjawab kebutuhan ruang usaha dan tempat tinggal dalam satu atap yang sama sebagai solusi nyata khususnya bagi start-up business.
                   </p>
                 </div>
@@ -319,7 +321,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
           <h1 className="text-3xl lg:text-[2.3rem] font-normal max-w-md tracking-tighter text-black mb-12 [animation:fadeSlideIn_0.8s_ease-out_0.1s_both] animate-on-scroll animate">
             {getRichText(homePage?.mainFeature?.headline, '[No Data: mainFeature.headline]')}
           </h1>
-          <p className="text-md text-neutral-600 text-justify max-w-md leading-relaxed mb-12 font-light [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
+          <p className="text-md text-neutral-600 max-w-md leading-relaxed mb-12 font-normal [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
             {getRichText(homePage?.mainFeature?.description, '[No Data: mainFeature.description]')}
           </p>
           <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate">
@@ -631,6 +633,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     src={getMediaUrl(article.thumbnail) || "/images/card-blog/tahap3.png"}
                     alt={article.title || "Article"}
                     fill
+                    quality={90}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-cover transition-all duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
@@ -643,7 +647,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">
                     {article.title}
                   </h2>
-                  <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">
+                  <p className="hidden sm:block text-neutral-400 text-xs font-normal leading-relaxed mb-3">
                     {article.excerpt}
                   </p>
                   <div className="flex items-center justify-start">
@@ -661,14 +665,14 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <>
                 <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                   <div className="relative">
-                    <Image src="/images/card-blog/tahap3.png" alt="Article" width={600} height={400} className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110" />
+                    <Image src="/images/card-blog/tahap3.png" alt="Article" width={600} height={400} quality={90} sizes="(max-width: 1024px) 100vw, 33vw" className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-2">
                       <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">NEWS</span>
                     </div>
                   </div>
                   <div className="p-3 sm:p-4 bg-neutral-900">
                     <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>
-                    <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3 dengan berbagai keunggulan.</p>
+                    <p className="hidden sm:block text-neutral-400 text-xs font-normal leading-relaxed mb-3">Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3 dengan berbagai keunggulan.</p>
                     <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
                       <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
