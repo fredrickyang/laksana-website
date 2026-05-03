@@ -2,11 +2,42 @@ import { getProducts, getSettings, getProductPage, getMediaUrl, getPhases } from
 import Image from "next/image"
 import Footer from "../../components/Footer"
 import { locales, type Locale } from '@/i18n.config'
+import type { Metadata } from 'next'
 
 export const revalidate = 3600; // Cache for 1 hour (3600 seconds)
 
 interface ProductPageProps {
   params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { locale } = await params
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksanabusinesspark.id'
+  
+  const titles: Record<string, string> = {
+    id: "Produk & Unit - Laksana Business Park",
+    en: "Products & Units - Laksana Business Park",
+    zh: "产品与单位 - Laksana Business Park"
+  }
+  
+  const descriptions: Record<string, string> = {
+    id: "Lihat berbagai pilihan unit gudang dan properti industri di Laksana Business Park, dari unit siap pakai hingga kavling industri.",
+    en: "Browse various warehouse units and industrial properties at Laksana Business Park, from ready-to-use units to industrial plots.",
+    zh: "在 Laksana Business Park 浏览各种仓库单位和工业物业，从现成单位到工业用地。"
+  }
+
+  return {
+    title: titles[locale] || titles.id,
+    description: descriptions[locale] || descriptions.id,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/product`,
+      languages: {
+        id: `${baseUrl}/id/product`,
+        en: `${baseUrl}/en/product`,
+        zh: `${baseUrl}/zh/product`,
+      },
+    },
+  }
 }
 
 export default async function Product({ params }: ProductPageProps) {
@@ -32,9 +63,6 @@ export default async function Product({ params }: ProductPageProps) {
     <>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>
-          Laksana Business Park - Solusi Gudang & Properti Strategis
-        </title>
         {/* Background Image from CMS */}
         <div className="absolute inset-0 z-0">
           <Image

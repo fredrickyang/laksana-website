@@ -4,7 +4,7 @@ import config from '@payload-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksunabusinesspark.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksanabusinesspark.id'
   const locales = ['id', 'en', 'zh']
 
   // 1. Static Pages

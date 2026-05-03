@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import "../../globals.css";
 import "../../style-component.css";
 import "../../style-menu.css";
+import JsonLd from "@/components/JsonLd";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -50,9 +51,30 @@ export default async function LocaleLayout({
 
   const settings = await getSettings(locale as Locale);
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Laksana Business Park",
+    "url": process.env.NEXT_PUBLIC_SERVER_URL || "https://laksanabusinesspark.id",
+    "logo": `${process.env.NEXT_PUBLIC_SERVER_URL || "https://laksanabusinesspark.id"}/images/logo/logo.svg`,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": settings?.contactInformation?.phoneNumbers?.[0]?.number || "+62-818-0588-6000",
+      "contactType": "customer service",
+      "areaServed": "ID",
+      "availableLanguage": ["Indonesian", "English", "Chinese"]
+    },
+    "sameAs": [
+      settings?.socialMedia?.instagram,
+      settings?.socialMedia?.facebook,
+      settings?.socialMedia?.linkedin
+    ].filter(Boolean)
+  };
+
   return (
     <html lang={locale}>
       <body className={`${manrope.variable} ${montserrat.variable} antialiased font-sans mb-0`}>
+        <JsonLd data={organizationJsonLd} />
         <Menu settings={settings} locale={locale} />
         {children}
         <FloatingWhatsApp settings={settings} />

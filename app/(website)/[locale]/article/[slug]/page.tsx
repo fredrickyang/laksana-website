@@ -3,9 +3,50 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Footer from '../../../components/Footer'
 import { locales, type Locale } from '@/i18n.config'
+import type { Metadata } from 'next'
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>
+}
+
+export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
+  const { locale, slug } = await params
+  const article = await getArticleBySlug(slug, locale as Locale)
+
+  if (!article) return {}
+
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksanabusinesspark.id'
+  const title = `${article.title} - Laksana Business Park`
+  const description = article.excerpt || ''
+  const imageUrl = getMediaUrl(article.thumbnail)
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/article/${slug}`,
+      languages: {
+        id: `${baseUrl}/id/article/${slug}`,
+        en: `${baseUrl}/en/article/${slug}`,
+        zh: `${baseUrl}/zh/article/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/article/${slug}`,
+      siteName: 'Laksana Business Park',
+      images: imageUrl ? [{ url: imageUrl }] : [],
+      type: 'article',
+      publishedTime: article.publicationDate,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: imageUrl ? [imageUrl] : [],
+    },
+  }
 }
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
@@ -57,11 +98,39 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     }).join('')
   }
 
+  // JSON-LD Structured Data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    image: getMediaUrl(article.thumbnail),
+    datePublished: article.publicationDate,
+    dateModified: article.updatedAt,
+    author: article.authors?.map((author: any) => ({
+      '@type': 'Person',
+      name: typeof author === 'object' ? author.name : author,
+    })),
+    publisher: {
+      '@type': 'Organization',
+      name: 'Laksana Business Park',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksanabusinesspark.id'}/images/logo/logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${process.env.NEXT_PUBLIC_SERVER_URL || 'https://laksanabusinesspark.id'}/${locale}/article/${slug}`,
+    },
+  }
+
   return (
     <>
-      <header>
-        <title>{`${article.title} - Laksana Business Park`}</title>
-      </header>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">

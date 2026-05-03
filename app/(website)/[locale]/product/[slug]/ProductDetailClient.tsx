@@ -103,7 +103,6 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
     <>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>{`${product.name} - Laksana Business Park`}</title>
         <div className="absolute inset-0 z-0">
           <Image
             className="w-full h-full object-cover"
