@@ -1,4 +1,6 @@
 "use client";
+// import Link from 'next/link';
+// import { ArrowRight } from 'react-feather';
 
 export default function AboutSection() {
 
@@ -6,16 +8,16 @@ export default function AboutSection() {
     <section className="py-12 md:py-20 lg:py-40 bg-[url(/luxima/images/about-us-optimized.webp)] bg-cover bg-center relative overflow-hidden">
       {/* Add a semi-transparent overlay for better text readability on mobile */}
       <div className="absolute inset-0 bg-black/50 md:bg-black/30"></div>
-
+      
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:justify-end">
           {/* Text Content - Centered on mobile, right side on desktop */}
           <div className="w-full md:w-1/2 md:bg-transparent  md:backdrop-blur-none p-5 md:p-6 lg:p-8 rounded-lg text-white">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
-              <span className="text-white leading-[125%] block md:inline">Mengapa </span>
+              <span className="text-white leading-[125%] block md:inline">Mengapa </span> 
               <span className="text-luxima-gold leading-[125%]">Kami?</span>
             </h2>
-
+            
             <div className="mb-6 leading-relaxed text-sm sm:text-base">
               <p className="mb-3 md:mb-4">Komplek Industri Paling<span className="font-medium text-luxima-gold"> Modern</span> di Tangerang Utara</p>
               <ul className="list-disc pl-5 md:pl-6 space-y-1 md:space-y-2 font-medium">
@@ -32,6 +34,10 @@ export default function AboutSection() {
                 <li>Bebas dari banjir</li>
               </ul>
             </div>
+            
+            {/* <Link href="/luxima/about" className="inline-flex items-center text-luxima-gold font-semibold hover:text-yellow-400 transition duration-300 leading-[125%] text-sm sm:text-base">
+              Pelajari Selengkapnya <ArrowRight className="w-4 h-4 ml-1" />
+            </Link> */}
           </div>
         </div>
       </div>

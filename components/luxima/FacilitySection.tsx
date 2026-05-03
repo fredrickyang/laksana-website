@@ -50,35 +50,39 @@ export default function FacilitySection() {
       ]
     },
   ], []);
-
+  
   // Create random sparkle positions for each facility card
   const generateSparkles = (count: number) => {
     return Array.from({ length: count }, () => ({
       top: `${Math.random() * 100}%`,
       left: `${Math.random() * 100}%`,
-      size: Math.random() * 6 + 4,
+      size: Math.random() * 6 + 4, // Larger size range (4-10px)
       delay: Math.random() * 1.5,
-      duration: 1.5 + Math.random() * 1
+      duration: 1.5 + Math.random() * 1 // Variable duration (1.5-2.5s)
     }));
   };
 
   // Track which cards have active sparkle animations
   const [finishingSparkles, setFinishingSparkles] = useState<number[]>([]);
   const timeoutRefs = useRef<NodeJS.Timeout[]>([]);
-
+  
   // Handle mouse leave to allow animation to finish
   const handleMouseLeave = (index: number) => {
+    // Add this card to finishing animations
     if (!finishingSparkles.includes(index)) {
       setFinishingSparkles(prev => [...prev, index]);
-
+      
+      // Clear any existing timeout for this card
       if (timeoutRefs.current[index]) {
         clearTimeout(timeoutRefs.current[index]);
       }
-
+      
+      // Set a new timeout to remove the finishing class after animation completes
       const timeout = setTimeout(() => {
         setFinishingSparkles(prev => prev.filter(i => i !== index));
-      }, 2500);
-
+      }, 2500); // Longer animation duration for maximum effects
+      
+      // Store the timeout reference
       timeoutRefs.current[index] = timeout;
     }
   };
@@ -94,9 +98,10 @@ export default function FacilitySection() {
 
   // Generate sparkles only on client-side to avoid hydration mismatch
   useEffect(() => {
+    // Generate sparkles for each facility
     const sparkles = facilities.map(() => generateSparkles(15));
     setFacilitySparkles(sparkles);
-  }, [facilities]);
+  }, [facilities]); // Only regenerate if the number of facilities changes
 
   return (
     <section className="py-20 relative overflow-hidden">
@@ -109,6 +114,7 @@ export default function FacilitySection() {
           style={{ objectFit: 'cover' }}
           priority
         />
+        {/* Overlay to ensure text readability */}
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -123,14 +129,14 @@ export default function FacilitySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {facilities.map((facility, index) => (
-            <div
-              key={index}
+            <div 
+              key={index} 
               className="facility-card bg-white/10 backdrop-blur-sm rounded-lg p-5 text-center transition-all duration-300 hover:scale-105 border border-luxima-gold/30 hover:border-luxima-gold"
               onMouseLeave={() => handleMouseLeave(index)}
             >
               {/* Sparkle elements - only render on client side after hydration */}
               {facilitySparkles[index]?.map((sparkle, i) => (
-                <span
+                <span 
                   key={`sparkle-${i}`}
                   className={`sparkle-effect ${finishingSparkles.includes(index) ? 'sparkle-finishing' : ''}`}
                   style={{
@@ -143,7 +149,7 @@ export default function FacilitySection() {
                   }}
                 />
               ))}
-
+              
               <div className="mb-2 mx-auto w-28 h-28 md:w-32 md:h-32 relative">
                 <Image
                   src={facility.icon}
@@ -158,7 +164,7 @@ export default function FacilitySection() {
                     {line}
                   </li>
                 ))}
-                <li className="h-2"></li>
+                <li className="h-2"></li> {/* Spacer between title and description */}
                 {facility.description.map((line, i) => (
                   <li key={`desc-${i}`} className="text-white text-xs md:text-sm font-light leading-[160%]">
                     {line}
@@ -171,4 +177,4 @@ export default function FacilitySection() {
       </div>
     </section>
   );
-}
+} 

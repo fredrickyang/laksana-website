@@ -25,13 +25,13 @@ export default function SpecificationSection() {
     { label: 'Saluran Air', value: 'Tertutup' },
     { label: 'Infra Jaringan Listrik', value: 'Underground' },
   ];
-
+  
   // Check if specifications count is odd
   const isOddCount = allSpecs.length % 2 !== 0;
-
+  
   // Copy array to avoid modifying original
   const specsToProcess = [...allSpecs];
-
+  
   // If odd, take the last item and remove it from specsToProcess
   let lastSpec: SpecificationItem | null = null;
   if (isOddCount) {
@@ -57,9 +57,10 @@ export default function SpecificationSection() {
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-12 text-luxima-blue">
           Spesifikasi
         </h2>
-
+        
         {/* Two-column layout on all screen sizes */}
         <div className="w-full md:w-5/6 lg:w-4/5 mx-auto">
+          {/* Map through rows instead of columns */}
           {rows.map((row, rowIndex) => (
             <div key={rowIndex} className="flex flex-row space-x-2 md:space-x-6 lg:space-x-8 mb-2 md:mb-4">
               {/* Left Column Item */}
@@ -71,7 +72,7 @@ export default function SpecificationSection() {
                   {row.left.value}
                 </div>
               </div>
-
+              
               {/* Right Column Item */}
               {row.right && (
                 <div className="flex flex-col text-center p-1 md:p-2 w-1/2 border-b-gray-300 border-b-2">
@@ -85,7 +86,7 @@ export default function SpecificationSection() {
               )}
             </div>
           ))}
-
+          
           {/* Center the last item if count is odd */}
           {lastSpec && (
             <div className="mx-auto w-1/2 text-center px-1 md:px-4 mt-2 md:mt-4">
@@ -103,4 +104,4 @@ export default function SpecificationSection() {
       </div>
     </section>
   );
-}
+} 

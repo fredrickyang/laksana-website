@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { WHATSAPP_CONTACT } from '@/constants/contacts';
-import { formatNumberInString } from '@/lib/utils';
 
 // Define interface for product data
 interface Product {
@@ -72,7 +71,7 @@ export default function ProductsSection() {
   // Carousel navigation functions
   const goToSlide = (index: number): void => {
     if (!selectedProduct) return;
-
+    
     let newIndex = index;
     if (newIndex < 0) newIndex = selectedProduct.images.length - 1;
     if (newIndex >= selectedProduct.images.length) newIndex = 0;
@@ -85,11 +84,11 @@ export default function ProductsSection() {
 
   const handleArrowClick = (direction: 'prev' | 'next'): void => {
     if (!selectedProduct) return;
-
-    const newIndex = direction === 'next'
+    
+    const newIndex = direction === 'next' 
       ? (currentImageIndex + 1) % selectedProduct.images.length
       : (currentImageIndex - 1 + selectedProduct.images.length) % selectedProduct.images.length;
-
+    
     setCurrentImageIndex(newIndex);
   };
 
@@ -101,18 +100,21 @@ export default function ProductsSection() {
 
   const handleTouchEnd = (e: React.TouchEvent): void => {
     if (!isDragging || !selectedProduct) return;
-
+    
     const endX = e.changedTouches[0].clientX;
     const diffX = startX - endX;
-
+    
+    // If difference is large enough, navigate to next/previous slide
     if (Math.abs(diffX) > 50) {
       if (diffX > 0) {
+        // Swipe left, go to next slide
         goToSlide(currentImageIndex + 1);
       } else {
+        // Swipe right, go to previous slide
         goToSlide(currentImageIndex - 1);
       }
     }
-
+    
     setIsDragging(false);
   };
 
@@ -124,18 +126,21 @@ export default function ProductsSection() {
 
   const handleMouseUp = (e: React.MouseEvent): void => {
     if (!isDragging || !selectedProduct) return;
-
+    
     const endX = e.clientX;
     const diffX = startX - endX;
-
+    
+    // If difference is large enough, navigate to next/previous slide
     if (Math.abs(diffX) > 50) {
       if (diffX > 0) {
+        // Drag left, go to next slide
         goToSlide(currentImageIndex + 1);
       } else {
+        // Drag right, go to previous slide
         goToSlide(currentImageIndex - 1);
       }
     }
-
+    
     setIsDragging(false);
   };
 
@@ -271,14 +276,14 @@ export default function ProductsSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
           {products.map((product) => (
-            <div
-              key={product.id}
+            <div 
+              key={product.id} 
               className="bg-white rounded-4xl shadow-[2px_2px_8px_2px_rgba(0,_0,_0,_0.25)] overflow-hidden transition-all duration-300 border border-gray-100 flex flex-col"
             >
 
 
-              <div
-                className="relative h-60 md:min-h-72 cursor-pointer overflow-hidden group"
+              <div 
+                className="relative h-60 md:min-h-72 cursor-pointer overflow-hidden group" 
                 onClick={() => openProductDetails(product)}
               >
                 <Image
@@ -290,7 +295,7 @@ export default function ProductsSection() {
                   priority
                 />
               </div>
-
+              
               <div className="p-4 md:p-6 flex flex-col flex-grow">
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -301,20 +306,20 @@ export default function ProductsSection() {
                     {product.dimensions}
                   </div>
                 </div>
-
-
+                
+                
                 <div className="mt-auto">
                   <div className="grid grid-cols-2 gap-2 mb-4">
                     <div className="bg-gray-50 p-2 md:p-3 rounded-lg">
                       <span className="block text-gray-500 text-xs">Luas Tanah</span>
-                      <span className="font-bold text-gray-800 text-sm md:text-base">{formatNumberInString(product.landArea)}</span>
+                      <span className="font-bold text-gray-800 text-sm md:text-base">{product.landArea}</span>
                     </div>
                     <div className="bg-gray-50 p-2 md:p-3 rounded-lg">
                       <span className="block text-gray-500 text-xs">Luas Bangunan</span>
-                      <span className="font-bold text-gray-800 text-sm md:text-base">{formatNumberInString(product.buildingArea)}</span>
+                      <span className="font-bold text-gray-800 text-sm md:text-base">{product.buildingArea}</span>
                     </div>
                   </div>
-
+                  
                   <div className="flex justify-center items-center gap-2 pt-3 md:pt-4 border-t border-gray-200">
                     <button
                     onClick={() => openProductVideo(product)}
@@ -322,8 +327,8 @@ export default function ProductsSection() {
                     >
                       Review
                     </button>
-                    <button
-                      onClick={() => openProductDetails(product)}
+                    <button 
+                      onClick={() => openProductDetails(product)} 
                       className="flex flex-1 bg-luxima-blue items-center justify-center hover:cursor-pointer hover:bg-white hover:text-luxima-gold  border-2 border-luxima-gold text-white bg-luxima-gold py-1.5 md:py-2 px-3 md:px-4 rounded-md text-xs md:text-sm font-medium transition-all duration-300"
                     >
                       Detail
@@ -334,14 +339,14 @@ export default function ProductsSection() {
             </div>
           ))}
         </div>
-
-
+        
+        
       </div>
 
       {/* Product Details Modal */}
       {isModalOpen && selectedProduct && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 md:p-4 backdrop-blur-sm overflow-y-auto">
-          <div
+          <div 
             ref={modalRef}
             className="bg-white rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto"
             role="dialog"
@@ -353,7 +358,7 @@ export default function ProductsSection() {
                 {selectedProduct.name}
                 <span className="md:ml-2 text-gray-600 text-base md:text-lg">- {selectedProduct.type}</span>
               </h3>
-              <button
+              <button 
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-500 hover:text-gray-700 focus:outline-none bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-colors"
                 aria-label="Close"
@@ -363,12 +368,12 @@ export default function ProductsSection() {
                 </svg>
               </button>
             </div>
-
+            
             <div className="p-4 md:p-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div className="bg-gray-50 rounded-xl p-3 md:p-4">
                   <div className="relative h-[250px] md:h-[350px] mb-4">
-                    <div
+                    <div 
                       ref={carouselRef}
                       className="h-full w-full relative cursor-grab active:cursor-grabbing"
                       onTouchStart={handleTouchStart}
@@ -378,14 +383,14 @@ export default function ProductsSection() {
                       onMouseLeave={handleMouseLeave}
                     >
                       {selectedProduct.images.map((image, index) => (
-                        <div
+                        <div 
                           key={index}
                           className={`absolute inset-0 transition-opacity duration-500 ${
                             index === currentImageIndex ? 'opacity-100' : 'opacity-0'
                           }`}
                         >
-                          <Image
-                            src={image}
+                          <Image 
+                            src={image} 
                             alt={`${selectedProduct.name} unit gudang - gambar ${index + 1}`}
                             fill
                             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -396,10 +401,10 @@ export default function ProductsSection() {
                         </div>
                       ))}
 
-                      {/* Navigation arrows */}
+                      {/* Tombol navigasi kiri/kanan */}
                       {selectedProduct.images.length > 1 && (
                         <>
-                          <button
+                          <button 
                             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow-md z-10 text-luxima-blue cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-lg"
                             onClick={() => handleArrowClick('prev')}
                             aria-label="Lihat gambar sebelumnya"
@@ -408,8 +413,8 @@ export default function ProductsSection() {
                               <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                             </svg>
                           </button>
-
-                          <button
+                          
+                          <button 
                             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow-md z-10 text-luxima-blue cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-lg"
                             onClick={() => handleArrowClick('next')}
                             aria-label="Lihat gambar berikutnya"
@@ -422,8 +427,8 @@ export default function ProductsSection() {
                       )}
                     </div>
                   </div>
-
-                  {/* Dot indicators for carousel */}
+                  
+                  {/* Indikator titik untuk carousel */}
                   {selectedProduct.images.length > 1 && (
                     <div className="flex justify-center mt-2 mb-3 space-x-2">
                       {selectedProduct.images.map((_, index) => (
@@ -431,8 +436,8 @@ export default function ProductsSection() {
                           key={index}
                           onClick={() => handleDotClick(index)}
                           className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
-                            index === currentImageIndex
-                              ? 'bg-luxima-blue'
+                            index === currentImageIndex 
+                              ? 'bg-luxima-blue' 
                               : 'bg-gray-300 hover:bg-gray-400'
                           }`}
                           aria-label={`Lihat gambar ${index + 1}`}
@@ -440,7 +445,7 @@ export default function ProductsSection() {
                       ))}
                     </div>
                   )}
-
+                  
                   <Link href={WHATSAPP_CONTACT.WHATSAPP_URL}>
                   <div className="bg-luxima-blue text-white p-3 md:p-4 rounded-lg mt-3">
                     <div className="flex justify-between items-center">
@@ -452,7 +457,7 @@ export default function ProductsSection() {
                   </div>
                   </Link>
                 </div>
-
+                
                 <div>
                   <div className="mb-6 md:mb-8">
                     <h4 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-luxima-blue flex items-center">
@@ -468,15 +473,15 @@ export default function ProductsSection() {
                       </div>
                       <div className="bg-gray-50 p-3 md:p-4 rounded-lg">
                         <span className="text-gray-500 text-xs md:text-sm block mb-1">Luas Tanah</span>
-                        <span className="font-bold text-gray-800 text-base md:text-lg">{formatNumberInString(selectedProduct.landArea)}</span>
+                        <span className="font-bold text-gray-800 text-base md:text-lg">{selectedProduct.landArea}</span>
                       </div>
                       <div className="bg-gray-50 p-3 md:p-4 rounded-lg">
                         <span className="text-gray-500 text-xs md:text-sm block mb-1">Luas Bangunan</span>
-                        <span className="font-bold text-gray-800 text-base md:text-lg">{formatNumberInString(selectedProduct.buildingArea)}</span>
+                        <span className="font-bold text-gray-800 text-base md:text-lg">{selectedProduct.buildingArea}</span>
                       </div>
                     </div>
                   </div>
-
+                  
                   <div className="mb-6 md:mb-8">
                     <h4 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-luxima-blue flex items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -488,7 +493,7 @@ export default function ProductsSection() {
                       <p className="text-gray-700 text-sm md:text-base">{selectedProduct.description}</p>
                     </div>
                   </div>
-
+                  
                   <div className="mb-6 md:mb-8">
                     <h4 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-luxima-blue flex items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -528,7 +533,7 @@ export default function ProductsSection() {
                   </div>
                 </div>
               </div>
-
+              
               <div className="mt-6 md:mt-8 flex justify-end border-t pt-4 md:pt-6">
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -536,7 +541,7 @@ export default function ProductsSection() {
                 >
                   Tutup
                 </button>
-                <Link
+                <Link 
                   href={WHATSAPP_CONTACT.WHATSAPP_SHORT_URL}
                   className="bg-luxima-gold hover:bg-luxima-gold-hover text-white py-1.5 md:py-2 px-4 md:px-5 rounded-md text-xs md:text-sm font-medium transition-colors duration-300 flex items-center"
                 >
@@ -576,6 +581,7 @@ export default function ProductsSection() {
               controls
               preload="none"
               className="w-full h-auto rounded-lg border border-gray-200 bg-black max-h-[60vh]"
+              poster="/luxima/images/video-poster.png"
             >
               Your browser does not support the video tag.
             </video>
