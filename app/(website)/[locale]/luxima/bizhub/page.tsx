@@ -29,7 +29,7 @@ export default function LuximaBizhubPage() {
           <div className="prose prose-lg max-w-none">
             <h2>Tentang Luxima BizHub</h2>
             <p>
-              Luxima BizHub adalah pusat bisnis modern yang dirancang untuk mendukung pertumbuhan dan kesuksesan perusahaan Anda. 
+              Luxima BizHub adalah pusat bisnis modern yang dirancang untuk mendukung pertumbuhan dan kesuksesan perusahaan Anda.
               Dengan lokasi strategis dan fasilitas lengkap, kami menyediakan lingkungan kerja yang optimal untuk bisnis Anda.
             </p>
 
@@ -45,7 +45,7 @@ export default function LuximaBizhubPage() {
 
             <h3>Keunggulan Lokasi</h3>
             <p>
-              Berada di lokasi strategis dengan akses mudah ke berbagai fasilitas publik, 
+              Berada di lokasi strategis dengan akses mudah ke berbagai fasilitas publik,
               transportasi, dan pusat bisnis lainnya.
             </p>
 
@@ -54,7 +54,7 @@ export default function LuximaBizhubPage() {
               Untuk informasi lebih lanjut tentang Luxima BizHub, silakan hubungi tim kami:
             </p>
             <div className="mt-6">
-              <Link 
+              <Link
                 href={WHATSAPP_CONTACT.WHATSAPP_URL}
                 className="inline-block bg-luxima-gold hover:bg-luxima-gold-hover text-white font-bold py-3 px-8 rounded-lg transition-all duration-300"
               >

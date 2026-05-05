@@ -1,6 +1,7 @@
 import { getSocialPage } from "@/lib/payload";
 import SocialPageClient from "./SocialPageClient";
 import { locales, type Locale } from "@/i18n.config";
+import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
@@ -14,7 +15,7 @@ export default async function SocialPage({ params }: SocialPageProps) {
   const socialPage = await getSocialPage(locale as Locale);
 
   if (!socialPage) {
-    return null;
+    notFound();
   }
 
   return <SocialPageClient socialPage={socialPage} />;
