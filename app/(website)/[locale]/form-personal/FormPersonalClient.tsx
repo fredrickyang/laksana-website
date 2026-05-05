@@ -6,7 +6,9 @@ import Image from "next/image";
 import { compressImage } from "@/lib/image-compression";
 import { submitForm } from "./actions";
 
-export default function FormPersonalClient() {
+import type { Setting } from "@/payload-types";
+
+export default function FormPersonalClient({ settings }: { settings?: Setting }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error";
@@ -469,7 +471,7 @@ export default function FormPersonalClient() {
         </div>
       </div>
 
-      <Footer />
+      <Footer settings={settings} />
     </>
   );
 }

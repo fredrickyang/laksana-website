@@ -6,7 +6,9 @@ import Image from "next/image";
 import { compressImage } from "@/lib/image-compression";
 import { submitForm } from "./actions";
 
-export default function FormCompanyClient() {
+import type { Setting } from "@/payload-types";
+
+export default function FormCompanyClient({ settings }: { settings?: Setting }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error";
@@ -503,7 +505,7 @@ export default function FormCompanyClient() {
         </div>
       </div>
 
-      <Footer />
+      <Footer settings={settings} />
     </>
   );
 }
