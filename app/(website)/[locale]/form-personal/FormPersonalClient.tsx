@@ -141,9 +141,6 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
     <>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
-        <title>
-          Laksana Business Park - Solusi Gudang & Properti Strategis
-        </title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
           <Image
