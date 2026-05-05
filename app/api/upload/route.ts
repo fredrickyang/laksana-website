@@ -12,7 +12,14 @@ const REQUIRED_S3_ENV = [
 
 export async function POST(req: NextRequest) {
   try {
-    const payload = await getPayloadClient();
+    const contentType = req.headers.get('content-type') || '';
+    if (!contentType.includes('multipart/form-data')) {
+      return NextResponse.json(
+        { error: 'Expected multipart/form-data upload request' },
+        { status: 400 },
+      );
+    }
+
     const formData = await req.formData();
     const file = formData.get('file');
     const s3Key = formData.get('s3Key');
@@ -29,6 +36,7 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      const payload = await getPayloadClient();
       const originalFileName = typeof fileName === 'string' && fileName ? fileName : s3Key;
       const mimeType = typeof fileType === 'string' && fileType ? fileType : 'application/octet-stream';
       const filesize = typeof fileSize === 'string' ? Number.parseInt(fileSize, 10) : 0;
@@ -49,6 +57,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
+    const payload = await getPayloadClient();
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
