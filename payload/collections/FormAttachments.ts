@@ -18,8 +18,8 @@ export const FormAttachments: CollectionConfig = {
         delete: isLegal,
     },
     upload: {
-        disableLocalStorage: true, 
-        // This will reuse the same S3 setup from payload.config.ts if added
+        disableLocalStorage: true,
+        filesRequiredOnCreate: false,
     },
     fields: [
         {

@@ -5,6 +5,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
+const REQUIRED_S3_ENV = [
+  'S3_BUCKET',
+  'S3_REGION',
+  'S3_ACCESS_KEY_ID',
+  'S3_SECRET_ACCESS_KEY',
+];
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -13,6 +20,14 @@ export async function GET(req: NextRequest) {
 
     if (!filename || !contentType) {
       return NextResponse.json({ error: 'Missing filename or type' }, { status: 400 });
+    }
+
+    const missingEnv = REQUIRED_S3_ENV.filter((key) => !process.env[key]);
+    if (missingEnv.length > 0) {
+      return NextResponse.json(
+        { error: `S3 upload is not configured. Missing: ${missingEnv.join(', ')}` },
+        { status: 500 },
+      );
     }
 
     const s3 = getS3Client();

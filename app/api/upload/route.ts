@@ -3,32 +3,49 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
+const REQUIRED_S3_ENV = [
+  'S3_BUCKET',
+  'S3_REGION',
+  'S3_ACCESS_KEY_ID',
+  'S3_SECRET_ACCESS_KEY',
+];
+
 export async function POST(req: NextRequest) {
   try {
     const payload = await getPayloadClient();
     const formData = await req.formData();
-    const file = formData.get('file') as File;
-    const s3Key = formData.get('s3Key') as string;
-    const fileName = formData.get('filename') as string;
-    const fileSize = formData.get('filesize') as string;
-    const fileType = formData.get('filetype') as string;
+    const file = formData.get('file');
+    const s3Key = formData.get('s3Key');
+    const fileName = formData.get('filename');
+    const fileSize = formData.get('filesize');
+    const fileType = formData.get('filetype');
 
-    if (s3Key) {
-      // Direct-to-S3 registration: Create the record in Payload without uploading again
-      // We manually populate the fields that the S3 plugin expects
+    if (typeof s3Key === 'string' && s3Key) {
+      const missingEnv = REQUIRED_S3_ENV.filter((key) => !process.env[key]);
+      if (missingEnv.length > 0) {
+        return NextResponse.json(
+          { error: `S3 upload is not configured. Missing: ${missingEnv.join(', ')}` },
+          { status: 500 },
+        );
+      }
+
+      const originalFileName = typeof fileName === 'string' && fileName ? fileName : s3Key;
+      const mimeType = typeof fileType === 'string' && fileType ? fileType : 'application/octet-stream';
+      const filesize = typeof fileSize === 'string' ? Number.parseInt(fileSize, 10) : 0;
+
       const doc = await payload.create({
         collection: 'form-attachments',
         data: {
-          alt: fileName || s3Key,
+          alt: originalFileName,
           filename: s3Key,
-          mimeType: fileType || 'application/pdf',
-          filesize: parseInt(fileSize || '0'),
+          mimeType,
+          filesize: Number.isFinite(filesize) ? filesize : 0,
         },
       });
       return NextResponse.json({ id: doc.id });
     }
 
-    if (!file) {
+    if (!(file instanceof File) || file.size === 0) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 

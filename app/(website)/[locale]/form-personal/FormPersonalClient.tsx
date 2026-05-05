@@ -8,13 +8,19 @@ import { submitForm } from "./actions";
 
 export default function FormPersonalClient() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const handleAction = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submission started");
     const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
 
     setIsSubmitting(true);
+    setSubmitStatus(null);
     try {
       const compressedFormData = new FormData();
 
@@ -24,16 +30,17 @@ export default function FormPersonalClient() {
       // Get name prefix for file naming
       const namePrefix = (formData.get('fullname_customer') as string) || 'submission';
       const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+      const getResponseError = async (response: Response, fallback: string) => {
+        try {
+          const body = await response.json();
+          return body?.error ? `${fallback}: ${body.error}` : fallback;
+        } catch {
+          return fallback;
+        }
+      };
 
       for (const [key, value] of formData.entries()) {
         if (value instanceof File && value.size > 0) {
-          // Check if file is too big for Vercel (4.5MB limit)
-          if (value.size > 4.5 * 1024 * 1024) {
-             alert(`File ${value.name} is too large (> 4.5MB). Please use a smaller file or compress the PDF.`);
-             setIsSubmitting(false);
-             return;
-          }
-
           uploadPromises.push((async () => {
              // 1. Compression (for images)
              const processedFile = value.type.startsWith('image/') ? await compressImage(value) : value;
@@ -53,7 +60,7 @@ export default function FormPersonalClient() {
                 console.log(`Using Direct-to-S3 for ${fileToUpload.name}...`);
                 // Get Presigned URL
                 const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(fileToUpload.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
-                if (!signRes.ok) throw new Error(`Failed to get upload link for ${fileToUpload.name}`);
+                if (!signRes.ok) throw new Error(await getResponseError(signRes, `Failed to get upload link for ${fileToUpload.name}`));
                 const { url, key: s3Key } = await signRes.json();
 
                 // Upload to S3
@@ -75,7 +82,7 @@ export default function FormPersonalClient() {
                   method: 'POST',
                   body: regData,
                 });
-                if (!regRes.ok) throw new Error(`Failed to register ${fileToUpload.name} in CMS`);
+                if (!regRes.ok) throw new Error(await getResponseError(regRes, `Failed to register ${fileToUpload.name} in CMS`));
                 const { id } = await regRes.json();
                 compressedFormData.append(key, id);
              } else {
@@ -88,7 +95,7 @@ export default function FormPersonalClient() {
                   body: uploadData,
                 });
 
-                if (!uploadRes.ok) throw new Error(`Failed to upload ${fileToUpload.name}`);
+                if (!uploadRes.ok) throw new Error(await getResponseError(uploadRes, `Failed to upload ${fileToUpload.name}`));
 
                 const { id } = await uploadRes.json();
                 compressedFormData.append(key, id);
@@ -106,14 +113,23 @@ export default function FormPersonalClient() {
       console.log("Server action result:", result);
 
       if (result.success) {
-        alert("Form berhasil terkirim, harap menunggu informasi lebih lanjut melalui Admin");
-        window.location.reload();
+        setSubmitStatus({
+          type: "success",
+          message: "Form berhasil terkirim. Harap menunggu informasi lebih lanjut melalui Admin.",
+        });
+        form.reset();
       } else {
-        alert("Gagal mengirim form: " + (result.error || "Terjadi kesalahan tidak dikenal"));
+        setSubmitStatus({
+          type: "error",
+          message: "Gagal mengirim form: " + (result.error || "Terjadi kesalahan tidak dikenal"),
+        });
       }
     } catch (error) {
       console.error("Submission error:", error);
-      alert("Terjadi kesalahan koneksi. Silakan coba lagi.");
+      setSubmitStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Terjadi kesalahan koneksi. Silakan coba lagi.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -153,12 +169,14 @@ export default function FormPersonalClient() {
       </div>
       <div className="flex items-center justify-center p-4 sm:p-12">
         <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg sm:p-10">
-          <img
+          <Image
             src="https://d2ml0yc0mb1c0r.cloudfront.net/utj.jpg"
             alt="Form Illustration"
+            width={960}
+            height={540}
             className="mb-8 w-full rounded-lg sm:mb-12"
           />
-          <form onSubmit={handleAction}>
+          <form onSubmit={handleAction} method="post" encType="multipart/form-data">
             {/* Title and Description */}
             <div className="mb-8 text-center">
               <p className="mt-2 text-sm text-gray-600 sm:text-base">
@@ -434,6 +452,19 @@ export default function FormPersonalClient() {
             >
               {isSubmitting ? 'Mengirim Data...' : 'Submit Data UTJ Sekarang'}
             </button>
+            <div aria-live="polite" className="mt-4 min-h-12">
+              {submitStatus && (
+                <p
+                  className={`rounded-md border px-4 py-3 text-sm ${
+                    submitStatus.type === "success"
+                      ? "border-green-200 bg-green-50 text-green-800"
+                      : "border-red-200 bg-red-50 text-red-800"
+                  }`}
+                >
+                  {submitStatus.message}
+                </p>
+              )}
+            </div>
           </form>
         </div>
       </div>
