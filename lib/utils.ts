@@ -35,3 +35,17 @@ export function formatNumberInString(str: string): string {
         return number.toLocaleString('en-US');
     });
 }
+
+/**
+ * Formats an author name by removing email domain and capitalizing the first letter.
+ */
+export function formatAuthorName(author: any): string {
+    const name = typeof author === 'string' ? author : (author?.email || '');
+    if (!name) return '';
+    
+    // Remove domain part if it's an email
+    const namePart = name.split('@')[0];
+    
+    // Capitalize only the first letter
+    return namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
+}

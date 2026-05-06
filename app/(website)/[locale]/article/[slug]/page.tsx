@@ -1,4 +1,5 @@
 import { getArticleBySlug, getArticles, getSettings, getArticlePage, getMediaUrl } from '@/lib/payload'
+import { formatAuthorName } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Footer from '../../../components/Footer'
@@ -74,9 +75,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     : null
 
   // Get author names
-  const authors = article.authors?.map((author: any) =>
-    typeof author === 'string' ? author : author.email
-  ).join(', ')
+  const authors = article.authors?.map((author: any) => formatAuthorName(author)).join(', ')
 
   // Helper to render Lexical children to HTML string
   function renderChildren(children: any[]): string {
@@ -109,7 +108,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     dateModified: article.updatedAt,
     author: article.authors?.map((author: any) => ({
       '@type': 'Person',
-      name: typeof author === 'object' ? author.name : author,
+      name: formatAuthorName(author),
     })),
     publisher: {
       '@type': 'Organization',

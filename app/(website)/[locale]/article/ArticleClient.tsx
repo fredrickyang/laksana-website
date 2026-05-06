@@ -2,7 +2,7 @@
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getMediaUrl } from "@/lib/utils";
+import { getMediaUrl, formatAuthorName } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -183,7 +183,7 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
                         <>
                           <span className="opacity-30">|</span>
                           <span className="font-semibold truncate max-w-[80px]">
-                            {article.authors.map((a: any) => typeof a === 'string' ? a : a.email).join(', ')}
+                            {article.authors.map((a: any) => formatAuthorName(a)).join(', ')}
                           </span>
                         </>
                       )}
