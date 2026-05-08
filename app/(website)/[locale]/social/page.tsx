@@ -9,16 +9,8 @@ interface SocialPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function SocialPage({ params }: SocialPageProps) {
-  const { locale } = await params;
-
-  const socialPage = await getSocialPage(locale as Locale);
-
-  if (!socialPage) {
-    notFound();
-  }
-
-  return <SocialPageClient socialPage={socialPage} />;
+export default async function SocialPage() {
+  return <SocialPageClient />;
 }
 
 export async function generateStaticParams() {
