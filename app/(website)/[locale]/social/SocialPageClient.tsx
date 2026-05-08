@@ -68,7 +68,7 @@ export default function SocialPageClient() {
       <div className="mt-[10rem] page-full-wrap relative">
         {/* Profile Image */}
         <div className="flex justify-center mb-8">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-white/20">
+          <div className="w-24 h-24 flex items-center justify-center">
             <Image
               src="/images/landing/logos.png"
               alt="Profile Picture"
