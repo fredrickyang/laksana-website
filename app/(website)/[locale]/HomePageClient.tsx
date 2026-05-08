@@ -7,6 +7,7 @@ import {
 } from "react";
 import Image from "next/image";
 import Footer from "../components/Footer";
+import VRModal from "../components/VRModal";
 import { getMediaUrl, formatNumberInString } from "@/lib/utils";
 
 // Helper to extract plain text from Payload richText field
@@ -26,15 +27,21 @@ interface HomePageClientProps {
   locale?: string;
 }
 
-export default function HomePageClient({ homePage, products, articles, settings, locale }: HomePageClientProps) {
+export default function HomePageClient({ homePage, products, articles, settings, locale = 'id' }: HomePageClientProps) {
+  const [isVRModalOpen, setIsVRModalOpen] = useState(false);
+  
   // Build images map from CMS stats data
   const statsImages = useMemo(() => homePage?.mainFeature?.stats?.reduce((acc: Record<string, string>, stat: any, index: number) => {
     const imageUrl = getMediaUrl(stat.image) || `/images/hero${index + 1}.png`;
     acc[String(index + 1)] = imageUrl;
     return acc;
-  }, {}) || {}, [homePage?.mainFeature?.stats]);
+  }, {}) || {
+    "1": "/images/hero1.png",
+    "2": "/images/img2.png",
+    "3": "/images/hero2.png",
+  }, [homePage?.mainFeature?.stats]);
 
-  const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string || '/images/placeholder.png');
+  const [currentImage, setCurrentImage] = useState(Object.values(statsImages)[0] as string || '/images/hero1.png');
   const [activeStatIndex, setActiveStatIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const mainImageRef = useRef<HTMLImageElement>(null);
@@ -97,18 +104,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
     };
   }, []);
 
-  // Get CTA URLs from CMS or use defaults
-  const primaryCtaLink = homePage?.hero?.primaryCtaLink || "#";
-  const secondaryCtaLink = homePage?.hero?.secondaryCtaLink || "#";
+  const primaryCtaLink = homePage?.hero?.primaryCtaLink || "https://api.whatsapp.com/send?phone=6281805886000&text=%5BWEB%5D%20Halo%20tim%20marketing%20Laksana%2C%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20unit%20Laksana%20Business%20Park";
   const heroVideoUrl = getMediaUrl(homePage?.hero?.backgroundVideo) || "/videos/hero-video.mp4";
   const heroPosterUrl = getMediaUrl(homePage?.hero?.fallbackImage) || "";
-
 
   return (
     <>
       {/* Hero Section with Background Image */}
       <header className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
-        <title>{settings?.siteTitle || '[No Data: siteTitle]'}</title>
+        <title>{settings?.siteTitle || 'Laksana Business Park - Solusi Gudang & Properti Strategis'}</title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
           <video
@@ -132,44 +136,62 @@ export default function HomePageClient({ homePage, products, articles, settings,
             <div className="lg:flex-1 fade-in-up">
               <h1 className="text-2xl md:text-5xl font-medium tracking-tight text-white mb-4 leading-[0.95] brand-font">
                 <span className="text-white bg-clip-text">
-                  {getRichText(homePage?.hero?.headline, '[No Data: hero.headline]')}
+                  {getRichText(homePage?.hero?.headline, 'Laksana Business Park')}
                 </span>
               </h1>
-              <p className="text-sm lg:text-lg text-white max-w-2xl font-normal leading-relaxed">
-                {getRichText(homePage?.hero?.subheadline, '[No Data: hero.subheadline]')}
+              <p className="text-sm lg:text-lg text-white max-w-2xl font-light leading-relaxed">
+                {getRichText(homePage?.hero?.subheadline, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara, dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.')}
               </p>
             </div>
             <div className="flex gap-4 fade-in-up justify-center lg:justify-start px-4 md:px-0 w-full lg:w-auto items-end" style={{ animationDelay: "0.2s" }}>
               <a
                 href={primaryCtaLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-white text-black font-medium hover:bg-[#1d2088] hover:text-white transition-all flex items-center gap-3 group text-sm tracking-wide whitespace-nowrap"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
                 </svg>
-                {homePage?.hero?.primaryCta || "[No Data: hero.primaryCta]"}
+                {homePage?.hero?.primaryCta || "Hubungi Kami"}
               </a>
               <div className="flex flex-col items-center gap-2">
                 <span className="text-white text-sm text-shadow tracking-wide animate-bounce">
                   {getRichText(homePage?.hero?.secondaryCtaHelperText, 'Klik untuk Lihat')}
                 </span>
-                <a
-                  href={secondaryCtaLink}
-                  className="justify-start flex px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap"
+                <button
+                  onClick={() => setIsVRModalOpen(true)}
+                  className="justify-start flex px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-play-circle-fill mr-3 mt-0.5" viewBox="0 0 16 16">
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
                   </svg>
-                  {homePage?.hero?.secondaryCta || "[No Data: hero.secondaryCta]"}
-                </a>
+                  {homePage?.hero?.secondaryCta || "Virtual 3D"}
+                </button>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="text-neutral-800 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#FACC15] selection:text-black">
-
+      <div className="text-neutral-800 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#FACC15] selection:text-black relative">
+        <div
+          className="aura-background-component top-0 w-full h-screen -z-10 mix-blend-darken saturate-0 brightness-150 absolute opacity-50"
+          data-alpha-mask="80"
+          style={{
+            maskImage: "linear-gradient(to bottom, transparent, white 0%, white 80%, transparent)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent, white 0%, white 80%, transparent)",
+          }}
+        >
+          <div className="aura-background-component top-0 w-full -z-10 absolute h-full">
+            <div
+              data-us-project="inzENTvhzS9plyop7Z6g"
+              className="absolute w-full h-full left-0 top-0 -z-10"
+              data-us-initialized="true"
+              data-scene-id="id-e069jmsq6g6thr8klsgcd"
+            ></div>
+          </div>
+        </div>
 
         {/* Navigation Section */}
         <nav className="w-full px-6 lg:px-12 flex justify-between items-center relative z-50 [animation:fadeSlideIn_0.8s_ease-out_0s_both] animate-on-scroll animate">
@@ -214,7 +236,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                 />
               </div>
               <div className="justify-start mt-6 border-l border-black/5 pl-4">
-                <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">
+                <h3 className="text-xl text-neutral-900 font-medium mb-2 group-hover:text-[#1d2088] transition-colors">
                   {product.name}
                 </h3>
                 <div className="flex justify-start items-center gap-4">
@@ -236,61 +258,49 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     ))
                   ) : (
                     <>
-                      <div className="flex items-center gap-1.5 min-w-0">
+                      <div className="flex items-center gap-1.5 min-w-0 text-neutral-600">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
                           <path d="M9 22v-4h6v4" />
                           <path d="M8 6h.01" />
                           <path d="M16 6h.01" />
-                          <path d="M8 10h.01" />
-                          <path d="M16 10h.01" />
                         </svg>
-                        <p className="text-sm leading-relaxed truncate max-w-[100px]">
-                          {product.type || "Industrial"}
-                        </p>
+                        <p className="text-sm leading-relaxed truncate max-w-[100px]">{product.type || "Industrial"}</p>
                       </div>
-                      <div className="flex items-center gap-1.5 min-w-0">
+                      <div className="flex items-center gap-1.5 min-w-0 text-neutral-600">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-                          <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-                          <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-                          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                          <path d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103" />
                         </svg>
-                        <p className="text-sm leading-relaxed truncate max-w-[100px]">
-                          {formatNumberInString(product.highlightSpecs?.landArea || "Luas 550 ha")}
-                        </p>
+                        <p className="text-sm leading-relaxed truncate max-w-[100px]">{formatNumberInString(product.highlightSpecs?.landArea || "Luas 550 ha")}</p>
                       </div>
                     </>
                   )}
                 </div>
-                <p className="mt-5 text-neutral-600 font-normal text-xs leading-relaxed max-w-[90%]">
+                <p className="mt-5 text-neutral-600 font-light text-xs text-justify leading-relaxed max-w-[90%]">
                   {product.shortDescription || ""}
                 </p>
               </div>
             </a>
           )) : (
-            // Fallback to hardcoded cards if no products in CMS
-            <>
-              <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
-                <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
-                  <Image
-                    src="/images/card-unit/luxima.png"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                    alt="Luxima"
-                    fill
-                    quality={100}
-                    sizes="100vw"
-                    priority
-                  />
-                </div>
-                <div className="justify-start mt-6 border-l border-black/5 pl-4">
-                  <h3 className="text-xl text-neutral-900 font-medium mb-2 hover:text-[#1d2088]">Luxima Bizhub 4 in 1</h3>
-                  <p className="mt-5 text-neutral-600 font-normal text-xs leading-relaxed max-w-[90%]">
-                    Didesain untuk menjawab kebutuhan ruang usaha dan tempat tinggal dalam satu atap yang sama sebagai solusi nyata khususnya bagi start-up business.
-                  </p>
-                </div>
-              </a>
-            </>
+            <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
+              <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
+                <Image
+                  src="/images/card-unit/luxima.png"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                  alt="Luxima"
+                  fill
+                  quality={100}
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+              <div className="justify-start mt-6 border-l border-black/5 pl-4">
+                <h3 className="text-xl text-neutral-900 font-medium mb-2 group-hover:text-[#1d2088] transition-colors">Luxima Bizhub 4 in 1</h3>
+                <p className="mt-5 text-neutral-600 font-light text-xs text-justify leading-relaxed max-w-[90%]">
+                  Didesain untuk menjawab kebutuhan ruang usaha dan tempat tinggal dalam satu atap yang sama sebagai solusi nyata khususnya bagi start-up business.
+                </p>
+              </div>
+            </a>
           )}
         </div>
       </div>
@@ -313,10 +323,10 @@ export default function HomePageClient({ homePage, products, articles, settings,
       <main className="flex-grow grid grid-cols-1 lg:px-12 lg:grid-cols-12 my-10 pb-12 relative gap-x-8 gap-y-8 px-6 py-6">
         <div className="lg:col-span-5 flex flex-col lg:pt-10 z-20 relative justify-center">
           <h1 className="text-3xl lg:text-[2.3rem] font-normal max-w-md tracking-tighter text-black mb-12 [animation:fadeSlideIn_0.8s_ease-out_0.1s_both] animate-on-scroll animate">
-            {getRichText(homePage?.mainFeature?.headline, '[No Data: mainFeature.headline]')}
+            {getRichText(homePage?.mainFeature?.headline, 'Membangun berkelanjutan untuk kawasan terpadu')}
           </h1>
-          <p className="text-md text-neutral-600 max-w-md leading-relaxed mb-12 font-normal [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
-            {getRichText(homePage?.mainFeature?.description, '[No Data: mainFeature.description]')}
+          <p className="text-md text-neutral-600 max-w-md leading-relaxed mb-12 font-light text-justify [animation:fadeSlideIn_0.8s_ease-out_0.2s_both] animate-on-scroll animate">
+            {getRichText(homePage?.mainFeature?.description, 'Kawasan industri dan komersial terintegrasi di Tangerang Utara dikembangkan oleh Agung Intiland dengan fasilitas modern dan lokasi strategis.')}
           </p>
           <div className="flex flex-col items-start gap-3 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate">
             <a
@@ -350,7 +360,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <div className="dot bottom left"></div>
               <button className="btn">
                 <span className="btn-text tracking-tight">
-                  {homePage?.mainFeature?.ctaButtonLabel || "[No Data: mainFeature.ctaButtonLabel]"}
+                  {homePage?.mainFeature?.ctaButtonLabel || "Tentang Perusahaan"}
                 </span>
                 <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"></path>
@@ -379,8 +389,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
         <div className="lg:col-span-3 flex flex-col relative z-20 pt-10 pl-6 [animation:fadeSlideIn_0.8s_ease-out_0.4s_both] animate-on-scroll animate">
           <div className="beam-border-v"></div>
           <div className="flex-1 flex flex-col justify-between h-full pb-10">
-            {homePage?.mainFeature?.stats?.length > 0 ? (<>
-              {homePage.mainFeature.stats.map((stat: any, index: number) => (
+            {homePage?.mainFeature?.stats?.length > 0 ? (
+              homePage.mainFeature.stats.map((stat: any, index: number) => (
                 <div
                   key={index}
                   className={`stat-item group ${index === activeStatIndex ? 'active' : ''} ${index > 0 ? 'py-12 border-t border-black/5 border-dashed' : 'mt-10'}`}
@@ -388,95 +398,30 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   onClick={() => handleStatClick(String(index + 1), index)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">
+                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors group-[.active]:text-black">
                     {stat.number || `0${index + 1}`}
                   </span>
-                  <span className="stat-label text-xs font-medium text-neutral-500 mt-2 block uppercase tracking-widest transition-colors group-[.active]:text-neutral-900">
-                    {stat.label || (
-                      index === 0 ? "Lokasi Strategis" :
-                        index === 1 ? "Fasilitas Lengkap" :
-                          index === 2 ? "Investasi Terbaik" : "Keunggulan Utama"
-                    )}
+                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-[.active]:text-black transition-colors">
+                    {stat.label || "Feature Item"}
                   </span>
                 </div>
-              ))}
-              {homePage?.mainFeature?.badges?.length > 0 && (
-                <div className="border-t border-black/5 border-dashed pt-12">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex items-center gap-4">
-                      {homePage.mainFeature.badges.map((badge: any, idx: number) => (
-                        <div key={idx} className="flex flex-col items-center gap-3">
-                          <Image
-                            src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
-                            alt={badge.label || `Badge ${idx + 1}`}
-                            width={112}
-                            height={112}
-                            className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
-                          />
-                          {badge.label && (
-                            <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-widest text-center max-w-[112px]">
-                              {badge.label}
-                            </span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                    {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
-                  </p>
-                </div>
-              )}
-            </>) : (
+              ))
+            ) : (
               <>
-                <div className={`stat-item ${activeStatIndex === 0 ? 'active' : ''} mt-10`} data-img-id="1" onClick={() => handleStatClick('1', 0)} style={{ cursor: 'pointer' }}>
-                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">01</span>
+                <div className={`stat-item group ${activeStatIndex === 0 ? 'active' : ''} mt-10`} onClick={() => handleStatClick('1', 0)} style={{ cursor: 'pointer' }}>
+                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors group-[.active]:text-black">01</span>
+                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-[.active]:text-black transition-colors">Menjaga Kualitas Produk</span>
                 </div>
-                <div className={`stat-item ${activeStatIndex === 1 ? 'active' : ''} py-12 border-t border-black/5 border-dashed`} data-img-id="2" onClick={() => handleStatClick('2', 1)} style={{ cursor: 'pointer' }}>
-                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors">02</span>
+                <div className={`stat-item group ${activeStatIndex === 1 ? 'active' : ''} py-12 border-t border-black/5 border-dashed`} onClick={() => handleStatClick('2', 1)} style={{ cursor: 'pointer' }}>
+                  <span className="stat-value text-7xl font-light tracking-tighter text-neutral-300 block transition-colors group-[.active]:text-black">02</span>
+                  <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2 block pl-2 group-[.active]:text-black transition-colors">Manajemen Estate Terbaik</span>
                 </div>
-                <div className={`stat-item ${activeStatIndex === 2 ? 'active' : ''} border-t border-black/5 border-dashed pt-12`} data-img-id="3" onClick={() => handleStatClick('3', 2)} style={{ cursor: 'pointer' }}>
-                  {homePage?.mainFeature?.badges?.length > 0 ? (
-                    <>
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="flex items-center gap-4">
-                          {homePage.mainFeature.badges.map((badge: any, idx: number) => (
-                            <div key={idx} className="flex flex-col items-center gap-3">
-                              <Image
-                                src={getMediaUrl(badge.icon) || "/images/usp/usp-1.png"}
-                                alt={badge.label || `Badge ${idx + 1}`}
-                                width={80}
-                                height={80}
-                                className="w-28 h-28 rounded-full object-cover relative z-10 transition-all"
-                              />
-                              {badge.label && (
-                                <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-widest text-center max-w-[112px]">
-                                  {badge.label}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                        {getRichText(homePage?.mainFeature?.badgesCaption, 'Akses Mudah ke Bandara Tersertifikasi UIKI')}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="relative group cursor-pointer">
-                          <div className="flex items-center gap-3">
-                            <Image src="/images/usp/usp-1.png" alt="Lead Architect" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
-                            <Image src="/images/usp/usp-2.png" alt="Lead Architect 2" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] mt-6 pointer-events-none">
-                        Akses Mudah ke Bandara Tersertifikasi UIKI
-                      </p>
-                    </>
-                  )}
+                <div className={`stat-item group ${activeStatIndex === 2 ? 'active' : ''} border-t border-black/5 border-dashed pt-12`} onClick={() => handleStatClick('3', 2)} style={{ cursor: 'pointer' }}>
+                   <div className="flex items-center gap-3 mb-6">
+                      <Image src="/images/usp/usp-1.png" alt="USP 1" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                      <Image src="/images/usp/usp-2.png" alt="USP 2" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                  </div>
+                  <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">Akses Mudah ke Bandara Tersertifikasi UIKI</p>
                 </div>
               </>
             )}
@@ -485,65 +430,45 @@ export default function HomePageClient({ homePage, products, articles, settings,
       </main>
 
       <section className="w-full bg-[#FAFAFA] relative overflow-hidden">
-        <div className="absolute top-12 left-0 right-0 flex justify-center z-30 px-6"></div>
-
         <div className="branding">
           <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-24 relative">
             <div className="container mx-auto px-6 lg:px-12 relative z-10">
               <div className="flex flex-col items-center mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-1 shadow-sm">
                   <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500">
-                    {getRichText(homePage?.branding?.tag, '[No Data: branding.tag]')}
+                    {getRichText(homePage?.branding?.tag, 'Klien Kami')}
                   </span>
                 </div>
                 <h2 className="mt-6 text-3xl lg:text-4xl font-medium tracking-tight text-neutral-900 text-center max-w-3xl leading-[1.05]">
-                  {getRichText(homePage?.branding?.sectionTitle, '[No Data: branding.sectionTitle]')}
+                  {getRichText(homePage?.branding?.sectionTitle, 'Dipercaya oleh perusahaan besar')}
                 </h2>
                 <p className="mt-4 text-base text-neutral-500 text-center max-w-2xl">
-                  {getRichText(homePage?.branding?.description, '[No Data: branding.description]')}
+                  {getRichText(homePage?.branding?.description, 'Kini mereka dapat fokus mengembangkan bisnis & operasional gudang lebih efisien bersama kami.')}
                 </p>
               </div>
               <div className="mt-14 flex flex-col items-center gap-5">
                 <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
                   {homePage?.branding?.clientLogos?.length > 0 ? (
                     homePage.branding.clientLogos.map((logo: any, idx: number) => (
-                      <span key={idx} className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        {getMediaUrl(logo.logo) && <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />}
+                      <span key={idx} className="inline-flex items-center gap-2">
+                        {getMediaUrl(logo.logo) && <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain transition-all" />}
                       </span>
                     ))
                   ) : (
                     <>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/coca-cola.svg" alt="Coca Cola" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/google.svg" alt="Google" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/heineken.svg" alt="Heineken" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/microsoft.svg" alt="Microsoft" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/underarmour.svg" alt="Under Armour" width={80} height={80} className="w-20 h-20 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/yamaha.svg" alt="Yamaha" width={112} height={112} className="w-28 h-28 object-contain relative transition-all" />
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400">
-                        <Image src="/brand/mastercard.svg" alt="Mastercard" width={80} height={80} className="w-20 h-20 object-contain relative transition-all" />
-                      </span>
+                      <Image src="/brand/coca-cola.svg" alt="Coca Cola" width={112} height={112} className="w-28 h-28 object-contain" />
+                      <Image src="/brand/google.svg" alt="Google" width={112} height={112} className="w-28 h-28 object-contain" />
+                      <Image src="/brand/heineken.svg" alt="Heineken" width={112} height={112} className="w-28 h-28 object-contain" />
+                      <Image src="/brand/microsoft.svg" alt="Microsoft" width={112} height={112} className="w-28 h-28 object-contain" />
+                      <Image src="/brand/underarmour.svg" alt="Under Armour" width={80} height={80} className="w-20 h-20 object-contain" />
+                      <Image src="/brand/yamaha.svg" alt="Yamaha" width={112} height={112} className="w-28 h-28 object-contain" />
+                      <Image src="/brand/mastercard.svg" alt="Mastercard" width={80} height={80} className="w-20 h-20 object-contain" />
                     </>
                   )}
                 </div>
               </div>
             </div>
           </section>
-        </div>
-
-        <div className="cta-section">
-          <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-24 relative"></section>
         </div>
 
         <div className="relative z-30 mx-4 lg:mx-auto max-w-6xl -mt-16 transform lg:-translate-y-12">
@@ -553,13 +478,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
               <div className="w-full h-full" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "20px 20px", maskImage: "radial-gradient(circle at 50% 50%, black, transparent 70%)" }}></div>
             </div>
             <div className="relative z-10 max-w-xl">
-              <h3 className="text-2xl lg:text-4xl text-white mb-4 leading-tight font-playfair font-medium tracking-tight">
-                {getRichText(homePage?.ctaSection?.cardTitle, '[No Data: ctaSection.cardTitle]')}
+              <h3 className="text-2xl lg:text-4xl text-white mb-4 leading-tight font-medium tracking-tight">
+                {getRichText(homePage?.ctaSection?.cardTitle, 'Sekarang giliran anda untuk bergabung dengan komunitas Laksana Business Park')}
               </h3>
-              <p className="text-[#A1A1AA] text-sm lg:text-base mb-8 font-geist">
-                {getRichText(homePage?.ctaSection?.cardDescription, '[No Data: ctaSection.cardDescription]')}
+              <p className="text-[#A1A1AA] text-sm lg:text-base mb-8">
+                {getRichText(homePage?.ctaSection?.cardDescription, 'Lebih dari 1000 perusahaan telah mempercayakan kebutuhan industri dan komersialnya bersama kami.')}
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-6 mt-4 [animation:fadeSlideIn_0.8s_ease-out_0.3s_both] animate-on-scroll animate -ml-2">
+              <div className="flex flex-col sm:flex-row items-center gap-6 mt-4">
                 <a
                   href={homePage?.ctaSection?.buttonLink || "/our-company#contact"}
                   className="btn-wrapper"
@@ -590,13 +515,9 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <div className="dot bottom right"></div>
                   <div className="dot bottom left"></div>
                   <button className="btn bg-transparent !text-white border-transparent transition-colors">
-                    <span className="btn-text tracking-tight">
-                      {homePage?.ctaSection?.button || "Konsultasi Gratis"}
-                    </span>
+                    <span className="btn-text tracking-tight">{homePage?.ctaSection?.button || "Bergabung Sekarang"}</span>
                   </button>
                 </a>
-
-                {/* Download Brochure Button */}
                 <a
                   href={getMediaUrl(settings?.brochure) || "#"}
                   target="_blank"
@@ -644,42 +565,31 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   <p className="hidden sm:block text-neutral-400 text-xs font-normal leading-relaxed mb-3">
                     {article.excerpt}
                   </p>
-                  <div className="flex items-center justify-start">
-                    <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                      <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
+                  <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs mt-4">
+                    <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </a>
             )) : (
-              <>
-                <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
-                  <div className="relative">
-                    <Image src="/images/card-blog/tahap3.png" alt="Article" width={600} height={400} quality={90} sizes="(max-width: 1024px) 100vw, 33vw" className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110" />
-                    <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-                      <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">NEWS</span>
-                    </div>
-                  </div>
-                  <div className="p-3 sm:p-4 bg-neutral-900">
-                    <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>
-                    <p className="hidden sm:block text-neutral-400 text-xs font-normal leading-relaxed mb-3">Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3 dengan berbagai keunggulan.</p>
-                    <button className="flex items-center gap-2 text-white transition-colors font-medium text-xs">
-                      <span>{homePage?.articleSection?.readMoreLabel || 'Baca Berita'}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
+              <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
+                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
+                  <Image src="/images/card-blog/tahap3.png" alt="Article" fill className="object-cover transition-all duration-500 group-hover:scale-110" />
                 </div>
-              </>
+                <div className="p-3 sm:p-4 bg-neutral-900">
+                  <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>
+                  <p className="hidden sm:block text-neutral-400 text-xs leading-relaxed mb-3">Demi pesatnya kebutuhan industri di Indonesia, Laksana Business Park kembali menghadirkan pengembangan tahap 3.</p>
+                </div>
+              </div>
             )}
           </article>
         </div>
       </section>
+      
+      <VRModal isOpen={isVRModalOpen} onClose={() => setIsVRModalOpen(false)} />
       <Footer settings={settings} />
     </>
   );

@@ -23,7 +23,7 @@ export default function SocialPageClient() {
       id: "261685",
       title: "Tiktok Official Laksana Business Park",
       url: "https://www.tiktok.com/@laksanabusinesspark.id",
-      icon: "/images/landing/tiktok.webp",
+      icon: "/images/landing/tiktok.webp.png",
       altText: "Tiktok @ laksanabusinesspark.id",
     },
     {
@@ -50,7 +50,7 @@ export default function SocialPageClient() {
   ];
 
   return (
-    <div className="min-h-full flex-h-center" id="background_div">
+    <div className="min-h-screen flex-h-center" id="background_div">
       {/* Background Image */}
       <div className="page-bg">
         <Image
@@ -60,30 +60,24 @@ export default function SocialPageClient() {
           className="page-image"
           priority
         />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80 z-10" />
       </div>
-
-      {/* Animated Stars Background (from CSS) */}
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-
-      {/* Canvas Background Overlay */}
-      <canvas id="bg-canvas" className="background-overlay">
-        
-      </canvas>
 
       {/* Main Content */}
       <div className="mt-[10rem] page-full-wrap relative">
         {/* Profile Image */}
-        <div className="flex-both-center">
-          <Image
-            src="/images/logo/agung-logo.svg"
-            alt="Profile Picture"
-            width={120}
-            height={120}
-            className="w-20 h-auto"
-            priority
-          />
+        <div className="flex justify-center mb-8">
+          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-white/20">
+            <Image
+              src="/images/landing/logos.png"
+              alt="Profile Picture"
+              width={120}
+              height={120}
+              className="w-16 h-auto"
+              priority
+            />
+          </div>
         </div>
 
         {/* Page Title */}
