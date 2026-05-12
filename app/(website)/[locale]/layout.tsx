@@ -10,6 +10,7 @@ import "../../globals.css";
 import "../../style-component.css";
 import "../../style-menu.css";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "../components/Analytics";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -74,6 +75,16 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${manrope.variable} ${montserrat.variable} antialiased font-sans mb-0`}>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=4053114351634743&ev=PageView&noscript=1"
+            alt="facebook-pixel-noscript"
+          />
+        </noscript>
+        <Analytics />
         <JsonLd data={organizationJsonLd} />
         <Menu settings={settings} locale={locale} />
         {children}
