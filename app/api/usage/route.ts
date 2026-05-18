@@ -17,9 +17,14 @@ export async function GET() {
 
     const storageBytes = Number(result.rows[0]?.total ?? 0)
 
-    return NextResponse.json({
-      [STORAGE_SERVICE_UUID]: storageBytes,
-    })
+    return NextResponse.json(
+      { [STORAGE_SERVICE_UUID]: storageBytes },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=600',
+        },
+      }
+    )
   } catch (error) {
     console.error('Usage endpoint error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

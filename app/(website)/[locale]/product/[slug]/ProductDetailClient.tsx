@@ -151,6 +151,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
                     src={slide.src}
                     alt={slide.label}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 800px"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -483,6 +484,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
                   src="https://agungintiland.com/assets/source/assets/thumbs/images/cover_1280_700_laksana-business-park---view-semi-bev-05.png.webp"
                   alt="Video cover"
                   fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                   className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 flex items-center justify-center flex-col gap-6">

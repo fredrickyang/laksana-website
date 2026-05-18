@@ -231,7 +231,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   alt={product.name || "Product"}
                   fill
                   quality={100}
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 360px, 360px"
                   priority={index < 6}
                 />
               </div>
@@ -290,7 +290,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   alt="Luxima"
                   fill
                   quality={100}
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 360px, 360px"
                   priority
                 />
               </div>
@@ -381,6 +381,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
               alt="Architectural Detail"
               fill
               priority
+              sizes="(max-width: 1024px) 100vw, 33vw"
               className="opacity-90 w-full h-full object-cover scale-110"
             />
           </div>
@@ -577,7 +578,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
             )) : (
               <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                 <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
-                  <Image src="/images/card-blog/tahap3.png" alt="Article" fill className="object-cover transition-all duration-500 group-hover:scale-110" />
+                  <Image src="/images/card-blog/tahap3.png" alt="Article" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition-all duration-500 group-hover:scale-110" />
                 </div>
                 <div className="p-3 sm:p-4 bg-neutral-900">
                   <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>

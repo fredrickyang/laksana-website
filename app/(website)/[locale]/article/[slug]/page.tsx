@@ -138,6 +138,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
             src={getMediaUrl(article.thumbnail) || "/images/bg-produk.png"}
             alt={article.title}
             fill
+            sizes="100vw"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />

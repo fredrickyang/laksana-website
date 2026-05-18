@@ -165,6 +165,7 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
                   src={getMediaUrl(article.thumbnail) || article.thumbnail || "images/card-blog/tahap3.png"}
                   alt={article.title || "Article Image"}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-all duration-500 group-hover:scale-110"
                 />
                 <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
