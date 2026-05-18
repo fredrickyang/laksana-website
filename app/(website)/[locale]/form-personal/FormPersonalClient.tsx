@@ -54,11 +54,10 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
              const fileToUpload = new File([processedFile], newName, { type: processedFile.type });
 
              // 3. Decide Upload Strategy
-             // Use Direct-to-S3 for PDFs or any file over 4MB
+             // Use Direct-to-S3 for any file over 4MB
              const isLargeFile = fileToUpload.size > 4 * 1024 * 1024;
-             const isPDF = fileToUpload.type === 'application/pdf';
 
-             if (isLargeFile || isPDF) {
+             if (isLargeFile) {
                 console.log(`Using Direct-to-S3 for ${fileToUpload.name}...`);
                 // Get Presigned URL
                 const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(fileToUpload.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
