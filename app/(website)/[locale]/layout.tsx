@@ -5,6 +5,7 @@ import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import { getSettings } from "@/lib/payload";
 import { locales, type Locale } from "@/i18n.config";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 import "../../globals.css";
 import "../../style-component.css";
@@ -84,6 +85,26 @@ export default async function LocaleLayout({
             alt="facebook-pixel-noscript"
           />
         </noscript>
+        <Script id="qontak-webchat" strategy="afterInteractive">
+          {`
+            (function() {
+              const qchatInit = document.createElement('script');
+              qchatInit.src = "https://webchat.qontak.com/qchatInitialize.js";
+              const qchatWidget = document.createElement('script');
+              qchatWidget.src = "https://webchat.qontak.com/js/app.js";
+              document.head.prepend(qchatInit);
+              document.head.prepend(qchatWidget);
+              qchatInit.onload = function() { 
+                if (typeof qchatInitialize === 'function') {
+                  qchatInitialize({
+                    id: "05730d05-a4b9-4fe1-9237-c68f0b561a79", 
+                    code: "4R4_LMmTyb6UGmMPnkM45w"  
+                  });
+                }
+              };
+            })();
+          `}
+        </Script>
         <Analytics />
         <JsonLd data={organizationJsonLd} />
         <Menu settings={settings} locale={locale} />
