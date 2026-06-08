@@ -10,6 +10,13 @@ export const FormAttachments: CollectionConfig = {
     admin: {
         hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
         group: 'Forms',
+        components: {
+            views: {
+                list: {
+                    Component: '/payload/components/FormAttachmentsListView#FormAttachmentsListView',
+                },
+            },
+        },
     },
     access: {
         read: isLegal,
