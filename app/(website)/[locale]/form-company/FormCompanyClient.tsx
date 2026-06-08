@@ -337,7 +337,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="ktp_kitas"
                 id="ktp_kitas"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -355,7 +355,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="nib"
                 id="nib"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -373,7 +373,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="akta_perusahaan"
                 id="akta_perusahaan"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -391,7 +391,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="surat_pernyataan"
                 id="surat_pernyataan"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -408,7 +408,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="surat_persetujuan"
                 id="surat_persetujuan"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
@@ -424,7 +424,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 type="file"
                 name="booking_form"
                 id="booking_form"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
@@ -441,7 +441,7 @@ export default function FormCompanyClient({ settings }: { settings?: Setting }) 
                 name="dokumen_tambahan"
                 id="dokumen_tambahan"
                 multiple
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>

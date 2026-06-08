@@ -321,7 +321,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 type="file"
                 name="ktp_kitas"
                 id="ktp_kitas"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -339,7 +339,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 type="file"
                 name="npwp_pribadi"
                 id="npwp_pribadi"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
                 required
               />
@@ -357,7 +357,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 type="file"
                 name="kartu_keluarga"
                 id="kartu_keluarga"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
@@ -374,7 +374,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 type="file"
                 name="akta_kelahiran_pernikahan"
                 id="akta_kelahiran_pernikahan"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
@@ -390,7 +390,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 type="file"
                 name="booking_form"
                 id="booking_form"
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
@@ -407,7 +407,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 name="dokumen_tambahan"
                 id="dokumen_tambahan"
                 multiple
-                accept=".pdf,.jpg,.jpeg,.png"
+                accept=".pdf,.jpg,.jpeg,.png,.zip,.mp4,.mov"
                 className="w-full border border-gray-300 p-3 text-sm text-gray-800 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
               />
             </div>
