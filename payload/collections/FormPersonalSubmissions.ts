@@ -126,4 +126,44 @@ export const FormPersonalSubmissions: CollectionConfig = {
         },
     ],
     timestamps: true,
+    hooks: {
+        afterDelete: [
+            async ({ req, doc }) => {
+                const attachmentIds: (string | number)[] = [];
+
+                // Single attachment fields
+                const fields = ['ktp_kitas', 'npwp_pribadi', 'kartu_keluarga', 'akta_kelahiran_pernikahan', 'booking_form'];
+                fields.forEach(field => {
+                    if (doc[field]) {
+                        const id = typeof doc[field] === 'object' ? doc[field].id : doc[field];
+                        if (id) attachmentIds.push(id);
+                    }
+                });
+
+                // Array attachment field: dokumen_tambahan
+                if (Array.isArray(doc.dokumen_tambahan)) {
+                    doc.dokumen_tambahan.forEach((item: any) => {
+                        if (item) {
+                            const id = typeof item === 'object' ? item.id : item;
+                            if (id) attachmentIds.push(id);
+                        }
+                    });
+                }
+
+                // Delete all referenced attachments
+                for (const attachmentId of attachmentIds) {
+                    try {
+                        console.log(`Auto-deleting referenced attachment ${attachmentId} for personal submission ${doc.id}...`);
+                        await req.payload.delete({
+                            collection: 'form-attachments',
+                            id: attachmentId,
+                            req,
+                        });
+                    } catch (err) {
+                        console.error(`Failed to delete attachment ${attachmentId}:`, err);
+                    }
+                }
+            }
+        ]
+    }
 }
