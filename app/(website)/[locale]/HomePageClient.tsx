@@ -432,7 +432,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
 
       <section className="w-full bg-[#FAFAFA] relative overflow-hidden">
         <div className="branding">
-          <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-24 relative">
+          <section className="overflow-hidden border-neutral-200 border-t pt-24 pb-36 lg:pb-44 relative">
             <div className="container mx-auto px-6 lg:px-12 relative z-10">
               <div className="flex flex-col items-center mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-1 shadow-sm">

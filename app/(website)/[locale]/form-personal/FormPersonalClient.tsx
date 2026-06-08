@@ -15,6 +15,13 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
     message: string;
   } | null>(null);
 
+  const [uploadProgress, setUploadProgress] = useState<{
+    totalBytes: number;
+    uploadedBytes: number;
+    percentage: number;
+    active: boolean;
+  } | null>(null);
+
   const handleAction = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submission started");
@@ -23,13 +30,58 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
 
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setUploadProgress(null);
+
+    // Local Helper to track upload progress using XMLHttpRequest
+    const uploadWithProgress = (
+      url: string,
+      method: string,
+      body: any,
+      headers: Record<string, string>,
+      onProgress: (loaded: number) => void
+    ): Promise<Response> => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        Object.entries(headers).forEach(([k, v]) => xhr.setRequestHeader(k, v));
+        
+        if (xhr.upload) {
+          xhr.upload.onprogress = (event) => {
+            if (event.lengthComputable) {
+              onProgress(event.loaded);
+            }
+          };
+        }
+
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve({
+              ok: true,
+              status: xhr.status,
+              json: async () => JSON.parse(xhr.responseText),
+              text: async () => xhr.responseText,
+            } as unknown as Response);
+          } else {
+            resolve({
+              ok: false,
+              status: xhr.status,
+              json: async () => {
+                try { return JSON.parse(xhr.responseText); } catch { return {}; }
+              },
+              text: async () => xhr.responseText,
+            } as unknown as Response);
+          }
+        };
+        xhr.onerror = () => reject(new Error("Network connection error"));
+        xhr.send(body);
+      });
+    };
+
     try {
       const compressedFormData = new FormData();
+      const filesToUpload: { key: string; file: File; isLarge: boolean }[] = [];
+      let totalBytes = 0;
 
-      // Separate array to handle promises for performance/concurrency
-      const uploadPromises: Promise<void>[] = [];
-
-      // Get name prefix for file naming
       const namePrefix = (formData.get('fullname_customer') as string) || 'submission';
       const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
       const getResponseError = async (response: Response, fallback: string) => {
@@ -41,71 +93,105 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
         }
       };
 
+      // First Pass: Compress images and prepare all files to calculate total file size
       for (const [key, value] of formData.entries()) {
         if (value instanceof File && value.size > 0) {
-          uploadPromises.push((async () => {
-             // 1. Compression (for images)
-             const processedFile = value.type.startsWith('image/') ? await compressImage(value) : value;
+          // 1. Compression (for images)
+          const processedFile = value.type.startsWith('image/') ? await compressImage(value) : value;
 
-             // 2. Rename file for better organization
-             const ext = value.name.split('.').pop();
-             const baseName = value.name.replace(`.${ext}`, '');
-             const newName = `${slugify(namePrefix)}_${slugify(key)}_${slugify(baseName)}.${ext}`;
-             const fileToUpload = new File([processedFile], newName, { type: processedFile.type });
+          // 2. Rename file for better organization
+          const ext = value.name.split('.').pop();
+          const baseName = value.name.replace(`.${ext}`, '');
+          const newName = `${slugify(namePrefix)}_${slugify(key)}_${slugify(baseName)}.${ext}`;
+          const fileToUpload = new File([processedFile], newName, { type: processedFile.type });
 
-             // 3. Decide Upload Strategy
-             // Use Direct-to-S3 for any file over 4MB
-             const isLargeFile = fileToUpload.size > 4 * 1024 * 1024;
-
-             if (isLargeFile) {
-                console.log(`Using Direct-to-S3 for ${fileToUpload.name}...`);
-                // Get Presigned URL
-                const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(fileToUpload.name)}&type=${encodeURIComponent(fileToUpload.type)}`);
-                if (!signRes.ok) throw new Error(await getResponseError(signRes, `Failed to get upload link for ${fileToUpload.name}`));
-                const { url, key: s3Key } = await signRes.json();
-
-                // Upload to S3
-                const s3Res = await fetch(url, {
-                  method: 'PUT',
-                  body: fileToUpload,
-                  headers: { 'Content-Type': fileToUpload.type }
-                });
-                if (!s3Res.ok) throw new Error(`Failed to upload ${fileToUpload.name} to S3`);
-
-                // Register with Payload
-                const regData = new FormData();
-                regData.append('s3Key', s3Key);
-                regData.append('filename', fileToUpload.name);
-                regData.append('filesize', fileToUpload.size.toString());
-                regData.append('filetype', fileToUpload.type);
-
-                const regRes = await fetch('/api/upload', {
-                  method: 'POST',
-                  body: regData,
-                });
-                if (!regRes.ok) throw new Error(await getResponseError(regRes, `Failed to register ${fileToUpload.name} in CMS`));
-                const { id } = await regRes.json();
-                compressedFormData.append(key, id);
-             } else {
-                console.log(`Using Standard Upload for ${fileToUpload.name}...`);
-                const uploadData = new FormData();
-                uploadData.append('file', fileToUpload);
-
-                const uploadRes = await fetch('/api/upload', {
-                  method: 'POST',
-                  body: uploadData,
-                });
-
-                if (!uploadRes.ok) throw new Error(await getResponseError(uploadRes, `Failed to upload ${fileToUpload.name}`));
-
-                const { id } = await uploadRes.json();
-                compressedFormData.append(key, id);
-             }
-          })());
+          const isLarge = fileToUpload.size > 4 * 1024 * 1024;
+          filesToUpload.push({ key, file: fileToUpload, isLarge });
+          totalBytes += fileToUpload.size;
         } else {
           compressedFormData.append(key, value);
         }
       }
+
+      // Initialize upload progress if files exist
+      if (totalBytes > 0) {
+        setUploadProgress({
+          totalBytes,
+          uploadedBytes: 0,
+          percentage: 0,
+          active: true
+        });
+      }
+
+      const fileProgresses: Record<string, number> = {};
+      const updateProgress = (filename: string, loaded: number) => {
+        fileProgresses[filename] = loaded;
+        const totalUploaded = Object.values(fileProgresses).reduce((sum, val) => sum + val, 0);
+        const percent = Math.min(Math.round((totalUploaded / totalBytes) * 100), 99);
+        setUploadProgress({
+          totalBytes,
+          uploadedBytes: totalUploaded,
+          percentage: percent,
+          active: true
+        });
+      };
+
+      // Second Pass: Upload files concurrently with progress tracking
+      const uploadPromises = filesToUpload.map(async ({ key, file, isLarge }) => {
+        updateProgress(file.name, 0);
+
+        if (isLarge) {
+          console.log(`Using Direct-to-S3 for ${file.name}...`);
+          // Get Presigned URL
+          const signRes = await fetch(`/api/upload/presigned?filename=${encodeURIComponent(file.name)}&type=${encodeURIComponent(file.type)}`);
+          if (!signRes.ok) throw new Error(await getResponseError(signRes, `Failed to get upload link for ${file.name}`));
+          const { url, key: s3Key } = await signRes.json();
+
+          // Upload to S3
+          const s3Res = await uploadWithProgress(
+            url,
+            'PUT',
+            file,
+            { 'Content-Type': file.type },
+            (loaded) => updateProgress(file.name, loaded)
+          );
+          if (!s3Res.ok) throw new Error(`Failed to upload ${file.name} to S3`);
+
+          // Register with Payload
+          const regData = new FormData();
+          regData.append('s3Key', s3Key);
+          regData.append('filename', file.name);
+          regData.append('filesize', file.size.toString());
+          regData.append('filetype', file.type);
+
+          const regRes = await fetch('/api/upload', {
+            method: 'POST',
+            body: regData,
+          });
+          if (!regRes.ok) throw new Error(await getResponseError(regRes, `Failed to register ${file.name} in CMS`));
+          const { id } = await regRes.json();
+          compressedFormData.append(key, id);
+        } else {
+          console.log(`Using Standard Upload for ${file.name}...`);
+          const uploadData = new FormData();
+          uploadData.append('file', file);
+
+          const uploadRes = await uploadWithProgress(
+            '/api/upload',
+            'POST',
+            uploadData,
+            {},
+            (loaded) => updateProgress(file.name, loaded)
+          );
+
+          if (!uploadRes.ok) throw new Error(await getResponseError(uploadRes, `Failed to upload ${file.name}`));
+
+          const { id } = await uploadRes.json();
+          compressedFormData.append(key, id);
+        }
+
+        updateProgress(file.name, file.size);
+      });
 
       await Promise.all(uploadPromises);
 
@@ -114,12 +200,15 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
       console.log("Server action result:", result);
 
       if (result.success) {
+        setUploadProgress(prev => prev ? { ...prev, percentage: 100, uploadedBytes: prev.totalBytes } : null);
         setSubmitStatus({
           type: "success",
           message: "Form berhasil terkirim. Harap menunggu informasi lebih lanjut melalui Admin.",
         });
         form.reset();
+        setTimeout(() => setUploadProgress(null), 2500);
       } else {
+        setUploadProgress(null);
         setSubmitStatus({
           type: "error",
           message: "Gagal mengirim form: " + (result.error || "Terjadi kesalahan tidak dikenal"),
@@ -127,6 +216,7 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
       }
     } catch (error) {
       console.error("Submission error:", error);
+      setUploadProgress(null);
       setSubmitStatus({
         type: "error",
         message: error instanceof Error ? error.message : "Terjadi kesalahan koneksi. Silakan coba lagi.",
@@ -442,13 +532,41 @@ export default function FormPersonalClient({ settings }: { settings?: Setting })
                 Dengan ini saya menyatakan bahwa informasi di atas adalah benar dan dokumen yang dilampirkan valid.{" "}
               </label>
             </div>
+
+            {/* Upload Progress Bar */}
+            {uploadProgress && uploadProgress.active && (
+              <div className="mb-6 rounded-lg border border-indigo-100 bg-indigo-50/50 p-5 shadow-sm">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-700">
+                    {uploadProgress.percentage === 100 ? "Menyimpan Data UTJ..." : "Mengunggah Dokumen..."}
+                  </span>
+                  <span className="text-sm font-bold text-indigo-700">
+                    {uploadProgress.percentage}%
+                  </span>
+                </div>
+                
+                {/* Progress Bar background */}
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-indigo-100">
+                  {/* Animated gradient bar */}
+                  <div 
+                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-300 ease-out"
+                    style={{ width: `${uploadProgress.percentage}%` }}
+                  />
+                </div>
+                
+                <div className="mt-2 text-right text-xs font-medium text-indigo-500">
+                  {(uploadProgress.uploadedBytes / (1024 * 1024)).toFixed(2)} MB dari {(uploadProgress.totalBytes / (1024 * 1024)).toFixed(2)} MB
+                </div>
+              </div>
+            )}
+
             {/* Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting}
               className={`relative z-30 w-full rounded-md bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition duration-300 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              {isSubmitting ? 'Mengirim Data...' : 'Submit Data UTJ Sekarang'}
+              {isSubmitting ? (uploadProgress && uploadProgress.percentage < 100 ? 'Mengunggah File...' : 'Mengirim Data...') : 'Submit Data UTJ Sekarang'}
             </button>
             <div aria-live="polite" className="mt-4 min-h-12">
               {submitStatus && (
