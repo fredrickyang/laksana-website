@@ -1,4 +1,5 @@
 import { getPayloadClient } from '@/lib/payload';
+import { s3ObjectExists } from '@/lib/s3';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
@@ -40,6 +41,14 @@ export async function POST(req: NextRequest) {
       const originalFileName = typeof fileName === 'string' && fileName ? fileName : s3Key;
       const mimeType = typeof fileType === 'string' && fileType ? fileType : 'application/octet-stream';
       const filesize = typeof fileSize === 'string' ? Number.parseInt(fileSize, 10) : 0;
+      const exists = await s3ObjectExists(s3Key);
+
+      if (!exists) {
+        return NextResponse.json(
+          { error: 'Uploaded file was not found in S3. Please upload the file again.' },
+          { status: 400 },
+        );
+      }
 
       const doc = await payload.create({
         collection: 'form-attachments',
