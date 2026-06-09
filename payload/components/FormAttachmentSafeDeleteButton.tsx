@@ -130,22 +130,32 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
   const handleConfirm = async () => {
     if (!preview) return
 
-    const response = await fetch('/api/form-attachments/safe-delete', {
-      body: JSON.stringify({ apply: true, ids: deleteIds }),
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-    })
-    const data = await response.json()
+    try {
+      const response = await fetch('/api/form-attachments/safe-delete', {
+        body: JSON.stringify({ apply: true, ids: deleteIds }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      })
+      const data = await response.json()
 
-    if (!response.ok) {
-      throw new Error(data?.error || 'Could not delete selected attachments.')
+      if (!response.ok) {
+        throw new Error(data?.error || 'Could not delete selected attachments.')
+      }
+
+      toast.success('Selected attachments were cleaned up.')
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Could not delete selected attachments.')
+    } finally {
+      closeModal(MODAL_SLUG)
+      setPreview(null)
+      setDeleteIds([])
+      toggleAll()
+      router.refresh()
+      window.setTimeout(() => {
+        window.location.reload()
+      }, 250)
     }
-
-    toast.success('Selected attachments were cleaned up.')
-    closeModal(MODAL_SLUG)
-    toggleAll()
-    router.refresh()
   }
 
   if (selectedCount === 0) {
