@@ -10,6 +10,7 @@ export const FormAttachments: CollectionConfig = {
     admin: {
         hidden: ({ user }) => !user || !(user.role === 'admin' || user.role === 'legal'),
         group: 'Forms',
+        defaultColumns: ['filename', 'alt', 'updatedAt', 'createdAt'],
         components: {
             views: {
                 list: {

@@ -30,6 +30,23 @@ import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const isLocalSafeMode = process.env.LOCAL_SAFE_MODE === 'true'
+const s3Collections = {
+  media: {
+    disableLocalStorage: true,
+    generateFileURL: ({ filename, prefix }: { filename: string; prefix?: string }) => {
+      const baseUrl = process.env.NEXT_PUBLIC_S3_URL || `https://d2ml0yc0mb1c0r.cloudfront.net`
+      return `${baseUrl}/${prefix ? prefix + '/' : ''}${filename}`
+    },
+  },
+  'form-attachments': {
+    disableLocalStorage: true,
+    generateFileURL: ({ filename, prefix }: { filename: string; prefix?: string }) => {
+      const baseUrl = process.env.NEXT_PUBLIC_S3_URL || `https://d2ml0yc0mb1c0r.cloudfront.net`
+      return `${baseUrl}/${prefix ? prefix + '/' : ''}${filename}`
+    },
+  },
+}
 
 export default buildConfig({
   localization: {
@@ -89,31 +106,20 @@ export default buildConfig({
       ],
     }),
     s3Storage({
-      collections: {
-        media: {
-          disableLocalStorage: true,
-          generateFileURL: ({ filename, prefix }) => {
-            const baseUrl = process.env.NEXT_PUBLIC_S3_URL || `https://d2ml0yc0mb1c0r.cloudfront.net`
-            return `${baseUrl}/${prefix ? prefix + '/' : ''}${filename}`
+      alwaysInsertFields: isLocalSafeMode,
+      collections: s3Collections,
+      enabled: !isLocalSafeMode,
+      bucket: process.env.S3_BUCKET || 'local-safe-mode-disabled',
+      config: isLocalSafeMode
+        ? { region: process.env.S3_REGION || 'ap-southeast-1' }
+        : {
+            credentials: {
+              accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+            },
+            region: process.env.S3_REGION!,
+            ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
           },
-        },
-        'form-attachments': {
-          disableLocalStorage: true,
-          generateFileURL: ({ filename, prefix }) => {
-            const baseUrl = process.env.NEXT_PUBLIC_S3_URL || `https://d2ml0yc0mb1c0r.cloudfront.net`
-            return `${baseUrl}/${prefix ? prefix + '/' : ''}${filename}`
-          },
-        },
-      },
-      bucket: process.env.S3_BUCKET!,
-      config: {
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-        },
-        region: process.env.S3_REGION!,
-        ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
-      },
     }),
   ],
 })

@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Button, ConfirmationModal, toast, useModal } from '@payloadcms/ui'
-import { SelectAllStatus, useSelection } from '@payloadcms/ui/providers/Selection'
+import { ConfirmationModal, toast, useModal, useSelection } from '@payloadcms/ui'
+import { ListSelectionButton } from '@payloadcms/ui/elements/ListSelection'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 
 type Reference = {
@@ -72,19 +73,32 @@ function ModalBody({ preview }: { preview: Preview }) {
 export const FormAttachmentSafeDeleteButton: React.FC = () => {
   const router = useRouter()
   const { closeModal, openModal } = useModal()
-  const { count, selectAll, selectedIDs, toggleAll } = useSelection()
+  const { count, getSelectedIds, selectedIDs, toggleAll } = useSelection()
   const [loading, setLoading] = React.useState(false)
   const [preview, setPreview] = React.useState<Preview | null>(null)
+  const [deleteIds, setDeleteIds] = React.useState<string[]>([])
+  const [portalTarget, setPortalTarget] = React.useState<Element | null>(null)
 
   const selectedIds = React.useMemo(() => selectedIDs.map(String), [selectedIDs])
+  const selectedCount = count ?? selectedIds.length
 
-  const handleOpen = async () => {
-    if (selectAll === SelectAllStatus.AllAvailable) {
-      toast.error('Safe delete supports selected rows on the current page. Please select the visible rows you want to delete.')
-      return
+  React.useEffect(() => {
+    const updatePortalTarget = () => {
+      setPortalTarget(document.querySelector('.collection-list--form-attachments .list-selection'))
     }
 
-    if (selectedIds.length === 0) {
+    updatePortalTarget()
+
+    const observer = new MutationObserver(updatePortalTarget)
+    observer.observe(document.body, { childList: true, subtree: true })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const handleOpen = async () => {
+    const activeIds = getSelectedIds().map(String)
+
+    if (activeIds.length === 0) {
       toast.error('Select one or more attachments first.')
       return
     }
@@ -92,7 +106,7 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
     setLoading(true)
     try {
       const response = await fetch('/api/form-attachments/safe-delete', {
-        body: JSON.stringify({ ids: selectedIds }),
+        body: JSON.stringify({ ids: activeIds }),
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -104,6 +118,7 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
       }
 
       setPreview(data.preview)
+      setDeleteIds(activeIds)
       openModal(MODAL_SLUG)
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Could not prepare safe delete.')
@@ -116,7 +131,7 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
     if (!preview) return
 
     const response = await fetch('/api/form-attachments/safe-delete', {
-      body: JSON.stringify({ apply: true, ids: selectedIds }),
+      body: JSON.stringify({ apply: true, ids: deleteIds }),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
@@ -133,15 +148,28 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
     router.refresh()
   }
 
-  if (count === 0) {
+  if (selectedCount === 0) {
     return null
   }
 
-  return (
-    <div style={{ marginBottom: '20px' }}>
-      <Button buttonStyle="secondary" disabled={loading} onClick={handleOpen} size="small" type="button">
-        {loading ? 'Checking references...' : `Delete selected safely (${count})`}
-      </Button>
+  const button = (
+    <div className="form-attachment-safe-delete">
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .collection-list--form-attachments .form-attachment-safe-delete .list-selection__button {
+              white-space: nowrap;
+            }
+
+            .collection-list--form-attachments .collection-list__wrap > .form-attachment-safe-delete {
+              margin: 16px 0;
+            }
+          `,
+        }}
+      />
+      <ListSelectionButton disabled={loading} onClick={handleOpen} type="button">
+        {loading ? 'Checking...' : 'Delete'}
+      </ListSelectionButton>
       {preview && (
         <ConfirmationModal
           body={<ModalBody preview={preview} />}
@@ -154,4 +182,6 @@ export const FormAttachmentSafeDeleteButton: React.FC = () => {
       )}
     </div>
   )
+
+  return portalTarget ? createPortal(button, portalTarget) : button
 }

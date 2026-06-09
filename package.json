@@ -8,6 +8,10 @@
     "build": "payload generate:importmap && next build",
     "start": "next start",
     "lint": "eslint",
+    "db:local:up": "node scripts/local-postgres.mjs up",
+    "db:local:status": "node scripts/local-postgres.mjs status",
+    "db:local:stop": "node scripts/local-postgres.mjs stop",
+    "db:clone:prod": "node scripts/clone-prod-db-to-local.mjs",
     "sync:form-attachments": "tsx scripts/sync-form-attachments.ts",
     "seed": "tsx payload/seed/index.ts",
     "payload": "payload"
