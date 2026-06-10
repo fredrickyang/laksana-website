@@ -13,6 +13,9 @@
     "db:local:stop": "node scripts/local-postgres.mjs stop",
     "db:clone:prod": "node scripts/clone-prod-db-to-local.mjs",
     "sync:form-attachments": "tsx scripts/sync-form-attachments.ts",
+    "images:static": "tsx scripts/optimize-static-images.ts",
+    "images:media:dry-run": "tsx scripts/backfill-media-sizes.ts --dry-run",
+    "images:media": "tsx scripts/backfill-media-sizes.ts",
     "seed": "tsx payload/seed/index.ts",
     "payload": "payload"
   },

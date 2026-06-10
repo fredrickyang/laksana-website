@@ -5,10 +5,10 @@ import {
   useState,
   useRef
 } from "react";
-import Image from "next/image";
 import Footer from "../components/Footer";
 import VRModal from "../components/VRModal";
 import { getMediaUrl, formatNumberInString } from "@/lib/utils";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 // Helper to extract plain text from Payload richText field
 function getRichText(richText: any, fallback: string = ''): string {
@@ -225,14 +225,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
               className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block"
             >
               <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
-                <Image
+                <ResponsiveImage
+                  media={product.thumbnail}
                   src={getMediaUrl(product.thumbnail) || "/images/card-unit/luxima.png"}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                   alt={product.name || "Product"}
-                  fill
-                  quality={100}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 360px, 360px"
-                  priority={index < 6}
+                  loading={index < 6 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  variant="card_768"
                 />
               </div>
               <div className="justify-start mt-6 border-l border-black/5 pl-4">
@@ -244,7 +245,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
                     product.keySpecs.slice(0, 2).map((spec: any, idx: number) => (
                       <div key={idx} className="flex items-center gap-1.5 min-w-0">
                         {spec.icon && getMediaUrl(spec.icon) ? (
-                          <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-3.5 h-3.5 object-contain" />
+                          <img src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-3.5 h-3.5 object-contain" loading="lazy" decoding="async" />
                         ) : (
                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi bi-check-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -284,14 +285,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
           )) : (
             <a href="/product#luxima-product" className="snap-center shrink-0 w-[300px] md:w-[360px] group cursor-pointer block">
               <div className="aspect-[4/5] overflow-hidden transition-all duration-500 hover:border-neutral-300 bg-white w-full border border-black/5 relative">
-                <Image
+                <ResponsiveImage
                   src="/images/card-unit/luxima.png"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                   alt="Luxima"
-                  fill
-                  quality={100}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 360px, 360px"
-                  priority
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
               <div className="justify-start mt-6 border-l border-black/5 pl-4">
@@ -374,15 +374,15 @@ export default function HomePageClient({ homePage, products, articles, settings,
         <div className="lg:col-span-4 relative flex items-center justify-center py-20 lg:py-0 [animation:fadeSlideIn_1s_ease-out_0.2s_both] animate-on-scroll animate">
           <div className="absolute inset-0 grid-bg opacity-100 z-0 mx-[-2rem] mask-image-linear-gradient(to bottom, black, transparent)"></div>
           <div className="relative z-10 w-full aspect-[3/4] overflow-hidden shadow-2xl border border-black/10 group">
-            <Image
+            <ResponsiveImage
               ref={mainImageRef}
               id="main-image"
               src={currentImage}
               alt="Architectural Detail"
-              fill
-              priority
               sizes="(max-width: 1024px) 100vw, 33vw"
-              className="opacity-90 w-full h-full object-cover scale-110"
+              loading="eager"
+              fetchPriority="high"
+              className="absolute inset-0 opacity-90 w-full h-full object-cover scale-110"
             />
           </div>
         </div>
@@ -419,8 +419,8 @@ export default function HomePageClient({ homePage, products, articles, settings,
                 </div>
                 <div className={`stat-item group ${activeStatIndex === 2 ? 'active' : ''} border-t border-black/5 border-dashed pt-12`} onClick={() => handleStatClick('3', 2)} style={{ cursor: 'pointer' }}>
                    <div className="flex items-center gap-3 mb-6">
-                      <Image src="/images/usp/usp-1.png" alt="USP 1" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
-                      <Image src="/images/usp/usp-2.png" alt="USP 2" width={80} height={80} className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                      <ResponsiveImage src="/images/usp/usp-1.png" alt="USP 1" width={80} height={80} sizes="112px" className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
+                      <ResponsiveImage src="/images/usp/usp-2.png" alt="USP 2" width={80} height={80} sizes="112px" className="w-28 h-28 rounded-full object-cover relative z-10 transition-all" />
                   </div>
                   <p className="text-base font-normal text-neutral-700 uppercase leading-relaxed tracking-tight max-w-[200px] pointer-events-none">Akses Mudah ke Bandara Tersertifikasi UIKI</p>
                 </div>
@@ -452,18 +452,18 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   {homePage?.branding?.clientLogos?.length > 0 ? (
                     homePage.branding.clientLogos.map((logo: any, idx: number) => (
                       <span key={idx} className="inline-flex items-center gap-2">
-                        {getMediaUrl(logo.logo) && <Image src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain transition-all" />}
+                        {getMediaUrl(logo.logo) && <img src={getMediaUrl(logo.logo)} alt={logo.clientName || `Client ${idx + 1}`} width={112} height={112} className="w-28 h-28 object-contain transition-all" loading="lazy" decoding="async" />}
                       </span>
                     ))
                   ) : (
                     <>
-                      <Image src="/brand/coca-cola.svg" alt="Coca Cola" width={112} height={112} className="w-28 h-28 object-contain" />
-                      <Image src="/brand/google.svg" alt="Google" width={112} height={112} className="w-28 h-28 object-contain" />
-                      <Image src="/brand/heineken.svg" alt="Heineken" width={112} height={112} className="w-28 h-28 object-contain" />
-                      <Image src="/brand/microsoft.svg" alt="Microsoft" width={112} height={112} className="w-28 h-28 object-contain" />
-                      <Image src="/brand/underarmour.svg" alt="Under Armour" width={80} height={80} className="w-20 h-20 object-contain" />
-                      <Image src="/brand/yamaha.svg" alt="Yamaha" width={112} height={112} className="w-28 h-28 object-contain" />
-                      <Image src="/brand/mastercard.svg" alt="Mastercard" width={80} height={80} className="w-20 h-20 object-contain" />
+                      <img src="/brand/coca-cola.svg" alt="Coca Cola" width={112} height={112} className="w-28 h-28 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/google.svg" alt="Google" width={112} height={112} className="w-28 h-28 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/heineken.svg" alt="Heineken" width={112} height={112} className="w-28 h-28 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/microsoft.svg" alt="Microsoft" width={112} height={112} className="w-28 h-28 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/underarmour.svg" alt="Under Armour" width={80} height={80} className="w-20 h-20 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/yamaha.svg" alt="Yamaha" width={112} height={112} className="w-28 h-28 object-contain" loading="lazy" decoding="async" />
+                      <img src="/brand/mastercard.svg" alt="Mastercard" width={80} height={80} className="w-20 h-20 object-contain" loading="lazy" decoding="async" />
                     </>
                   )}
                 </div>
@@ -545,13 +545,13 @@ export default function HomePageClient({ homePage, products, articles, settings,
             {articles.length > 0 ? articles.map((article, index) => (
               <a key={article.id || index} href={`/${locale}/article/${article.slug}`} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                 <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
-                  <Image
+                  <ResponsiveImage
+                    media={article.thumbnail}
                     src={getMediaUrl(article.thumbnail) || "/images/card-blog/tahap3.png"}
                     alt={article.title || "Article"}
-                    fill
-                    quality={90}
                     sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover transition-all duration-500 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                    variant="card_768"
                   />
                   <div className="absolute top-3 left-3 right-3 flex flex-wrap gap-2">
                     <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
@@ -578,7 +578,7 @@ export default function HomePageClient({ homePage, products, articles, settings,
             )) : (
               <div className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1">
                 <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
-                  <Image src="/images/card-blog/tahap3.png" alt="Article" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition-all duration-500 group-hover:scale-110" />
+                  <ResponsiveImage src="/images/card-blog/tahap3.png" alt="Article" sizes="(max-width: 1024px) 100vw, 33vw" className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110" />
                 </div>
                 <div className="p-3 sm:p-4 bg-neutral-900">
                   <h2 className="text-base sm:text-lg lg:text-xl font-semibold leading-tight mb-1 group-hover:text-[#1d2088] transition-colors duration-300 text-white">Pengembangan Laksana Tahap 3</h2>

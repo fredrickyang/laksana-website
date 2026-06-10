@@ -1,6 +1,6 @@
 import { getProducts, getSettings, getProductPage, getMediaUrl, getPhases } from '@/lib/payload'
-import Image from "next/image"
 import Footer from "../../components/Footer"
+import { ResponsiveImage } from "@/components/ResponsiveImage"
 import { locales, type Locale } from '@/i18n.config'
 import type { Metadata } from 'next'
 
@@ -65,13 +65,17 @@ export default async function Product({ params }: ProductPageProps) {
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
         {/* Background Image from CMS */}
         <div className="absolute inset-0 z-0">
-          <Image
+          <ResponsiveImage
             className="w-full h-full object-cover"
+            media={productPage?.hero?.backgroundImage}
             src={getMediaUrl(productPage?.hero?.backgroundImage) || "/images/bg-produk.png"}
             alt="Hero Background"
             width={1920}
             height={1080}
-            priority
+            sizes="100vw"
+            loading="eager"
+            fetchPriority="high"
+            variant="hero_1920"
           />
           {/* Gradient overlay from top to bottom - 50% black to transparent */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
@@ -115,11 +119,13 @@ export default async function Product({ params }: ProductPageProps) {
                   href={`/${locale}/product/${product.slug}`}
                   className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]"
                 >
-                  <Image
+                  <ResponsiveImage
+                    media={product.thumbnail}
                     src={getMediaUrl(product.thumbnail) || "/images/card-unit/kavling-card.png"}
-                    fill
-                    className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
+                    className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover"
                     alt={product.name || "Product"}
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    variant="card_768"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
@@ -134,7 +140,7 @@ export default async function Product({ params }: ProductPageProps) {
                       {product.keySpecs?.slice(0, 3).map((spec: any, idx: number) => (
                         <div key={idx} className="bg-white/25 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-2">
                           {spec.icon && getMediaUrl(spec.icon) && (
-                            <Image src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-[14px] h-[14px] object-contain invert grayscale" />
+                            <img src={getMediaUrl(spec.icon)} alt={spec.label || "Spec"} width={14} height={14} className="w-[14px] h-[14px] object-contain invert grayscale" loading="lazy" decoding="async" />
                           )}
                           <span className="text-[10px] text-white font-medium uppercase tracking-tighter">{spec.label}</span>
                         </div>
@@ -157,7 +163,7 @@ export default async function Product({ params }: ProductPageProps) {
           </div>
           <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/blok-b.png" alt="Blok B" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/blok-b.png" alt="Blok B" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
@@ -165,7 +171,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/blok-c.png" alt="Blok C" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/blok-c.png" alt="Blok C" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
@@ -173,7 +179,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/blok-l.png" alt="Blok L" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/blok-l.png" alt="Blok L" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang Siap Pakai</span>
@@ -181,7 +187,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/kavling-card.png" alt="Kavling" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/kavling-card.png" alt="Kavling" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
@@ -196,7 +202,7 @@ export default async function Product({ params }: ProductPageProps) {
           </div>
           <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/kavling-card.png" alt="Kavling" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/kavling-card.png" alt="Kavling" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Kavling Siap Bangun</span>
@@ -204,7 +210,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/cluster-card.png" alt="Cluster" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/cluster-card.png" alt="Cluster" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Cluster Siap Bangun</span>
@@ -219,7 +225,7 @@ export default async function Product({ params }: ProductPageProps) {
           </div>
           <div className="w-full px-6 lg:px-12 grid grid-cols-2 md:grid md:grid-cols-4 md:items-end">
             <a href="/product/opxima" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/unit-opxima.png" alt="Opxima" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/unit-opxima.png" alt="Opxima" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
@@ -227,7 +233,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/unit-nexima.png" alt="Nexima" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/unit-nexima.png" alt="Nexima" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
@@ -235,7 +241,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/unit-nexima-plus.png" alt="Nexima Plus" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/unit-nexima-plus.png" alt="Nexima Plus" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>
@@ -243,7 +249,7 @@ export default async function Product({ params }: ProductPageProps) {
               </div>
             </a>
             <a href="#" className="group relative aspect-[3/4] overflow-hidden border-r border-b border-[#C7D0C8] bg-[#EBE9E4]">
-              <Image src="/images/card-unit/unit-maxima.png" alt="Maxima" fill className="grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
+              <ResponsiveImage src="/images/card-unit/unit-maxima.png" alt="Maxima" sizes="(max-width: 768px) 50vw, 25vw" className="absolute inset-0 grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
                 <span className="text-[10px] font-sans uppercase tracking-widest text-white/80 mb-1 block">Gudang 4 in 1</span>

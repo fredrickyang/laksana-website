@@ -1,9 +1,9 @@
 "use client";
 import Footer from "../../components/Footer";
 import Form from "../../components/Form";
-import Image from "next/image";
 import FacilityCard from "../../components/FacilityCard";
 import { getMediaUrl } from "@/lib/utils";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 interface FacilitiesClientProps {
   facilitiesPage: any;
@@ -36,12 +36,17 @@ export default function FacilitiesClient({ facilitiesPage, settings }: Facilitie
         </title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
-          <Image
+          <ResponsiveImage
             className="w-full h-full object-cover"
+            media={facilitiesPage?.hero?.backgroundImage}
             src={heroBackground}
             alt="Background Image"
             width={1400}
             height={400}
+            sizes="100vw"
+            loading="eager"
+            fetchPriority="high"
+            variant="hero_1920"
           />
           {/* Gradient overlay from top to bottom - 50% black to transparent */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
@@ -98,6 +103,7 @@ export default function FacilitiesClient({ facilitiesPage, settings }: Facilitie
                 key={index}
                 title={card.title}
                 description={card.description}
+                imageMedia={card.image}
                 imageSrc={getMediaUrl(card.image) || `/images/facilities/image${index + 1}.jpg`}
                 imageAlt={card.title}
               />
@@ -154,7 +160,7 @@ export default function FacilitiesClient({ facilitiesPage, settings }: Facilitie
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center bg-black/10">
                         {service.icon && getMediaUrl(service.icon) ? (
-                          <Image src={getMediaUrl(service.icon)} alt={service.title || "Service"} width={24} height={24} className="w-6 h-6" />
+                          <img src={getMediaUrl(service.icon)} alt={service.title || "Service"} width={24} height={24} className="w-6 h-6" loading="lazy" decoding="async" />
                         ) : (
                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-check-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />

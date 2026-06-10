@@ -1,6 +1,6 @@
 "use client"
-import Image from "next/image"
 import { getMediaUrl } from "@/lib/utils"
+import { ResponsiveImage } from "@/components/ResponsiveImage"
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -115,11 +115,13 @@ export default function RichTextContent({ data, className = '' }: RichTextConten
                         if (!src) return null
                         return (
                             <div key={i} className="my-8 relative aspect-video w-full overflow-hidden rounded-lg">
-                                <Image
+                                <ResponsiveImage
+                                    media={media}
                                     src={src}
                                     alt={media.alt || 'Content image'}
-                                    fill
-                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 800px"
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    variant="content_1200"
                                 />
                                 {media.caption && (
                                     <p className="mt-2 text-sm text-gray-500 text-center">{media.caption}</p>

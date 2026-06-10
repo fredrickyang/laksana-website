@@ -1,11 +1,13 @@
 // app/components/FacilityCard.tsx
-import Image from "next/image";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import type { ResponsiveMedia } from "@/lib/image-variants";
 
 interface FacilityCardProps {
   title: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
+  imageMedia?: ResponsiveMedia | null;
 }
 
 const FacilityCard: React.FC<FacilityCardProps> = ({
@@ -13,6 +15,7 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
   description,
   imageSrc,
   imageAlt,
+  imageMedia,
 }) => {
   return (
     <div className="group relative transition border rounded-lg shadow-sm w-full max-w-xl hover:border-black/20 text-zinc-800 bg-zinc-100/50 border-black/10">
@@ -35,13 +38,15 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.06)_100%)]" />
         <div className="aspect-[4/3] p-4 md:p-6">
           <div className="h-full w-full overflow-hidden border border-black/10 bg-zinc-100/40">
-            <Image
+            <ResponsiveImage
+              media={imageMedia}
               src={imageSrc}
               alt={imageAlt}
               width={1207}
               height={929}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              variant="card_768"
               className="h-full w-full object-cover"
-              style={{}}
             />
           </div>
         </div>

@@ -1,8 +1,8 @@
 "use client";
 import Footer from "../../components/Footer";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getMediaUrl, formatAuthorName } from "@/lib/utils";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -90,12 +90,17 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
         </title>
         {/* Background Video (fixed) */}
         <div className="absolute inset-0 z-0">
-          <Image
+          <ResponsiveImage
             className="w-full h-full object-cover"
+            media={articlePage?.hero?.backgroundImage}
             src={getMediaUrl(articlePage?.hero?.backgroundImage) || "/images/bg-produk.png"}
             alt="Background Image"
             width={1400}
             height={400}
+            sizes="100vw"
+            loading="eager"
+            fetchPriority="high"
+            variant="hero_1920"
           />
           {/* Gradient overlay from top to bottom - 50% black to transparent */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
@@ -161,12 +166,13 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
               className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1"
             >
               <div className="relative h-40 sm:h-48 lg:h-56">
-                <Image
+                <ResponsiveImage
+                  media={article.thumbnail}
                   src={getMediaUrl(article.thumbnail) || article.thumbnail || "images/card-blog/tahap3.png"}
                   alt={article.title || "Article Image"}
-                  fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-all duration-500 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                  variant="card_768"
                 />
                 <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
                   <span className="bg-white border border-white/30 text-black/70 text-[10px] font-semibold px-3 py-1 rounded-full uppercase tracking-wide">

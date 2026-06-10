@@ -1,10 +1,10 @@
 import { getArticleBySlug, getArticles, getSettings, getArticlePage, getMediaUrl } from '@/lib/payload'
 import { formatAuthorName } from '@/lib/utils'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Footer from '../../../components/Footer'
 import { locales, type Locale } from '@/i18n.config'
 import type { Metadata } from 'next'
+import { ResponsiveImage } from '@/components/ResponsiveImage'
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -133,13 +133,15 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image
-            className="w-full h-full object-cover"
+          <ResponsiveImage
+            className="absolute inset-0 w-full h-full object-cover"
+            media={article.thumbnail}
             src={getMediaUrl(article.thumbnail) || "/images/bg-produk.png"}
             alt={article.title}
-            fill
             sizes="100vw"
-            priority
+            loading="eager"
+            fetchPriority="high"
+            variant="hero_1920"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
@@ -288,12 +290,15 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
               return (
                 <figure key={index} className={`my-8 ${sizeClass} ${alignmentClass}`}>
-                  <Image
+                  <ResponsiveImage
+                    media={media}
                     src={url}
                     alt={alt}
                     width={media?.width || 800}
                     height={media?.height || 600}
+                    sizes="(max-width: 768px) 100vw, 800px"
                     className="w-full h-auto rounded-lg"
+                    variant="content_1200"
                   />
                   {caption && (
                     <figcaption className="text-sm text-neutral-500 mt-2 text-center italic">
@@ -380,10 +385,13 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                   <div key={index} className="group relative overflow-hidden bg-neutral-900 transition-all duration-500 hover:scale-[1.02] w-full lg:flex-1 rounded-xl">
                     <a href={`/${locale}/article/${relatedSlug}`} className="block relative h-full flex flex-col">
                       <div className="relative">
-                        <img
+                        <ResponsiveImage
+                          media={relatedArticle.thumbnail}
                           src={relatedThumbnail || '/images/bg-produk.png'}
                           alt={relatedTitle}
+                          sizes="(max-width: 768px) 100vw, 33vw"
                           className="w-full h-40 sm:h-48 lg:h-56 object-cover transition-all duration-500 group-hover:scale-110"
+                          variant="card_768"
                         />
                         <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
                           <span className="bg-white border border-white/30 text-black/50 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">

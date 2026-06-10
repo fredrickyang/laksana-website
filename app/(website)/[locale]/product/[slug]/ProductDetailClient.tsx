@@ -2,10 +2,10 @@
 
 import Footer from "../../../components/Footer";
 import Form from "../../../components/Form";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getMediaUrl, formatNumberInString } from "@/lib/utils";
 import RichTextContent from "../../../components/RichTextContent";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 const productTranslations: Record<string, Record<string, string>> = {
   id: { breadcrumbPrefix: 'Beranda / Produk /', type: 'Tipe' },
@@ -62,6 +62,7 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
     ? product.gallery
         .filter((item: any) => getMediaUrl(item.image))
         .map((item: any, index: number) => ({
+          media: item.image,
           src: getMediaUrl(item.image),
           label: `${product.name} - ${index + 1}`,
           desc: `Slide ${index + 1}`,
@@ -104,13 +105,17 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
       {/* Hero Section with Background Image */}
       <div className="relative min-h-25vh flex flex-col justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image
+          <ResponsiveImage
             className="w-full h-full object-cover"
+            media={product.thumbnail}
             src={getMediaUrl(product.thumbnail) || "/images/bg-produk.png"}
             alt={product.name || "Product Background"}
             width={1400}
             height={400}
-            priority
+            sizes="100vw"
+            loading="eager"
+            fetchPriority="high"
+            variant="hero_1920"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
@@ -147,12 +152,13 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <Image
+                  <ResponsiveImage
+                    media={slide.media}
                     src={slide.src}
                     alt={slide.label}
-                    fill
                     sizes="(max-width: 1024px) 100vw, 800px"
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    variant="content_1200"
                   />
                 </div>
               ))}
@@ -339,28 +345,28 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
             {facilities.length > 0 ? facilities.map((facility: any, index: number) => (
               <div key={index} className="flex flex-col items-center gap-2">
                 {facility.icon && getMediaUrl(facility.icon) ? (
-                  <Image className="mx-auto" src={getMediaUrl(facility.icon)} width={56} height={56} alt={facility.label || "Facility"} />
+                  <img className="mx-auto" src={getMediaUrl(facility.icon)} width={56} height={56} alt={facility.label || "Facility"} loading="lazy" decoding="async" />
                 ) : (
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt={facility.label || "Facility"} />
+                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt={facility.label || "Facility"} loading="lazy" decoding="async" />
                 )}
                 <span className="text-xs text-neutral-600 uppercase tracking-widest">{facility.label}</span>
               </div>
             )) : (
               <>
                 <div className="flex flex-col items-center gap-2">
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt="One Gate System" />
+                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/3381/3381540.png" width={56} height={56} alt="One Gate System" loading="lazy" decoding="async" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">One Gate System</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/2062/2062582.png" width={46} height={46} alt="Keamanan CCTV 24Jam" />
+                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/2062/2062582.png" width={46} height={46} alt="Keamanan CCTV 24Jam" loading="lazy" decoding="async" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Keamanan CCTV 24Jam</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/7969/7969430.png" width={46} height={46} alt="Porter Bongkar Muat" />
+                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/7969/7969430.png" width={46} height={46} alt="Porter Bongkar Muat" loading="lazy" decoding="async" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Tersedia Porter Bongkar Muat</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <Image className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/25/25276.png" width={46} height={46} alt="Akses Jalan Luas" />
+                  <img className="mx-auto" src="https://cdn-icons-png.flaticon.com/512/25/25276.png" width={46} height={46} alt="Akses Jalan Luas" loading="lazy" decoding="async" />
                   <span className="text-xs text-neutral-600 uppercase tracking-widest">Akses Jalan Luas</span>
                 </div>
               </>
@@ -480,12 +486,11 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
               ></iframe>
             ) : (
               <>
-                <Image
+                <ResponsiveImage
                   src="https://agungintiland.com/assets/source/assets/thumbs/images/cover_1280_700_laksana-business-park---view-semi-bev-05.png.webp"
                   alt="Video cover"
-                  fill
                   sizes="(max-width: 1200px) 100vw, 1200px"
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 flex items-center justify-center flex-col gap-6">
                   <button
