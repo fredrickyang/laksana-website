@@ -109,31 +109,39 @@ index d40221cd6a1f4d9865cdb0943d9e7e3dcd055333..72cfb62b7319aaf6f42f4a0519f834c4
                  ACL: acl,
                  Body: fileBufferOrStream,
 diff --git a/dist/staticHandler.js b/dist/staticHandler.js
-index 1c9e43b47410666f4001f97d7290c1a9a3aa94b6..a7328314548b32e82c87405244f367ea5a7db2ae 100644
+index 1c9e43b47410666f4001f97d7290c1a9a3aa94b6..1a22f3e616c1faf6756d1674022eb2bf48820817 100644
 --- a/dist/staticHandler.js
 +++ b/dist/staticHandler.js	
-@@ -17,6 +17,25 @@ const abortRequestAndDestroyStream = ({ abortController, object })=>{
+@@ -17,6 +17,33 @@ const abortRequestAndDestroyStream = ({ abortController, object })=>{
  };
  export const getHandler = ({ bucket, collection, getStorageClient, signedDownloads })=>{
      return async (req, { headers: incomingHeaders, params: { clientUploadContext, filename } })=>{
 +        if (clientUploadContext && !/\.(jpe?g|png|gif|webp|tiff?|bmp|svg)$/i.test(filename)) {
-+            console.log(`[S3-Storage] Bypassing S3 download for non-image client upload: ${filename}`);
-+            const headers = new Headers(incomingHeaders);
-+            
-+            let mimeType = 'application/octet-stream';
-+            const ext = path.extname(filename).toLowerCase();
-+            if (ext === '.mp4') mimeType = 'video/mp4';
-+            else if (ext === '.webm') mimeType = 'video/webm';
-+            else if (ext === '.mov') mimeType = 'video/quicktime';
-+            else if (ext === '.avi') mimeType = 'video/x-msvideo';
-+            else if (ext === '.mkv') mimeType = 'video/x-matroska';
-+            else if (ext === '.pdf') mimeType = 'application/pdf';
-+            
-+            headers.set('Content-Type', mimeType);
-+            return new Response(Buffer.from([0]), {
-+                headers,
-+                status: 200
-+            });
++            console.log(`[S3-Storage] Bypassing S3 download for non-image client upload: ${filename}. Fetching first 1KB from S3 for validation.`);
++            try {
++                const prefix = await getFilePrefix({
++                    clientUploadContext,
++                    collection,
++                    filename,
++                    req
++                });
++                const key = path.posix.join(prefix, filename);
++                const object = await getStorageClient().getObject({
++                    Bucket: bucket,
++                    Key: key,
++                    Range: 'bytes=0-1023'
++                });
++                if (object.Body) {
++                    const headers = new Headers(incomingHeaders);
++                    headers.set('Content-Type', String(object.ContentType || 'application/octet-stream'));
++                    return new Response(object.Body, {
++                        headers,
++                        status: 206
++                    });
++                }
++            } catch (err) {
++                req.payload.logger.error(`[S3-Storage] Failed to fetch validation chunk for ${filename}: ${String(err)}`);
++            }
 +        }
          let object = undefined;
          let streamed = false;
