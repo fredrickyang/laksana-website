@@ -109,7 +109,7 @@ export default buildConfig({
       alwaysInsertFields: isLocalSafeMode,
       collections: s3Collections,
       enabled: !isLocalSafeMode,
-      clientUploads: true,
+      clientUploads: false,
       bucket: process.env.S3_BUCKET || 'local-safe-mode-disabled',
       config: isLocalSafeMode
         ? { region: process.env.S3_REGION || 'ap-southeast-1' }
