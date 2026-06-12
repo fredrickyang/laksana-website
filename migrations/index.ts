@@ -1,7 +1,7 @@
 import * as migration_20260306_170000 from './20260306_170000';
 import * as migration_20260412_082812_fix_virtual_tour_reasons from './20260412_082812_fix_virtual_tour_reasons';
 import * as migration_20260413_150326_phase_system from './20260413_150326_phase_system';
-import * as migration_20260612_110912_add_media_sizes from './20260612_110912_add_media_sizes';
+import * as migration_20260612_114851_add_media_sizes from './20260612_114851_add_media_sizes';
 
 export const migrations = [
   {
@@ -20,8 +20,8 @@ export const migrations = [
     name: '20260413_150326_phase_system',
   },
   {
-    up: migration_20260612_110912_add_media_sizes.up,
-    down: migration_20260612_110912_add_media_sizes.down,
-    name: '20260612_110912_add_media_sizes'
+    up: migration_20260612_114851_add_media_sizes.up,
+    down: migration_20260612_114851_add_media_sizes.down,
+    name: '20260612_114851_add_media_sizes'
   },
 ];
