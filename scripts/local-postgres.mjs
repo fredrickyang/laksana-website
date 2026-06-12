@@ -27,7 +27,7 @@ function assertPostgresTools() {
 
 function run(commandPath, args, options = {}) {
   const result = spawnSync(commandPath, args, {
-    env: process.env,
+    env: { ...process.env, LC_ALL: 'C' },
     stdio: options.stdio || 'inherit',
   })
 
