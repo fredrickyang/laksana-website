@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Montserrat } from "next/font/google";
 import Menu from "../components/Menu";
-import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import { getSettings } from "@/lib/payload";
 import { locales, type Locale } from "@/i18n.config";
 import { notFound } from "next/navigation";
@@ -109,7 +108,6 @@ export default async function LocaleLayout({
         <JsonLd data={organizationJsonLd} />
         <Menu settings={settings} locale={locale} />
         {children}
-        <FloatingWhatsApp settings={settings} />
       </body>
     </html>
   );
