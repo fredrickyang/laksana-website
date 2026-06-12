@@ -1,0 +1,75 @@
+diff --git a/dist/client/S3ClientUploadHandler.js b/dist/client/S3ClientUploadHandler.js
+index b03487975237fee7903b101e6e93985a8650b7e0..a9aadc807f7b7da61cbf01d230d18e66c7c55339 100644
+--- a/dist/client/S3ClientUploadHandler.js
++++ b/dist/client/S3ClientUploadHandler.js	
+@@ -1,6 +1,42 @@
+ 'use client';
+ import { createClientUploadHandler } from '@payloadcms/plugin-cloud-storage/client';
+ import { formatAdminURL } from 'payload/shared';
++import { toast } from '@payloadcms/ui';
++
++function uploadWithProgress(url, file, onProgress) {
++    return new Promise((resolve, reject) => {
++        const xhr = new XMLHttpRequest();
++        xhr.open('PUT', url);
++        
++        try {
++            xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
++        } catch (e) {
++            console.error('Failed to set Content-Type header:', e);
++        }
++
++        xhr.upload.onprogress = (event) => {
++            if (event.lengthComputable) {
++                const percent = Math.round((event.loaded / event.total) * 100);
++                onProgress(percent);
++            }
++        };
++
++        xhr.onload = () => {
++            if (xhr.status >= 200 && xhr.status < 300) {
++                resolve();
++            } else {
++                reject(new Error(`S3 upload failed with status ${xhr.status}`));
++            }
++        };
++
++        xhr.onerror = () => {
++            reject(new Error('Network error occurred during S3 upload'));
++        };
++
++        xhr.send(file);
++    });
++}
++
+ export const S3ClientUploadHandler = createClientUploadHandler({
+     handler: async ({ apiRoute, collectionSlug, file, prefix, serverHandlerPath, serverURL })=>{
+         const endpointRoute = formatAdminURL({
+@@ -23,14 +59,19 @@ export const S3ClientUploadHandler = createClientUploadHandler({
+             throw new Error(errors.reduce((acc, err)=>`${acc ? `${acc}, ` : ''}${err.message}`, ''));
+         }
+         const { url } = await response.json();
+-        await fetch(url, {
+-            body: file,
+-            headers: {
+-                'Content-Length': file.size.toString(),
+-                'Content-Type': file.type
+-            },
+-            method: 'PUT'
+-        });
++
++        // Trigger loading toast with progress
++        const toastId = toast.loading(`Uploading "${file.name}"... 0%`);
++        try {
++            await uploadWithProgress(url, file, (percent) => {
++                toast.loading(`Uploading "${file.name}"... ${percent}%`, { id: toastId });
++            });
++            toast.success(`"${file.name}" uploaded successfully!`, { id: toastId });
++        } catch (err) {
++            toast.error(`Upload failed for "${file.name}": ${err.message}`, { id: toastId });
++            throw err;
++        }
++
+         return {
+             prefix
+         };

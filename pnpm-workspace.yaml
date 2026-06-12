@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@payloadcms/storage-s3': patches/@payloadcms__storage-s3.patch
