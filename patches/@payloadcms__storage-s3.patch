@@ -1,8 +1,8 @@
 diff --git a/dist/client/S3ClientUploadHandler.js b/dist/client/S3ClientUploadHandler.js
-index b03487975237fee7903b101e6e93985a8650b7e0..a9aadc807f7b7da61cbf01d230d18e66c7c55339 100644
+index b03487975237fee7903b101e6e93985a8650b7e0..3bc16a783c00cb24305683761a68ed8939078cb6 100644
 --- a/dist/client/S3ClientUploadHandler.js
 +++ b/dist/client/S3ClientUploadHandler.js	
-@@ -1,6 +1,42 @@
+@@ -1,8 +1,54 @@
  'use client';
  import { createClientUploadHandler } from '@payloadcms/plugin-cloud-storage/client';
  import { formatAdminURL } from 'payload/shared';
@@ -42,10 +42,22 @@ index b03487975237fee7903b101e6e93985a8650b7e0..a9aadc807f7b7da61cbf01d230d18e66
 +    });
 +}
 +
++const uploadedFiles = new Map();
++
  export const S3ClientUploadHandler = createClientUploadHandler({
      handler: async ({ apiRoute, collectionSlug, file, prefix, serverHandlerPath, serverURL })=>{
++        const cacheKey = `${collectionSlug}:${file.name}:${file.size}`;
++        if (uploadedFiles.has(cacheKey)) {
++            console.log(`[S3ClientUploadHandler] Skipping S3 upload for "${file.name}" as it was already uploaded in this session.`);
++            return {
++                prefix
++            };
++        }
++
          const endpointRoute = formatAdminURL({
-@@ -23,14 +59,19 @@ export const S3ClientUploadHandler = createClientUploadHandler({
+             apiRoute,
+             path: serverHandlerPath,
+@@ -23,14 +69,21 @@ export const S3ClientUploadHandler = createClientUploadHandler({
              throw new Error(errors.reduce((acc, err)=>`${acc ? `${acc}, ` : ''}${err.message}`, ''));
          }
          const { url } = await response.json();
@@ -65,6 +77,8 @@ index b03487975237fee7903b101e6e93985a8650b7e0..a9aadc807f7b7da61cbf01d230d18e66
 +                toast.loading(`Uploading "${file.name}"... ${percent}%`, { id: toastId });
 +            });
 +            toast.success(`"${file.name}" uploaded successfully!`, { id: toastId });
++            // Cache the successful upload
++            uploadedFiles.set(cacheKey, true);
 +        } catch (err) {
 +            toast.error(`Upload failed for "${file.name}": ${err.message}`, { id: toastId });
 +            throw err;
