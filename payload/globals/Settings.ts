@@ -12,8 +12,9 @@ export const Settings: GlobalConfig = {
         afterChange: [
             async ({ doc }) => {
                 try {
-                    const { revalidateTag } = await import('next/cache')
+                    const { revalidateTag, revalidatePath } = await import('next/cache')
                     revalidateTag('settings', { expire: 0 })
+                    revalidatePath('/', 'layout')
                 } catch (err: any) {
                     console.error('Error revalidating settings:', err)
                 }

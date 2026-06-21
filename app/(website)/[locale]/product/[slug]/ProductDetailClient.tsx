@@ -392,7 +392,18 @@ export default function ProductDetailClient({ product, settings, locale = 'id', 
                 <a href="#contact" className="button-cta1 w-full sm:w-auto px-8 py-3 bg-white hover:bg-[#1d2088] hover:text-white text-black text-sm font-semibold transition-colors tracking-tight cursor-pointer">
                   {productPage?.detailLabels?.freeConsultationLabel || 'Konsultasi Gratis'}
                 </a>
-                <a href={getMediaUrl(product?.brochure) || getMediaUrl(settings?.brochure) || '#'} target="_blank" rel="noopener noreferrer" download className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer">
+                <a
+                  href={getMediaUrl(product?.brochure) || getMediaUrl(settings?.brochure) || undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={(getMediaUrl(product?.brochure) || getMediaUrl(settings?.brochure)) ? "Laksana_Business_Park_Brochure.pdf" : undefined}
+                  onClick={(e) => {
+                    if (!(getMediaUrl(product?.brochure) || getMediaUrl(settings?.brochure))) {
+                      e.preventDefault();
+                    }
+                  }}
+                  className="w-full sm:w-auto px-8 py-3 bg-transparent border border-white text-white text-sm font-medium hover:bg-white/5 transition-colors tracking-tight cursor-pointer"
+                >
                   {productPage?.detailLabels?.downloadBrochureLabel || 'Download E-Brochure'}
                 </a>
               </div>

@@ -520,12 +520,18 @@ export default function HomePageClient({ homePage, products, articles, settings,
                   </button>
                 </a>
                 <a
-                  href={getMediaUrl(settings?.brochure) || "#"}
+                  href={getMediaUrl(settings?.brochure) || undefined}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap min-w-[200px] text-center"
+                  download={getMediaUrl(settings?.brochure) ? "Laksana_Business_Park_Brochure.pdf" : undefined}
+                  onClick={(e) => {
+                    if (!getMediaUrl(settings?.brochure)) {
+                      e.preventDefault();
+                    }
+                  }}
+                  className="px-8 py-4 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm font-medium transition-colors text-sm tracking-wide whitespace-nowrap min-w-[200px] text-center uppercase"
                 >
-                  {locale === 'id' ? 'Unduh Brosur' : locale === 'zh' ? '下载电子手册' : 'Download Brochure'}
+                  {locale === 'id' ? 'UNDUH BROSUR' : locale === 'zh' ? '下载电子手册' : 'DOWNLOAD BROCHURE'}
                 </a>
               </div>
             </div>

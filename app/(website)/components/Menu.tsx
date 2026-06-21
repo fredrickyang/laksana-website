@@ -371,10 +371,15 @@ export default function Menu({ settings, locale = 'id' }: MenuProps) {
           </div>
           <div className="menu-item delay-500">
             <a
-              href={getMediaUrl(settings?.brochure) || '#'}
+              href={getMediaUrl(settings?.brochure) || undefined}
               target="_blank"
               rel="noopener noreferrer"
-              download
+              download={getMediaUrl(settings?.brochure) ? "Laksana_Business_Park_Brochure.pdf" : undefined}
+              onClick={(e) => {
+                if (!getMediaUrl(settings?.brochure)) {
+                  e.preventDefault();
+                }
+              }}
               className="block w-full py-4 border text-center uppercase text-sm tracking-[0.2em] hover:bg-sand hover:border-sand hover:text-white transition-all duration-300 font-sans font-normal bg-white border-white/10 text-black"
             >
               {t.downloadBrochure}

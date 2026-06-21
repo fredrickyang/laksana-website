@@ -97,11 +97,25 @@ export const getSettings = cache(async (locale: Locale = 'id') => {
                 console.error('Payload client is not initialized correctly or findGlobal missing', payload)
                 throw new Error('Payload client is not initialized correctly')
             }
-            return await payload.findGlobal({
+            const settings = await payload.findGlobal({
                 slug: 'settings',
                 locale,
                 depth: 1,
             })
+
+            // Localized brochure fallback: if current locale's brochure is missing, fall back to default 'id' brochure
+            if (settings && !settings.brochure && locale !== 'id') {
+                const defaultSettings = await payload.findGlobal({
+                    slug: 'settings',
+                    locale: 'id',
+                    depth: 1,
+                })
+                if (defaultSettings?.brochure) {
+                    settings.brochure = defaultSettings.brochure
+                }
+            }
+
+            return settings
         },
         [`settings-${locale}`],
         { revalidate: CACHE_REVALIDATE, tags: ['settings', `settings-${locale}`] }
