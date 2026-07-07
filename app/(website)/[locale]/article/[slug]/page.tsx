@@ -74,9 +74,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       })
     : null
 
-  // Get author names
-  const authors = article.authors?.map((author: any) => formatAuthorName(author)).join(', ')
-
   // Helper to render Lexical children to HTML string
   function renderChildren(children: any[]): string {
     if (!children) return ''
@@ -159,12 +156,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                 <div className="flex justify-center">
                   <p className="text-white/90 text-sm bg-black/40 backdrop-blur-md px-4 py-2 rounded-full shadow-2xl border border-white/20">
                     <span className="opacity-80">{publicationDate}</span>
-                    {authors && (
-                      <>
-                        <span className="mx-2 opacity-30">|</span>
-                        <span className="font-medium">{authors}</span>
-                      </>
-                    )}
                   </p>
                 </div>
               )}
@@ -193,18 +184,6 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                     </svg>
                     {publicationDate}
                   </span>
-                )}
-                {authors && (
-                  <>
-                    <span className="hidden sm:block w-1 h-1 rounded-full bg-neutral-300" />
-                    <span className="flex items-center gap-1.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                      </svg>
-                      {authors}
-                    </span>
-                  </>
                 )}
               </div>
             </div>

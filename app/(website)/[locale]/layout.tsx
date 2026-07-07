@@ -87,20 +87,22 @@ export default async function LocaleLayout({
         <Script id="qontak-webchat" strategy="afterInteractive">
           {`
             (function() {
+              // app.js reads the config set by qchatInitialize(), so it must
+              // only be injected after initialization completes
               const qchatInit = document.createElement('script');
               qchatInit.src = "https://webchat.qontak.com/qchatInitialize.js";
-              const qchatWidget = document.createElement('script');
-              qchatWidget.src = "https://webchat.qontak.com/js/app.js";
-              document.head.prepend(qchatInit);
-              document.head.prepend(qchatWidget);
-              qchatInit.onload = function() { 
+              qchatInit.onload = function() {
                 if (typeof qchatInitialize === 'function') {
                   qchatInitialize({
-                    id: "05730d05-a4b9-4fe1-9237-c68f0b561a79", 
-                    code: "4R4_LMmTyb6UGmMPnkM45w"  
+                    id: "05730d05-a4b9-4fe1-9237-c68f0b561a79",
+                    code: "4R4_LMmTyb6UGmMPnkM45w"
                   });
                 }
+                const qchatWidget = document.createElement('script');
+                qchatWidget.src = "https://webchat.qontak.com/js/app.js";
+                document.head.append(qchatWidget);
               };
+              document.head.append(qchatInit);
             })();
           `}
         </Script>

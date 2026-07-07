@@ -1,7 +1,7 @@
 "use client";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
-import { getMediaUrl, formatAuthorName } from "@/lib/utils";
+import { getMediaUrl } from "@/lib/utils";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 const ITEMS_PER_PAGE = 6;
@@ -186,14 +186,6 @@ export default function ArticleClient({ articles: cmsArticles, settings, article
                           month: 'short',
                         })}
                       </span>
-                      {article.authors?.length > 0 && (
-                        <>
-                          <span className="opacity-30">|</span>
-                          <span className="font-semibold truncate max-w-[80px]">
-                            {article.authors.map((a: any) => formatAuthorName(a)).join(', ')}
-                          </span>
-                        </>
-                      )}
                     </span>
                   )}
                 </div>
