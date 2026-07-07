@@ -87,22 +87,43 @@ export default async function LocaleLayout({
         <Script id="qontak-webchat" strategy="afterInteractive">
           {`
             (function() {
-              // app.js reads the config set by qchatInitialize(), so it must
-              // only be injected after initialization completes
-              const qchatInit = document.createElement('script');
-              qchatInit.src = "https://webchat.qontak.com/qchatInitialize.js";
-              qchatInit.onload = function() {
-                if (typeof qchatInitialize === 'function') {
-                  qchatInitialize({
-                    id: "05730d05-a4b9-4fe1-9237-c68f0b561a79",
-                    code: "4R4_LMmTyb6UGmMPnkM45w"
-                  });
+              // Custom embed instead of Qontak's stock app.js: their script sends
+              // window.location.origin ("https://laksanabusinesspark.id") as the
+              // widget domain, but Qontak validates it with an exact string match
+              // against the registered domain ("laksanabusinesspark.id", no
+              // protocol), so the widget never passes validation and stays hidden.
+              // We build the same iframe ourselves and pass the bare hostname.
+              const QONTAK_ORIGIN = "https://webchat.qontak.com";
+              const params = new URLSearchParams({
+                c: "4R4_LMmTyb6UGmMPnkM45w",
+                i: "05730d05-a4b9-4fe1-9237-c68f0b561a79",
+                d: window.location.hostname,
+                w: window.innerWidth,
+                h: window.innerHeight,
+                u: "null"
+              });
+              const ifrm = document.createElement('iframe');
+              ifrm.setAttribute('src', QONTAK_ORIGIN + '/?' + params.toString());
+              ifrm.setAttribute('id', 'qontak-webchat-widget');
+              ifrm.setAttribute('frameborder', '0');
+              ifrm.setAttribute('allowfullscreen', 'true');
+              ifrm.style.position = 'fixed';
+              ifrm.style.bottom = '0';
+              ifrm.style.right = '0';
+              ifrm.style.zIndex = '999999';
+              ifrm.style.maxHeight = '100%';
+              ifrm.style.overflow = 'auto';
+              ifrm.width = '94px';
+              ifrm.height = '94px';
+              document.body.appendChild(ifrm);
+              window.addEventListener('message', function(e) {
+                if (e.origin !== QONTAK_ORIGIN) return;
+                const { eventName, data } = e.data || {};
+                if (eventName === 'setFrameSize' && data) {
+                  ifrm.height = data.height;
+                  ifrm.width = data.width;
                 }
-                const qchatWidget = document.createElement('script');
-                qchatWidget.src = "https://webchat.qontak.com/js/app.js";
-                document.head.append(qchatWidget);
-              };
-              document.head.append(qchatInit);
+              }, false);
             })();
           `}
         </Script>
