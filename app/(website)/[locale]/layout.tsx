@@ -95,10 +95,13 @@ export default async function LocaleLayout({
               // stays hidden. We build the same iframe ourselves and pass the
               // bare apex hostname.
               const QONTAK_ORIGIN = "https://webchat.qontak.com";
+              // On localhost, pass the registered production domain so Qontak's
+              // domain validation passes and the widget can be previewed in dev
+              const host = window.location.hostname.replace(/^www\./, "");
               const params = new URLSearchParams({
                 c: "4R4_LMmTyb6UGmMPnkM45w",
                 i: "05730d05-a4b9-4fe1-9237-c68f0b561a79",
-                d: window.location.hostname.replace(/^www\./, ""),
+                d: host === "localhost" ? "laksanabusinesspark.id" : host,
                 w: window.innerWidth,
                 h: window.innerHeight,
                 u: "null"
