@@ -88,16 +88,17 @@ export default async function LocaleLayout({
           {`
             (function() {
               // Custom embed instead of Qontak's stock app.js: their script sends
-              // window.location.origin ("https://laksanabusinesspark.id") as the
-              // widget domain, but Qontak validates it with an exact string match
-              // against the registered domain ("laksanabusinesspark.id", no
-              // protocol), so the widget never passes validation and stays hidden.
-              // We build the same iframe ourselves and pass the bare hostname.
+              // window.location.origin ("https://www.laksanabusinesspark.id") as
+              // the widget domain, but Qontak validates it with an exact string
+              // match against the registered domain ("laksanabusinesspark.id" —
+              // no protocol, no www), so the widget never passes validation and
+              // stays hidden. We build the same iframe ourselves and pass the
+              // bare apex hostname.
               const QONTAK_ORIGIN = "https://webchat.qontak.com";
               const params = new URLSearchParams({
                 c: "4R4_LMmTyb6UGmMPnkM45w",
                 i: "05730d05-a4b9-4fe1-9237-c68f0b561a79",
-                d: window.location.hostname,
+                d: window.location.hostname.replace(/^www\./, ""),
                 w: window.innerWidth,
                 h: window.innerHeight,
                 u: "null"
